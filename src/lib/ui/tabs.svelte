@@ -1,0 +1,32 @@
+<script lang="ts">
+	import { crossfade } from 'svelte/transition';
+	import { cubicOut } from 'svelte/easing';
+
+	const [send, receive] = crossfade({});
+	export let tabs: string[];
+	export let disabled: string[] = [];
+	export let currentTab: string = '';
+	export let duration = 300;
+</script>
+
+<div class="flex items-center w-full h-10 p-1 gap-2">
+	{#each tabs as tab (tab)}
+		<button
+			class="group relative btn text w-full h-full p-0 rounded-md"
+			on:click={() => (currentTab = tab)}
+			aria-pressed={tab === currentTab}
+			disabled={disabled.includes(tab)}
+		>
+			{#if tab === currentTab}
+				<div
+					in:receive|local={{ key: 'tab', easing: cubicOut, duration }}
+					out:send|local={{ key: 'tab', easing: cubicOut, duration }}
+					class="w-full h-full rounded bg-base-300/50 dark:bg-base-800/50"
+				/>
+			{/if}
+			<span class="capitalize absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+				{tab}
+			</span>
+		</button>
+	{/each}
+</div>

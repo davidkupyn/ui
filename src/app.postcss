@@ -1,0 +1,117 @@
+/* Write your global styles here, in PostCSS syntax */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+input:-webkit-autofill,
+input:-webkit-autofill:focus {
+	transition: background-color 600000s 0s, color 600000s 0s;
+}
+input[data-autocompleted] {
+	background-color: transparent !important;
+}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+	-webkit-appearance: none;
+	margin: 0;
+}
+input[type='number'] {
+	-moz-appearance: textfield;
+}
+body {
+	@apply bg-base-50 dark:bg-base-950 min-h-screen text-base-800 dark:text-base-50 selection:bg-primary-500/30 overscroll-y-none;
+}
+
+:root {
+	--color-primary-50: theme('colors.primary.50');
+	--color-primary-100: theme('colors.primary.100');
+	--color-primary-200: theme('colors.primary.200');
+	--color-primary-300: theme('colors.primary.300');
+	--color-primary-400: theme('colors.primary.400');
+	--color-primary-500: theme('colors.primary.500');
+	--color-primary-600: theme('colors.primary.600');
+	--color-primary-700: theme('colors.primary.700');
+	--color-primary-800: theme('colors.primary.800');
+	--color-primary-900: theme('colors.primary.900');
+	--color-primary-950: theme('colors.primary.950');
+}
+.tippy-box {
+	@apply inline-block rounded-lg bg-base-50 border border-base-300 text-base-700 dark:bg-base-950 dark:border-base-800 px-2.5 py-1 text-sm font-medium dark:text-base-300 shadow-sm;
+}
+
+@layer components {
+	.input-label {
+		@apply text-base-500 dark:text-base-400 grid w-fit gap-1.5 text-xs;
+	}
+	.input {
+		@apply disabled:cursor-not-allowed resize-none disabled:opacity-50 hover:ring-primary-500 text-base-800 dark:text-base-50 dark:hover:ring-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 dark:placeholder:text-base-500 placeholder:text-base-400 bg-base-200/50 dark:bg-base-900 h-10 rounded-xl border-0 px-4 text-sm outline-none ring-1 ring-transparent transition duration-200 data-[invalid]:hover:ring-red-500 data-[invalid]:focus:ring-red-500 data-[invalid]:ring-red-500 invalid:hover:ring-red-500 invalid:focus:ring-red-500 invalid:ring-red-500 dark:data-[invalid]:hover:ring-red-600 dark:data-[invalid]:focus:ring-red-600 dark:data-[invalid]:ring-red-600 dark:invalid:hover:ring-red-600 dark:invalid:focus:ring-red-600 dark:invalid:ring-red-600;
+	}
+	textarea.input {
+		@apply py-3;
+	}
+	.input-group {
+		@apply input disabled:[&>*]:cursor-not-allowed focus-within:ring-primary-500 dark:focus-within:ring-primary-600 flex items-center overflow-hidden px-4 data-[invalid]:hover:ring-red-500 data-[invalid]:focus:ring-red-500 data-[invalid]:ring-red-500 dark:data-[invalid]:hover:ring-red-600 dark:data-[invalid]:focus:ring-red-600 dark:data-[invalid]:ring-red-600;
+	}
+
+	.input-group input,
+	.input-group textarea {
+		@apply dark:placeholder:text-base-500 placeholder:text-base-400 w-full border-0 bg-transparent outline-none transition focus:ring-0 resize-none px-0;
+	}
+	.input-icon {
+		@apply focus-visible:bg-base-300/75 focus-visible:text-base-800 dark:focus-visible:bg-base-800 dark:focus-visible:text-base-200 text-base-500 dark:text-base-400 hover:text-base-700 dark:hover:text-base-100 block rounded-md p-1 outline-none transition-colors min-h-[1.5rem] min-w-[1.5rem];
+	}
+	.input > .icon-left {
+		@apply input-icon -ml-2 mr-2;
+	}
+	.input > .icon-right {
+		@apply input-icon -mr-2 ml-2;
+	}
+	.checkbox {
+		@apply h-5 w-5 cursor-pointer rounded border-base-400 dark:border-base-700 bg-transparent text-primary-500 dark:text-primary-600 outline-0 ring-primary-600 focus:ring-transparent focus:ring-offset-0 focus-visible:outline-2 focus-visible:outline-primary-700;
+	}
+
+	.badge {
+		@apply inline-flex items-center border rounded-full px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-primary-600 focus:ring-offset-2 bg-primary-500 dark:bg-primary-600 hover:bg-primary-600 dark:hover:bg-primary-700 border-transparent text-base-100;
+	}
+	.badge.destructive {
+		@apply bg-red-500 dark:bg-red-600/70 hover:bg-red-600 dark:hover:bg-red-600/60;
+	}
+	.badge.secondary {
+		@apply bg-base-300/40 dark:bg-base-800 border-transparent text-base-800 dark:text-base-200;
+	}
+	.badge.outline {
+		@apply outline-none bg-transparent border dark:border-base-800 border-base-300 text-base-600 dark:text-base-300 dark:hover:text-base-50 hover:text-base-900;
+	}
+
+	.skeleton {
+		@apply bg-base-200/50 dark:bg-base-800 rounded-xl animate-pulse overflow-hidden;
+	}
+
+	.btn {
+		@apply gap-2 inline-flex text-base-50 items-center justify-center rounded-xl text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-600 focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none bg-primary-500 hover:bg-primary-600 dark:bg-primary-600 dark:hover:bg-primary-700 ring-offset-base-50 dark:ring-offset-base-950 h-10 py-2 px-4;
+	}
+	.btn.outline {
+		@apply bg-transparent outline-none border dark:border-base-800 border-base-300 text-base-600 dark:text-base-300 dark:hover:text-base-50 hover:text-base-900 hover:bg-base-200/50 dark:hover:bg-base-800;
+	}
+	.btn.secondary:not(.link) {
+		@apply bg-base-300/50 hover:bg-base-300 dark:bg-base-800/50 dark:hover:bg-base-800 text-base-800 hover:text-base-950 dark:text-base-200 dark:hover:text-base-50;
+	}
+	.btn.ghost {
+		@apply bg-transparent hover:bg-base-200 dark:hover:bg-base-800/50 text-base-500 dark:text-base-400 focus-visible:text-base-700 dark:focus-visible:text-base-300 hover:text-base-800 dark:hover:text-base-100 aria-pressed:text-base-800 dark:aria-pressed:text-base-100;
+	}
+	.btn.text {
+		@apply bg-transparent text-base-500 dark:text-base-400 focus-visible:text-base-700 dark:focus-visible:text-base-100 hover:text-base-800 dark:hover:text-base-100 aria-pressed:text-base-800 dark:aria-pressed:text-base-100 focus-visible:ring-offset-0;
+	}
+	.btn.link {
+		@apply bg-transparent underline-offset-4 hover:underline text-primary-500 dark:text-primary-600;
+	}
+	.btn.link.secondary {
+		@apply text-base-800 dark:text-base-200;
+	}
+	.btn.sm {
+		@apply h-9 px-3 rounded-lg;
+	}
+	.btn.lg {
+		@apply h-11 px-8 rounded-lg;
+	}
+}
