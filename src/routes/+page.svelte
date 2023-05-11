@@ -30,7 +30,7 @@
 		id: crypto.randomUUID().slice(0, 20),
 		name: `Item ${i}`,
 		description: `aliquip fugiat dolor consequat voluptate aliqua irure nulla officia magna quis commodo fugiat sit anim duis ea eu do sunt velit culpa anim non velit enim dolore incididunt id minim dolore irure quis nulla laboris non ${i}`,
-		price: Math.floor(Math.random() * 1000)
+		price: `$${Math.floor(Math.random() * 1000)}`
 	}));
 
 	$: paginatedItems = $currentPage
@@ -139,8 +139,8 @@
 		</label>
 	</div>
 
-	<div class="flex flex-col items-center w-full">
-		<div class="w-full border border-base-300/50 dark:border-base-900 rounded-xl overflow-hidden">
+	<div class="flex flex-col items-center w-full max-w-6xl">
+		<div class="w-full border border-base-300/50 dark:border-base-900 rounded-3xl overflow-hidden">
 			<Table items={paginatedItems} id="id" bind:selected />
 		</div>
 		<div class="sticky bottom-24 z-20 h-12 w-96 max-md:w-full mx-auto">

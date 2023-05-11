@@ -47,8 +47,10 @@
 <div class="w-full overflow-auto">
 	<table class="w-full caption-bottom overflow-x-scroll">
 		<thead class="[&_tr]:border-b">
-			<tr class="border-base-300/50 dark:border-base-900">
-				<th class="px-4 py-2 align-middle">
+			<tr
+				class="border-base-300/50 dark:border-base-900 hover:bg-base-200/50 dark:hover:bg-base-900/50 transition-colors"
+			>
+				<th class="px-4 py-2 align-middle text-left">
 					<input
 						type="checkbox"
 						aria-label="Select all"
@@ -69,11 +71,13 @@
 						}}
 					>
 						<span class="flex items-center gap-2">
-							<span class="uppercase btn text p-0 font-semibold">
+							<span
+								class="uppercase btn text p-0 font-semibold group-hover:text-base-800 dark:group-hover:text-base-100"
+							>
 								{convertTableName(columnName)}
 							</span>
 							<button
-								class="btn ghost group/button relative h-9 w-9"
+								class="btn ghost group/button relative h-9 w-9 focus-visible:ring-offset-0"
 								aria-label="Sort by {columnName}"
 								use:tippy={{ content: `Sort by ${columnName}`, delay: 300 }}
 							>
@@ -103,7 +107,7 @@
 						</span>
 					</th>
 				{/each}
-				<th class="relative px-4 py-2 align-middle">
+				<th class="relative px-4 py-2 align-middle text-right">
 					<button
 						use:menu.button
 						class="btn ghost p-2 h-fit"
@@ -121,7 +125,7 @@
 					>
 						<ul
 							use:menu.items
-							class="absolute -left-[7.75rem] z-20 mt-2 w-44 origin-top-right divide-y divide-base-200 dark:divide-base-900 rounded-2xl border border-base-300/50 dark:border-base-900 bg-base-50/50 dark:bg-base-950/50 backdrop-blur-md shadow-lg ring-opacity-5 focus:outline-none"
+							class="absolute -left-[7.25rem] z-20 mt-2 w-44 origin-top-right divide-y divide-base-200 dark:divide-base-900 rounded-2xl border border-base-300/50 dark:border-base-900 bg-base-50/50 dark:bg-base-950/50 backdrop-blur-md shadow-lg ring-opacity-5 focus:outline-none"
 						>
 							{#each tableColumns as key (key)}
 								{@const active = $menu.active === convertTableName(key)}
@@ -153,10 +157,10 @@
 			{#each items as item, idx (item[id] + idx)}
 				<tr
 					animate:flip={{ duration: 300, easing: cubicOut }}
-					class="group border-base-300/50 dark:border-base-900 transition-colors data-[state=selected]:bg-primary-500/10 data-[state=selected]:hover:bg-primary-600/10 hover:bg-base-300/50 dark:hover:bg-base-900/50"
+					class="group border-base-300/50 dark:border-base-900 transition-colors data-[state=selected]:bg-primary-500/10 data-[state=selected]:hover:bg-primary-600/10 hover:bg-base-200/50 dark:hover:bg-base-900/50"
 					data-state={selected.includes(item[id]) ? 'selected' : null}
 				>
-					<td class="px-4 py-3 align-middle">
+					<td class="px-4 py-3 align-middle text-left">
 						<input
 							type="checkbox"
 							aria-label="Select user"
@@ -179,7 +183,7 @@
 							{item[column]}
 						</td>
 					{/each}
-					<td class="px-4 py-3 align-middle">
+					<td class="px-4 py-3 align-middle text-right">
 						<button class="btn ghost p-2 h-fit"><MoreHorizontal size={20} /></button>
 					</td>
 				</tr>
