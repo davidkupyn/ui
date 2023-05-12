@@ -1,4 +1,3 @@
-/* Write your global styles here, in PostCSS syntax */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -20,7 +19,7 @@ html {
 }
 
 body {
-	@apply bg-base-50 dark:bg-base-950 min-h-screen text-base-800 dark:text-base-50 selection:bg-primary-500/30 overscroll-y-none;
+	@apply bg-base-50 dark:bg-base-950 min-h-screen text-base-800 dark:text-base-50 selection:bg-primary-500/30 overscroll-y-none transition-colors;
 }
 
 :root {
@@ -38,6 +37,12 @@ body {
 }
 .tippy-box {
 	@apply inline-block rounded-lg bg-base-50 border border-base-300 text-base-700 dark:bg-base-950 dark:border-base-800 px-2.5 py-1 text-sm font-medium dark:text-base-300 shadow-sm;
+}
+
+@layer utilities {
+	.scrollbar-custom {
+		@apply scrollbar scrollbar-track-transparent scrollbar-thumb-black/10 scrollbar-thumb-rounded-full scrollbar-w-1 hover:scrollbar-thumb-black/20 dark:scrollbar-thumb-white/10 dark:hover:scrollbar-thumb-white/20;
+	}
 }
 
 @layer components {

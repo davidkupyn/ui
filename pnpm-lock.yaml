@@ -22,6 +22,7 @@ specifiers:
   svelte-tippy: ^1.3.2
   svelte-transition: ^0.0.7
   sveltekit-search-params: ^1.0.12
+  tailwind-scrollbar: ^3.0.1
   tailwindcss: ^3.3.2
   tippy.js: ^6.3.7
   tslib: ^2.5.0
@@ -53,6 +54,7 @@ devDependencies:
   svelte: 3.59.1
   svelte-check: 3.3.2_xu475yrmkl6r3r5hxjubm4dv6a
   svelte-preprocess: 5.0.3_e6zgqaujgph3bxmcnjljm7ijdq
+  tailwind-scrollbar: 3.0.1_tailwindcss@3.3.2
   tailwindcss: 3.3.2
   tslib: 2.5.0
   typescript: 5.0.4
@@ -1867,6 +1869,15 @@ packages:
       '@sveltejs/kit': 1.16.3_svelte@3.59.1+vite@4.3.5
       svelte: 3.59.1
     dev: false
+
+  /tailwind-scrollbar/3.0.1_tailwindcss@3.3.2:
+    resolution: {integrity: sha512-mM0ecSf/RGRGWw/qB0Zg1bWhuXIkpmleNAFgMxdb4eERgA6eQ0kVouYsF3/OvBqDSK8RJikZC/ynGPxnfXeddw==}
+    engines: {node: '>=12.13.0'}
+    peerDependencies:
+      tailwindcss: 3.x
+    dependencies:
+      tailwindcss: 3.3.2
+    dev: true
 
   /tailwindcss/3.3.2:
     resolution: {integrity: sha512-9jPkMiIBXvPc2KywkraqsUfbfj+dHDb+JPWtSJa9MLFdrPyazI7q6WX2sUrm7R9eVR7qqv3Pas7EvQFzxKnI6w==}

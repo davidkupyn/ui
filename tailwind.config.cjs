@@ -1,9 +1,10 @@
 import defaultTheme from 'tailwindcss/defaultTheme';
 import colors from 'tailwindcss/colors';
+import tailwindScrollbar from 'tailwind-scrollbar';
+import tailwindForms from '@tailwindcss/forms';
 
 const config = {
 	content: ['./src/**/*.{html,js,svelte,ts}'],
-
 	theme: {
 		extend: {
 			colors: {
@@ -19,7 +20,7 @@ const config = {
 		}
 	},
 
-	plugins: [require('@tailwindcss/forms')]
+	plugins: [tailwindForms, tailwindScrollbar({ nocompatible: true })]
 };
 
 module.exports = config;

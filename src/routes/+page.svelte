@@ -1,24 +1,14 @@
 <script lang="ts">
 	import { queryParam, ssp } from 'sveltekit-search-params';
 	import { tippy } from '$lib/actions/tippy';
-	import {
-		Send,
-		Search,
-		Calendar,
-		X,
-		Eye,
-		Lock,
-		EyeOff,
-		Github,
-		QrCode,
-		Trash2
-	} from 'lucide-svelte';
+	import { Send, Search, X, Eye, Lock, EyeOff, Github, QrCode, Trash2 } from 'lucide-svelte';
 	import Tabs from '../lib/ui/tabs.svelte';
 	import Pagination from '$lib/ui/pagination.svelte';
 	import Switch from '$lib/ui/switch.svelte';
 	import Table from '$lib/ui/table.svelte';
 	import { fly } from 'svelte/transition';
 	import { cubicOut } from 'svelte/easing';
+	import Disclosure from '$lib/ui/disclosure.svelte';
 
 	let showPassword = false;
 	const tabs = ['witalina', 'david', 'wiktor', 'gustaw'];
@@ -41,7 +31,7 @@
 </script>
 
 <main class="p-8 min-h-screen w-full flex flex-col gap-6">
-	<div class="w-full sm:w-[40rem] flex flex-col gap-6">
+	<div class="w-full max-w-[40rem] flex flex-col gap-6">
 		<h1 class="text-2xl font-bold text-base-800 dark:text-base-200 md:text-3xl">Dave Kupyn's UI</h1>
 		<label class="input-group">
 			<span class="icon-left">
@@ -138,7 +128,23 @@
 			Switch this
 		</label>
 	</div>
-
+	<div
+		class="w-full max-w-md grid gap-4 border border-base-300/50 dark:border-base-900 rounded-3xl p-4"
+	>
+		<Disclosure
+			defaultExpanded
+			summary="What is your refund policy?"
+			content="If you're unhappy with your purchase for any reason, email us within 90 days and we'll refund you in full, no questions asked."
+		/>
+		<Disclosure
+			summary="Do you offer technical support?"
+			content="No. We don't offer any support. However, we do have a very active community where we chime in all the time."
+		/>
+		<Disclosure
+			summary="What about updates?"
+			content="We don't offer any updates. However, we do have a very active community where we chime in all the time."
+		/>
+	</div>
 	<div class="flex flex-col items-center w-full max-w-6xl">
 		<div class="w-full border border-base-300/50 dark:border-base-900 rounded-3xl overflow-hidden">
 			<Table items={paginatedItems} id="id" bind:selected />
@@ -177,9 +183,4 @@
 		</div>
 		<Pagination totalPages={10} />
 	</div>
-	<!-- <div class="w-64 input-group">
-		<Calendar size={16} class="icon-left" />
-
-		<input type="date" class=" w-64" placeholder="Select date" />
-	</div> -->
 </main>
