@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { ChevronDown, MoreHorizontal, Settings2 } from 'lucide-svelte';
 	import { tippy } from '$lib/actions/tippy';
-	import { createMenu } from 'svelte-headlessui';
+	import { createMenu, createPopover } from 'svelte-headlessui';
 	import Transition from 'svelte-transition';
 	import { flip } from 'svelte/animate';
 	import { cubicOut } from 'svelte/easing';
@@ -32,7 +32,7 @@
 		pushHistory
 	});
 	const menu = createMenu({ label: 'Actions' });
-
+	const popover = createPopover({ label: 'Columns' });
 	function selectAll() {
 		selected = allSelected
 			? selected.filter((item) => !items.map((item) => item[id]).includes(item))
@@ -45,7 +45,7 @@
 </script>
 
 <div class="w-full overflow-auto">
-	<table class="w-full caption-bottom overflow-x-scroll">
+	<table class="w-full caption-bottom overflow-x-scroll scrollbar-custom">
 		<thead class="[&_tr]:border-b">
 			<tr
 				class="border-base-300/50 dark:border-base-900 hover:bg-base-200/50 dark:hover:bg-base-900/50 transition-colors"
@@ -109,13 +109,13 @@
 				{/each}
 				<th class="relative px-4 py-2 align-middle text-right">
 					<button
-						use:menu.button
+						use:popover.button
 						class="btn ghost p-2 h-fit"
-						use:tippy={{ content: 'Toggle columns' }}><MoreHorizontal size={20} /></button
+						use:tippy={{ content: 'Toggle columns' }}><Settings2 size={20} /></button
 					>
 
 					<Transition
-						show={$menu.expanded}
+						show={$popover.expanded}
 						enter="transition ease-out duration-100"
 						enterFrom="transform opacity-0 scale-50"
 						enterTo="transform opacity-100 scale-100"
@@ -124,17 +124,15 @@
 						leaveTo="transform opacity-0 scale-50"
 					>
 						<ul
-							use:menu.items
-							class="absolute -left-[7.25rem] z-20 mt-2 w-44 origin-top-right divide-y divide-base-200 dark:divide-base-900 rounded-2xl border border-base-300/50 dark:border-base-900 bg-base-50/50 dark:bg-base-950/50 backdrop-blur-md shadow-lg ring-opacity-5 focus:outline-none"
+							use:popover.panel
+							class="absolute right-4 z-20 mt-2 w-44 origin-top-right divide-y divide-base-200 dark:divide-base-900 rounded-2xl border border-base-300/50 dark:border-base-900 bg-base-50/50 dark:bg-base-950/50 backdrop-blur-md shadow-lg ring-opacity-5 focus:outline-none"
 						>
 							{#each tableColumns as key (key)}
-								{@const active = $menu.active === convertTableName(key)}
 								<li class="px-1 py-1">
 									<label
 										for={key}
 										use:menu.item
-										data-active={active ? '' : undefined}
-										class="flex w-full items-center justify-between rounded-xl p-2 text-sm font-medium capitalize transition hover:bg-base-200 dark:hover:bg-base-800/50 text-base-500 dark:text-base-400 data-[active]:bg-base-200 dark:data-[active]:bg-base-800/50 hover:text-base-800 dark:hover:text-base-100 data-[active]:text-base-800 dark:data-[active]:text-base-100"
+										class="flex w-full items-center justify-between rounded-xl p-2 text-sm font-medium capitalize transition hover:bg-base-200 dark:hover:bg-base-800/50 text-base-500 dark:text-base-400 focus-within:bg-base-200 dark:focus-within:bg-base-800/50 hover:text-base-800 dark:hover:text-base-100 focus-within:text-base-800 dark:focus-within:text-base-100"
 									>
 										{convertTableName(key)}
 										<Switch

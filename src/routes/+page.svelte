@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { queryParam, ssp } from 'sveltekit-search-params';
 	import { tippy } from '$lib/actions/tippy';
-	import { Send, Search, X, Eye, Lock, EyeOff, Github, QrCode, Trash2 } from 'lucide-svelte';
+	import { Send, Search, X, Eye, Lock, EyeOff, Cpu, Github, QrCode, Trash2 } from 'lucide-svelte';
 	import Tabs from '../lib/ui/tabs.svelte';
 	import Pagination from '$lib/ui/pagination.svelte';
 	import Switch from '$lib/ui/switch.svelte';
@@ -136,10 +136,14 @@
 			summary="What is your refund policy?"
 			content="If you're unhappy with your purchase for any reason, email us within 90 days and we'll refund you in full, no questions asked."
 		/>
-		<Disclosure
-			summary="Do you offer technical support?"
-			content="No. We don't offer any support. However, we do have a very active community where we chime in all the time."
-		/>
+		<Disclosure>
+			<Cpu size={16} slot="icon" />
+			<svelte:fragment slot="summary">Do you offer technical support?</svelte:fragment>
+			<svelte:fragment slot="content">
+				No. We don't offer any support. However, we do have a very active community where we chime
+				in all the time.
+			</svelte:fragment>
+		</Disclosure>
 		<Disclosure
 			summary="What about updates?"
 			content="We don't offer any updates. However, we do have a very active community where we chime in all the time."

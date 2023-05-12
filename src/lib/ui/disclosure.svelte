@@ -3,9 +3,9 @@
 
 	export let defaultExpanded = false;
 	export let expanded = defaultExpanded;
-	export let summary: string;
+	export let summary: string = '';
+	export let content: string = '';
 	export let label = summary;
-	export let content: string;
 </script>
 
 <div class="w-full">
@@ -15,7 +15,10 @@
 		aria-expanded={expanded}
 		aria-label={label}
 	>
-		<span>{summary}</span>
+		<span class="inline-flex gap-2 items-center">
+			<slot name="icon" />
+			<slot name="summary">{summary}</slot>
+		</span>
 		<ChevronUp
 			class="h-5 w-5 text-primary-500 dark:text-primary-600 transition {expanded
 				? 'rotate-180 transform'
@@ -31,7 +34,9 @@
 				? 'mt-2'
 				: ''} transition-all ease-in-out text-sm text-gray-500 dark:text-gray-400 overflow-hidden"
 		>
-			{content}
+			<slot name="content">
+				{content}
+			</slot>
 		</div>
 	</div>
 </div>
