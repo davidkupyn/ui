@@ -51,6 +51,7 @@
 	$: paginationPages = getPageList(Number($currentPage), totalPages);
 
 	onMount(() => {
+		$currentPage = 1;
 		if ($currentPage && $currentPage > totalPages) {
 			$currentPage = 1;
 		}
