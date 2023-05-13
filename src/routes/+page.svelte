@@ -1,7 +1,20 @@
 <script lang="ts">
 	import { queryParam, ssp } from 'sveltekit-search-params';
 	import { tippy } from '$lib/actions/tippy';
-	import { Send, Search, X, Eye, Lock, EyeOff, Cpu, Github, QrCode, Trash2 } from 'lucide-svelte';
+	import {
+		Send,
+		Search,
+		X,
+		Eye,
+		Edit,
+		Lock,
+		EyeOff,
+		Cpu,
+		Github,
+		QrCode,
+		Trash2,
+		AppWindow
+	} from 'lucide-svelte';
 	import Tabs from '../lib/ui/tabs.svelte';
 	import Pagination from '$lib/ui/pagination.svelte';
 	import Switch from '$lib/ui/switch.svelte';
@@ -9,6 +22,7 @@
 	import { fly } from 'svelte/transition';
 	import { cubicOut } from 'svelte/easing';
 	import Disclosure from '$lib/ui/disclosure.svelte';
+	import Dialog from '$lib/ui/dialog.svelte';
 
 	let showPassword = false;
 	const tabs = ['witalina', 'david', 'wiktor', 'gustaw'];
@@ -28,6 +42,7 @@
 		: items.slice(0, 10);
 
 	let selected: string[] = [];
+	let closeDialog: () => void;
 </script>
 
 <main class="p-8 min-h-screen w-full flex flex-col gap-6">
@@ -149,9 +164,57 @@
 			content="We don't offer any updates. However, we do have a very active community where we chime in all the time."
 		/>
 	</div>
+	<Dialog bind:closeTrigger={closeDialog}>
+		<button slot="button" let:open on:click={() => open()} class="btn">
+			<AppWindow size={16} />
+			Open Dialog
+		</button>
+		<form class="grid gap-4" slot="panel">
+			<h2 class="font-semibold text-md">Edit Profile</h2>
+			<label class="input-label w-full sm:w-72">
+				Username
+				<input class="input" placeholder="Dave Kupyn" />
+			</label>
+			<label class="input-label w-full sm:w-72">
+				Email
+				<input class="input" placeholder="dkupyn@gmail.com" />
+			</label>
+			<div class="flex gap-4 mt-4 w-full">
+				<button type="button" on:click={() => closeDialog()} class="btn outline w-full">
+					Cancel
+				</button>
+				<button class="btn w-full"> Confirm </button>
+			</div>
+		</form>
+	</Dialog>
 	<div class="flex flex-col items-center w-full max-w-6xl">
 		<div class="w-full border border-base-300/50 dark:border-base-900 rounded-3xl overflow-hidden">
-			<Table items={paginatedItems} id="id" bind:selected />
+			<Table items={paginatedItems} id="id" bind:selected columnsEditable>
+				<ul slot="actions" let:row>
+					<li class="px-1 py-1">
+						<button
+							class="btn ghost w-full justify-start"
+							on:click={() => {
+								console.log('edit');
+							}}
+						>
+							<Edit size={20} class="mr-2" />
+							Edit
+						</button>
+					</li>
+					<li class="px-1 py-1">
+						<button
+							class="btn ghost w-full justify-start"
+							on:click={() => {
+								items = items.filter((item) => item.id !== row.id);
+							}}
+						>
+							<Trash2 size={20} class="mr-2" />
+							Delete
+						</button>
+					</li>
+				</ul>
+			</Table>
 		</div>
 		<div class="sticky bottom-24 z-20 h-12 w-96 max-md:w-full mx-auto">
 			{#if selected.length > 0}

@@ -1,12 +1,11 @@
 <script lang="ts">
 	import { ChevronDown, MoreHorizontal, Settings2 } from 'lucide-svelte';
 	import { tippy } from '$lib/actions/tippy';
-	import { createMenu, createPopover } from 'svelte-headlessui';
-	import Transition from 'svelte-transition';
 	import { flip } from 'svelte/animate';
 	import { cubicOut } from 'svelte/easing';
 	import { queryParam, ssp } from 'sveltekit-search-params';
 	import Switch from './switch.svelte';
+	import Popover from './popover.svelte';
 
 	export function uniqueArray<T>(array: T[]): T[] {
 		return Array.from(new Set(array));
@@ -18,10 +17,10 @@
 			.replace(/([A-Z])/g, ' $1')
 			.replace(/^./, (str) => str.toUpperCase());
 	};
-
 	export let selected = new Array<string>();
 	export let items: any[] = [];
 	export let pushHistory = false;
+	export let columnsEditable = false;
 	const tableColumns = Object.keys(items[0]);
 	let currentTableColumns = tableColumns;
 	export let id = 'name';
@@ -31,8 +30,7 @@
 	const sortDir = queryParam('dir', ssp.string('asc'), {
 		pushHistory
 	});
-	const menu = createMenu({ label: 'Actions' });
-	const popover = createPopover({ label: 'Columns' });
+
 	function selectAll() {
 		selected = allSelected
 			? selected.filter((item) => !items.map((item) => item[id]).includes(item))
@@ -46,11 +44,9 @@
 
 <div class="w-full overflow-auto">
 	<table class="w-full caption-bottom overflow-x-scroll scrollbar-custom">
-		<thead class="[&_tr]:border-b">
-			<tr
-				class="border-base-300/50 dark:border-base-900 hover:bg-base-200/50 dark:hover:bg-base-900/50 transition-colors"
-			>
-				<th class="px-4 py-2 align-middle text-left">
+		<thead class="[&_tr]:border-b hover:bg-base-200/50 dark:hover:bg-base-900/50 transition-colors">
+			<tr class="border-base-300/50 dark:border-base-900">
+				<th class="px-4 py-3 align-middle text-left">
 					<input
 						type="checkbox"
 						aria-label="Select all"
@@ -108,46 +104,37 @@
 					</th>
 				{/each}
 				<th class="relative px-4 py-2 align-middle text-right">
-					<button
-						use:popover.button
-						class="btn ghost p-2 h-fit"
-						use:tippy={{ content: 'Toggle columns' }}><Settings2 size={20} /></button
-					>
-
-					<Transition
-						show={$popover.expanded}
-						enter="transition ease-out duration-100"
-						enterFrom="transform opacity-0 scale-50"
-						enterTo="transform opacity-100 scale-100"
-						leave="transition ease-in duration-100"
-						leaveFrom="transform opacity-100 scale-100"
-						leaveTo="transform opacity-0 scale-50"
-					>
-						<ul
-							use:popover.panel
-							class="absolute right-4 z-20 mt-2 w-44 origin-top-right divide-y divide-base-200 dark:divide-base-900 rounded-2xl border border-base-300/50 dark:border-base-900 bg-base-50/50 dark:bg-base-950/50 backdrop-blur-md shadow-lg ring-opacity-5 focus:outline-none"
-						>
-							{#each tableColumns as key (key)}
-								<li class="px-1 py-1">
-									<label
-										for={key}
-										use:menu.item
-										class="flex w-full items-center justify-between rounded-xl p-2 text-sm font-medium capitalize transition hover:bg-base-200 dark:hover:bg-base-800/50 text-base-500 dark:text-base-400 focus-within:bg-base-200 dark:focus-within:bg-base-800/50 hover:text-base-800 dark:hover:text-base-100 focus-within:text-base-800 dark:focus-within:text-base-100"
-									>
-										{convertTableName(key)}
-										<Switch
-											id={key}
-											bind:group={currentTableColumns}
-											value={key}
-											defaultChecked
-											disabled={currentTableColumns.includes(key) &&
-												currentTableColumns.length === 1}
-										/>
-									</label>
-								</li>
-							{/each}
-						</ul>
-					</Transition>
+					{#if columnsEditable}
+						<Popover>
+							<button
+								slot="button"
+								let:button
+								use:button
+								class="btn ghost p-2 h-fit"
+								use:tippy={{ content: 'Toggle columns' }}><Settings2 size={20} /></button
+							>
+							<ul slot="panel">
+								{#each tableColumns as key (key)}
+									<li class="px-1 py-1">
+										<label
+											for={key}
+											class="flex w-full items-center justify-between rounded-xl p-2 text-sm font-medium capitalize transition hover:bg-base-200 dark:hover:bg-base-800/50 text-base-500 dark:text-base-400 focus-within:bg-base-200 dark:focus-within:bg-base-800/50 hover:text-base-800 dark:hover:text-base-100 focus-within:text-base-800 dark:focus-within:text-base-100"
+										>
+											{convertTableName(key)}
+											<Switch
+												id={key}
+												bind:group={currentTableColumns}
+												value={key}
+												defaultChecked
+												disabled={currentTableColumns.includes(key) &&
+													currentTableColumns.length === 1}
+											/>
+										</label>
+									</li>
+								{/each}
+							</ul>
+						</Popover>
+					{/if}
 				</th>
 			</tr>
 		</thead>
@@ -182,7 +169,20 @@
 						</td>
 					{/each}
 					<td class="px-4 py-3 align-middle text-right">
-						<button class="btn ghost p-2 h-fit"><MoreHorizontal size={20} /></button>
+						{#if $$slots.actions}
+							<Popover>
+								<button
+									slot="button"
+									let:button
+									use:button
+									class="btn ghost p-2 h-fit"
+									use:tippy={{ content: 'View Actions' }}
+								>
+									<MoreHorizontal size={20} />
+								</button>
+								<slot row={item} slot="panel" name="actions" />
+							</Popover>
+						{/if}
 					</td>
 				</tr>
 			{:else}
