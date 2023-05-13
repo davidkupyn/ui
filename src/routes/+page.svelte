@@ -164,7 +164,7 @@
 			content="We don't offer any updates. However, we do have a very active community where we chime in all the time."
 		/>
 	</div>
-	<Dialog bind:closeTrigger={closeDialog}>
+	<Dialog bind:close={closeDialog}>
 		<button slot="button" let:open on:click={() => open()} class="btn">
 			<AppWindow size={16} />
 			Open Dialog

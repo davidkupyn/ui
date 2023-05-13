@@ -4,8 +4,8 @@
 
 	export let label = 'Dialog';
 	const dialog = createDialog({ label });
-	const { open, close, modal } = dialog;
-	export const closeTrigger = close;
+	const { open, modal } = dialog;
+	export const close = dialog.close;
 </script>
 
 <div class="relative z-20">
@@ -20,7 +20,7 @@
 			leaveTo="opacity-0"
 		>
 			<!-- svelte-ignore a11y-click-events-have-key-events -->
-			<div class="fixed inset-0 bg-base-800/40 dark:bg-base-950/60" on:click={dialog.close} />
+			<div class="fixed inset-0 bg-base-950/60 dark:bg-base-950/70" on:click={dialog.close} />
 		</Transition>
 
 		<div class="fixed inset-0 overflow-y-auto">
