@@ -4,6 +4,14 @@
 	export let label = 'Menu';
 	const popover = createPopover({ label });
 	const { button } = popover;
+	export let position: 'top-start' | 'top-end' | 'bottom-start' | 'bottom-end' = 'bottom-end';
+
+	const positionValues = {
+		'top-start': 'origin-bottom-left mb-2 bottom-10',
+		'top-end': 'origin-bottom-right mb-2 right-0 bottom-10',
+		'bottom-start': 'origin-top-left mt-2',
+		'bottom-end': 'origin-top-right mt-2 right-0'
+	};
 </script>
 
 <div class="relative">
@@ -19,7 +27,9 @@
 	>
 		<div
 			use:popover.panel
-			class="absolute right-0 z-20 mt-2 w-44 origin-top-right divide-y divide-base-200 dark:divide-base-900 rounded-2xl border border-base-300/50 dark:border-base-900 bg-base-50/50 dark:bg-base-950/50 backdrop-blur-md shadow-lg ring-opacity-5 focus:outline-none"
+			class="{positionValues[
+				position
+			]} absolute z-20 w-fit divide-y divide-base-200 dark:divide-base-900 rounded-2xl border border-base-300/50 dark:border-base-900 bg-base-50/60 dark:bg-base-950/80 backdrop-blur-md shadow-lg ring-opacity-5 focus:outline-none"
 		>
 			<slot name="panel" />
 		</div>

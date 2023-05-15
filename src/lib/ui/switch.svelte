@@ -1,6 +1,6 @@
 <script lang="ts">
 	export let id = 'switch';
-	export let value = '';
+	export let value: any = undefined;
 	export let defaultChecked = false;
 	export let checked = defaultChecked;
 	export let disabled = false;

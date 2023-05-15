@@ -50,7 +50,7 @@ body {
 		@apply text-base-500 dark:text-base-400 grid w-fit gap-1.5 text-xs;
 	}
 	.input {
-		@apply disabled:cursor-not-allowed resize-none disabled:opacity-50 hover:ring-primary-500 text-base-800 dark:text-base-50 dark:hover:ring-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 dark:placeholder:text-base-500 placeholder:text-base-400 bg-base-200/50 dark:bg-base-900 h-10 rounded-xl border-0 px-4 text-sm outline-none ring-1 ring-transparent transition duration-200 data-[invalid]:hover:ring-red-500 data-[invalid]:focus:ring-red-500 data-[invalid]:ring-red-500 invalid:hover:ring-red-500 invalid:focus:ring-red-500 invalid:ring-red-500 dark:data-[invalid]:hover:ring-red-600 dark:data-[invalid]:focus:ring-red-600 dark:data-[invalid]:ring-red-600 dark:invalid:hover:ring-red-600 dark:invalid:focus:ring-red-600 dark:invalid:ring-red-600;
+		@apply border-0 disabled:cursor-not-allowed resize-none disabled:opacity-50 hover:ring-primary-500 text-base-800 dark:text-base-50 dark:hover:ring-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 dark:placeholder:text-base-500 placeholder:text-base-400 bg-base-200/80 dark:bg-base-900 h-10 rounded-xl px-4 text-sm outline-none ring-1 ring-transparent transition duration-200 data-[invalid]:hover:ring-red-500 data-[invalid]:focus:ring-red-500 data-[invalid]:ring-red-500 invalid:hover:ring-red-500 invalid:focus:ring-red-500 invalid:ring-red-500 dark:data-[invalid]:hover:ring-red-600 dark:data-[invalid]:focus:ring-red-600 dark:data-[invalid]:ring-red-600 dark:invalid:hover:ring-red-600 dark:invalid:focus:ring-red-600 dark:invalid:ring-red-600;
 	}
 	textarea.input {
 		@apply py-3;
@@ -77,10 +77,13 @@ body {
 	}
 
 	.badge {
-		@apply inline-flex items-center border rounded-full px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-primary-600 focus:ring-offset-2 bg-primary-500 dark:bg-primary-600 hover:bg-primary-600 dark:hover:bg-primary-700 border-transparent text-base-100;
+		@apply inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-primary-600 focus:ring-offset-2 border bg-primary-500/20  border-primary-500/10 text-primary-500 dark:bg-primary-400/20  dark:border-primary-400/10 dark:text-primary-400;
 	}
 	.badge.destructive {
-		@apply bg-red-500 dark:bg-red-600/70 hover:bg-red-600 dark:hover:bg-red-600/60;
+		@apply bg-red-500/20 border border-red-500/10 text-red-500;
+	}
+	.badge.success {
+		@apply bg-green-500/20 border border-green-500/10 text-green-500;
 	}
 	.badge.secondary {
 		@apply bg-base-300/40 dark:bg-base-800 border-transparent text-base-800 dark:text-base-200;
@@ -104,6 +107,9 @@ body {
 	}
 	.btn.ghost {
 		@apply bg-transparent hover:bg-base-200 dark:hover:bg-base-800/50 text-base-500 dark:text-base-400 focus-visible:text-base-700 dark:focus-visible:text-base-300 hover:text-base-800 dark:hover:text-base-100 aria-pressed:text-base-800 dark:aria-pressed:text-base-100;
+	}
+	.btn.destructive {
+		@apply bg-red-500 hover:bg-red-600 dark:bg-red-600 dark:hover:bg-red-700;
 	}
 	.btn.text {
 		@apply bg-transparent text-base-500 dark:text-base-400 focus-visible:text-base-700 dark:focus-visible:text-base-100 hover:text-base-800 dark:hover:text-base-100 aria-pressed:text-base-800 dark:aria-pressed:text-base-100 focus-visible:ring-offset-0;

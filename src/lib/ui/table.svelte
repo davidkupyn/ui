@@ -7,24 +7,28 @@
 	import Switch from './switch.svelte';
 	import Popover from './popover.svelte';
 
-	export function uniqueArray<T>(array: T[]): T[] {
-		return Array.from(new Set(array));
-	}
-
-	export const convertTableName = (str: string) => {
-		return str
-			.replace(/_/g, ' ')
-			.replace(/([A-Z])/g, ' $1')
-			.replace(/^./, (str) => str.toUpperCase());
-	};
 	export let selected = new Array<string>();
-	export let items: any[] = [];
 	export let pushHistory = false;
 	export let columnsEditable = false;
-	const tableColumns = Object.keys(items[0]);
+	export let selectable = false;
+	export let items: Record<string, any>[] = [];
+	export let tableColumns: {
+		displayName: string;
+		name: string;
+	}[] = items[0]
+		? Object.keys(items[0]).map((key) => ({
+				displayName: key
+					.replace(/_/g, ' ')
+					.replace(/([A-Z])/g, ' $1')
+					.replace(/^./, (str) => str.toUpperCase()),
+				name: key
+		  }))
+		: [];
+
 	let currentTableColumns = tableColumns;
-	export let id = 'name';
-	const sortBy = queryParam('sort', ssp.string(tableColumns[0]), {
+	export let id = items[0][0];
+
+	const sortBy = queryParam('sort', ssp.string(tableColumns[0].name), {
 		pushHistory
 	});
 	const sortDir = queryParam('dir', ssp.string('asc'), {
@@ -34,11 +38,12 @@
 	function selectAll() {
 		selected = allSelected
 			? selected.filter((item) => !items.map((item) => item[id]).includes(item))
-			: [...selected, ...items.map((item) => item[id])];
+			: Array.from(new Set([...selected, ...items.map((item) => item[id])]));
 	}
 
 	$: allSelected =
 		items.map((item) => item[id]).every((itemId) => selected.includes(itemId)) && items.length > 0;
+
 	selected = [];
 </script>
 
@@ -46,56 +51,58 @@
 	<table class="w-full caption-bottom overflow-x-scroll scrollbar-custom">
 		<thead class="[&_tr]:border-b hover:bg-base-200/50 dark:hover:bg-base-900/50 transition-colors">
 			<tr class="border-base-300/50 dark:border-base-900">
-				<th class="px-4 py-3 align-middle text-left">
-					<input
-						type="checkbox"
-						aria-label="Select all"
-						on:change={selectAll}
-						checked={allSelected}
-						class="checkbox"
-					/>
-				</th>
-				{#each currentTableColumns as columnName, idx (columnName)}
+				{#if selectable}
+					<th class="px-4 py-3 align-middle text-left">
+						<input
+							type="checkbox"
+							aria-label="Select all"
+							on:change={selectAll}
+							checked={allSelected}
+							class="checkbox"
+						/>
+					</th>
+				{/if}
+				{#each currentTableColumns as column, idx (column.name)}
 					<th
 						animate:flip={{ duration: 200, easing: cubicOut }}
-						class="px-4 group cursor-pointer transition select-text"
-						class:pl-0={idx === 0}
-						class:pr-0={idx === currentTableColumns.length - 1}
+						class="px-4 py-2 group cursor-pointer transition select-text"
+						class:pl-0={idx === 0 && selectable}
+						class:pr-0={idx === currentTableColumns.length - 1 && columnsEditable}
 						on:click={() => {
-							$sortDir = $sortBy === columnName && $sortDir === 'asc' ? 'desc' : 'asc';
-							$sortBy = columnName;
+							$sortDir = $sortBy === column.name && $sortDir === 'asc' ? 'desc' : 'asc';
+							$sortBy = column.name;
 						}}
 					>
 						<span class="flex items-center gap-2">
 							<span
 								class="uppercase btn text p-0 font-semibold group-hover:text-base-800 dark:group-hover:text-base-100"
 							>
-								{convertTableName(columnName)}
+								{column.displayName}
 							</span>
 							<button
 								class="btn ghost group/button relative h-9 w-9 focus-visible:ring-offset-0"
-								aria-label="Sort by {columnName}"
-								use:tippy={{ content: `Sort by ${columnName}`, delay: 300 }}
+								aria-label="Sort by {column.name}"
+								use:tippy={{ content: `Sort by ${column.name}`, delay: 300 }}
 							>
 								<ChevronDown
 									size={20}
 									class="absolute rotate-180 transform ease-out group-focus-visible/button:opacity-100 
-													{$sortBy === columnName && $sortDir === 'desc'
+													{$sortBy === column.name && $sortDir === 'desc'
 										? 'top-2 opacity-100 group-hover:top-0.5  group-focus-visible/button:top-0.5'
 										: 'top-0.5 opacity-0'} 
 														transition-all group-hover:opacity-100 
-														{$sortBy === columnName && $sortDir === 'desc'
+														{$sortBy === column.name && $sortDir === 'desc'
 										? 'group-hover:text-base-950 group-focus-visible/button:text-base-950 dark:group-hover:text-base-50 dark:group-focus-visible/button:text-base-50'
 										: 'group-hover:text-base-400 group-focus-visible/button:text-base-400 dark:group-hover:text-base-500 dark:group-focus-visible/button:text-base-500'}"
 								/>
 								<ChevronDown
 									size={20}
 									class="absolute ease-out group-focus-visible/button:opacity-100 
-													{$sortBy === columnName && $sortDir === 'asc'
+													{$sortBy === column.name && $sortDir === 'asc'
 										? 'bottom-2 opacity-100 group-hover:bottom-0.5 group-focus-visible/button:bottom-0.5'
 										: 'bottom-0.5 opacity-0'} 
 														transition-all group-hover:opacity-100 
-														{$sortBy === columnName && $sortDir === 'asc'
+														{$sortBy === column.name && $sortDir === 'asc'
 										? 'group-hover:text-base-950 group-focus-visible/button:text-base-950 dark:group-hover:text-base-50 dark:group-focus-visible/button:text-base-50'
 										: 'group-hover:text-base-400 group-focus-visible/button:text-base-400 dark:group-hover:text-base-500 dark:group-focus-visible/button:text-base-500'}"
 								/>
@@ -113,20 +120,20 @@
 								class="btn ghost p-2 h-fit"
 								use:tippy={{ content: 'Toggle columns' }}><Settings2 size={20} /></button
 							>
-							<ul slot="panel">
-								{#each tableColumns as key (key)}
+							<ul slot="panel" class="w-44 divide-y divide-base-200 dark:divide-base-900">
+								{#each tableColumns as column (column.name)}
 									<li class="px-1 py-1">
 										<label
-											for={key}
-											class="flex w-full items-center justify-between rounded-xl p-2 text-sm font-medium capitalize transition hover:bg-base-200 dark:hover:bg-base-800/50 text-base-500 dark:text-base-400 focus-within:bg-base-200 dark:focus-within:bg-base-800/50 hover:text-base-800 dark:hover:text-base-100 focus-within:text-base-800 dark:focus-within:text-base-100"
+											for={column.name}
+											class="flex w-full text-left items-center justify-between rounded-xl p-2 text-sm font-medium capitalize transition hover:bg-base-200 dark:hover:bg-base-800/50 text-base-500 dark:text-base-400 focus-within:bg-base-200 dark:focus-within:bg-base-800/50 hover:text-base-800 dark:hover:text-base-100 focus-within:text-base-800 dark:focus-within:text-base-100"
 										>
-											{convertTableName(key)}
+											{column.displayName}
 											<Switch
-												id={key}
+												id={column.name}
 												bind:group={currentTableColumns}
-												value={key}
+												value={column}
 												defaultChecked
-												disabled={currentTableColumns.includes(key) &&
+												disabled={currentTableColumns.includes(column) &&
 													currentTableColumns.length === 1}
 											/>
 										</label>
@@ -138,39 +145,43 @@
 				</th>
 			</tr>
 		</thead>
-		<tbody class="[&_tr]:border-b [&_tr:last-child]:border-none">
+		<tbody class="[&_tr]:border-b [&_tr:last-child]:border-none relative">
 			{#each items as item, idx (item[id] + idx)}
 				<tr
 					animate:flip={{ duration: 300, easing: cubicOut }}
 					class="group border-base-300/50 dark:border-base-900 transition-colors data-[state=selected]:bg-primary-500/10 data-[state=selected]:hover:bg-primary-600/10 hover:bg-base-200/50 dark:hover:bg-base-900/50"
 					data-state={selected.includes(item[id]) ? 'selected' : null}
 				>
-					<td class="px-4 py-3 align-middle text-left">
-						<input
-							type="checkbox"
-							aria-label="Select user"
-							checked={selected.includes(item[id])}
-							on:change={() =>
-								(selected = selected.includes(item[id])
-									? selected.filter((idx) => idx !== item[id])
-									: [...selected, item[id]])}
-							value={item[id]}
-							class="checkbox"
-						/>
-					</td>
-					{#each currentTableColumns as column, columnId (column)}
+					{#if selectable}
+						<td class="px-4 py-3 align-middle text-left">
+							<input
+								type="checkbox"
+								aria-label="Select user"
+								checked={selected.includes(item[id])}
+								on:change={() =>
+									(selected = selected.includes(item[id])
+										? selected.filter((idx) => idx !== item[id])
+										: [...selected, item[id]])}
+								value={item[id]}
+								class="checkbox"
+							/>
+						</td>
+					{/if}
+					{#each currentTableColumns as column, columnIdx (column)}
 						<td
 							animate:flip={{ duration: 200, easing: cubicOut }}
-							class="px-4 tabular-nums max-w-[500px] truncate"
-							class:pl-0={columnId === 0}
-							class:pr-0={columnId === currentTableColumns.length - 1}
+							class="px-4 py-5 tabular-nums max-w-[500px] truncate"
+							class:pl-0={columnIdx === 0 && selectable}
+							class:pr-0={columnIdx === currentTableColumns.length - 1 && !$$slots.actions}
 						>
-							{item[column]}
+							<slot name="row" row={item} {column}>
+								{item[column.name]}
+							</slot>
 						</td>
 					{/each}
 					<td class="px-4 py-3 align-middle text-right">
 						{#if $$slots.actions}
-							<Popover>
+							<Popover position={idx >= items.length - 2 ? 'top-end' : 'bottom-end'}>
 								<button
 									slot="button"
 									let:button
@@ -189,7 +200,7 @@
 				<tr
 					class="border-b p-4 border-base-300/50 dark:border-base-900 transition-colors hover:bg-base-300/50 dark:hover:bg-base-900/50"
 				>
-					<td colspan={tableColumns.length + 2} class="text-center"> No users found </td>
+					<td colspan={tableColumns.length + 2} class="text-center py-8 text-sm"> No results.</td>
 				</tr>
 			{/each}
 		</tbody>

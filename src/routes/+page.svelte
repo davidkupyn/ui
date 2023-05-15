@@ -13,7 +13,8 @@
 		Github,
 		QrCode,
 		Trash2,
-		AppWindow
+		AppWindow,
+		Hash
 	} from 'lucide-svelte';
 	import Tabs from '../lib/ui/tabs.svelte';
 	import Pagination from '$lib/ui/pagination.svelte';
@@ -34,7 +35,8 @@
 		id: crypto.randomUUID().slice(0, 20),
 		name: `Item ${i}`,
 		description: `aliquip fugiat dolor consequat voluptate aliqua irure nulla officia magna quis commodo fugiat sit anim duis ea eu do sunt velit culpa anim non velit enim dolore incididunt id minim dolore irure quis nulla laboris non ${i}`,
-		price: `$${Math.floor(Math.random() * 1000)}`
+		price: `$${Math.floor(Math.random() * 1000)}`,
+		status: Math.random() > 0.41 ? 'active' : 'inactive'
 	}));
 
 	$: paginatedItems = $currentPage
@@ -108,8 +110,9 @@
 			</button>
 			<button class="btn secondary">
 				<Send size={16} />
-				Filled
+				Secondary
 			</button>
+			<button class="btn destructive"> Destructive </button>
 			<button class="btn ghost"> Ghost </button>
 			<button class="btn ghost p-2 h-fit" use:tippy={{ content: 'Ghost icon button' }}>
 				<QrCode size={20} />
@@ -123,19 +126,13 @@
 		<div class="w-full border border-base-300 dark:border-base-900 rounded-xl">
 			<Tabs {tabs} bind:currentTab={tab} />
 		</div>
-		<div>
-			<span class="badge capitalize mr-2">
-				{tab}
-			</span>
-			<span class="badge secondary capitalize">
-				{tab}
-			</span>
+		<div class="space-x-2">
+			<span class="badge capitalize"> Primary </span>
+			<span class="badge outline capitalize"> Outline </span>
+			<span class="badge secondary capitalize"> Secondary </span>
+			<span class="badge success capitalize"> Success </span>
 
-			<span class="badge outline capitalize ml-2">
-				{tab}
-			</span><span class="badge destructive capitalize ml-2">
-				{tab}
-			</span>
+			<span class="badge destructive capitalize"> Destructive </span>
 		</div>
 
 		<label for="switch" class="flex items-center gap-2 text-sm">
@@ -187,10 +184,23 @@
 			</div>
 		</form>
 	</Dialog>
-	<div class="flex flex-col items-center w-full max-w-6xl">
+	<div class="flex flex-col items-center w-full max-w-7xl">
 		<div class="w-full border border-base-300/50 dark:border-base-900 rounded-3xl overflow-hidden">
-			<Table items={paginatedItems} id="id" bind:selected columnsEditable>
-				<ul slot="actions" let:row>
+			<Table
+				items={paginatedItems}
+				id="id"
+				tableColumns={Object.keys(items[0]).map((key) => ({
+					displayName: key
+						.replace(/_/g, ' ')
+						.replace(/([A-Z])/g, ' $1')
+						.replace(/^./, (str) => str.toUpperCase()),
+					name: key
+				}))}
+				bind:selected
+				columnsEditable
+				selectable
+			>
+				<ul slot="actions" class="w-40 divide-y divide-base-200 dark:divide-base-900" let:row>
 					<li class="px-1 py-1">
 						<button
 							class="btn ghost w-full justify-start"
@@ -214,6 +224,17 @@
 						</button>
 					</li>
 				</ul>
+				<svelte:fragment slot="row" let:row let:column>
+					{#if column.name === 'description'}
+						<Hash class="inline mr-1 text-base-500" size={16} /> {row[column.name]}
+					{:else if column.name === 'status'}
+						<span class="badge {row[column.name] === 'inactive' ? 'destructive' : 'success'}">
+							{row[column.name]}
+						</span>
+					{:else}
+						{row[column.name]}
+					{/if}
+				</svelte:fragment>
 			</Table>
 		</div>
 		<div class="sticky bottom-24 z-20 h-12 w-96 max-md:w-full mx-auto">
