@@ -14,7 +14,9 @@
 		QrCode,
 		Trash2,
 		AppWindow,
-		Hash
+		Hash,
+		Fingerprint,
+		DollarSign
 	} from 'lucide-svelte';
 	import Tabs from '../lib/ui/tabs.svelte';
 	import Pagination from '$lib/ui/pagination.svelte';
@@ -28,23 +30,33 @@
 	let showPassword = false;
 	const tabs = ['witalina', 'david', 'wiktor', 'gustaw'];
 	let tab = tabs[0];
-
+	const PAGE_SIZE = 10;
 	const currentPage = queryParam('page', ssp.number());
-
-	$: items = Array.from({ length: 100 }, (_, i) => ({
-		id: crypto.randomUUID().slice(0, 20),
-		name: `Item ${i}`,
-		description: `aliquip fugiat dolor consequat voluptate aliqua irure nulla officia magna quis commodo fugiat sit anim duis ea eu do sunt velit culpa anim non velit enim dolore incididunt id minim dolore irure quis nulla laboris non ${i}`,
-		price: `$${Math.floor(Math.random() * 1000)}`,
+	const item = {
+		id: crypto.randomUUID().slice(0, 16),
+		name: 'Item',
+		description: `“Well, and so we breakfasted at ten as usual; I thought it would never be over; for, by the bye, you are to understand, that my uncle and aunt were horrid unpleasant all the time I was with them. If you’ll believe me, I did not once put my foot out of doors, though I was there a fortnight. Not one party, or scheme, or anything. To be sure London was rather thin, but, however, the Little Theatre was open. Well, and so just as the carriage came to the door, my uncle was called away upon business to that horrid man Mr. Stone. And then, you know, when once they get together, there is no end of it. Well, I was so frightened I did not know what to do, for my uncle was to give me away; and if we were beyond the hour, we could not be married all day. But, luckily, he came back again in ten minutes’ time, and then we all set out. However, I recollected afterwards that if he had been prevented going, the wedding need not be put off, for Mr. Darcy might have done as well.”`,
+		price: Math.floor(Math.random() * 1000),
+		status: Math.random() > 0.41 ? 'active' : 'inactive'
+	};
+	let items = Array.from({ length: 100 }, (_, i) => ({
+		id: crypto.randomUUID().slice(0, 16),
+		name: `Item ${i + 1}`,
+		description: `“Well, and so we breakfasted at ten as usual; I thought it would never be over; for, by the bye, you are to understand, that my uncle and aunt were horrid unpleasant all the time I was with them. If you’ll believe me, I did not once put my foot out of doors, though I was there a fortnight. Not one party, or scheme, or anything. To be sure London was rather thin, but, however, the Little Theatre was open. Well, and so just as the carriage came to the door, my uncle was called away upon business to that horrid man Mr. Stone. And then, you know, when once they get together, there is no end of it. Well, I was so frightened I did not know what to do, for my uncle was to give me away; and if we were beyond the hour, we could not be married all day. But, luckily, he came back again in ten minutes’ time, and then we all set out. However, I recollected afterwards that if he had been prevented going, the wedding need not be put off, for Mr. Darcy might have done as well.”`,
+		price: Math.floor(Math.random() * 1000),
 		status: Math.random() > 0.41 ? 'active' : 'inactive'
 	}));
 
 	$: paginatedItems = $currentPage
-		? items.slice(($currentPage - 1) * 10, $currentPage * 10)
-		: items.slice(0, 10);
+		? items.slice(($currentPage - 1) * PAGE_SIZE, $currentPage * PAGE_SIZE)
+		: items.slice(0, PAGE_SIZE);
 
 	let selected: string[] = [];
 	let closeDialog: () => void;
+	let openDeleteDialog: () => void;
+	let closeDeleteDialog: () => void;
+
+	$: totalPages = Math.ceil(items.length / PAGE_SIZE) || 1;
 </script>
 
 <main class="p-8 min-h-screen w-full flex flex-col gap-6">
@@ -137,7 +149,7 @@
 
 		<label for="switch" class="flex items-center gap-2 text-sm">
 			<Switch id="switch" />
-			Switch this
+			Toggle
 		</label>
 	</div>
 	<div
@@ -162,7 +174,7 @@
 		/>
 	</div>
 	<Dialog bind:close={closeDialog}>
-		<button slot="button" let:open on:click={() => open()} class="btn">
+		<button slot="button" let:open on:click={open} class="btn">
 			<AppWindow size={16} />
 			Open Dialog
 		</button>
@@ -184,12 +196,12 @@
 			</div>
 		</form>
 	</Dialog>
-	<div class="flex flex-col items-center w-full max-w-7xl">
+	<div class="flex flex-col items-center w-full">
 		<div class="w-full border border-base-300/50 dark:border-base-900 rounded-3xl overflow-hidden">
 			<Table
 				items={paginatedItems}
 				id="id"
-				tableColumns={Object.keys(items[0]).map((key) => ({
+				tableColumns={Object.keys(item).map((key) => ({
 					displayName: key
 						.replace(/_/g, ' ')
 						.replace(/([A-Z])/g, ' $1')
@@ -225,10 +237,23 @@
 					</li>
 				</ul>
 				<svelte:fragment slot="row" let:row let:column>
-					{#if column.name === 'description'}
-						<Hash class="inline mr-1 text-base-500" size={16} /> {row[column.name]}
+					{#if column.name === 'id'}
+						<span class="flex items-center gap-2">
+							<Fingerprint class="text-base-500" size={16} />
+							{row[column.name]}
+						</span>
+					{:else if column.name === 'description'}
+						<Hash class="inline mr-1 text-base-500" size={16} />
+						{row[column.name]}
+					{:else if column.name === 'price'}
+						<span class="flex items-center">
+							<DollarSign class="text-base-500" size={16} />
+							{row[column.name]}
+						</span>
 					{:else if column.name === 'status'}
-						<span class="badge {row[column.name] === 'inactive' ? 'destructive' : 'success'}">
+						<span
+							class="badge capitalize {row[column.name] === 'inactive' ? 'destructive' : 'success'}"
+						>
 							{row[column.name]}
 						</span>
 					{:else}
@@ -241,7 +266,7 @@
 			{#if selected.length > 0}
 				<div
 					transition:fly={{ y: 150, duration: 200, easing: cubicOut }}
-					class="z-20 flex h-full w-full items-center justify-between rounded-xl bg-base-50/80 border border-base-300 dark:bg-base-950 dark:border-base-800/80 backdrop-blur-md shadow-xl p-2 px-4"
+					class="drop-shadow-sm z-20 flex h-full w-full items-center justify-between rounded-xl bg-base-50/80 border border-base-300 dark:bg-base-950 dark:border-base-800/80 backdrop-blur-md shadow-xl p-2 px-4"
 				>
 					<span class="text-sm">
 						Selected
@@ -251,12 +276,14 @@
 					</span>
 					<div class="flex gap-4">
 						<button
+							on:click={openDeleteDialog}
 							aria-label="Delete items"
 							class="btn ghost p-1.5 h-fit rounded-md"
 							use:tippy={{ content: 'Delete items' }}
 						>
 							<Trash2 size={20} />
 						</button>
+
 						<button
 							aria-label="Discard selection"
 							class="btn ghost p-1.5 h-fit rounded-md"
@@ -269,6 +296,29 @@
 				</div>
 			{/if}
 		</div>
-		<Pagination totalPages={10} />
+		<Pagination {totalPages} />
 	</div>
 </main>
+
+<Dialog bind:close={closeDeleteDialog} bind:open={openDeleteDialog}>
+	<form class="grid gap-4 w-72" slot="panel">
+		<h2 class="font-semibold text-lg">Are you sure?</h2>
+
+		<div class="flex gap-4 mt-4 w-full">
+			<button type="button" on:click={() => closeDeleteDialog()} class="btn outline w-full">
+				Cancel
+			</button>
+			<button
+				type="submit"
+				class="btn destructive w-full"
+				on:click={() => {
+					items = items.filter((item) => !selected.includes(item.id));
+					selected = [];
+					closeDeleteDialog();
+				}}
+			>
+				Delete
+			</button>
+		</div>
+	</form>
+</Dialog>

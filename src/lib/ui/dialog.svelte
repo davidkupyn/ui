@@ -4,8 +4,8 @@
 
 	export let label = 'Dialog';
 	const dialog = createDialog({ label });
-	const { open, modal } = dialog;
 	export const close = dialog.close;
+	export const open = dialog.open;
 </script>
 
 <div class="relative z-20">
@@ -34,7 +34,7 @@
 					leaveTo="opacity-0 scale-75"
 				>
 					<div
-						use:modal
+						use:dialog.modal
 						class="w-full sm:w-fit rounded-3xl border border-base-300 dark:border-base-800 bg-base-50 dark:bg-base-950/75 backdrop-blur-md p-6"
 					>
 						<slot name="panel" />

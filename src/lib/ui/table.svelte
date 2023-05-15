@@ -120,7 +120,7 @@
 								class="btn ghost p-2 h-fit"
 								use:tippy={{ content: 'Toggle columns' }}><Settings2 size={20} /></button
 							>
-							<ul slot="panel" class="w-44 divide-y divide-base-200 dark:divide-base-900">
+							<ul slot="panel" class="w-48 divide-y divide-base-200 dark:divide-base-900">
 								{#each tableColumns as column (column.name)}
 									<li class="px-1 py-1">
 										<label

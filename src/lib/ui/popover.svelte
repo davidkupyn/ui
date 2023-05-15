@@ -29,7 +29,7 @@
 			use:popover.panel
 			class="{positionValues[
 				position
-			]} absolute z-20 w-fit divide-y divide-base-200 dark:divide-base-900 rounded-2xl border border-base-300/50 dark:border-base-900 bg-base-50/60 dark:bg-base-950/80 backdrop-blur-md shadow-lg ring-opacity-5 focus:outline-none"
+			]} absolute z-20 w-fit divide-y divide-base-200 dark:divide-base-900 rounded-2xl border border-base-300/50 dark:border-base-900 bg-base-50 dark:bg-base-950 backdrop-blur-md shadow-lg ring-opacity-5 focus:outline-none"
 		>
 			<slot name="panel" />
 		</div>
