@@ -221,6 +221,8 @@
 				columnsEditable
 				selectable
 			>
+				<!-- rowClickable
+				on:rowclick={(event) => console.log('clicked on', event.detail.name)} -->
 				<Popover
 					slot="actions"
 					let:row
@@ -241,7 +243,7 @@
 						<li class="px-1 py-1">
 							<button
 								class="btn ghost w-full justify-start"
-								on:click={() => {
+								on:click|stopPropagation={() => {
 									console.log('edit');
 								}}
 							>
@@ -252,7 +254,7 @@
 						<li class="px-1 py-1">
 							<button
 								class="btn ghost w-full justify-start"
-								on:click={() => {
+								on:click|stopPropagation={() => {
 									items = items.filter((item) => item.id !== row.id);
 									selected = selected.filter((item) => item !== row.id);
 								}}
@@ -326,9 +328,9 @@
 		</div>
 		<Pagination {totalPages} />
 	</div>
-	<Swiper>
-		<!-- <Card active={false} removeCard={() => {}} card /> -->
-	</Swiper>
+	<div class="my-8">
+		<Swiper />
+	</div>
 </main>
 
 <Dialog bind:close={closeDeleteDialog} bind:open={openDeleteDialog}>

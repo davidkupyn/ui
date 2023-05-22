@@ -6,13 +6,15 @@
 	import { queryParam, ssp } from 'sveltekit-search-params';
 	import Switch from './switch.svelte';
 	import Popover from './popover.svelte';
+	import { createEventDispatcher } from 'svelte';
 
+	const dispatch = createEventDispatcher();
 	export let selected = new Array<string>();
 	export let pushHistory = false;
 	export let columnsEditable = false;
 	export let selectable = false;
 	export let items: Record<string, any>[] = [];
-	export let rowClick = false;
+	export let rowClickable = false;
 	export let tableColumns: {
 		displayName: string;
 		name: string;
@@ -164,8 +166,14 @@
 		<tbody class="[&_tr]:border-b [&_tr:last-child]:border-none relative">
 			{#each items as item, idx (item[id] + idx)}
 				<tr
-					tabindex={rowClick ? 1 : null}
-					on:click={() => (rowClick ? console.log('click') : null)}
+					tabindex={rowClickable ? 0 : null}
+					on:click={() => dispatch('rowclick', item)}
+					on:keydown={(e) => {
+						if (e.code === 'Enter') {
+							e.preventDefault();
+							dispatch('rowclick', item);
+						}
+					}}
 					animate:flip={{ duration: 300, easing: cubicOut }}
 					class="group border-base-300/50 dark:border-base-900 transition-colors data-[state=selected]:bg-primary-500/10 data-[state=selected]:hover:bg-primary-600/10 hover:bg-base-200/50 dark:hover:bg-base-900/50 focus:bg-base-200/80 dark:focus:bg-base-900/80 outline-none data-[state=selected]:focus:bg-primary-600/20"
 					data-state={selected.includes(item[id]) ? 'selected' : null}
