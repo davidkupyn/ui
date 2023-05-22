@@ -12,6 +12,7 @@
 	export let columnsEditable = false;
 	export let selectable = false;
 	export let items: Record<string, any>[] = [];
+	export let rowClick = false;
 	export let tableColumns: {
 		displayName: string;
 		name: string;
@@ -27,7 +28,7 @@
 
 	let currentTableColumns = tableColumns;
 	export let id = items[0][0];
-
+	const all = tableColumns;
 	const sortBy = queryParam('sort', ssp.string(tableColumns[0].name), {
 		pushHistory
 	});
@@ -136,6 +137,21 @@
 												disabled={currentTableColumns.includes(column) &&
 													currentTableColumns.length === 1}
 											/>
+											<!-- <label class="relative inline-flex items-center cursor-pointer">
+												<input
+													id={column.name}
+													name={column.name}
+													value={column}
+													type="checkbox"
+													class="sr-only peer"
+													disabled={currentTableColumns.includes(column) &&
+														currentTableColumns.length === 1}
+													bind:group={currentTableColumns}
+												/>
+												<span
+													class="w-11 transition peer-disabled:after:dark:bg-zinc-300 peer-disabled:opacity-50 peer-disabled:pointer-events-none h-6 bg-base-300/50 dark:bg-base-800 peer-focus:outline-none peer-focus-visible:ring-2 peer-focus-visible:ring-primary-600 peer-focus-visible:ring-offset-2 peer-focus-visible:ring-offset-base-50 dark:peer-focus-visible:ring-offset-base-950 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-base-50 after:shadow-lg after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-base-600 peer-checked:bg-primary-500 dark:peer-checked:bg-primary-600"
+												/>
+											</label> -->
 										</label>
 									</li>
 								{/each}
@@ -148,8 +164,10 @@
 		<tbody class="[&_tr]:border-b [&_tr:last-child]:border-none relative">
 			{#each items as item, idx (item[id] + idx)}
 				<tr
+					tabindex={rowClick ? 1 : null}
+					on:click={() => (rowClick ? console.log('click') : null)}
 					animate:flip={{ duration: 300, easing: cubicOut }}
-					class="group border-base-300/50 dark:border-base-900 transition-colors data-[state=selected]:bg-primary-500/10 data-[state=selected]:hover:bg-primary-600/10 hover:bg-base-200/50 dark:hover:bg-base-900/50"
+					class="group border-base-300/50 dark:border-base-900 transition-colors data-[state=selected]:bg-primary-500/10 data-[state=selected]:hover:bg-primary-600/10 hover:bg-base-200/50 dark:hover:bg-base-900/50 focus:bg-base-200/80 dark:focus:bg-base-900/80 outline-none data-[state=selected]:focus:bg-primary-600/20"
 					data-state={selected.includes(item[id]) ? 'selected' : null}
 				>
 					{#if selectable}
@@ -158,6 +176,7 @@
 								type="checkbox"
 								aria-label="Select user"
 								checked={selected.includes(item[id])}
+								on:click|stopPropagation
 								on:change={() =>
 									(selected = selected.includes(item[id])
 										? selected.filter((idx) => idx !== item[id])
@@ -181,18 +200,7 @@
 					{/each}
 					<td class="px-4 py-3 align-middle text-right">
 						{#if $$slots.actions}
-							<Popover position={idx >= items.length - 2 ? 'top-end' : 'bottom-end'}>
-								<button
-									slot="button"
-									let:button
-									use:button
-									class="btn ghost p-2 h-fit"
-									use:tippy={{ content: 'View Actions' }}
-								>
-									<MoreHorizontal size={20} />
-								</button>
-								<slot row={item} slot="panel" name="actions" />
-							</Popover>
+							<slot row={item} index={idx} name="actions" />
 						{/if}
 					</td>
 				</tr>

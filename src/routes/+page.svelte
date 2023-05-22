@@ -16,7 +16,8 @@
 		AppWindow,
 		Hash,
 		Fingerprint,
-		DollarSign
+		DollarSign,
+		MoreHorizontal
 	} from 'lucide-svelte';
 	import Tabs from '../lib/ui/tabs.svelte';
 	import Pagination from '$lib/ui/pagination.svelte';
@@ -26,6 +27,9 @@
 	import { cubicOut } from 'svelte/easing';
 	import Disclosure from '$lib/ui/disclosure.svelte';
 	import Dialog from '$lib/ui/dialog.svelte';
+	import Card from '$lib/ui/card.svelte';
+	import Swiper from '$lib/ui/swiper.svelte';
+	import Popover from '$lib/ui/popover.svelte';
 
 	let showPassword = false;
 	const tabs = ['witalina', 'david', 'wiktor', 'gustaw'];
@@ -63,9 +67,7 @@
 	<div class="w-full max-w-[40rem] flex flex-col gap-6">
 		<h1 class="text-2xl font-bold text-base-800 dark:text-base-200 md:text-3xl">Dave Kupyn's UI</h1>
 		<label class="input-group">
-			<span class="icon-left">
-				<Search size={16} class="icon-left" />
-			</span>
+			<Search size={16} class="icon-left" />
 			<input placeholder="Search..." />
 		</label>
 		<label class="input-label w-full">
@@ -73,13 +75,15 @@
 			<input class="input" placeholder="Placeholder" />
 		</label>
 		<label class="input-label w-full">
-			Password
+			<span>
+				Password <span class="text-red-500">*</span>
+			</span>
 			<fieldset class="input-group" disabled={false}>
 				<Lock size={16} class="icon-left" />
 				<input type="password" placeholder="Password" />
 				<button
 					type="button"
-					class="icon-right"
+					class="icon-right p-1 rounded-md h-fit btn text"
 					on:click={() => {
 						showPassword = !showPassword;
 					}}
@@ -174,11 +178,16 @@
 		/>
 	</div>
 	<Dialog bind:close={closeDialog}>
-		<button slot="button" let:open on:click={open} class="btn">
+		<button
+			slot="button"
+			let:open
+			on:click={open}
+			class="btn lg hover:bg-primary-500 dark:hover:bg-primary-600 hover:scale-105 transition hover:shadow-xl duration-300"
+		>
 			<AppWindow size={16} />
 			Open Dialog
 		</button>
-		<form class="grid gap-4" slot="panel">
+		<form class="grid gap-4" slot="panel" method="">
 			<h2 class="font-semibold text-md">Edit Profile</h2>
 			<label class="input-label w-full sm:w-72">
 				Username
@@ -192,7 +201,7 @@
 				<button type="button" on:click={() => closeDialog()} class="btn outline w-full">
 					Cancel
 				</button>
-				<button class="btn w-full"> Confirm </button>
+				<button type="submit" class="btn w-full"> Confirm </button>
 			</div>
 		</form>
 	</Dialog>
@@ -212,30 +221,49 @@
 				columnsEditable
 				selectable
 			>
-				<ul slot="actions" class="w-40 divide-y divide-base-200 dark:divide-base-900" let:row>
-					<li class="px-1 py-1">
-						<button
-							class="btn ghost w-full justify-start"
-							on:click={() => {
-								console.log('edit');
-							}}
-						>
-							<Edit size={20} class="mr-2" />
-							Edit
-						</button>
-					</li>
-					<li class="px-1 py-1">
-						<button
-							class="btn ghost w-full justify-start"
-							on:click={() => {
-								items = items.filter((item) => item.id !== row.id);
-							}}
-						>
-							<Trash2 size={20} class="mr-2" />
-							Delete
-						</button>
-					</li>
-				</ul>
+				<Popover
+					slot="actions"
+					let:row
+					let:index
+					position={index >= paginatedItems.length - 2 ? 'top-end' : 'bottom-end'}
+				>
+					<button
+						slot="button"
+						let:button
+						use:button
+						class="btn ghost p-2 h-fit"
+						use:tippy={{ content: 'View Actions' }}
+						on:click|stopPropagation
+					>
+						<MoreHorizontal size={20} />
+					</button>
+					<ul slot="panel" class="w-40 divide-y divide-base-200 dark:divide-base-900">
+						<li class="px-1 py-1">
+							<button
+								class="btn ghost w-full justify-start"
+								on:click={() => {
+									console.log('edit');
+								}}
+							>
+								<Edit size={20} class="mr-2" />
+								Edit
+							</button>
+						</li>
+						<li class="px-1 py-1">
+							<button
+								class="btn ghost w-full justify-start"
+								on:click={() => {
+									items = items.filter((item) => item.id !== row.id);
+									selected = selected.filter((item) => item !== row.id);
+								}}
+							>
+								<Trash2 size={20} class="mr-2" />
+								Delete
+							</button>
+						</li>
+					</ul>
+				</Popover>
+
 				<svelte:fragment slot="row" let:row let:column>
 					{#if column.name === 'id'}
 						<span class="flex items-center gap-2">
@@ -298,6 +326,9 @@
 		</div>
 		<Pagination {totalPages} />
 	</div>
+	<Swiper>
+		<!-- <Card active={false} removeCard={() => {}} card /> -->
+	</Swiper>
 </main>
 
 <Dialog bind:close={closeDeleteDialog} bind:open={openDeleteDialog}>

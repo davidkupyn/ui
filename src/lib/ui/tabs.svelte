@@ -21,7 +21,7 @@
 				<div
 					in:receive|local={{ key: 'tab', easing: cubicOut, duration }}
 					out:send|local={{ key: 'tab', easing: cubicOut, duration }}
-					class="w-full h-full rounded bg-base-300/50 dark:bg-base-800/50"
+					class="w-full h-full rounded-md bg-base-300/50 dark:bg-base-800/50"
 				/>
 			{/if}
 			<span class="capitalize absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
