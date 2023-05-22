@@ -1,3 +1,11 @@
+<script context="module" lang="ts">
+	import { writable } from 'svelte/store';
+
+	let expandedId = writable(0);
+
+	let id = 1;
+</script>
+
 <script lang="ts">
 	import { ChevronUp } from 'lucide-svelte';
 
@@ -6,11 +14,13 @@
 	export let summary: string = '';
 	export let content: string = '';
 	export let label = summary;
+	const componentId = id++;
+	$: expanded = $expandedId === componentId;
 </script>
 
 <div class="w-full">
 	<button
-		on:click={() => (expanded = !expanded)}
+		on:click={() => ($expandedId = expanded ? 0 : componentId)}
 		class="btn ghost w-full justify-between"
 		aria-expanded={expanded}
 		aria-label={label}
