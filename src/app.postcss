@@ -12,10 +12,12 @@ input::-webkit-inner-spin-button {
 }
 html {
 	color-scheme: light dark;
+	scroll-behaviour: smooth;
 }
 
 body {
 	@apply bg-base-50 dark:bg-base-950 min-h-screen text-base-800 dark:text-base-50 selection:bg-primary-500/30 overscroll-y-none transition-colors;
+	-webkit-tap-highlight-color: transparent;
 }
 
 :root {

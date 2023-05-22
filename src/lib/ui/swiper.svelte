@@ -8,9 +8,9 @@
 
 <section class="w-full flex flex-col items-center">
 	<!-- <slot /> -->
-	<div class="space-x-4">
+	<div class="flex max-sm:flex-col gap-4">
 		<div
-			class="w-80 h-[26rem] inline-flex flex-col convex transform
+			class="w-80 max-sm:hidden h-[26rem] flex flex-col convex transform
        transition rounded-3xl overflow-hidden p-6 pb-0"
 		>
 			<!-- <div class="w-full h-56 bg-white/5 rounded-xl" /> -->
@@ -20,7 +20,7 @@
 			</hgroup>
 		</div>
 		<div
-			class="w-80 h-[26rem] inline-flex flex-col convex transform
+			class="w-80 max-sm:hidden h-[26rem] flex flex-col convex transform
        transition rounded-3xl overflow-hidden p-6 pb-0"
 		>
 			<!-- <div class="w-full h-56 bg-white/5 rounded-xl" /> -->
@@ -30,7 +30,7 @@
 			</hgroup>
 		</div>
 		<div
-			class="w-80 h-[26rem] inline-flex flex-col convex transform
+			class="w-80 h-[26rem] flex flex-col convex transform
        transition rounded-3xl overflow-hidden p-6 pb-0"
 		>
 			<!-- <div class="w-full h-56 bg-white/5 rounded-xl" /> -->

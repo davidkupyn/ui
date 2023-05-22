@@ -33,7 +33,10 @@
 
 	let showPassword = false;
 	const tabs = ['witalina', 'david', 'wiktor', 'gustaw'];
+	const tabs2 = ['witalina', 'david', 'wiktor', 'gustaw'];
+
 	let tab = tabs[0];
+	let tab2 = tabs2[0];
 	const PAGE_SIZE = 10;
 	const currentPage = queryParam('page', ssp.number());
 	const item = {
@@ -141,6 +144,9 @@
 		</div>
 		<div class="w-full border border-base-300 dark:border-base-900 rounded-xl">
 			<Tabs {tabs} bind:currentTab={tab} />
+		</div>
+		<div class="w-full rounded-xl bg-base-300/50 dark:bg-base-800/50">
+			<Tabs tabs={tabs2} bind:currentTab={tab2} transparent />
 		</div>
 		<div class="space-x-2">
 			<span class="badge capitalize"> Primary </span>
