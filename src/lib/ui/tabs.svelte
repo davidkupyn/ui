@@ -13,7 +13,7 @@
 <div class="flex items-center w-full h-10 p-1 gap-2">
 	{#each tabs as tab (tab)}
 		<button
-			class="group relative btn text w-full h-full p-0 rounded-md"
+			class="group relative btn text w-full h-full p-0 rounded-lg"
 			on:click={() => (currentTab = tab)}
 			aria-pressed={tab === currentTab}
 			disabled={disabled.includes(tab)}
@@ -22,7 +22,7 @@
 				<div
 					in:receive|local={{ key: 'tab', easing: cubicOut, duration }}
 					out:send|local={{ key: 'tab', easing: cubicOut, duration }}
-					class="w-full h-full rounded-md {transparent
+					class="w-full h-full rounded-lg {transparent
 						? 'bg-base-50 dark:bg-base-950'
 						: 'bg-base-300/50 dark:bg-base-800/50'}"
 				/>
