@@ -6,7 +6,6 @@
 
 <svelte:head>
 	<title>Essence UI</title>
-	<meta property="og:image" content="og.svg" />
 	<meta
 		name="description"
 		content="Crafted with Unparalleled Precision and Timeless Elegance, Essence Transcends Expectations"
