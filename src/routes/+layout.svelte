@@ -5,7 +5,7 @@
 </script>
 
 <svelte:head>
-	<title>David Kupyn's UI</title>
+	<title>Essence UI</title>
 	<meta property="og:image" content="og.svg" />
 	<meta
 		name="description"
