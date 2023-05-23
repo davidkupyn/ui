@@ -27,7 +27,7 @@
 					<a
 						aria-label="Github Link"
 						class="btn btn-text p-2 h-fit"
-						href="https://github.com/davidkupyn"
+						href="https://github.com/davidkupyn/ui"
 						target="_blank"
 					>
 						<Github size={20} />
