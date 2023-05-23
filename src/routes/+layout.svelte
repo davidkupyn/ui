@@ -6,6 +6,12 @@
 
 <svelte:head>
 	<title>David Kupyn's UI</title>
+	<meta property="og:image" content="og.svg" />
+	<meta
+		name="description"
+		content="Crafted with Unparalleled Precision and Timeless Elegance, Essence Transcends Expectations"
+	/>
+	<meta name="author" content="David Kupyn" />
 </svelte:head>
 <header
 	class="{$page.url.pathname === '/'
