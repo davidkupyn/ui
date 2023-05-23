@@ -109,8 +109,8 @@
 		<label class="input-label w-full">
 			Text Area
 			<fieldset class="input-group h-64 flex flex-col" disabled={false}>
-				<input class="text-xl font-semibold my-3" placeholder="Title" />
-				<textarea class="h-full" placeholder="Description" />
+				<input class="!text-xl font-semibold my-3" placeholder="Title" />
+				<textarea class="h-full text-sm" placeholder="Description" />
 			</fieldset>
 		</label>
 		<label class="input-label w-full">
@@ -133,7 +133,7 @@
 				<Send size={16} />
 				Secondary
 			</button>
-			<button class="btn btn-destructive"> Destructive </button>
+			<button class="btn btn-danger"> Danger </button>
 			<button class="btn btn-ghost"> Ghost </button>
 			<button class="btn btn-ghost p-2 h-fit" use:tippy={{ content: 'Ghost icon button' }}>
 				<QrCode size={20} />
@@ -144,7 +144,7 @@
 
 			<button class="btn btn-link btn-secondary">Link Secondary</button>
 		</div>
-		<div class="w-full border border-base-300 dark:border-base-900 rounded-xl">
+		<div class="w-full border border-subtle rounded-xl">
 			<Tabs {tabs} bind:currentTab={tab} />
 		</div>
 		<div class="w-full rounded-xl bg-base-300/50 dark:bg-base-800/50">
@@ -161,13 +161,13 @@
 				</span>
 			</Tabs>
 		</div>
-		<div class="space-x-2">
+		<div class="flex flex-wrap gap-4">
 			<span class="badge badge-capitalize"> Primary </span>
 			<span class="badge badge-outline capitalize"> Outline </span>
 			<span class="badge badge-secondary capitalize"> Secondary </span>
 			<span class="badge badge-success capitalize"> Success </span>
 
-			<span class="badge badge-destructive capitalize"> Destructive </span>
+			<span class="badge badge-danger capitalize"> Danger </span>
 		</div>
 
 		<label for="switch" class="flex items-center gap-2 text-sm">
@@ -175,9 +175,7 @@
 			Toggle
 		</label>
 	</div>
-	<div
-		class="w-full max-w-md grid gap-4 border border-base-300/50 dark:border-base-900 rounded-3xl p-4"
-	>
+	<div class="w-full max-w-md grid gap-4 border border-subtle rounded-3xl p-4">
 		<Disclosure
 			defaultExpanded
 			summary="What is your refund policy?"
@@ -229,7 +227,7 @@
 		</form>
 	</Dialog>
 	<div class="flex flex-col items-center w-full">
-		<div class="w-full border border-base-300/50 dark:border-base-900 rounded-3xl overflow-hidden">
+		<div class="w-full border border-subtle rounded-3xl overflow-hidden">
 			<Table
 				items={paginatedItems}
 				id="id"
@@ -306,7 +304,7 @@
 					{:else if column.name === 'status'}
 						<span
 							class="badge capitalize {row[column.name] === 'inactive'
-								? 'badge-destructive'
+								? 'badge-danger'
 								: 'badge-success'}"
 						>
 							{row[column.name]}
@@ -319,11 +317,11 @@
 				</svelte:fragment>
 			</Table>
 		</div>
-		<div class="sticky bottom-24 z-20 h-12 w-96 max-md:w-full mx-auto">
+		<div class="sticky bottom-24 z-20 h-12 w-96 max-md:w-full mx-auto my-2">
 			{#if selected.length > 0}
 				<div
 					transition:fly={{ y: 150, duration: 200, easing: cubicOut }}
-					class="drop-shadow-sm z-20 flex h-full w-full items-center justify-between rounded-xl bg-base-50/80 border border-base-300 dark:bg-base-950 dark:border-base-800/80 backdrop-blur-md shadow-xl p-2 px-4"
+					class="drop-shadow-sm z-20 flex h-full w-full items-center justify-between rounded-xl bg-base-50/80 border dark:bg-base-950 border-subtle backdrop-blur-md shadow-xl p-2 px-4"
 				>
 					<span class="text-sm">
 						Selected
@@ -359,8 +357,9 @@
 		<Swiper />
 	</div>
 </main>
+
 <Dialog bind:close={closeDeleteDialog} bind:open={openDeleteDialog}>
-	<form class="grid gap-4 w-72" slot="panel">
+	<form class="grid gap-4 w-full sm:w-72" slot="panel">
 		<h2 class="font-semibold text-lg">Are you sure?</h2>
 
 		<div class="flex gap-4 mt-4 w-full">
@@ -369,7 +368,7 @@
 			</button>
 			<button
 				type="submit"
-				class="btn btn-destructive w-full"
+				class="btn btn-danger w-full"
 				on:click={() => {
 					items = items.filter((item) => !selected.includes(item.id));
 					selected = [];

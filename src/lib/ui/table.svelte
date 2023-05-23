@@ -53,7 +53,7 @@
 <div class="w-full overflow-auto">
 	<table class="w-full caption-bottom overflow-x-scroll scrollbar-custom">
 		<thead class="[&_tr]:border-b hover:bg-base-200/50 dark:hover:bg-base-900/50 transition-colors">
-			<tr class="border-base-300/50 dark:border-base-900">
+			<tr class="border-subtle">
 				{#if selectable}
 					<th class="px-4 py-3 align-middle text-left">
 						<input
@@ -175,7 +175,7 @@
 						}
 					}}
 					animate:flip={{ duration: 300, easing: cubicOut }}
-					class="group border-base-300/50 dark:border-base-900 transition-colors data-[state=selected]:bg-primary-500/10 data-[state=selected]:hover:bg-primary-600/10 hover:bg-base-200/50 dark:hover:bg-base-900/50 focus:bg-base-200/80 dark:focus:bg-base-900/80 outline-none data-[state=selected]:focus:bg-primary-600/20"
+					class="group border-subtle transition-colors data-[state=selected]:bg-primary-500/10 data-[state=selected]:hover:bg-primary-600/10 hover:bg-base-200/50 dark:hover:bg-base-900/50 focus:bg-base-200/80 dark:focus:bg-base-900/80 outline-none data-[state=selected]:focus:bg-primary-600/20"
 					data-state={selected.includes(item[id]) ? 'selected' : null}
 				>
 					{#if selectable}
@@ -214,7 +214,7 @@
 				</tr>
 			{:else}
 				<tr
-					class="border-b p-4 border-base-300/50 dark:border-base-900 transition-colors hover:bg-base-300/50 dark:hover:bg-base-900/50"
+					class="border-b p-4 border-subtle transition-colors hover:bg-base-300/50 dark:hover:bg-base-900/50"
 				>
 					<td colspan={tableColumns.length + 2} class="text-center py-8 text-sm"> No results.</td>
 				</tr>

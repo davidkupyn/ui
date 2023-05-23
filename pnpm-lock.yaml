@@ -12,6 +12,7 @@ specifiers:
   eslint-plugin-svelte: ^2.27.4
   lucide-svelte: ^0.215.0
   postcss: ^8.4.23
+  postcss-import: ^15.1.0
   postcss-load-config: ^4.0.1
   prettier: ^2.8.8
   prettier-plugin-svelte: ^2.10.0
@@ -48,6 +49,7 @@ devDependencies:
   eslint-config-prettier: 8.8.0_eslint@8.40.0
   eslint-plugin-svelte: 2.27.4_fjycs5d4hyrgmnptoyq55by2xe
   postcss: 8.4.23
+  postcss-import: 15.1.0_postcss@8.4.23
   postcss-load-config: 4.0.1_postcss@8.4.23
   prettier: 2.8.8
   prettier-plugin-svelte: 2.10.0_blbg2s7pis747igzn3ilcyh5ou

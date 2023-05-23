@@ -15,7 +15,7 @@
 <header
 	class="{$page.url.pathname === '/'
 		? 'fixed'
-		: 'sticky top-0 dark:bg-base-950/50 bg-base-50/50 backdrop-blur-md'} w-full z-20 dark:border-base-900 border-base-300"
+		: 'sticky top-0 dark:bg-base-950/50 bg-base-50/50 backdrop-blur-md'} w-full z-20 border-subtle"
 	class:border-b={$page.url.pathname !== '/'}
 >
 	<div class="container mx-auto flex justify-between items-center px-6 py-3">
@@ -55,7 +55,7 @@
 <slot />
 
 <footer
-	class="bottom-0 dark:border-base-900 border-base-300 w-full z-20"
+	class="bottom-0 border-subtle w-full z-20"
 	class:border-t={$page.url.pathname !== '/'}
 	class:fixed={$page.url.pathname === '/'}
 >
