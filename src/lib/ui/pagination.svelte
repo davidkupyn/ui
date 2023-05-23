@@ -62,7 +62,7 @@
 	<div class="flex gap-1 items-center">
 		<button
 			on:click={() => ($currentPage &&= $currentPage - 1)}
-			class="btn ghost p-2 h-fit"
+			class="btn btn-ghost p-2 h-fit"
 			disabled={!$currentPage || $currentPage === 1 || totalPages <= 1}
 		>
 			<ArrowLeft size={20} />
@@ -72,15 +72,19 @@
 				<button
 					on:click={() => ($currentPage = page)}
 					aria-pressed={$currentPage === page}
-					class="relative h-9 w-9 p-0 btn text"
+					class="relative h-9 w-9 p-0 btn btn-text"
 				>
 					<span class="absolute text-sm p-1 inset-0 grid place-items-center z-[2]">
 						{page}
 					</span>
 					{#if $currentPage === page}
 						<div
-							in:receive={{ key: 'background', easing: cubicOut, duration: animationDuration }}
-							out:send={{ key: 'background', easing: cubicOut, duration: animationDuration }}
+							in:receive|local={{
+								key: 'background',
+								easing: cubicOut,
+								duration: animationDuration
+							}}
+							out:send|local={{ key: 'background', easing: cubicOut, duration: animationDuration }}
 							class="w-full h-full rounded-xl bg-base-300/50 dark:bg-base-800/50"
 						/>
 					{/if}
@@ -92,7 +96,7 @@
 
 		<button
 			on:click={() => ($currentPage &&= $currentPage + 1)}
-			class="btn ghost p-2 h-fit"
+			class="btn btn-ghost p-2 h-fit"
 			disabled={($currentPage && $currentPage >= totalPages) || totalPages <= 1}
 		>
 			<ArrowRight size={20} />
@@ -110,7 +114,7 @@
 				bind:value={desirablePage}
 			/>
 			<button
-				class="btn ghost group hover:pr-3.5 transition-all"
+				class="btn btn-ghost group hover:pr-3.5 transition-all"
 				on:click={() =>
 					($currentPage =
 						desirablePage && desirablePage > 0 && desirablePage <= totalPages

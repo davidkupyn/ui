@@ -21,7 +21,7 @@
 <div class="w-full">
 	<button
 		on:click={() => ($expandedId = expanded ? 0 : componentId)}
-		class="btn ghost w-full justify-between"
+		class="btn btn-ghost w-full justify-between {expanded ? 'text-base-950 dark:text-base-50' : ''}"
 		aria-expanded={expanded}
 		aria-label={label}
 	>

@@ -8,7 +8,7 @@ const config = {
 	theme: {
 		extend: {
 			colors: {
-				primary: colors.indigo,
+				primary: colors.blue,
 				base: colors.gray
 			},
 			backgroundImage: {

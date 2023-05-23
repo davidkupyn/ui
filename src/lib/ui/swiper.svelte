@@ -42,7 +42,7 @@
 	</div>
 	<div class="w-fit mt-8 space-x-2">
 		<button
-			class="btn secondary p-2 h-fit"
+			class="btn btn-secondary p-2 h-fit"
 			on:click={() => {
 				$x -= 2000;
 			}}
@@ -50,7 +50,7 @@
 			<ChevronLeft size={20} />
 		</button>
 		<button
-			class="btn secondary p-2 h-fit"
+			class="btn btn-secondary p-2 h-fit"
 			on:click={() => {
 				$x += 2000;
 			}}

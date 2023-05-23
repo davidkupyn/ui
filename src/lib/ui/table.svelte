@@ -78,12 +78,12 @@
 					>
 						<span class="flex items-center gap-2">
 							<span
-								class="uppercase btn text p-0 font-semibold group-hover:text-base-800 dark:group-hover:text-base-100"
+								class="uppercase btn btn-text p-0 font-semibold group-hover:text-base-800 dark:group-hover:text-base-100"
 							>
 								{column.displayName}
 							</span>
 							<button
-								class="btn ghost group/button relative h-9 w-9 focus-visible:ring-offset-0"
+								class="btn btn-ghost group/button relative h-9 w-9 focus-visible:ring-offset-0"
 								aria-label="Sort by {column.name}"
 								use:tippy={{ content: `Sort by ${column.name}`, delay: 300 }}
 							>
@@ -120,7 +120,7 @@
 								slot="button"
 								let:button
 								use:button
-								class="btn ghost p-2 h-fit"
+								class="btn btn-ghost p-2 h-fit"
 								use:tippy={{ content: 'Toggle columns' }}><Settings2 size={20} /></button
 							>
 							<ul slot="panel" class="w-48 divide-y divide-base-200 dark:divide-base-900">

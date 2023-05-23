@@ -80,17 +80,17 @@ body {
 	.badge {
 		@apply inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-primary-600 focus:ring-offset-2 border bg-primary-500/20  border-primary-500/10 text-primary-500 dark:text-primary-400;
 	}
-	.badge.destructive {
+	.badge-destructive {
 		@apply bg-red-500/20 border border-red-500/10 text-red-500 dark:text-red-400;
 	}
-	.badge.success {
+	.badge-success {
 		@apply bg-green-500/20 border border-green-500/10 text-green-700 dark:text-green-400;
 	}
-	.badge.secondary {
+	.badge-secondary {
 		@apply bg-base-400/20 border border-base-500/10 text-base-600 dark:bg-base-300/20 dark:border-base-300/10 dark:text-base-300;
 	}
-	.badge.outline {
-		@apply outline-none bg-transparent border dark:border-base-800 border-base-300 text-base-600 dark:text-base-300 dark:hover:text-base-50 hover:text-base-900;
+	.badge-outline {
+		@apply bg-transparent border dark:border-base-800 border-base-300 text-base-600 dark:text-base-300 dark:hover:text-base-50 hover:text-base-900;
 	}
 
 	.skeleton {
@@ -100,31 +100,34 @@ body {
 	.btn {
 		@apply gap-2 inline-flex text-base-50 items-center justify-center rounded-xl active:scale-95 text-sm font-medium transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-600 focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none bg-primary-500 hover:bg-primary-600 dark:bg-primary-600 dark:hover:bg-primary-700 ring-offset-base-50 dark:ring-offset-base-950 h-10 py-2 px-4;
 	}
-	.btn.outline {
-		@apply bg-transparent outline-none border dark:border-base-800 border-base-300 text-base-600 dark:text-base-300 dark:hover:text-base-50 hover:text-base-900 hover:bg-base-200/50 dark:hover:bg-base-800;
+	.btn-outline {
+		@apply bg-transparent border dark:border-base-800 border-base-300 text-base-600 dark:text-base-300 dark:hover:text-base-50 hover:text-base-900 hover:bg-base-200/50 dark:hover:bg-base-800;
 	}
-	.btn.secondary:not(.link) {
+	.btn-secondary {
 		@apply bg-base-300/50 hover:bg-base-300 dark:bg-base-800/50 dark:hover:bg-base-800 text-base-800 hover:text-base-950 dark:text-base-200 dark:hover:text-base-50;
 	}
-	.btn.ghost {
+
+	.btn-text {
+		@apply hover:bg-transparent bg-transparent text-base-500 dark:text-base-400 focus-visible:text-base-700 dark:focus-visible:text-base-100 hover:text-base-800 dark:hover:text-base-100 aria-pressed:text-base-900 dark:aria-pressed:text-base-50 aria-[current]:text-base-900 dark:aria-[current]:text-base-50 focus-visible:ring-offset-0;
+	}
+
+	.btn-ghost {
 		@apply bg-transparent hover:bg-base-200 dark:hover:bg-base-800/50 text-base-500 dark:text-base-400 focus-visible:text-base-700 dark:focus-visible:text-base-300 hover:text-base-800 dark:hover:text-base-100 aria-pressed:text-base-800 dark:aria-pressed:text-base-100;
 	}
-	.btn.destructive {
+	.btn-destructive {
 		@apply bg-red-500 hover:bg-red-600 dark:bg-red-600 dark:hover:bg-red-700;
 	}
-	.btn.text {
-		@apply bg-transparent text-base-500 dark:text-base-400 focus-visible:text-base-700 dark:focus-visible:text-base-100 hover:text-base-800 dark:hover:text-base-100 aria-pressed:text-base-800 dark:aria-pressed:text-base-100 focus-visible:ring-offset-0;
+
+	.btn-link {
+		@apply hover:bg-transparent bg-transparent underline-offset-4 hover:underline text-primary-500 dark:text-primary-600;
 	}
-	.btn.link {
-		@apply bg-transparent underline-offset-4 hover:underline text-primary-500 dark:text-primary-600;
+	.btn-link.btn-secondary {
+		@apply text-base-800 hover:text-base-950 dark:text-base-200 dark:hover:text-base-50;
 	}
-	.btn.link.secondary {
-		@apply text-base-800 dark:text-base-200;
-	}
-	.btn.sm {
+	.btn-sm {
 		@apply h-9 px-3 rounded-lg;
 	}
-	.btn.lg {
+	.btn-lg {
 		@apply h-11 px-6 text-base;
 	}
 }
