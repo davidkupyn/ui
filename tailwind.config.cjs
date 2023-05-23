@@ -8,7 +8,7 @@ const config = {
 	theme: {
 		extend: {
 			colors: {
-				primary: colors.blue,
+				primary: colors.indigo,
 				base: colors.gray
 			},
 			backgroundImage: {
@@ -23,7 +23,23 @@ const config = {
 				base: '0.5rem'
 			},
 			fontFamily: {
-				sans: ['Inter', ...defaultTheme.fontFamily.sans]
+				sans: ['Inter', ...defaultTheme.fontFamily.sans],
+				roobert: ['Roobert', ...defaultTheme.fontFamily.sans]
+			},
+			animation: {
+				text: 'text 8s ease infinite'
+			},
+			keyframes: {
+				text: {
+					'0%, 100%': {
+						'background-size': '200% 200%',
+						'background-position': 'left center'
+					},
+					'50%': {
+						'background-size': '200% 200%',
+						'background-position': 'right center'
+					}
+				}
 			}
 		}
 	},

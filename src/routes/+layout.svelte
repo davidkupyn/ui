@@ -13,12 +13,13 @@
 		: 'sticky top-0 dark:bg-base-950/50 bg-base-50/50 backdrop-blur-md'} w-full z-20 dark:border-base-900 border-base-300"
 	class:border-b={$page.url.pathname !== '/'}
 >
-	<div class="container mx-auto flex justify-between items-center px-6 py-3.5 md:py-5">
+	<div class="container mx-auto flex justify-between items-center px-6 py-3">
 		<h2>
 			<a
 				href="/"
 				aria-label="Go to home page"
-				class="btn btn-link btn-secondary text-lg font-bold -ml-4">kupyn/ui</a
+				class="text-lg font-bold -ml-2 p-2 focus-visible:ring-2 focus-visible:outline-none rounded-xl transition ring-offset-base-50 dark:ring-offset-base-950 focus-visible:ring-primary-600"
+				>Kupyn/UI</a
 			>
 		</h2>
 		<nav>
@@ -46,6 +47,21 @@
 		</nav>
 	</div>
 </header>
-<main class="py-8 min-h-screen w-full flex flex-col gap-6 container mx-auto px-6">
-	<slot />
-</main>
+<slot />
+
+<footer
+	class="bottom-0 dark:border-base-900 border-base-300 w-full z-20"
+	class:border-t={$page.url.pathname !== '/'}
+	class:fixed={$page.url.pathname === '/'}
+>
+	<div class="container mx-auto flex justify-between items-center px-6 py-6">
+		<span class="mx-auto">
+			<span class="text-base-600 dark:text-base-400 mr-1.5">&copy</span><a
+				href="https://github.com/davidkupyn"
+				target="_blank"
+				class="font-medium border-b border-opacity-0 dark:border-opacity-0 border-base-950 dark:border-base-50 hover:border-opacity-100 dark:hover:border-opacity-100 transition"
+				>Dave Kupyn</a
+			>
+		</span>
+	</div>
+</footer>
