@@ -41,14 +41,16 @@
 				in:fade={{ duration: 400 }}
 				class="text-center bg-clip-text max-w-prose text-transparent bg-gradient-to-t from-base-700 to-base-500 dark:from-base-400 dark:to-base-50 md:text-lg"
 			>
-				Crafted with Unparalleled Precision and Timeless Elegance, Kupyn/UI Transcends Expectations
+				Crafted with Unparalleled Precision and Timeless Elegance, <span class="font-semibold"
+					>Essence</span
+				> Transcends Expectations
 			</p>
 			<a
 				in:fadeScale={{ duration: 400 }}
 				href="/preview"
 				class="btn btn-lg gap-2 hover:pr-5 group transition-all"
 			>
-				Get Started
+				Explore Components
 				<ArrowRight class="w-4 h-4 group-hover:ml-1 transition-[margin]" size={16} />
 			</a>
 		</div>

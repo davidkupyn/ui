@@ -5,7 +5,7 @@
 </script>
 
 <svelte:head>
-	<title>Dave Kupyn's UI</title>
+	<title>David Kupyn's UI</title>
 </svelte:head>
 <header
 	class="{$page.url.pathname === '/'
@@ -19,7 +19,7 @@
 				href="/"
 				aria-label="Go to home page"
 				class="text-lg font-bold -ml-2 p-2 focus-visible:ring-2 focus-visible:outline-none rounded-xl transition ring-offset-base-50 dark:ring-offset-base-950 focus-visible:ring-primary-600"
-				>Kupyn/UI</a
+				>Essence</a
 			>
 		</h2>
 		<nav>
@@ -60,7 +60,7 @@
 				href="https://github.com/davidkupyn"
 				target="_blank"
 				class="font-medium border-b border-opacity-0 dark:border-opacity-0 border-base-950 dark:border-base-50 hover:border-opacity-100 dark:hover:border-opacity-100 transition"
-				>Dave Kupyn</a
+				>David Kupyn, Essence UI</a
 			>
 		</span>
 	</div>

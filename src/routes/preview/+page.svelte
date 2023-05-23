@@ -197,10 +197,14 @@
 		/>
 	</div>
 
-	<button
+	<!-- <button
 		on:click={openDialog}
 		class="btn btn-lg w-fit hover:bg-primary-500 dark:hover:bg-primary-600 hover:scale-105 transition hover:shadow-xl duration-300"
 	>
+		<AppWindow size={16} />
+		Open Dialog
+	</button> -->
+	<button on:click={openDialog} class="btn btn-lg w-fit">
 		<AppWindow size={16} />
 		Open Dialog
 	</button>
