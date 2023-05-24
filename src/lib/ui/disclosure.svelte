@@ -14,13 +14,20 @@
 	export let summary: string = '';
 	export let content: string = '';
 	export let label = summary;
+	export let independent = false;
 	const componentId = id++;
-	$: expanded = $expandedId === componentId;
+	$: expanded = independent ? expanded : $expandedId === componentId;
 </script>
 
 <div class="w-full">
 	<button
-		on:click={() => ($expandedId = expanded ? 0 : componentId)}
+		on:click={() => {
+			if (independent) {
+				expanded = !expanded;
+			} else {
+				$expandedId = expanded ? 0 : componentId;
+			}
+		}}
 		class="btn btn-ghost w-full justify-between {expanded ? 'text-base-950 dark:text-base-50' : ''}"
 		aria-expanded={expanded}
 		aria-label={label}
