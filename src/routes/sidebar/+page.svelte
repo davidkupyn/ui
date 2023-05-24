@@ -1,18 +1,36 @@
 <script>
-	import { scale, fade, fly } from 'svelte/transition';
+	import { scale, fly, crossfade } from 'svelte/transition';
 	import { Home, ScrollText, SidebarClose, SidebarOpen, Star } from 'lucide-svelte';
+	import { cubicOut } from 'svelte/easing';
 
 	let expanded = false;
+
+	let items = [
+		{
+			icon: Home,
+			label: 'Home'
+		},
+		{
+			icon: Star,
+			label: 'Preview'
+		},
+		{
+			icon: ScrollText,
+			label: 'Documentation'
+		}
+	];
+	const [send, receive] = crossfade({});
+	let current = 'Home';
 </script>
 
 <div
-	class="h-screen border-r border-subtle transition-all px-[1.6rem] duration-300 w-24 flex flex-col gap-8 py-12 data-[expanded=true]:w-56"
+	class="h-screen border-r border-subtle transition-all px-[1.6rem] w-24 flex flex-col gap-8 py-12 data-[expanded=true]:w-56"
 	data-expanded={expanded}
 >
 	<div class="flex items-center gap-4">
 		{#if expanded}
 			<a
-				in:fly={{ x: -10, duration: 300 }}
+				in:fly|local={{ x: -10, duration: 150 }}
 				href="/"
 				on:click|stopPropagation
 				aria-label="Go to home page"
@@ -23,11 +41,11 @@
 		{/if}
 		<button on:click={() => (expanded = !expanded)} class="btn btn-ghost p-3 h-fit w-fit ml-auto">
 			{#if expanded}
-				<span in:scale>
+				<span in:scale|local>
 					<SidebarClose size={20} />
 				</span>
 			{:else}
-				<span in:scale>
+				<span in:scale|local>
 					<SidebarOpen size={20} />
 				</span>
 			{/if}
@@ -35,40 +53,40 @@
 	</div>
 	<nav>
 		<ul class="flex flex-col gap-3 items-center">
-			<li class="w-full">
-				<button
-					on:click|stopPropagation
-					class="btn btn-ghost p-3 h-fit {expanded && 'w-full justify-start'}"
-				>
-					<Home size={20} />
+			{#each items as item}
+				<li class="w-full">
+					<button
+						on:click={() => (current = item.label)}
+						aria-pressed={current === item.label}
+						class="relative btn btn-text h-11 p-0 {expanded ? 'w-44' : 'w-11'}"
+					>
+						<span
+							class="absolute text-sm inset-0 flex {expanded
+								? 'justify-start'
+								: 'justify-center'} items-center gap-3 p-3 z-[2]"
+						>
+							<span>
+								<svelte:component this={item.icon} size={20} />
+							</span>
 
-					{#if expanded}
-						<span in:fly={{ x: -10, duration: 300 }}>Title</span>
-					{/if}
-				</button>
-			</li>
-			<li class="w-full">
-				<button
-					on:click|stopPropagation
-					class="btn btn-ghost p-3 h-fit {expanded && 'w-full justify-start'}"
-				>
-					<Star size={20} />
-					{#if expanded}
-						<span in:fly={{ x: -10, duration: 300 }}>Title</span>
-					{/if}
-				</button>
-			</li>
-			<li class="w-full">
-				<button
-					on:click|stopPropagation
-					class="btn btn-ghost p-3 h-fit {expanded && 'w-full justify-start'}"
-				>
-					<ScrollText size={20} />
-					{#if expanded}
-						<span in:fly={{ x: -10, duration: 300 }}>Title</span>
-					{/if}
-				</button>
-			</li>
+							{#if expanded}
+								<span in:fly|local={{ x: -10, duration: 300 }}>{item.label}</span>
+							{/if}
+						</span>
+						{#if current === item.label}
+							<div
+								in:receive|local={{
+									key: 'background',
+									easing: cubicOut,
+									duration: 200
+								}}
+								out:send|local={{ key: 'background', easing: cubicOut, duration: 200 }}
+								class="w-full h-full rounded-xl bg-base-300/50 dark:bg-base-800/50"
+							/>
+						{/if}
+					</button>
+				</li>
+			{/each}
 		</ul>
 	</nav>
 </div>
