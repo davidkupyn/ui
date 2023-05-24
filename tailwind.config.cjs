@@ -1,6 +1,5 @@
 import defaultTheme from 'tailwindcss/defaultTheme';
 import colors from 'tailwindcss/colors';
-import tailwindScrollbar from 'tailwind-scrollbar';
 import tailwindForms from '@tailwindcss/forms';
 
 const config = {
@@ -37,7 +36,7 @@ const config = {
 		}
 	},
 
-	plugins: [tailwindForms, tailwindScrollbar({ nocompatible: true })]
+	plugins: [tailwindForms]
 };
 
 module.exports = config;

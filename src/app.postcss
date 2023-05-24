@@ -39,9 +39,6 @@ body {
 }
 
 @layer utilities {
-	.scrollbar-custom {
-		@apply scrollbar scrollbar-track-transparent scrollbar-thumb-black/10 scrollbar-thumb-rounded-full scrollbar-w-1 hover:scrollbar-thumb-black/20 dark:scrollbar-thumb-white/10 dark:hover:scrollbar-thumb-white/20;
-	}
 	.convex {
 		@apply bg-base-100 shadow-convex shadow-base-50 dark:shadow-base-700 dark:bg-base-900/30;
 	}
@@ -56,7 +53,7 @@ body {
 	}
 
 	.input {
-		@apply border-0 disabled:cursor-not-allowed resize-none disabled:opacity-50 hover:ring-primary-500 text-base-800 dark:text-base-50 dark:hover:ring-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 dark:placeholder:text-base-500 placeholder:text-base-400 bg-base-200/80 dark:bg-base-900/80 h-10 rounded-xl px-4 text-sm outline-none ring-1 ring-transparent transition duration-200 data-[invalid]:hover:ring-red-500 data-[invalid]:focus:ring-red-500 data-[invalid]:ring-red-500 invalid:hover:ring-red-500 invalid:focus:ring-red-500 invalid:ring-red-500 dark:data-[invalid]:hover:ring-red-600 dark:data-[invalid]:focus:ring-red-600 dark:data-[invalid]:ring-red-600 dark:invalid:hover:ring-red-600 dark:invalid:focus:ring-red-600 dark:invalid:ring-red-600;
+		@apply border-0 disabled:cursor-not-allowed resize-none disabled:opacity-50 hover:ring-primary-500 text-base-800 dark:text-base-50 dark:hover:ring-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 dark:placeholder:text-base-500 placeholder:text-base-400 bg-base-200/80 dark:bg-base-900 h-10 rounded-xl px-4 text-sm outline-none ring-1 ring-transparent transition duration-200 data-[invalid]:hover:ring-red-500 data-[invalid]:focus:ring-red-500 data-[invalid]:ring-red-500 invalid:hover:ring-red-500 invalid:focus:ring-red-500 invalid:ring-red-500 dark:data-[invalid]:hover:ring-red-600 dark:data-[invalid]:focus:ring-red-600 dark:data-[invalid]:ring-red-600 dark:invalid:hover:ring-red-600 dark:invalid:focus:ring-red-600 dark:invalid:ring-red-600;
 
 		> .icon-left {
 			@apply text-base-500 dark:text-base-400 focus-visible:text-base-700 dark:focus-visible:text-base-100 hover:text-base-800 dark:hover:text-base-100 aria-pressed:text-base-800 dark:aria-pressed:text-base-100 transition-colors focus-visible:ring-offset-0 min-w-[1.5rem] -ml-1 mr-2;

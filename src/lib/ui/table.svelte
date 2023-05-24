@@ -51,7 +51,7 @@
 </script>
 
 <div class="w-full overflow-auto">
-	<table class="w-full caption-bottom overflow-x-scroll scrollbar-custom">
+	<table class="w-full caption-bottom overflow-x-scroll">
 		<thead class="[&_tr]:border-b hover:bg-base-200/50 dark:hover:bg-base-900/50 transition-colors">
 			<tr class="border-subtle">
 				{#if selectable}
