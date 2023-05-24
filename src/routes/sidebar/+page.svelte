@@ -24,7 +24,7 @@
 </script>
 
 <div
-	class="h-screen border-r border-subtle transition-all px-[1.6rem] w-24 flex flex-col gap-8 py-12 data-[expanded=true]:w-56"
+	class="h-screen border-r border-subtle transition-all px-[1.4rem] w-[5.5rem] flex flex-col gap-8 py-12 data-[expanded=true]:w-56"
 	data-expanded={expanded}
 >
 	<div class="flex items-center gap-4">
@@ -34,7 +34,7 @@
 				href="/"
 				on:click|stopPropagation
 				aria-label="Go to home page"
-				class="text-center w-fit font-bold px-2 focus-visible:ring-2 focus-visible:outline-none rounded-xl transition ring-offset-base-50 dark:ring-offset-base-950 focus-visible:ring-primary-600"
+				class="text-center w-fit font-bold p-2 focus-visible:ring-2 focus-visible:outline-none rounded-xl transition ring-offset-base-50 dark:ring-offset-base-950 focus-visible:ring-primary-600"
 			>
 				Essence</a
 			>
@@ -58,6 +58,7 @@
 					<button
 						on:click={() => (current = item.label)}
 						aria-pressed={current === item.label}
+						aria-label={item.label}
 						class="relative btn btn-text h-11 p-0 {expanded ? 'w-44 transition-[width]' : 'w-11'}"
 					>
 						<span
