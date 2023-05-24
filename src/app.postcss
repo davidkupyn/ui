@@ -145,4 +145,47 @@ body {
 			@apply h-11 px-6 text-base;
 		}
 	}
+
+	.table {
+		@apply w-full caption-bottom overflow-x-scroll;
+
+		&-container {
+			@apply w-full overflow-auto;
+		}
+		&-head {
+			@apply [&_tr]:border-b [&_tr]:border-subtle hover:bg-base-200/50 dark:hover:bg-base-900/50 transition-colors;
+		}
+		&-header {
+			@apply text-left text-sm p-4 text-base-500 dark:text-base-400 uppercase font-semibold hover:text-base-800 dark:hover:text-base-100 cursor-pointer transition select-text;
+		}
+		&-body {
+			@apply [&_tr]:border-b [&_tr:last-child]:border-none relative;
+		}
+		&-row {
+			@apply border-subtle transition-colors data-[state=selected]:bg-primary-500/10 data-[state=selected]:hover:bg-primary-600/10 hover:bg-base-200/50 dark:hover:bg-base-900/50 focus:bg-base-200/80 dark:focus:bg-base-900/80 outline-none data-[state=selected]:focus:bg-primary-600/20;
+		}
+		&-cell {
+			@apply px-4 py-5;
+		}
+
+		> thead {
+			@apply table-head;
+
+			> tr > th {
+				@apply table-header;
+			}
+		}
+
+		> tbody {
+			@apply table-body;
+
+			> tr {
+				@apply table-row;
+
+				> td {
+					@apply table-cell;
+				}
+			}
+		}
+	}
 }
