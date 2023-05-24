@@ -29,8 +29,7 @@
 		: [];
 
 	let currentTableColumns = tableColumns;
-	export let id = items[0][0];
-	const all = tableColumns;
+	export let id = Object.keys(items[0])[0];
 	const sortBy = queryParam('sort', ssp.string(tableColumns[0].name), {
 		pushHistory
 	});

@@ -44,8 +44,7 @@
 					<a
 						href="/preview"
 						class="btn btn-text"
-						aria-current={$page.url.pathname.startsWith('/preview') ? true : undefined}
-						>Components</a
+						aria-current={$page.url.pathname.startsWith('/preview')}>Components</a
 					>
 				</li>
 			</ul>

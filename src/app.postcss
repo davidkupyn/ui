@@ -6,6 +6,7 @@
 input[data-autocompleted] {
 	background-color: transparent !important;
 }
+
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
 	-webkit-appearance: none;
@@ -34,6 +35,7 @@ body {
 	--color-primary-900: theme('colors.primary.900');
 	--color-primary-950: theme('colors.primary.950');
 }
+
 .tippy-box {
 	@apply inline-block rounded-lg bg-base-50 border border-base-300 text-base-700 dark:bg-base-950 dark:border-base-800 px-2.5 py-1 text-sm font-medium dark:text-base-300 shadow-sm;
 }
@@ -116,7 +118,7 @@ body {
 		}
 
 		&-text {
-			@apply hover:bg-transparent bg-transparent text-base-500 dark:text-base-400 focus-visible:text-base-700 dark:focus-visible:text-base-100 hover:text-base-800 dark:hover:text-base-100 aria-pressed:text-base-900 dark:aria-pressed:text-base-50 aria-[current]:text-base-900 dark:aria-[current]:text-base-50 aria-pressed:underline underline-offset-4 aria-[current]:underline focus-visible:ring-offset-0;
+			@apply hover:bg-transparent bg-transparent text-base-500 dark:text-base-400 focus-visible:text-base-700 dark:focus-visible:text-base-100 hover:text-base-800 dark:hover:text-base-100 aria-pressed:text-base-900 dark:aria-pressed:text-base-50 aria-[current=true]:text-base-900 dark:aria-[current=true]:text-base-50 aria-pressed:underline underline-offset-4 aria-[current=true]:underline focus-visible:ring-offset-0;
 		}
 
 		&-ghost {

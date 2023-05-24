@@ -239,8 +239,8 @@
 					name: key
 				}))}
 				bind:selected
-				columnsEditable
 				selectable
+				columnsEditable
 			>
 				<!-- rowClickable
 				on:rowclick={(event) => console.log('clicked on', event.detail.name)} -->
@@ -294,8 +294,19 @@
 							{row[column.name]}
 						</span>
 					{:else if column.name === 'description'}
-						<Hash class="inline mr-1 text-base-500" size={16} />
-						{row[column.name]}
+						<Disclosure>
+							<Hash size={16} slot="icon" />
+							<svelte:fragment slot="summary">
+								<span class="max-w-sm truncate">
+									{row[column.name]}
+								</span>
+							</svelte:fragment>
+							<svelte:fragment slot="content">
+								<p class="text-base whitespace-normal">
+									{row[column.name]}
+								</p>
+							</svelte:fragment>
+						</Disclosure>
 					{:else if column.name === 'price'}
 						<span class="flex items-center">
 							<DollarSign class="text-base-500" size={16} />
@@ -321,7 +332,7 @@
 			{#if selected.length > 0}
 				<div
 					transition:fly={{ y: 150, duration: 200, easing: cubicOut }}
-					class="drop-shadow-sm z-20 flex h-full w-full items-center justify-between rounded-xl bg-base-50/80 border dark:bg-base-950 border-subtle backdrop-blur-md shadow-xl p-2 px-4"
+					class="drop-shadow-sm z-20 flex h-full w-full items-center justify-between rounded-xl bg-base-50/80 border dark:bg-base-950 border-subtle backdrop-blur-md shadow-xl dark:shadow-base-900/50 p-2 px-4"
 				>
 					<span class="text-sm">
 						Selected
