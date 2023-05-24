@@ -29,7 +29,9 @@
 					<slot name="background" />
 				</div>
 			{/if}
-			<span class="capitalize absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+			<span
+				class="capitalize absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 group-aria-pressed:scale-100 scale-95 transition-[transform]"
+			>
 				<slot name="tab" {tab}>
 					{tab}
 				</slot>

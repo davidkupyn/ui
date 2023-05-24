@@ -42,10 +42,36 @@ body {
 
 @layer utilities {
 	.convex {
-		@apply bg-base-100 shadow-convex shadow-base-50 dark:shadow-base-700 dark:bg-base-900/30;
+		@apply bg-base-100 shadow-convex shadow-base-50 dark:shadow-base-700 dark:bg-[#080C18];
 	}
 	.border-subtle {
 		@apply dark:border-base-900 border-base-200;
+	}
+	.stack {
+		@apply inline-grid place-items-center items-end gap-3;
+
+		& > * {
+			@apply opacity-60 col-start-1 row-start-1 translate-y-4 scale-90 z-[48];
+		}
+		& > *:nth-child(2) {
+			@apply opacity-80 translate-y-2 scale-95 z-[49];
+		}
+		& > *:nth-child(1) {
+			@apply opacity-100 translate-y-0 scale-100 z-50;
+		}
+
+		&-inverted {
+			@apply stack;
+			& > * {
+				@apply -translate-y-4;
+			}
+			& > *:nth-child(2) {
+				@apply -translate-y-2;
+			}
+			& > *:nth-child(1) {
+				@apply translate-y-0;
+			}
+		}
 	}
 }
 

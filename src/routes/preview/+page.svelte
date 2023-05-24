@@ -28,7 +28,6 @@
 	import { cubicOut } from 'svelte/easing';
 	import Disclosure from '$lib/ui/disclosure.svelte';
 	import Dialog from '$lib/ui/dialog.svelte';
-	import Swiper from '$lib/ui/swiper.svelte';
 	import Popover from '$lib/ui/popover.svelte';
 
 	let showPassword = false;
@@ -42,7 +41,7 @@
 	const item = {
 		id: crypto.randomUUID().slice(0, 16),
 		name: 'Item',
-		description: `“Well, and so we breakfasted at ten as usual; I thought it would never be over; for, by the bye, you are to understand, that my uncle and aunt were horrid unpleasant all the time I was with them. If you’ll believe me, I did not once put my foot out of doors, though I was there a fortnight. Not one party, or scheme, or anything. To be sure London was rather thin, but, however, the Little Theatre was open. Well, and so just as the carriage came to the door, my uncle was called away upon business to that horrid man Mr. Stone. And then, you know, when once they get together, there is no end of it. Well, I was so frightened I did not know what to do, for my uncle was to give me away; and if we were beyond the hour, we could not be married all day. But, luckily, he came back again in ten minutes’ time, and then we all set out. However, I recollected afterwards that if he had been prevented going, the wedding need not be put off, for Mr. Darcy might have done as well.”`,
+		description: `“Well, and so we breakfasted at ten as usual; I thought it would never be over; for, by the bye, you are to understand, that my uncle and aunt were horrid unpleasant all the time I was with them. If you’ll believe me, I did not once put my foot out of doors, though I was there a fortnight. Not one party, or scheme, or anything. ”`,
 		price: Math.floor(Math.random() * 1000),
 		createdAt: new Date(),
 		status: Math.random() > 0.41 ? 'active' : 'inactive'
@@ -50,7 +49,7 @@
 	let items = Array.from({ length: 100 }, (_, i) => ({
 		id: crypto.randomUUID().slice(0, 16),
 		name: `Item ${i + 1}`,
-		description: `“Well, and so we breakfasted at ten as usual; I thought it would never be over; for, by the bye, you are to understand, that my uncle and aunt were horrid unpleasant all the time I was with them. If you’ll believe me, I did not once put my foot out of doors, though I was there a fortnight. Not one party, or scheme, or anything. To be sure London was rather thin, but, however, the Little Theatre was open. Well, and so just as the carriage came to the door, my uncle was called away upon business to that horrid man Mr. Stone. And then, you know, when once they get together, there is no end of it. Well, I was so frightened I did not know what to do, for my uncle was to give me away; and if we were beyond the hour, we could not be married all day. But, luckily, he came back again in ten minutes’ time, and then we all set out. However, I recollected afterwards that if he had been prevented going, the wedding need not be put off, for Mr. Darcy might have done as well.”`,
+		description: `“Well, and so we breakfasted at ten as usual; I thought it would never be over; for, by the bye, you are to understand, that my uncle and aunt were horrid unpleasant all the time I was with them. If you’ll believe me, I did not once put my foot out of doors, though I was there a fortnight. Not one party, or scheme, or anything. ”`,
 		price: Math.floor(Math.random() * 1000),
 		createdAt: new Date(),
 		status: Math.random() > 0.41 ? 'active' : 'inactive'
@@ -365,7 +364,17 @@
 		<Pagination {totalPages} />
 	</div>
 	<div class="my-8">
-		<Swiper />
+		<div class="stack">
+			<div class="w-80 h-32 grid place-content-center border border-subtle convex rounded-3xl pb-0">
+				<h2 class="text-center font-medium">Stack of 3 Cards</h2>
+			</div>
+			<div class="w-80 h-32 grid place-content-center border border-subtle convex rounded-3xl pb-0">
+				<h2 class="text-center font-medium">Stack of 3 Cards</h2>
+			</div>
+			<div class="w-80 h-32 grid place-content-center border border-subtle convex rounded-3xl pb-0">
+				<h2 class="text-center font-medium">Stack of 3 Cards</h2>
+			</div>
+		</div>
 	</div>
 </main>
 

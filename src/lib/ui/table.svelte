@@ -14,7 +14,7 @@
 	export let columnsEditable = false;
 	export let selectable = false;
 	export let items: Record<string, any>[] = [];
-	export let rowClickable = false;
+	export let interactive = false;
 	export let tableColumns: {
 		displayName: string;
 		name: string;
@@ -165,7 +165,7 @@
 		<tbody class="[&_tr]:border-b [&_tr:last-child]:border-none relative">
 			{#each items as item, idx (item[id] + idx)}
 				<tr
-					tabindex={rowClickable ? 0 : null}
+					tabindex={interactive ? 0 : null}
 					on:click={() => dispatch('rowclick', item)}
 					on:keydown={(e) => {
 						if (e.code === 'Enter') {

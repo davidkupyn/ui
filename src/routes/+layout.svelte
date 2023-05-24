@@ -17,6 +17,7 @@
 		? 'fixed'
 		: 'sticky top-0 dark:bg-base-950/50 bg-base-50/50 backdrop-blur-md'} w-full z-20 border-subtle"
 	class:border-b={$page.url.pathname !== '/'}
+	class:hidden={$page.url.pathname === '/sidebar'}
 >
 	<div class="container mx-auto flex justify-between items-center px-6 py-3">
 		<h2>
@@ -56,6 +57,7 @@
 <footer
 	class="bottom-0 border-subtle w-full z-20"
 	class:border-t={$page.url.pathname !== '/'}
+	class:hidden={$page.url.pathname === '/sidebar'}
 	class:fixed={$page.url.pathname === '/'}
 >
 	<div class="container mx-auto flex justify-between items-center px-6 py-6">
