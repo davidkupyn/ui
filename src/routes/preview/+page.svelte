@@ -63,6 +63,8 @@
 	let openDialog: () => void;
 	let closeDialog: () => void;
 	let openDeleteDialog: () => void;
+	let toggle: () => void;
+
 	let closeDeleteDialog: () => void;
 
 	$: totalPages = Math.ceil(items.length / PAGE_SIZE) || 1;
@@ -176,6 +178,7 @@
 	</div>
 	<div class="w-full max-w-md grid gap-4 border border-subtle rounded-3xl p-4">
 		<Disclosure
+			bind:toggle
 			defaultExpanded
 			summary="What is your refund policy?"
 			content="If you're unhappy with your purchase for any reason, email us within 90 days and we'll refund you in full, no questions asked."

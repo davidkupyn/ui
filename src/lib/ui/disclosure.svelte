@@ -15,19 +15,22 @@
 	export let content: string = '';
 	export let label = summary;
 	export let independent = false;
+	export const toggle = toggleDisclosure;
 	const componentId = id++;
 	$: expanded = independent ? expanded : $expandedId === componentId;
+
+	function toggleDisclosure() {
+		if (independent) {
+			expanded = !expanded;
+		} else {
+			$expandedId = expanded ? 0 : componentId;
+		}
+	}
 </script>
 
 <div class="w-full">
 	<button
-		on:click={() => {
-			if (independent) {
-				expanded = !expanded;
-			} else {
-				$expandedId = expanded ? 0 : componentId;
-			}
-		}}
+		on:click={toggleDisclosure}
 		class="btn btn-ghost w-full justify-between {expanded ? 'text-base-950 dark:text-base-50' : ''}"
 		aria-expanded={expanded}
 		aria-label={label}

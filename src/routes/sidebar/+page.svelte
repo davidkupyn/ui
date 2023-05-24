@@ -30,7 +30,7 @@
 	<div class="flex items-center gap-4">
 		{#if expanded}
 			<a
-				in:fly|local={{ x: -10, duration: 150 }}
+				in:fly|local={{ x: -10, duration: 400 }}
 				href="/"
 				on:click|stopPropagation
 				aria-label="Go to home page"
@@ -58,7 +58,7 @@
 					<button
 						on:click={() => (current = item.label)}
 						aria-pressed={current === item.label}
-						class="relative btn btn-text h-11 p-0 {expanded ? 'w-44' : 'w-11'}"
+						class="relative btn btn-text h-11 p-0 {expanded ? 'w-44 transition-[width]' : 'w-11'}"
 					>
 						<span
 							class="absolute text-sm inset-0 flex {expanded
