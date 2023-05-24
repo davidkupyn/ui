@@ -39,7 +39,7 @@
 						<Github size={20} />
 					</a>
 				</li>
-				<span class="max-sm:hidden bg-base-300 dark:bg-base-800 w-px h-6" />
+				<span class="bg-base-300 dark:bg-base-800 w-px h-6" />
 				<li>
 					<a
 						href="/preview"
