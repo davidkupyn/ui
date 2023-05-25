@@ -2,23 +2,23 @@
 	import { queryParam, ssp } from 'sveltekit-search-params';
 	import { tippy } from '$lib/actions/tippy';
 	import {
-		Send,
 		Search,
 		X,
 		Eye,
 		Edit,
 		Lock,
 		EyeOff,
-		Cpu,
-		Github,
-		QrCode,
 		Trash2,
 		AppWindow,
 		Hash,
 		Fingerprint,
 		DollarSign,
 		MoreHorizontal,
-		Crown
+		Crown,
+		Stars,
+		Flower2,
+		BookTemplate,
+		Save
 	} from 'lucide-svelte';
 	import Tabs from '$lib/ui/tabs.svelte';
 	import Pagination from '$lib/ui/pagination.svelte';
@@ -29,6 +29,8 @@
 	import Disclosure from '$lib/ui/disclosure.svelte';
 	import Dialog from '$lib/ui/dialog.svelte';
 	import Popover from '$lib/ui/popover.svelte';
+	import Select from '$lib/ui/select.svelte';
+	import Combobox from '$lib/ui/combobox.svelte';
 
 	let showPassword = false;
 	const tabs = ['witalina', 'david', 'wiktor', 'gustaw'];
@@ -36,6 +38,10 @@
 
 	let tab = tabs[0];
 	let tab2 = tabs2[0];
+	let selectValue: {
+		value: string;
+		label: string;
+	};
 	const PAGE_SIZE = 10;
 	const currentPage = queryParam('page', ssp.number());
 	const item = {
@@ -63,10 +69,9 @@
 	let openDialog: () => void;
 	let closeDialog: () => void;
 	let openDeleteDialog: () => void;
-	let toggle: () => void;
 
 	let closeDeleteDialog: () => void;
-
+	let labelInside = false;
 	$: totalPages = Math.ceil(items.length / PAGE_SIZE) || 1;
 </script>
 
@@ -114,30 +119,76 @@
 				<textarea class="h-full text-sm" placeholder="Description" />
 			</fieldset>
 		</label>
+
+		<label class="input-label w-full" for="select">
+			<span class="{labelInside ? 'opacity-0' : 'opacity-100'} transition-opacity duration-100">
+				Custom Select
+			</span>
+			<Select
+				nonEmpty
+				placeholder="Select an option"
+				label={labelInside ? 'Custom Select' : undefined}
+				items={[
+					{ label: 'Witalina', value: 'witalina' },
+					{ label: 'David', value: 'david' },
+					{ label: 'Wiktor', value: 'wiktor' },
+					{ label: 'Gustaw', value: 'gustaw' }
+				]}
+				bind:selected={selectValue}
+			/>
+		</label>
+		<label class="input-label w-full" for="autocomplete">
+			<span class="{labelInside ? 'opacity-0' : 'opacity-100'} transition-opacity duration-100">
+				Autocomplete
+			</span>
+			<Combobox
+				id="autocomplete"
+				placeholder="Select an option"
+				label={labelInside ? 'Autocomplete' : undefined}
+				items={[
+					{ label: 'Witalina', value: 'witalina' },
+					{ label: 'David', value: 'david' },
+					{ label: 'Wiktor', value: 'wiktor' },
+					{ label: 'Gustaw', value: 'gustaw' }
+				]}
+				bind:selected={selectValue}
+			/>
+		</label>
+		<label for="switch" class="flex items-center gap-2 text-sm w-fit">
+			Label Inside
+			<Switch id="switch" bind:checked={labelInside} />
+		</label>
+		<label class="input-label w-full" for="select">
+			Native Select
+			<select class="input">
+				<option value="witalina">Witalina</option>
+				<option value="david">David</option>
+				<option value="wiktor">Wiktor</option>
+				<option value="gustaw">Gustaw</option>
+			</select>
+		</label>
+
 		<label class="input-label w-full">
 			Normal Text Area
 			<textarea class="h-24 input" placeholder="Placeholder" />
 		</label>
-		<div
-			class="flex flex-wrap gap-2 w-full
-  "
-		>
+		<div class="flex flex-wrap gap-2 w-full">
 			<button class="btn">
-				<Github size={16} />
+				<Stars size={16} />
 				Primary
 			</button>
 			<button class="btn btn-outline">
-				<Send size={16} />
+				<BookTemplate size={16} />
 				Outline
 			</button>
 			<button class="btn btn-secondary">
-				<Send size={16} />
+				<Flower2 size={16} />
 				Secondary
 			</button>
 			<button class="btn btn-danger"> Danger </button>
 			<button class="btn btn-ghost"> Ghost </button>
 			<button class="btn btn-ghost p-2 h-fit" use:tippy={{ content: 'Ghost icon button' }}>
-				<QrCode size={20} />
+				<Save size={20} />
 			</button>
 
 			<button class="btn btn-link">Link</button>
@@ -170,30 +221,42 @@
 
 			<span class="badge badge-danger capitalize"> Danger </span>
 		</div>
-
-		<label for="switch" class="flex items-center gap-2 text-sm">
-			<Switch id="switch" />
-			Toggle
-		</label>
 	</div>
 	<div class="w-full max-w-md grid gap-4 border border-subtle rounded-3xl p-4">
-		<Disclosure
-			bind:toggle
-			defaultExpanded
-			summary="What is your refund policy?"
-			content="If you're unhappy with your purchase for any reason, email us within 90 days and we'll refund you in full, no questions asked."
-		/>
 		<Disclosure>
-			<Cpu size={16} slot="icon" />
-			<svelte:fragment slot="summary">Do you offer technical support?</svelte:fragment>
+			<svelte:fragment slot="summary">Why copy/paste and not a package?</svelte:fragment>
 			<svelte:fragment slot="content">
-				No. We don't offer any support. However, we do have a very active community where we chime
-				in all the time.
+				<p>
+					The idea behind this is to give you ownership and control over the code, allowing you to
+					decide how the components are built and styled.
+					<br />
+					<br />
+					Start with some sensible defaults, then customize the components to your needs.
+					<br />
+					<br />
+					One of the drawback of packaging the components in an npm package is that the style is coupled
+					with the implementation. The design of your components should be separate from their implementation.
+				</p>
+			</svelte:fragment>
+		</Disclosure>
+		<Disclosure>
+			<Stars size={16} slot="icon" />
+			<svelte:fragment slot="summary">Why Essence?</svelte:fragment>
+			<svelte:fragment slot="content">
+				<p>
+					We wanted to create a set of components that are easy to use, customizable and accessible.
+					<br />
+
+					<br />
+					The word "essence" suggests something fundamental or core. Our library aims to provide essential
+					or foundational UI elements, so you can focus on other parts of your app, where you can express
+					your creativity.
+				</p>
 			</svelte:fragment>
 		</Disclosure>
 		<Disclosure
 			summary="What about updates?"
-			content="We don't offer any updates. However, we do have a very active community where we chime in all the time."
+			content="Yes, we will be updating the components regularly. We will also be adding new components."
 		/>
 	</div>
 
@@ -244,8 +307,8 @@
 				selectable
 				columnsEditable
 			>
-				<!-- rowClickable
-				on:rowclick={(event) => console.log('clicked on', event.detail.name)} -->
+				<!-- interactive
+				on:rowclick={({ detail: row }) => console.log('clicked on', row.name)} -->
 				<Popover
 					slot="actions"
 					let:row

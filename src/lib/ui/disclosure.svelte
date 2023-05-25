@@ -35,7 +35,7 @@
 		aria-expanded={expanded}
 		aria-label={label}
 	>
-		<span class="inline-flex gap-2 items-center">
+		<span class="inline-flex gap-2 items-center my-1">
 			<slot name="icon" />
 			<slot name="summary">{summary}</slot>
 		</span>

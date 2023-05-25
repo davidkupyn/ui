@@ -68,16 +68,17 @@
 			<ArrowLeft size={20} />
 		</button>
 		{#each paginationPages as page, index (index)}
+			{@const isCurrentPage = $currentPage === page}
 			{#if page}
 				<button
 					on:click={() => ($currentPage = page)}
-					aria-pressed={$currentPage === page}
+					aria-pressed={isCurrentPage}
 					class="relative h-9 w-9 p-0 btn btn-text"
 				>
 					<span class="absolute text-sm p-1 inset-0 grid place-items-center z-[2]">
 						{page}
 					</span>
-					{#if $currentPage === page}
+					{#if isCurrentPage}
 						<div
 							in:receive|local={{
 								key: 'background',

@@ -3,39 +3,39 @@
 @tailwind components;
 @tailwind utilities;
 
-input[data-autocompleted] {
-	background-color: transparent !important;
-}
+@layer base {
+	input[data-autocompleted] {
+		background-color: transparent !important;
+	}
 
-input::-webkit-outer-spin-button,
-input::-webkit-inner-spin-button {
-	-webkit-appearance: none;
-	margin: 0;
-}
-html {
-	color-scheme: light dark;
-	scroll-behaviour: smooth;
-}
+	input::-webkit-outer-spin-button,
+	input::-webkit-inner-spin-button {
+		-webkit-appearance: none;
+		margin: 0;
+	}
+	html {
+		color-scheme: light dark;
+		scroll-behaviour: smooth;
+	}
 
-body {
-	@apply bg-base-50 dark:bg-base-950 min-h-screen text-base-800 dark:text-base-50 selection:bg-primary-500/30 overscroll-y-none transition-colors font-roobert;
-	-webkit-tap-highlight-color: transparent;
+	:root {
+		--color-primary-50: theme('colors.primary.50');
+		--color-primary-100: theme('colors.primary.100');
+		--color-primary-200: theme('colors.primary.200');
+		--color-primary-300: theme('colors.primary.300');
+		--color-primary-400: theme('colors.primary.400');
+		--color-primary-500: theme('colors.primary.500');
+		--color-primary-600: theme('colors.primary.600');
+		--color-primary-700: theme('colors.primary.700');
+		--color-primary-800: theme('colors.primary.800');
+		--color-primary-900: theme('colors.primary.900');
+		--color-primary-950: theme('colors.primary.950');
+	}
+	body {
+		@apply bg-base-50 dark:bg-base-950 min-h-screen text-base-800 dark:text-base-50 selection:bg-primary-500/30 overscroll-y-none transition-colors font-roobert;
+		-webkit-tap-highlight-color: transparent;
+	}
 }
-
-:root {
-	--color-primary-50: theme('colors.primary.50');
-	--color-primary-100: theme('colors.primary.100');
-	--color-primary-200: theme('colors.primary.200');
-	--color-primary-300: theme('colors.primary.300');
-	--color-primary-400: theme('colors.primary.400');
-	--color-primary-500: theme('colors.primary.500');
-	--color-primary-600: theme('colors.primary.600');
-	--color-primary-700: theme('colors.primary.700');
-	--color-primary-800: theme('colors.primary.800');
-	--color-primary-900: theme('colors.primary.900');
-	--color-primary-950: theme('colors.primary.950');
-}
-
 .tippy-box {
 	@apply inline-block rounded-lg bg-base-50 border border-base-300 text-base-700 dark:bg-base-950 dark:border-base-800 px-2.5 py-1 text-sm font-medium dark:text-base-300 shadow-sm;
 }
@@ -76,10 +76,6 @@ body {
 }
 
 @layer components {
-	.input-label {
-		@apply text-base-500 dark:text-base-400 grid w-fit gap-1.5 text-xs;
-	}
-
 	.input {
 		@apply border-0 disabled:cursor-not-allowed resize-none disabled:opacity-50 hover:ring-primary-500 text-base-800 dark:text-base-50 dark:hover:ring-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 dark:placeholder:text-base-500 placeholder:text-base-400 bg-base-200/80 dark:bg-base-900 h-10 rounded-xl px-4 text-sm outline-none ring-1 ring-transparent transition duration-200 data-[invalid]:hover:ring-red-500 data-[invalid]:focus:ring-red-500 data-[invalid]:ring-red-500 invalid:hover:ring-red-500 invalid:focus:ring-red-500 invalid:ring-red-500 dark:data-[invalid]:hover:ring-red-600 dark:data-[invalid]:focus:ring-red-600 dark:data-[invalid]:ring-red-600 dark:invalid:hover:ring-red-600 dark:invalid:focus:ring-red-600 dark:invalid:ring-red-600;
 
@@ -89,19 +85,23 @@ body {
 		> .icon-right {
 			@apply text-base-500 dark:text-base-400 focus-visible:text-base-700 dark:focus-visible:text-base-100 hover:text-base-800 dark:hover:text-base-100 aria-pressed:text-base-800 dark:aria-pressed:text-base-100 transition-colors focus-visible:ring-offset-0 min-w-[1.5rem] -mr-1 ml-2;
 		}
+
+		&-label {
+			@apply text-base-500 dark:text-base-400 grid w-fit gap-1.5 text-xs;
+		}
+
+		&-group {
+			@apply input disabled:[&>*]:cursor-not-allowed focus-within:ring-primary-500 dark:focus-within:ring-primary-600 flex items-center overflow-hidden px-4 data-[invalid]:hover:ring-red-500 data-[invalid]:focus:ring-red-500 data-[invalid]:ring-red-500 dark:data-[invalid]:hover:ring-red-600 dark:data-[invalid]:focus:ring-red-600 dark:data-[invalid]:ring-red-600;
+
+			> input,
+			textarea {
+				@apply dark:placeholder:text-base-500 text-sm placeholder:text-base-400 w-full border-0 bg-transparent outline-none transition focus:ring-0 resize-none px-0;
+			}
+		}
 	}
 
 	textarea.input {
 		@apply py-3;
-	}
-
-	.input-group {
-		@apply input disabled:[&>*]:cursor-not-allowed focus-within:ring-primary-500 dark:focus-within:ring-primary-600 flex items-center overflow-hidden px-4 data-[invalid]:hover:ring-red-500 data-[invalid]:focus:ring-red-500 data-[invalid]:ring-red-500 dark:data-[invalid]:hover:ring-red-600 dark:data-[invalid]:focus:ring-red-600 dark:data-[invalid]:ring-red-600;
-
-		> input,
-		textarea {
-			@apply dark:placeholder:text-base-500 text-sm placeholder:text-base-400 w-full border-0 bg-transparent outline-none transition focus:ring-0 resize-none px-0;
-		}
 	}
 
 	.checkbox {

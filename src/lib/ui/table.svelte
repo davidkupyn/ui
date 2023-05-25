@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { ChevronDown, MoreHorizontal, Settings2 } from 'lucide-svelte';
+	import { ChevronDown, ChevronUp, Settings2 } from 'lucide-svelte';
 	import { tippy } from '$lib/actions/tippy';
 	import { flip } from 'svelte/animate';
 	import { cubicOut } from 'svelte/easing';
@@ -65,13 +65,14 @@
 					</th>
 				{/if}
 				{#each currentTableColumns as column, idx (column.name)}
+					{@const sortingByCurrentColumn = $sortBy === column.name}
 					<th
 						animate:flip={{ duration: 200, easing: cubicOut }}
 						class="px-4 py-2 group cursor-pointer transition select-text"
 						class:pl-0={idx === 0 && selectable}
 						class:pr-0={idx === currentTableColumns.length - 1 && columnsEditable}
 						on:click={() => {
-							$sortDir = $sortBy === column.name && $sortDir === 'asc' ? 'desc' : 'asc';
+							$sortDir = sortingByCurrentColumn && $sortDir === 'asc' ? 'desc' : 'asc';
 							$sortBy = column.name;
 						}}
 					>
@@ -86,25 +87,25 @@
 								aria-label="Sort by {column.name}"
 								use:tippy={{ content: `Sort by ${column.name}`, delay: 300 }}
 							>
-								<ChevronDown
+								<ChevronUp
 									size={20}
-									class="absolute rotate-180 transform ease-out group-focus-visible/button:opacity-100 
-													{$sortBy === column.name && $sortDir === 'desc'
+									class="absolute ease-out group-focus-visible/button:opacity-100 
+													{sortingByCurrentColumn && $sortDir === 'desc'
 										? 'top-2 opacity-100 group-hover:top-0.5  group-focus-visible/button:top-0.5'
 										: 'top-0.5 opacity-0'} 
 														transition-all group-hover:opacity-100 
-														{$sortBy === column.name && $sortDir === 'desc'
+														{sortingByCurrentColumn && $sortDir === 'desc'
 										? 'group-hover:text-base-950 group-focus-visible/button:text-base-950 dark:group-hover:text-base-50 dark:group-focus-visible/button:text-base-50'
 										: 'group-hover:text-base-400 group-focus-visible/button:text-base-400 dark:group-hover:text-base-500 dark:group-focus-visible/button:text-base-500'}"
 								/>
 								<ChevronDown
 									size={20}
 									class="absolute ease-out group-focus-visible/button:opacity-100 
-													{$sortBy === column.name && $sortDir === 'asc'
+													{sortingByCurrentColumn && $sortDir === 'asc'
 										? 'bottom-2 opacity-100 group-hover:bottom-0.5 group-focus-visible/button:bottom-0.5'
 										: 'bottom-0.5 opacity-0'} 
 														transition-all group-hover:opacity-100 
-														{$sortBy === column.name && $sortDir === 'asc'
+														{sortingByCurrentColumn && $sortDir === 'asc'
 										? 'group-hover:text-base-950 group-focus-visible/button:text-base-950 dark:group-hover:text-base-50 dark:group-focus-visible/button:text-base-50'
 										: 'group-hover:text-base-400 group-focus-visible/button:text-base-400 dark:group-hover:text-base-500 dark:group-focus-visible/button:text-base-500'}"
 								/>

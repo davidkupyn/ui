@@ -1,5 +1,5 @@
 <script lang="ts">
-	export let id = 'switch';
+	export let id = 'switch' + Math.random();
 	export let value: any = undefined;
 	export let defaultChecked = false;
 	export let checked = defaultChecked;

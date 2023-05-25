@@ -16,7 +16,7 @@
 		},
 		{
 			icon: ScrollText,
-			label: 'Documentation'
+			label: 'Strona glowna '
 		}
 	];
 	const [send, receive] = crossfade({});
@@ -34,7 +34,7 @@
 				href="/"
 				on:click|stopPropagation
 				aria-label="Go to home page"
-				class="text-center w-fit font-bold p-2 focus-visible:ring-2 focus-visible:outline-none rounded-xl transition ring-offset-base-50 dark:ring-offset-base-950 focus-visible:ring-primary-600"
+				class="text-center w-fit font-bold whitespace-nowrap p-2 focus-visible:ring-2 focus-visible:outline-none rounded-xl transition ring-offset-base-50 dark:ring-offset-base-950 focus-visible:ring-primary-600"
 			>
 				Essence</a
 			>
@@ -54,12 +54,15 @@
 	<nav>
 		<ul class="flex flex-col gap-3 items-center">
 			{#each items as item}
+				{@const currentLink = current === item.label}
 				<li class="w-full">
 					<button
 						on:click={() => (current = item.label)}
-						aria-pressed={current === item.label}
+						aria-pressed={currentLink}
 						aria-label={item.label}
-						class="relative btn btn-text h-11 p-0 {expanded ? 'w-44 transition-[width]' : 'w-11'}"
+						class="relative btn btn-text transition h-11 p-0 {expanded
+							? 'w-44 transition-[width]'
+							: 'w-11'}"
 					>
 						<span
 							class="absolute text-sm inset-0 flex {expanded
@@ -71,10 +74,12 @@
 							</span>
 
 							{#if expanded}
-								<span in:fly|local={{ x: -10, duration: 300 }}>{item.label}</span>
+								<span in:fly|local={{ x: -10, duration: 300 }} class="whitespace-nowrap"
+									>{item.label}</span
+								>
 							{/if}
 						</span>
-						{#if current === item.label}
+						{#if currentLink}
 							<div
 								in:receive|local={{
 									key: 'background',
