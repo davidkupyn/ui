@@ -3,6 +3,9 @@ import colors from 'tailwindcss/colors';
 import tailwindForms from '@tailwindcss/forms';
 
 const config = {
+	future: {
+		hoverOnlyWhenSupported: true
+	},
 	content: ['./src/**/*.{html,js,svelte,ts}'],
 	theme: {
 		extend: {

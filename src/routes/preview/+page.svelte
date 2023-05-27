@@ -79,11 +79,11 @@
 	<div class="w-full max-w-[40rem] flex flex-col gap-6">
 		<label class="input-group">
 			<Search size={16} class="icon-left" />
-			<input placeholder="Search..." />
+			<input spellcheck="false" autocomplete="false" placeholder="Search..." />
 		</label>
 		<label class="input-label w-full">
 			Normal Input
-			<input class="input" placeholder="Placeholder" />
+			<input spellcheck="false" autocomplete="false" class="input" placeholder="Placeholder" />
 		</label>
 		<label class="input-label w-full">
 			<span>
@@ -91,7 +91,7 @@
 			</span>
 			<fieldset class="input-group" disabled={false}>
 				<Lock size={16} class="icon-left" />
-				<input type="password" placeholder="Password" />
+				<input spellcheck="false" type="password" placeholder="Password" />
 				<button
 					type="button"
 					class="btn btn-text icon-right p-1 rounded-md h-fit"
@@ -116,26 +116,12 @@
 			Text Area
 			<fieldset class="input-group h-64 flex flex-col" disabled={false}>
 				<input class="!text-xl font-semibold my-3" placeholder="Title" />
-				<textarea class="h-full text-sm" placeholder="Description" />
+				<textarea class="h-full sm:text-sm" placeholder="Description" />
 			</fieldset>
 		</label>
-
-		<label class="input-label w-full" for="select">
-			<span class="{labelInside ? 'opacity-0' : 'opacity-100'} transition-opacity duration-100">
-				Custom Select
-			</span>
-			<Select
-				nonEmpty
-				placeholder="Select an option"
-				label={labelInside ? 'Custom Select' : undefined}
-				items={[
-					{ label: 'Witalina', value: 'witalina' },
-					{ label: 'David', value: 'david' },
-					{ label: 'Wiktor', value: 'wiktor' },
-					{ label: 'Gustaw', value: 'gustaw' }
-				]}
-				bind:selected={selectValue}
-			/>
+		<label for="switch" class="flex items-center gap-2 text-sm w-fit">
+			Label Inside
+			<Switch id="switch" bind:checked={labelInside} />
 		</label>
 		<label class="input-label w-full" for="autocomplete">
 			<span class="{labelInside ? 'opacity-0' : 'opacity-100'} transition-opacity duration-100">
@@ -151,12 +137,19 @@
 					{ label: 'Wiktor', value: 'wiktor' },
 					{ label: 'Gustaw', value: 'gustaw' }
 				]}
-				bind:selected={selectValue}
 			/>
 		</label>
-		<label for="switch" class="flex items-center gap-2 text-sm w-fit">
-			Label Inside
-			<Switch id="switch" bind:checked={labelInside} />
+		<label class="input-label w-full" for="select">
+			<span class="{labelInside ? 'opacity-0' : 'opacity-100'} transition-opacity duration-100">
+				Custom Select
+			</span>
+			<Select
+				nonEmpty
+				placeholder="Select an option"
+				label={labelInside ? 'Custom Select' : undefined}
+				items={['Witalina', 'David', 'Wiktor', 'Gustaw']}
+				bind:selected={selectValue}
+			/>
 		</label>
 		<label class="input-label w-full" for="select">
 			Native Select
@@ -367,7 +360,7 @@
 								</span>
 							</svelte:fragment>
 							<svelte:fragment slot="content">
-								<p class="text-base whitespace-normal">
+								<p class="max-sm:text-base whitespace-normal">
 									{row[column.name]}
 								</p>
 							</svelte:fragment>

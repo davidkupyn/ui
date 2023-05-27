@@ -3,26 +3,33 @@
 	import { createCombobox } from 'svelte-headlessui';
 	import Transition from 'svelte-transition';
 
-	export let items: {
-		label: string;
-		value: unknown;
-	}[];
-
+	export let items:
+		| {
+				label: string;
+				value: unknown;
+		  }[]
+		| string[];
+	const mappedItems = items.map((item) => {
+		if (typeof item === 'string') {
+			return { label: item, value: item };
+		}
+		return item;
+	});
 	export let label = '';
 	export let placeholder = '';
 	export let nonEmpty = false;
 	export let id = '';
 	const combobox = createCombobox({
 		label: label + ' Select',
-		selected: nonEmpty ? items[0] : placeholder
+		selected: nonEmpty ? mappedItems[0] : placeholder
 	});
-	export let selected = items[0];
+	export let selected = nonEmpty ? mappedItems[0] : undefined;
 	$: {
 		if (selected !== $combobox.selected) {
-			selected = $combobox.selected;
+			selected = $combobox.selected.value;
 		}
 	}
-	$: filtered = items.filter((item) =>
+	$: filtered = mappedItems.filter((item) =>
 		item.label
 			.toLowerCase()
 			.replace(/\s+/g, '')
@@ -30,7 +37,7 @@
 	);
 </script>
 
-<div class="relative">
+<div class="relative text-base">
 	<fieldset class="input-group w-full justify-between">
 		<input {id} name={id} use:combobox.input value={$combobox.selected.label ?? ''} {placeholder} />
 		<button use:combobox.button class="icon-right" aria-pressed={$combobox.expanded}>
@@ -54,7 +61,7 @@
 		>
 			{#if label}
 				<li
-					class="text-base-950 dark:text-base-50 max-h-60 w-full overflow-auto text-sm font-medium py-2 pl-10 pr-2"
+					class="text-base-950 dark:text-base-50 max-h-60 w-full overflow-auto sm:text-sm font-medium py-2 pl-10 pr-2"
 				>
 					{label}
 				</li>
@@ -69,9 +76,9 @@
 						: ''} {selected ? 'bg-primary-600/20 text-primary-900 dark:text-primary-50' : ''}"
 					use:combobox.item={{ value: item }}
 				>
-					<span class="block text-sm truncate {selected ? 'font-medium' : 'font-normal'}"
-						>{item.label}</span
-					>
+					<span class="block sm:text-sm truncate {selected ? 'font-medium' : 'font-normal'}">
+						{item.label}
+					</span>
 					{#if selected}
 						<span class="absolute inset-y-0 left-0 flex items-center pl-3 text-primary-600">
 							<Check class="h-5 w-5" />
@@ -80,7 +87,7 @@
 				</li>
 			{:else}
 				<li class="relative cursor-default select-none py-2 pl-10 pr-4">
-					<span class="block truncate font-normal text-sm">Nothing found</span>
+					<span class="block truncate font-normal sm:text-sm">Nothing found</span>
 				</li>
 			{/each}
 		</ul>

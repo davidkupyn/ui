@@ -1,35 +1,40 @@
 <script lang="ts">
-	import { fade } from 'svelte/transition';
-	import { flip } from 'svelte/animate';
 	import { Check, ChevronsUpDown } from 'lucide-svelte';
 	import { createListbox } from 'svelte-headlessui';
 	import Transition from 'svelte-transition';
 
-	export let items: {
-		label: string;
-		value: unknown;
-	}[];
-
+	export let items:
+		| {
+				label: string;
+				value: unknown;
+		  }[]
+		| string[];
+	const mappedItems = items.map((item) => {
+		if (typeof item === 'string') {
+			return { label: item, value: item };
+		}
+		return item;
+	});
 	export let label = '';
 	export let placeholder = '';
 	export let nonEmpty = false;
 
 	const listbox = createListbox({
 		label: label + ' Select',
-		selected: nonEmpty ? items[0] : placeholder
+		selected: nonEmpty ? mappedItems[0] : placeholder
 	});
-	export let selected = items[0];
+	export let selected = nonEmpty ? mappedItems[0] : undefined;
 	$: {
 		if (selected !== $listbox.selected) {
-			selected = $listbox.selected;
+			selected = $listbox.selected.value;
 		}
 	}
 </script>
 
-<div class="relative">
+<div class="relative text-base">
 	<button use:listbox.button class="input-group w-full justify-between">
-		{#if $listbox.selected.label}
-			<span>{$listbox.selected.label}</span>
+		{#if $listbox.selected !== placeholder}
+			{$listbox.selected.label}
 		{:else}
 			<span class="text-base-400 dark:text-base-500">{placeholder}</span>
 		{/if}
@@ -53,12 +58,12 @@
 		>
 			{#if label}
 				<li
-					class="text-base-950 dark:text-base-50 max-h-60 w-full overflow-auto text-sm font-medium py-2 pl-10 pr-2"
+					class="text-base-950 dark:text-base-50 max-h-60 w-full overflow-auto sm:text-sm font-medium py-2 pl-10 pr-2"
 				>
 					{label}
 				</li>
 			{/if}
-			{#each items as item}
+			{#each mappedItems as item}
 				{@const active = $listbox.active === item}
 				{@const selected = $listbox.selected === item}
 				<li
@@ -68,9 +73,13 @@
 						: ''} {selected ? 'bg-primary-600/20 text-primary-900 dark:text-primary-50' : ''}"
 					use:listbox.item={{ value: item }}
 				>
-					<span class="block text-sm truncate {selected ? 'font-medium' : 'font-normal'}"
-						>{item.label}</span
-					>
+					<span class="block sm:text-sm truncate {selected ? 'font-medium' : 'font-normal'}">
+						{#if typeof item === 'string'}
+							{item}
+						{:else}
+							{item.label}
+						{/if}
+					</span>
 					{#if selected}
 						<span class="absolute inset-y-0 left-0 flex items-center pl-3 text-primary-600">
 							<Check class="h-5 w-5" />
