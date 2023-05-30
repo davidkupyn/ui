@@ -74,7 +74,7 @@
 							</span>
 
 							{#if expanded}
-								<span in:fly|local={{ x: -10, duration: 300 }} class="whitespace-nowrap"
+								<span in:fly|local={{ x: -10, duration: 200 }} class="whitespace-nowrap"
 									>{item.label}</span
 								>
 							{/if}

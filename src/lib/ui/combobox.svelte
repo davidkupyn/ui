@@ -26,7 +26,7 @@
 	export let selected = nonEmpty ? mappedItems[0] : undefined;
 	$: {
 		if (selected !== $combobox.selected) {
-			selected = $combobox.selected.value;
+			selected = $combobox.selected;
 		}
 	}
 	$: filtered = mappedItems.filter((item) =>

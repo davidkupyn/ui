@@ -174,7 +174,7 @@
 							dispatch('rowclick', item);
 						}
 					}}
-					animate:flip={{ duration: 300, easing: cubicOut }}
+					animate:flip={{ duration: 200, easing: cubicOut }}
 					class="group border-subtle transition-colors data-[state=selected]:bg-primary-500/10 data-[state=selected]:hover:bg-primary-600/10 hover:bg-base-200/50 dark:hover:bg-base-900/50 focus:bg-base-200/80 dark:focus:bg-base-900/80 outline-none data-[state=selected]:focus:bg-primary-600/20"
 					data-state={selected.includes(item[id]) ? 'selected' : null}
 				>

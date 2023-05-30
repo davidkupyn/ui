@@ -18,7 +18,9 @@
 		Stars,
 		Flower2,
 		BookTemplate,
-		Save
+		Save,
+		Command,
+		CalendarIcon
 	} from 'lucide-svelte';
 	import Tabs from '$lib/ui/tabs.svelte';
 	import Pagination from '$lib/ui/pagination.svelte';
@@ -31,6 +33,7 @@
 	import Popover from '$lib/ui/popover.svelte';
 	import Select from '$lib/ui/select.svelte';
 	import Combobox from '$lib/ui/combobox.svelte';
+	import Calendar from '$lib/ui/calendar.svelte';
 
 	let showPassword = false;
 	const tabs = ['witalina', 'david', 'wiktor', 'gustaw'];
@@ -73,13 +76,19 @@
 	let closeDeleteDialog: () => void;
 	let labelInside = false;
 	$: totalPages = Math.ceil(items.length / PAGE_SIZE) || 1;
+
+	let calendarValue: string;
 </script>
 
 <main in:fade={{ duration: 100 }} class="py-8 w-full flex flex-col gap-6 container mx-auto px-6">
 	<div class="w-full max-w-[40rem] flex flex-col gap-6">
-		<label class="input-group">
+		<label class="input-group group">
 			<Search size={16} class="icon-left" />
 			<input spellcheck="false" autocomplete="false" placeholder="Search..." />
+			<kbd class="group-focus-within:scale-90 group-focus-within:opacity-0 transition">
+				<Command size="14" />
+				K</kbd
+			>
 		</label>
 		<label class="input-label w-full">
 			Normal Input
@@ -165,6 +174,21 @@
 			Normal Text Area
 			<textarea class="h-24 input" placeholder="Placeholder" />
 		</label>
+		<Popover position="bottom-center" unstyled>
+			<button slot="button" let:button use:button class="input-group w-full">
+				<CalendarIcon size={16} class="icon-left" />
+				{#if calendarValue}
+					{new Date(calendarValue).toLocaleDateString('en', {
+						year: 'numeric',
+						month: 'long',
+						day: 'numeric'
+					})}
+				{:else}
+					<span class="dark:text-base-500 text-base-400">Select Date</span>
+				{/if}
+			</button>
+			<Calendar bind:value={calendarValue} slot="panel" />
+		</Popover>
 		<div class="flex flex-wrap gap-2 w-full">
 			<button class="btn">
 				<Stars size={16} />
@@ -355,7 +379,7 @@
 						<Disclosure>
 							<Hash size={16} slot="icon" />
 							<svelte:fragment slot="summary">
-								<span class="max-w-sm truncate">
+								<span class="max-w-sm truncate max-sm:text-base">
 									{row[column.name]}
 								</span>
 							</svelte:fragment>
@@ -422,7 +446,7 @@
 		</div>
 		<Pagination {totalPages} />
 	</div>
-	<div class="my-8">
+	<!-- <div class="my-8">
 		<div class="stack">
 			<div class="w-80 h-32 grid place-content-center border border-subtle convex rounded-3xl pb-0">
 				<h2 class="text-center font-medium">Stack of 3 Cards</h2>
@@ -434,7 +458,7 @@
 				<h2 class="text-center font-medium">Stack of 3 Cards</h2>
 			</div>
 		</div>
-	</div>
+	</div> -->
 </main>
 
 <Dialog bind:close={closeDeleteDialog} bind:open={openDeleteDialog}>

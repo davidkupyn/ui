@@ -58,10 +58,14 @@
 	});
 </script>
 
-<div class="mx-auto flex gap-4 max-sm:flex-col items-center max-sm:gap-8">
+<nav
+	class="mx-auto flex gap-4 max-sm:flex-col items-center max-sm:gap-8"
+	aria-label="Pagination Navigation"
+>
 	<div class="flex gap-1 items-center">
 		<button
 			on:click={() => ($currentPage &&= $currentPage - 1)}
+			aria-label="Go to page {$currentPage ? $currentPage - 1 : 'previous'}"
 			class="btn btn-ghost p-2 h-fit"
 			disabled={!$currentPage || $currentPage === 1 || totalPages <= 1}
 		>
@@ -73,6 +77,7 @@
 				<button
 					on:click={() => ($currentPage = page)}
 					aria-pressed={isCurrentPage}
+					aria-label="Go to page {page}"
 					class="relative h-9 w-9 p-0 btn btn-text"
 				>
 					<span class="absolute text-sm p-1 inset-0 grid place-items-center z-[2]">
@@ -96,6 +101,7 @@
 		{/each}
 
 		<button
+			aria-label="Go to page {$currentPage ? $currentPage + 1 : 'next'}"
 			on:click={() => ($currentPage &&= $currentPage + 1)}
 			class="btn btn-ghost p-2 h-fit"
 			disabled={($currentPage && $currentPage >= totalPages) || totalPages <= 1}
@@ -126,4 +132,4 @@
 			</button>
 		</form>
 	{/if}
-</div>
+</nav>
