@@ -35,7 +35,7 @@
 				>
 					<div
 						use:dialog.modal
-						class="w-full sm:w-fit rounded-3xl border border-subtle bg-base-50 dark:bg-base-950/75 backdrop-blur-md p-6 mx-2"
+						class="w-full sm:w-fit rounded-3xl border border-subtle bg-base-50 dark:bg-base-950 backdrop-blur-md p-6 mx-2"
 					>
 						<slot name="panel" />
 					</div>

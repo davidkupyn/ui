@@ -8,6 +8,8 @@
 
 <script lang="ts">
 	import { ChevronUp } from 'lucide-svelte';
+	import { slide } from 'svelte/transition';
+	import { cubicInOut } from 'svelte/easing';
 
 	export let defaultExpanded = false;
 	export let expanded = defaultExpanded;
@@ -45,18 +47,14 @@
 				: ''}"
 		/>
 	</button>
-	<div
-		class="grid transition-all ease-in-out
-					{expanded ? 'grid-rows-[1fr]' : 'grid-rows-[0fr]'}"
-	>
+	{#if expanded}
 		<div
-			class="px-4 {expanded
-				? 'mt-2'
-				: ''} transition-all ease-in-out text-sm text-gray-500 dark:text-gray-400 overflow-hidden"
+			transition:slide={{ duration: 150, easing: cubicInOut }}
+			class="px-4 mt-2 text-sm text-gray-500 dark:text-gray-400 overflow-hidden"
 		>
 			<slot name="content">
 				{content}
 			</slot>
 		</div>
-	</div>
+	{/if}
 </div>

@@ -11,7 +11,7 @@
 
 <div
 	use:calendar
-	class="flex w-80 flex-col overflow-clip rounded-3xl border border-subtle bg-base-50 dark:bg-base-950/75 p-4 backdrop-blur-md shadow-lg ring-opacity-5 focus:outline-none"
+	class="flex w-80 flex-col overflow-clip rounded-3xl border border-subtle bg-base-50 dark:bg-base-950 p-4 backdrop-blur-md shadow-lg ring-opacity-5 focus:outline-none"
 >
 	<div class="mb-4 flex items-center justify-between">
 		<button

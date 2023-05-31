@@ -99,7 +99,6 @@
 				Password <span class="text-red-500">*</span>
 			</span>
 			<fieldset class="input-group" disabled={false}>
-				<Lock size={16} class="icon-left" />
 				<input spellcheck="false" type="password" placeholder="Password" />
 				<button
 					type="button"
@@ -277,13 +276,6 @@
 		/>
 	</div>
 
-	<!-- <button
-		on:click={openDialog}
-		class="btn btn-lg w-fit hover:bg-primary-500 dark:hover:bg-primary-600 hover:scale-105 transition hover:shadow-xl duration-300"
-	>
-		<AppWindow size={16} />
-		Open Dialog
-	</button> -->
 	<button on:click={openDialog} class="btn btn-lg w-fit">
 		<AppWindow size={16} />
 		Open Dialog
@@ -313,13 +305,16 @@
 			<Table
 				items={paginatedItems}
 				id="id"
-				tableColumns={Object.keys(item).map((key) => ({
-					displayName: key
-						.replace(/_/g, ' ')
-						.replace(/([A-Z])/g, ' $1')
-						.replace(/^./, (str) => str.toUpperCase()),
-					name: key
-				}))}
+				headers={Object.keys(item)
+					.map((key) => ({
+						key,
+						value: key
+							.replace(/_/g, ' ')
+							.replace(/([A-Z])/g, ' $1')
+							.replace(/^./, (str) => str.toUpperCase())
+					}))
+					.filter((header) => header.key !== 'id')}
+				disabledKeys={[items[7].id]}
 				bind:selected
 				selectable
 				columnsEditable
@@ -368,44 +363,48 @@
 						</li>
 					</ul>
 				</Popover>
-
-				<svelte:fragment slot="row" let:row let:column>
-					{#if column.name === 'id'}
+				<svelte:fragment slot="row-header" let:header>
+					{#if header.key === 'createdAt'}
 						<span class="flex items-center gap-2">
-							<Fingerprint class="text-base-500" size={16} />
-							{row[column.name]}
+							<CalendarIcon size={16} />
+							{header.value}
 						</span>
-					{:else if column.name === 'description'}
+					{:else}
+						{header.value}
+					{/if}
+				</svelte:fragment>
+				<svelte:fragment slot="row" let:cell>
+					{#if cell.key === 'description'}
 						<Disclosure>
 							<Hash size={16} slot="icon" />
 							<svelte:fragment slot="summary">
 								<span class="max-w-sm truncate max-sm:text-base">
-									{row[column.name]}
+									{cell.value}
 								</span>
 							</svelte:fragment>
 							<svelte:fragment slot="content">
 								<p class="max-sm:text-base whitespace-normal">
-									{row[column.name]}
+									{cell.value}
 								</p>
 							</svelte:fragment>
 						</Disclosure>
-					{:else if column.name === 'price'}
+					{:else if cell.key === 'price'}
 						<span class="flex items-center">
 							<DollarSign class="text-base-500" size={16} />
-							{row[column.name]}
+							{cell.value}
 						</span>
-					{:else if column.name === 'status'}
+					{:else if cell.key === 'status'}
 						<span
-							class="badge capitalize {row[column.name] === 'inactive'
+							class="badge capitalize {cell.value === 'inactive'
 								? 'badge-danger'
 								: 'badge-success'}"
 						>
-							{row[column.name]}
+							{cell.value}
 						</span>
-					{:else if column.name === 'createdAt'}
-						{row[column.name].toLocaleDateString('pl')}
+					{:else if cell.key === 'createdAt'}
+						{cell.value.toLocaleDateString('pl')}
 					{:else}
-						{row[column.name]}
+						{cell.value}
 					{/if}
 				</svelte:fragment>
 			</Table>

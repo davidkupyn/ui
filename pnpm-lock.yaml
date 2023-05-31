@@ -1,6 +1,7 @@
 lockfileVersion: 5.4
 
 specifiers:
+  '@neodrag/svelte': ^2.0.3
   '@sveltejs/adapter-auto': ^2.0.1
   '@sveltejs/kit': ^1.16.3
   '@tailwindcss/forms': ^0.5.3
@@ -30,6 +31,7 @@ specifiers:
   vite: ^4.3.5
 
 dependencies:
+  '@neodrag/svelte': 2.0.3
   '@tailwindcss/forms': 0.5.3_tailwindcss@3.3.2
   lucide-svelte: 0.215.0_svelte@3.59.1
   svelte-headlessui: 0.0.15
@@ -326,6 +328,10 @@ packages:
     dependencies:
       '@jridgewell/resolve-uri': 3.1.0
       '@jridgewell/sourcemap-codec': 1.4.14
+
+  /@neodrag/svelte/2.0.3:
+    resolution: {integrity: sha512-/7k4Byv6guBs6NpfzOnqOep8PM3HjhPg1rRPNsJsGNGDXSJNB+tn9NAi/vTXJBos3vN9XPlbnr3g/lNKGfg+Jg==}
+    dev: false
 
   /@nodelib/fs.scandir/2.1.5:
     resolution: {integrity: sha512-vq24Bq3ym5HEQm2NKCr3yXDwjc7vTsEThRDnkp2DK9p1uqLR+DHurm/NOTo0KG7HYHU7eppKZj3MyqYuMBf62g==}

@@ -15,22 +15,26 @@
 	export let selectable = false;
 	export let items: Record<string, any>[] = [];
 	export let interactive = false;
-	export let tableColumns: {
-		displayName: string;
-		name: string;
+	export let filled = false;
+	export let lined = true;
+	export let headers: {
+		key: string;
+		value: string;
 	}[] = items[0]
 		? Object.keys(items[0]).map((key) => ({
-				displayName: key
+				key: key,
+				value: key
 					.replace(/_/g, ' ')
 					.replace(/([A-Z])/g, ' $1')
-					.replace(/^./, (str) => str.toUpperCase()),
-				name: key
+					.replace(/^./, (str) => str.toUpperCase())
 		  }))
 		: [];
 
-	let currentTableColumns = tableColumns;
+	let currentTableColumns = headers;
 	export let id = Object.keys(items[0])[0];
-	const sortBy = queryParam('sort', ssp.string(tableColumns[0].name), {
+	export let disabledKeys: (typeof id)[] = [];
+
+	const sortBy = queryParam('sort', ssp.string(headers[0].key), {
 		pushHistory
 	});
 	const sortDir = queryParam('dir', ssp.string('asc'), {
@@ -39,22 +43,38 @@
 
 	function selectAll() {
 		selected = allSelected
-			? selected.filter((item) => !items.map((item) => item[id]).includes(item))
-			: Array.from(new Set([...selected, ...items.map((item) => item[id])]));
+			? selected.filter((item) => !items.some((i) => i[id] === item))
+			: [
+					...new Set([
+						...selected,
+						...items
+							.map((item) => (disabledKeys.includes(item[id]) ? null : item[id]))
+							.filter((item) => item)
+					])
+			  ];
 	}
 
 	$: allSelected =
-		items.map((item) => item[id]).every((itemId) => selected.includes(itemId)) && items.length > 0;
+		items
+			.map((item) => (disabledKeys.includes(item[id]) ? null : item[id]))
+			.filter((item) => item)
+			.every((itemId) => selected.includes(itemId)) && items.length > 0;
 
 	selected = [];
 </script>
 
 <div class="w-full overflow-auto">
 	<table class="w-full caption-bottom overflow-x-scroll">
-		<thead class="[&_tr]:border-b hover:bg-base-200/50 dark:hover:bg-base-900/50 transition-colors">
+		<thead
+			class="{filled
+				? 'bg-base-200 dark:bg-base-900 rounded-xl'
+				: 'hover:bg-base-200/50 dark:hover:bg-base-900/50'} {lined
+				? '[&_tr]:border-b'
+				: ''} transition-colors"
+		>
 			<tr class="border-subtle">
 				{#if selectable}
-					<th class="px-4 py-3 align-middle text-left">
+					<th class="px-4 py-2 align-middle text-left">
 						<input
 							type="checkbox"
 							aria-label="Select all"
@@ -64,8 +84,8 @@
 						/>
 					</th>
 				{/if}
-				{#each currentTableColumns as column, idx (column.name)}
-					{@const sortingByCurrentColumn = $sortBy === column.name}
+				{#each currentTableColumns as column, idx (column.key)}
+					{@const sortingByCurrentColumn = $sortBy === column.key}
 					<th
 						animate:flip={{ duration: 200, easing: cubicOut }}
 						class="px-4 py-2 group cursor-pointer transition select-text"
@@ -73,19 +93,21 @@
 						class:pr-0={idx === currentTableColumns.length - 1 && columnsEditable}
 						on:click={() => {
 							$sortDir = sortingByCurrentColumn && $sortDir === 'asc' ? 'desc' : 'asc';
-							$sortBy = column.name;
+							$sortBy = column.key;
 						}}
 					>
 						<span class="flex items-center gap-2">
 							<span
 								class="uppercase btn btn-text p-0 font-semibold group-hover:text-base-800 dark:group-hover:text-base-100"
 							>
-								{column.displayName}
+								<slot name="row-header" header={column}>
+									{column.value}
+								</slot>
 							</span>
 							<button
 								class="btn btn-ghost group/button relative h-9 w-9 focus-visible:ring-offset-0"
-								aria-label="Sort by {column.name}"
-								use:tippy={{ content: `Sort by ${column.name}`, delay: 300 }}
+								aria-label="Sort by {column.key}"
+								use:tippy={{ content: `Sort by ${column.key}`, delay: 300 }}
 							>
 								<ChevronUp
 									size={20}
@@ -124,15 +146,15 @@
 								use:tippy={{ content: 'Toggle columns' }}><Settings2 size={20} /></button
 							>
 							<ul slot="panel" class="w-48 divide-y divide-base-200 dark:divide-base-900">
-								{#each tableColumns as column (column.name)}
+								{#each headers as column (column.key)}
 									<li class="px-1 py-1">
 										<label
-											for={column.name}
+											for={column.key}
 											class="flex w-full text-left items-center justify-between rounded-xl p-2 text-sm font-medium capitalize transition hover:bg-base-200 dark:hover:bg-base-800/50 text-base-500 dark:text-base-400 focus-within:bg-base-200 dark:focus-within:bg-base-800/50 hover:text-base-800 dark:hover:text-base-100 focus-within:text-base-800 dark:focus-within:text-base-100"
 										>
-											{column.displayName}
+											{column.value}
 											<Switch
-												id={column.name}
+												id={column.key}
 												bind:group={currentTableColumns}
 												value={column}
 												defaultChecked
@@ -141,8 +163,8 @@
 											/>
 											<!-- <label class="relative inline-flex items-center cursor-pointer">
 												<input
-													id={column.name}
-													name={column.name}
+													id={column.key}
+													name={column.key}
 													value={column}
 													type="checkbox"
 													class="sr-only peer"
@@ -163,7 +185,7 @@
 				</th>
 			</tr>
 		</thead>
-		<tbody class="[&_tr]:border-b [&_tr:last-child]:border-none relative">
+		<tbody class="{lined ? '[&_tr]:border-b' : ''} [&_tr:last-child]:border-none relative">
 			{#each items as item, idx (item[id] + idx)}
 				<tr
 					tabindex={interactive ? 0 : null}
@@ -174,12 +196,13 @@
 							dispatch('rowclick', item);
 						}
 					}}
+					aria-disabled={disabledKeys.includes(item[id])}
 					animate:flip={{ duration: 200, easing: cubicOut }}
-					class="group border-subtle transition-colors data-[state=selected]:bg-primary-500/10 data-[state=selected]:hover:bg-primary-600/10 hover:bg-base-200/50 dark:hover:bg-base-900/50 focus:bg-base-200/80 dark:focus:bg-base-900/80 outline-none data-[state=selected]:focus:bg-primary-600/20"
+					class="group aria-disabled:opacity-40 aria-disabled:pointer-events-none border-subtle transition-colors data-[state=selected]:bg-primary-500/10 data-[state=selected]:hover:bg-primary-600/10 hover:bg-base-200/50 dark:hover:bg-base-900/50 focus:bg-base-200/80 dark:focus:bg-base-900/80 outline-none data-[state=selected]:focus:bg-primary-600/20"
 					data-state={selected.includes(item[id]) ? 'selected' : null}
 				>
 					{#if selectable}
-						<td class="px-4 py-3 align-middle text-left">
+						<td class="px-4 py-2 align-middle text-left">
 							<input
 								type="checkbox"
 								aria-label="Select user"
@@ -197,16 +220,22 @@
 					{#each currentTableColumns as column, columnIdx (column)}
 						<td
 							animate:flip={{ duration: 200, easing: cubicOut }}
-							class="px-4 py-5 tabular-nums max-w-[500px] truncate"
+							class="px-4 py-4 tabular-nums max-w-[500px] truncate"
 							class:pl-0={columnIdx === 0 && selectable}
 							class:pr-0={columnIdx === currentTableColumns.length - 1 && !$$slots.actions}
 						>
-							<slot name="row" row={item} {column}>
-								{item[column.name]}
+							<slot
+								name="row"
+								cell={{
+									key: column.key,
+									value: item[column.key]
+								}}
+							>
+								{item[column.key]}
 							</slot>
 						</td>
 					{/each}
-					<td class="px-4 py-3 align-middle text-right">
+					<td class="px-4 py-2 align-middle text-right">
 						{#if $$slots.actions}
 							<slot row={item} index={idx} name="actions" />
 						{/if}
@@ -216,7 +245,7 @@
 				<tr
 					class="border-b p-4 border-subtle transition-colors hover:bg-base-300/50 dark:hover:bg-base-900/50"
 				>
-					<td colspan={tableColumns.length + 2} class="text-center py-8 text-sm"> No results.</td>
+					<td colspan={headers.length + 2} class="text-center py-8 text-sm"> No results.</td>
 				</tr>
 			{/each}
 		</tbody>
