@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { browser } from '$app/environment';
 	import { draggable } from '@neodrag/svelte';
 	import { createEventDispatcher } from 'svelte';
 	import { spring } from 'svelte/motion';
@@ -16,7 +17,7 @@
 			type,
 			id
 		});
-		position.stiffness = 0.2;
+		if (browser) position.stiffness = window.innerWidth > 768 ? 0.2 : 0.05;
 		setTimeout(() => {
 			active = false;
 		}, 150);
