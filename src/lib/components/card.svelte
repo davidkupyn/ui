@@ -6,7 +6,7 @@
 	export let id: number | string = 0;
 
 	const dispatch = createEventDispatcher();
-	let position = spring({ x: 0, y: 0 }, { damping: 0.8, stiffness: 0.15 });
+	let position = spring({ x: 0, y: 0 }, { damping: 0.4, stiffness: 0.15 });
 	export let active = true;
 	export function swipeAction(type: 'left' | 'right') {
 		$position = {
@@ -38,6 +38,7 @@
 			bound = window.innerWidth > 768 ? 150 : 50;
 		}
 	});
+	export let rotation = 0;
 </script>
 
 {#if active}
@@ -60,7 +61,7 @@
 			}
 		}}
 	>
-		<div style="transform: rotate({$position.x * 0.02}deg)">
+		<div style="transform: rotate({$position.x * 0.02 + rotation}deg)">
 			<slot {upcomingAction} />
 		</div>
 	</div>

@@ -53,22 +53,22 @@
 		@apply inline-grid place-items-center items-end gap-3;
 
 		& > * {
-			@apply opacity-60 col-start-1 row-start-1 translate-y-4 scale-90 z-[48];
+			@apply col-start-1 row-start-1 translate-y-4 scale-90 z-[48];
 		}
 		& > *:nth-child(2) {
-			@apply opacity-80 translate-y-2 scale-95 z-[49];
+			@apply translate-y-2 scale-95 z-[49];
 		}
 		& > *:nth-child(1) {
-			@apply opacity-100 translate-y-0 scale-100 z-50;
+			@apply translate-y-0 scale-100 z-50;
 		}
 
 		&-inverted {
 			@apply stack;
 			& > * {
-				@apply -translate-y-4;
+				@apply -translate-y-4 -rotate-12;
 			}
 			& > *:nth-child(2) {
-				@apply -translate-y-2;
+				@apply -translate-y-2 rotate-12;
 			}
 			& > *:nth-child(1) {
 				@apply translate-y-0;

@@ -16,9 +16,14 @@
 	export let cards: T[] = [];
 </script>
 
-<div class="container mx-auto grid place-content-center stack">
-	{#each cards as card}
-		<Card on:swipe={(e) => (actions = [...actions, e.detail])} id={card.id} let:upcomingAction>
+<div class="container mx-auto place-content-center stack drop-shadow-md">
+	{#each cards as card, idx}
+		<Card
+			on:swipe={(e) => (actions = [...actions, e.detail])}
+			id={card.id}
+			let:upcomingAction
+			rotation={idx & 1 ? -2 : 2}
+		>
 			<slot name="card" {card} {upcomingAction} />
 		</Card>
 	{/each}
