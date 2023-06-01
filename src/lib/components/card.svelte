@@ -35,7 +35,7 @@
 
 	onMount(() => {
 		if (browser) {
-			bound = window.innerWidth > 768 ? 150 : 40;
+			bound = window.innerWidth > 768 ? 150 : 50;
 		}
 	});
 </script>
