@@ -9,20 +9,30 @@
 	import { createEventDispatcher } from 'svelte';
 
 	const dispatch = createEventDispatcher();
-	export let selected = new Array<string>();
-	export let pushHistory = false;
-	export let columnsEditable = false;
-	export let selectable = false;
-	export let items: Record<string, any>[] = [];
-	export let interactive = false;
-	export let filled = false;
-	export let lined = true;
-	export let headers: {
-		key: string;
+	type T = $$Generic<{ id: any }>;
+	type Header = {
+		key: keyof T;
 		value: string;
-	}[] = items[0]
+	};
+	interface $$Slots {
+		'row-header': {
+			header: Header;
+		};
+		row: {
+			cell: {
+				key: keyof T;
+				value: any; //TODO fix this any
+			};
+		};
+		actions: {
+			row: T;
+			index: number;
+		};
+	}
+	export let items: T[] = [];
+	export let headers: Header[] = items[0]
 		? Object.keys(items[0]).map((key) => ({
-				key: key,
+				key: key as keyof T,
 				value: key
 					.replace(/_/g, ' ')
 					.replace(/([A-Z])/g, ' $1')
@@ -30,11 +40,19 @@
 		  }))
 		: [];
 
-	let currentTableColumns = headers;
-	export let id = Object.keys(items[0])[0];
-	export let disabledKeys: (typeof id)[] = [];
+	export let selected: any[] = [];
+	export let disabledKeys: any[] = [];
 
-	const sortBy = queryParam('sort', ssp.string(headers[0].key), {
+	export let pushHistory = false;
+	export let columnsEditable = false;
+	export let selectable = false;
+	export let interactive = false;
+	export let filled = false;
+	export let lined = true;
+
+	let currentTableColumns = headers;
+
+	const sortBy = queryParam('sort', ssp.string(headers[0].key as string), {
 		pushHistory
 	});
 	const sortDir = queryParam('dir', ssp.string('asc'), {
@@ -43,12 +61,12 @@
 
 	function selectAll() {
 		selected = allSelected
-			? selected.filter((item) => !items.some((i) => i[id] === item))
+			? selected.filter((item) => !items.some((i) => i.id === item))
 			: [
 					...new Set([
 						...selected,
 						...items
-							.map((item) => (disabledKeys.includes(item[id]) ? null : item[id]))
+							.map((item) => (disabledKeys.includes(item.id) ? null : item.id))
 							.filter((item) => item)
 					])
 			  ];
@@ -56,7 +74,7 @@
 
 	$: allSelected =
 		items
-			.map((item) => (disabledKeys.includes(item[id]) ? null : item[id]))
+			.map((item) => (disabledKeys.includes(item.id) ? null : item.id))
 			.filter((item) => item)
 			.every((itemId) => selected.includes(itemId)) && items.length > 0;
 
@@ -93,7 +111,7 @@
 						class:pr-0={idx === currentTableColumns.length - 1 && columnsEditable}
 						on:click={() => {
 							$sortDir = sortingByCurrentColumn && $sortDir === 'asc' ? 'desc' : 'asc';
-							$sortBy = column.key;
+							$sortBy = column.key.toString();
 						}}
 					>
 						<span class="flex items-center gap-2">
@@ -106,8 +124,8 @@
 							</span>
 							<button
 								class="btn btn-ghost group/button relative h-9 w-9 focus-visible:ring-offset-0"
-								aria-label="Sort by {column.key}"
-								use:tippy={{ content: `Sort by ${column.key}`, delay: 300 }}
+								aria-label="Sort by {column.key.toString()}"
+								use:tippy={{ content: `Sort by ${column.key.toString()}`, delay: 300 }}
 							>
 								<ChevronUp
 									size={20}
@@ -149,7 +167,7 @@
 								{#each headers as column (column.key)}
 									<li class="px-1 py-1">
 										<label
-											for={column.key}
+											for={column.key.toString()}
 											class="flex w-full text-left items-center justify-between rounded-xl p-2 text-sm font-medium capitalize transition hover:bg-base-200 dark:hover:bg-base-800/50 text-base-500 dark:text-base-400 focus-within:bg-base-200 dark:focus-within:bg-base-800/50 hover:text-base-800 dark:hover:text-base-100 focus-within:text-base-800 dark:focus-within:text-base-100"
 										>
 											{column.value}
@@ -186,7 +204,7 @@
 			</tr>
 		</thead>
 		<tbody class="{lined ? '[&_tr]:border-b' : ''} [&_tr:last-child]:border-none relative">
-			{#each items as item, idx (item[id] + idx)}
+			{#each items as item, idx (item.id)}
 				<tr
 					tabindex={interactive ? 0 : null}
 					on:click={() => dispatch('rowclick', item)}
@@ -196,23 +214,23 @@
 							dispatch('rowclick', item);
 						}
 					}}
-					aria-disabled={disabledKeys.includes(item[id])}
+					aria-disabled={disabledKeys.includes(item.id)}
 					animate:flip={{ duration: 200, easing: cubicOut }}
 					class="group aria-disabled:opacity-40 aria-disabled:pointer-events-none border-subtle transition-colors data-[state=selected]:bg-primary-500/10 data-[state=selected]:hover:bg-primary-600/10 hover:bg-base-200/50 dark:hover:bg-base-900/50 focus:bg-base-200/80 dark:focus:bg-base-900/80 outline-none data-[state=selected]:focus:bg-primary-600/20"
-					data-state={selected.includes(item[id]) ? 'selected' : null}
+					data-state={selected.includes(item.id) ? 'selected' : null}
 				>
 					{#if selectable}
 						<td class="px-4 py-2 align-middle text-left">
 							<input
 								type="checkbox"
 								aria-label="Select user"
-								checked={selected.includes(item[id])}
+								checked={selected.includes(item.id)}
 								on:click|stopPropagation
 								on:change={() =>
-									(selected = selected.includes(item[id])
-										? selected.filter((idx) => idx !== item[id])
-										: [...selected, item[id]])}
-								value={item[id]}
+									(selected = selected.includes(item.id)
+										? selected.filter((idx) => idx !== item.id)
+										: [...selected, item.id])}
+								value={item.id}
 								class="checkbox"
 							/>
 						</td>

@@ -47,14 +47,7 @@
 	};
 	const PAGE_SIZE = 10;
 	const currentPage = queryParam('page', ssp.number());
-	const item = {
-		id: crypto.randomUUID().slice(0, 16),
-		name: 'Item',
-		description: `“Well, and so we breakfasted at ten as usual; I thought it would never be over; for, by the bye, you are to understand, that my uncle and aunt were horrid unpleasant all the time I was with them. If you’ll believe me, I did not once put my foot out of doors, though I was there a fortnight. Not one party, or scheme, or anything. ”`,
-		price: Math.floor(Math.random() * 1000),
-		createdAt: new Date(),
-		status: Math.random() > 0.41 ? 'active' : 'inactive'
-	};
+
 	let items = Array.from({ length: 100 }, (_, i) => ({
 		id: crypto.randomUUID().slice(0, 16),
 		name: `Item ${i + 1}`,
@@ -78,6 +71,16 @@
 	$: totalPages = Math.ceil(items.length / PAGE_SIZE) || 1;
 
 	let calendarValue: string;
+
+	const headers = Object.keys(items[0])
+		.map((key) => ({
+			key: key as keyof (typeof items)[0],
+			value: key
+				.replace(/_/g, ' ')
+				.replace(/([A-Z])/g, ' $1')
+				.replace(/^./, (str) => str.toUpperCase())
+		}))
+		.filter((header) => header.key !== 'id');
 </script>
 
 <main in:fade={{ duration: 100 }} class="py-8 w-full flex flex-col gap-6 container mx-auto px-6">
@@ -304,16 +307,7 @@
 		<div class="w-full border border-subtle rounded-3xl overflow-hidden">
 			<Table
 				items={paginatedItems}
-				id="id"
-				headers={Object.keys(item)
-					.map((key) => ({
-						key,
-						value: key
-							.replace(/_/g, ' ')
-							.replace(/([A-Z])/g, ' $1')
-							.replace(/^./, (str) => str.toUpperCase())
-					}))
-					.filter((header) => header.key !== 'id')}
+				{headers}
 				disabledKeys={[items[7].id]}
 				bind:selected
 				selectable
@@ -445,19 +439,6 @@
 		</div>
 		<Pagination {totalPages} />
 	</div>
-	<!-- <div class="my-8">
-		<div class="stack">
-			<div class="w-80 h-32 grid place-content-center border border-subtle convex rounded-3xl pb-0">
-				<h2 class="text-center font-medium">Stack of 3 Cards</h2>
-			</div>
-			<div class="w-80 h-32 grid place-content-center border border-subtle convex rounded-3xl pb-0">
-				<h2 class="text-center font-medium">Stack of 3 Cards</h2>
-			</div>
-			<div class="w-80 h-32 grid place-content-center border border-subtle convex rounded-3xl pb-0">
-				<h2 class="text-center font-medium">Stack of 3 Cards</h2>
-			</div>
-		</div>
-	</div> -->
 </main>
 
 <Dialog bind:close={closeDeleteDialog} bind:open={openDeleteDialog}>
