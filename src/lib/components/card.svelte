@@ -1,12 +1,12 @@
 <script lang="ts">
 	import { browser } from '$app/environment';
 	import { draggable } from '@neodrag/svelte';
-	import { createEventDispatcher } from 'svelte';
+	import { createEventDispatcher, onMount } from 'svelte';
 	import { spring } from 'svelte/motion';
 	export let id: number | string = 0;
 
 	const dispatch = createEventDispatcher();
-	let position = spring({ x: 0, y: 0 }, { damping: 0.7, stiffness: 0.15 });
+	let position = spring({ x: 0, y: 0 }, { damping: 0.8, stiffness: 0.15 });
 	export let active = true;
 	export function swipeAction(type: 'left' | 'right') {
 		$position = {
@@ -31,7 +31,13 @@
 	}
 
 	let outOfBound = false;
-	const bound = 150;
+	let bound = 150;
+
+	onMount(() => {
+		if (browser) {
+			bound = window.innerWidth > 768 ? 150 : 40;
+		}
+	});
 </script>
 
 {#if active}
