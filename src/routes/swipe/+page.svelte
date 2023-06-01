@@ -1,55 +1,57 @@
 <script lang="ts">
-	import { draggable } from '@neodrag/svelte';
-	import { expoOut } from 'svelte/easing';
-	import { tweened } from 'svelte/motion';
+	import { fade, scale } from 'svelte/transition';
+	import CardContainer from '$lib/components/card-container.svelte';
 
-	let position = tweened(
-		{
-			x: 0,
-			y: 0
-		},
-		{ easing: expoOut, duration: 600 }
-	);
-	function swipeAction(type: 'left' | 'right') {
-		if (type === 'left') {
-			console.log('left');
-		} else {
-			console.log('right');
-		}
-	}
-	let outOfBound = false;
-	const bound = 300;
+	let actions: { type: 'left' | 'right'; id: number | string }[] = [];
+	let reset = 0;
 </script>
 
-<main class="h-[90vh] mx-auto max-w-4xl grid place-content-center overflow-hidden">
-	<div
-		use:draggable={{
-			axis: 'x',
-			position: $position,
-			onDrag: (data) => {
-				if (data.offsetX > bound || data.offsetX < -bound) {
-					outOfBound = true;
-				} else {
-					outOfBound = false;
-				}
-				position.set({ x: data.offsetX, y: data.offsetY }, { duration: 0 });
-			},
-			onDragEnd: () => {
-				if ($position.x > bound) {
-					position.set({ x: 1200, y: 0 }, { duration: 1200 });
-					swipeAction('right');
-				} else if ($position.x < -bound) {
-					position.set({ x: -1200, y: 0 }, { duration: 1200 });
-					swipeAction('left');
-				} else {
-					$position = { x: 0, y: 0 };
-				}
-			}
+<main class="h-[90vh] grid place-content-center w-full overflow-hidden">
+	<div class="h-96">
+		{#key reset}
+			<div in:fade={{ duration: 150 }}>
+				<CardContainer
+					cards={[
+						{ id: 1, name: 's' },
+						{ id: 2, name: 's' },
+						{ id: 3, name: 's' },
+						{ id: 4, name: 's' }
+					]}
+					bind:actions
+				>
+					<div
+						slot="card"
+						let:outOfBound
+						class="cursor-grab convex grid place-content-center border {outOfBound
+							? ' border-primary-500 dark:border-primary-400'
+							: 'border-transparent'} transition ease-out rounded-2xl w-72 h-96"
+						let:card
+					>
+						Card {card.id}
+					</div>
+				</CardContainer>
+			</div>
+		{/key}
+	</div>
+
+	<button
+		class="my-8 btn btn-secondary w-[6.25rem] mx-auto"
+		on:click={() => {
+			actions = [];
+			reset++;
 		}}
-		class="h-96 w-72 rounded-2xl grid place-content-center text-semibold {outOfBound
-			? 'bg-primary-500 dark:bg-primary-400'
-			: 'bg-primary-200 dark:bg-primary-800'} transition-colors"
-	>
-		Swipeable element
+		>Reset
+	</button>
+	<div class="flex flex-wrap gap-2 justify-center">
+		{#each actions as action}
+			<span
+				in:scale|local
+				class="badge {action.type === 'left' ? 'badge-danger' : 'badge-success'}"
+			>
+				Card {action.id}
+			</span>
+		{:else}
+			<span class="badge badge-outline"> No actions </span>
+		{/each}
 	</div>
 </main>
