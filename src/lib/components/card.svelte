@@ -6,7 +6,7 @@
 	export let id: number | string = 0;
 
 	const dispatch = createEventDispatcher();
-	let position = spring({ x: 0, y: 0 }, { damping: 1, stiffness: 0.15 });
+	let position = spring({ x: 0, y: 0 }, { damping: 0.7, stiffness: 0.15 });
 	export let active = true;
 	export function swipeAction(type: 'left' | 'right') {
 		$position = {
@@ -17,7 +17,7 @@
 			type,
 			id
 		});
-		if (browser) position.stiffness = window.innerWidth > 768 ? 0.2 : 0.05;
+		if (browser) position.stiffness = window.innerWidth > 768 ? 0.2 : 0.04;
 		setTimeout(() => {
 			active = false;
 		}, 150);
