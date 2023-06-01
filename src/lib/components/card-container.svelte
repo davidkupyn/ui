@@ -10,7 +10,7 @@
 	interface $$Slots {
 		card: {
 			card: T;
-			outOfBound: boolean;
+			upcomingAction: 'left' | 'right' | undefined;
 		};
 	}
 	export let cards: T[] = [];
@@ -18,8 +18,8 @@
 
 <div class="container mx-auto grid place-content-center stack">
 	{#each cards as card}
-		<Card on:swipe={(e) => (actions = [...actions, e.detail])} id={card.id} let:outOfBound>
-			<slot name="card" {card} {outOfBound} />
+		<Card on:swipe={(e) => (actions = [...actions, e.detail])} id={card.id} let:upcomingAction>
+			<slot name="card" {card} {upcomingAction} />
 		</Card>
 	{/each}
 </div>

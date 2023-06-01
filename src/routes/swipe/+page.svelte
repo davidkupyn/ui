@@ -21,9 +21,11 @@
 				>
 					<div
 						slot="card"
-						let:outOfBound
-						class="cursor-grab convex grid place-content-center border {outOfBound
-							? ' border-primary-500 dark:border-primary-400'
+						let:upcomingAction
+						class="cursor-grab convex grid place-content-center border {upcomingAction === 'left'
+							? 'border-red-500 dark:border-red-400'
+							: upcomingAction === 'right'
+							? 'border-green-500 dark:border-green-400'
 							: 'border-transparent'} transition ease-out rounded-2xl w-72 h-96"
 						let:card
 					>

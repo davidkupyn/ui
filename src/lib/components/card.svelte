@@ -27,10 +27,10 @@
 		active = true;
 		$position = { x: 0, y: 0 };
 		position.stiffness = 0.15;
-		outOfBound = false;
+		upcomingAction = undefined;
 	}
 
-	let outOfBound = false;
+	let upcomingAction: 'left' | 'right' | undefined;
 	let bound = 150;
 
 	onMount(() => {
@@ -47,7 +47,8 @@
 			bounds: { top: 80, bottom: 80, left: -1200, right: -1200 },
 
 			onDrag: (data) => {
-				outOfBound = data.offsetX > bound || data.offsetX < -bound;
+				upcomingAction =
+					data.offsetX > bound ? 'right' : data.offsetX < -bound ? 'left' : undefined;
 				$position = { x: data.offsetX, y: data.offsetY };
 			},
 			onDragEnd: () => {
@@ -60,7 +61,7 @@
 		}}
 	>
 		<div style="transform: rotate({$position.x * 0.02}deg)">
-			<slot {outOfBound} />
+			<slot {upcomingAction} />
 		</div>
 	</div>
 {/if}
