@@ -1,20 +1,39 @@
+<script lang="ts" context="module">
+	type SwipeAction = (type: 'left' | 'right') => void;
+	export const swipeDispatcher = createDispatcher<SwipeAction>();
+</script>
+
 <script lang="ts">
 	import { browser } from '$app/environment';
+	import { createDispatcher } from '$lib/helpers/createDispatcher';
 	import { draggable } from '@neodrag/svelte';
 	import { createEventDispatcher, onMount } from 'svelte';
 	import { spring } from 'svelte/motion';
-	export let id: number | string = 0;
 
 	const dispatch = createEventDispatcher();
-	let position = spring({ x: 0, y: 0 }, { damping: 0.4, stiffness: 0.15 });
-	export let swiped = false;
-	let active = true;
 
-	export function swipeAction(type: 'left' | 'right') {
+	export let id: number | string = 0;
+	export let swiped = false;
+	export let rotation = 0;
+	export let isTop = false;
+
+	let active = true;
+	let dragging = false;
+	let upcomingAction: 'left' | 'right' | undefined;
+	let position = spring({ x: 0, y: 0 }, { damping: 0.4, stiffness: 0.15 });
+	let bound = browser ? (window.innerWidth > 768 ? 150 : 50) : 150;
+
+	swipeDispatcher.addListenerOnMount((type) => {
+		if (!isTop) return;
+		swipeAction(type);
+	});
+
+	function swipeAction(type: 'left' | 'right') {
 		dispatch('swipe', {
 			type,
 			id
 		});
+
 		$position = {
 			x: type === 'left' ? -800 : 800,
 			y: $position.y
@@ -26,26 +45,14 @@
 		}, 75);
 	}
 
-	export function resetSwipe() {
-		active = true;
-		swiped = false;
+	function resetSwipe() {
 		$position = { x: 0, y: 0 };
 		position.stiffness = 0.15;
 		upcomingAction = undefined;
 	}
-
-	let upcomingAction: 'left' | 'right' | undefined;
-	let bound = 150;
-
-	onMount(() => {
-		if (browser) {
-			bound = window.innerWidth > 768 ? 150 : 50;
-		}
-	});
-	export let rotation = 0;
-	let dragging = false;
 </script>
 
+{bound}
 {#if active}
 	<div
 		on:mousedown={() => {

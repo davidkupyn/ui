@@ -1,10 +1,7 @@
 <script lang="ts">
 	import Card from '$lib/components/card.svelte';
+	import { randRange } from '$lib/helpers/random';
 
-	export let actions: {
-		type: 'left' | 'right';
-		id: number | string;
-	}[] = [];
 	//TODO maybe a set?
 	type T = $$Generic<{ id: number | string }>;
 	interface $$Slots {
@@ -14,22 +11,23 @@
 		};
 	}
 	export let cards: T[] = [];
-	let swipeActions: ((action: 'left' | 'right') => void)[] = [];
+	export let actions: {
+		type: 'left' | 'right';
+		id: number | string;
+	}[] = [];
+
 	let swipedCards: boolean[] = [];
-	export const swipeNextCard = (action: 'left' | 'right') => {
-		swipeActions[swipedCards.findIndex((card) => !card)](action);
-	};
 </script>
 
 <div class="container mx-auto place-content-center stack drop-shadow-md">
-	{#each cards as card, idx}
+	{#each cards as card, idx (card.id)}
 		<Card
 			on:swipe={(e) => (actions = [...actions, e.detail])}
 			id={card.id}
 			bind:swiped={swipedCards[idx]}
-			bind:swipeAction={swipeActions[idx]}
 			let:upcomingAction
-			rotation={idx & 1 ? -2 : 2}
+			rotation={randRange(-6, 6)}
+			isTop={swipedCards.findIndex((v) => !v) === idx}
 		>
 			<slot name="card" {card} {upcomingAction} />
 		</Card>
