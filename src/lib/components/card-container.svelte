@@ -21,7 +21,7 @@ $: topIdx = swipedCards.findIndex((v) => !v);
 </script>
 
 <div class="container mx-auto place-content-center stack drop-shadow-md">
-	{#each cards.splice(topIdx, topIdx + 10) as card, idx (card.id)}
+	{#each cards as card, idx (card.id)}
 		<Card
 			on:swipe={(e) => (actions = [...actions, e.detail])}
 			id={card.id}
