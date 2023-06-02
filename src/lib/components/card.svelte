@@ -52,7 +52,6 @@
 	}
 </script>
 
-{bound}
 {#if active}
 	<div
 		on:mousedown={() => {
