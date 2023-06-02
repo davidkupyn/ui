@@ -17,17 +17,18 @@
 	}[] = [];
 
 	let swipedCards: boolean[] = [];
+$: topIdx = swipedCards.findIndex((v) => !v);
 </script>
 
 <div class="container mx-auto place-content-center stack drop-shadow-md">
-	{#each cards as card, idx (card.id)}
+	{#each cards.splice(topIdx, topIdx + 10) as card, idx (card.id)}
 		<Card
 			on:swipe={(e) => (actions = [...actions, e.detail])}
 			id={card.id}
 			bind:swiped={swipedCards[idx]}
 			let:upcomingAction
-			rotation={randRange(-6, 6)}
-			isTop={swipedCards.findIndex((v) => !v) === idx}
+			rotation={randRange(-3, 3)}
+			isTop={topIdx === idx}
 		>
 			<slot name="card" {card} {upcomingAction} />
 		</Card>
