@@ -7,24 +7,28 @@
 
 	const dispatch = createEventDispatcher();
 	let position = spring({ x: 0, y: 0 }, { damping: 0.4, stiffness: 0.15 });
-	export let active = true;
+	export let swiped = false;
+	let active = true;
+
 	export function swipeAction(type: 'left' | 'right') {
-		$position = {
-			x: type === 'left' ? -1200 : 1200,
-			y: $position.y
-		};
 		dispatch('swipe', {
 			type,
 			id
 		});
-		if (browser) position.stiffness = window.innerWidth > 768 ? 0.2 : 0.04;
+		$position = {
+			x: type === 'left' ? -800 : 800,
+			y: $position.y
+		};
+		if (browser && upcomingAction) position.stiffness = window.innerWidth > 768 ? 0.2 : 0.04;
+		swiped = true;
 		setTimeout(() => {
 			active = false;
-		}, 150);
+		}, 75);
 	}
 
 	export function resetSwipe() {
 		active = true;
+		swiped = false;
 		$position = { x: 0, y: 0 };
 		position.stiffness = 0.15;
 		upcomingAction = undefined;
@@ -39,10 +43,17 @@
 		}
 	});
 	export let rotation = 0;
+	let dragging = false;
 </script>
 
 {#if active}
 	<div
+		on:mousedown={() => {
+			dragging = true;
+		}}
+		on:mouseup={() => {
+			dragging = false;
+		}}
 		use:draggable={{
 			position: $position,
 			bounds: { top: 80, bottom: 80, left: -1200, right: -1200 },
@@ -61,7 +72,10 @@
 			}
 		}}
 	>
-		<div style="transform: rotate({$position.x * 0.02 + rotation}deg)">
+		<div
+			style="transform: rotate({$position.x * 0.02 + rotation}deg)"
+			class={dragging ? 'cursor-grabbing' : 'cursor-grab'}
+		>
 			<slot {upcomingAction} />
 		</div>
 	</div>

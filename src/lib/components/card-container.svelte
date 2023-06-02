@@ -5,7 +5,7 @@
 		type: 'left' | 'right';
 		id: number | string;
 	}[] = [];
-
+	//TODO maybe a set?
 	type T = $$Generic<{ id: number | string }>;
 	interface $$Slots {
 		card: {
@@ -14,6 +14,11 @@
 		};
 	}
 	export let cards: T[] = [];
+	let swipeActions: ((action: 'left' | 'right') => void)[] = [];
+	let swipedCards: boolean[] = [];
+	export const swipeNextCard = (action: 'left' | 'right') => {
+		swipeActions[swipedCards.findIndex((card) => !card)](action);
+	};
 </script>
 
 <div class="container mx-auto place-content-center stack drop-shadow-md">
@@ -21,6 +26,8 @@
 		<Card
 			on:swipe={(e) => (actions = [...actions, e.detail])}
 			id={card.id}
+			bind:swiped={swipedCards[idx]}
+			bind:swipeAction={swipeActions[idx]}
 			let:upcomingAction
 			rotation={idx & 1 ? -2 : 2}
 		>

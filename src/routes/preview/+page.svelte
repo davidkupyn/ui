@@ -74,7 +74,7 @@
 
 	const headers = Object.keys(items[0])
 		.map((key) => ({
-			key: key as keyof (typeof items)[0],
+			key,
 			value: key
 				.replace(/_/g, ' ')
 				.replace(/([A-Z])/g, ' $1')
