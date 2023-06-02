@@ -6,7 +6,7 @@
 	let actions: { type: 'left' | 'right'; id: number | string }[] = [];
 	let reset = 0;
 
-	const cards = Array.from({ length: 100 }, (_, i) => ({ id: i + 1, name: `Card ${i + 1}` }));
+	const cards = Array.from({ length: 16 }, (_, i) => ({ id: i + 1, name: `Card ${i + 1}` }));
 	let swipeNextCard: (action: 'left' | 'right') => void;
 </script>
 
