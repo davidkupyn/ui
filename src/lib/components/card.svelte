@@ -12,13 +12,16 @@
 
 	const dispatch = createEventDispatcher();
 
-	let position = spring({ x: 0, y: 0 }, { damping: 0.4, stiffness: 0.15 });
-	let active = true;
-
 	export let id: number | string = 0;
 	export let swiped = false;
 	export let rotation = 0;
 	export let isTop = false;
+
+	let active = true;
+	let dragging = false;
+	let upcomingAction: 'left' | 'right' | undefined;
+	let position = spring({ x: 0, y: 0 }, { damping: 0.4, stiffness: 0.15 });
+	let bound = browser ? (window.innerWidth > 768 ? 150 : 50) : 150;
 
 	swipeDispatcher.addListenerOnMount((type) => {
 		if (!isTop) return;
@@ -43,25 +46,13 @@
 	}
 
 	function resetSwipe() {
-		active = true;
-		swiped = false;
 		$position = { x: 0, y: 0 };
 		position.stiffness = 0.15;
 		upcomingAction = undefined;
 	}
-
-	let upcomingAction: 'left' | 'right' | undefined;
-	let bound = 150;
-
-	let dragging = false;
-
-	onMount(() => {
-		if (browser) {
-			bound = window.innerWidth > 768 ? 150 : 50;
-		}
-	});
 </script>
 
+{bound}
 {#if active}
 	<div
 		on:mousedown={() => {
