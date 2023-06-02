@@ -30,15 +30,12 @@
 		};
 	}
 	export let items: T[] = [];
-	export let headers: Header[] = items[0]
-		? Object.keys(items[0]).map((key) => ({
-				key: key as keyof T,
-				value: key
-					.replace(/_/g, ' ')
-					.replace(/([A-Z])/g, ' $1')
-					.replace(/^./, (str) => str.toUpperCase())
-		  }))
-		: [];
+	export let headers: {
+		key: string | keyof T;
+		value: string;
+	}[] = [];
+
+	let tablesColumns = headers as Header[];
 
 	export let selected: any[] = [];
 	export let disabledKeys: any[] = [];
@@ -50,9 +47,9 @@
 	export let filled = false;
 	export let lined = true;
 
-	let currentTableColumns = headers;
+	let currentTableColumns = tablesColumns;
 
-	const sortBy = queryParam('sort', ssp.string(headers[0].key as string), {
+	const sortBy = queryParam('sort', ssp.string(tablesColumns[0].key as string), {
 		pushHistory
 	});
 	const sortDir = queryParam('dir', ssp.string('asc'), {
@@ -164,7 +161,7 @@
 								use:tippy={{ content: 'Toggle columns' }}><Settings2 size={20} /></button
 							>
 							<ul slot="panel" class="w-48 divide-y divide-base-200 dark:divide-base-900">
-								{#each headers as column (column.key)}
+								{#each tablesColumns as column (column.key)}
 									<li class="px-1 py-1">
 										<label
 											for={column.key.toString()}
@@ -263,7 +260,7 @@
 				<tr
 					class="border-b p-4 border-subtle transition-colors hover:bg-base-300/50 dark:hover:bg-base-900/50"
 				>
-					<td colspan={headers.length + 2} class="text-center py-8 text-sm"> No results.</td>
+					<td colspan={tablesColumns.length + 2} class="text-center py-8 text-sm"> No results.</td>
 				</tr>
 			{/each}
 		</tbody>
