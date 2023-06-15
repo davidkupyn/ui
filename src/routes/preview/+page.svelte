@@ -20,7 +20,7 @@
 		Command,
 		CalendarIcon
 	} from 'lucide-svelte';
-	import Tabs from '$lib/ui/tabs.svelte';
+	import ToggleGroup from '$lib/ui/toggle-group.svelte';
 	import Pagination from '$lib/ui/pagination.svelte';
 	import Switch from '$lib/ui/switch.svelte';
 	import Table from '$lib/ui/table.svelte';
@@ -208,10 +208,10 @@
 			<button class="btn btn-link btn-secondary">Link Secondary</button>
 		</div>
 		<div class="w-full border border-subtle rounded-xl">
-			<Tabs {tabs} bind:currentTab={tab} />
+			<ToggleGroup {tabs} bind:value={tab} />
 		</div>
 		<div class="w-full rounded-xl bg-base-300/50 dark:bg-base-800/50">
-			<Tabs tabs={tabs2} bind:currentTab={tab2} transparent>
+			<ToggleGroup tabs={tabs2} bind:value={tab2} transparent>
 				<span slot="tab" let:tab class="flex items-center">
 					{#if tab.toLowerCase() === 'david'}
 						<Crown class="mr-1 {tab2 === tab ? 'text-amber-500' : ''}" size={16} />
@@ -222,7 +222,7 @@
 						{tab}
 					{/if}
 				</span>
-			</Tabs>
+			</ToggleGroup>
 		</div>
 		<div class="flex flex-wrap gap-4">
 			<span class="badge badge-capitalize"> Primary </span>

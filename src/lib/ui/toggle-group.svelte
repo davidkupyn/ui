@@ -1,30 +1,37 @@
 <script lang="ts">
 	import { crossfade } from 'svelte/transition';
 	import { cubicOut } from 'svelte/easing';
+	import { createToggleGroup } from '@melt-ui/svelte';
+	import { cn } from '$lib/helpers/style';
+
+	const { root, item, value } = createToggleGroup();
 
 	const [send, receive] = crossfade({});
+
 	export let tabs: string[];
 	export let disabled: string[] = [];
-	export let currentTab: string = '';
+	export { $value as value };
 	export let duration = 300;
 	export let transparent = false;
+
+	// binding changes of value in the parent component to the local value would be nice.
 </script>
 
-<div class="flex items-center w-full h-10 p-1 gap-2">
+<div class="flex items-center w-full h-10 p-1 gap-2" {...$root}>
 	{#each tabs as tab (tab)}
 		<button
 			class="group relative btn btn-text w-full h-full p-0 rounded-lg"
-			on:click={() => (currentTab = tab)}
-			aria-pressed={tab === currentTab}
+			{...$item(tab)}
 			disabled={disabled.includes(tab)}
 		>
-			{#if tab === currentTab}
+			{#if tab === $value}
 				<div
 					in:receive|local={{ key: 'tab', easing: cubicOut, duration }}
 					out:send|local={{ key: 'tab', easing: cubicOut, duration }}
-					class="w-full h-full rounded-lg overflow-hidden {transparent
-						? 'bg-base-50 dark:bg-base-950'
-						: 'bg-base-300/50 dark:bg-base-800/50'}"
+					class={cn(
+						'w-full h-full rounded-lg overflow-hidden bg-base-300/50 dark:bg-base-800/50',
+						transparent && 'bg-base-50 dark:bg-base-950'
+					)}
 				>
 					<slot name="background" />
 				</div>
