@@ -1,7 +1,7 @@
 lockfileVersion: 5.4
 
 specifiers:
-  '@melt-ui/svelte': ^0.8.2
+  '@melt-ui/svelte': ^0.8.3
   '@neodrag/svelte': ^2.0.3
   '@sveltejs/adapter-auto': ^2.1.0
   '@sveltejs/kit': ^1.20.1
@@ -34,7 +34,7 @@ specifiers:
   vite: ^4.3.9
 
 dependencies:
-  '@melt-ui/svelte': 0.8.2_svelte@3.59.1
+  '@melt-ui/svelte': 0.8.3_svelte@3.59.1
   '@neodrag/svelte': 2.0.3
   '@tailwindcss/forms': 0.5.3_tailwindcss@3.3.2
   lucide-svelte: 0.233.0_svelte@3.59.1
@@ -345,8 +345,8 @@ packages:
       '@jridgewell/resolve-uri': 3.1.0
       '@jridgewell/sourcemap-codec': 1.4.14
 
-  /@melt-ui/svelte/0.8.2_svelte@3.59.1:
-    resolution: {integrity: sha512-x5jbHiJ9cBZpSo81vU9vhE3ADtbqF///+oNSCBnDVxPPfKVodAeslHsivhLRSF/+owxPf761Emt7GZYqxtq8+A==}
+  /@melt-ui/svelte/0.8.3_svelte@3.59.1:
+    resolution: {integrity: sha512-i08XtonnYV0HnUd68wIb5JkqTPimZCjtAVaMBYxi2qMcDK3qkydLkET6AlYD3LYFG7s8s1VMfq3H5le91fnRPA==}
     peerDependencies:
       svelte: ^3.58.0
     dependencies:

@@ -4,51 +4,18 @@
 	import { queryParam, ssp } from 'sveltekit-search-params';
 	import { crossfade } from 'svelte/transition';
 	import { onMount } from 'svelte';
+	import { createPagination } from '@melt-ui/svelte';
 
 	let desirablePage: number;
 	export let totalPages: number;
 	export let animationDuration = 200;
 	export let pushHistory = false;
+
 	const currentPage = queryParam('page', ssp.number(), {
 		pushHistory
 	});
 
 	const [send, receive] = crossfade({});
-
-	function getPageList(currentPage = 1, totalPages: number, maxLength = 6) {
-		function range(start: number, end: number) {
-			return Array.from({ length: end - start + 1 }, (_, i) => start + i);
-		}
-		let sideWidth = maxLength < 9 ? 1 : 2;
-		let leftWidth = (2 - sideWidth * 2) >> 1;
-		let rightWidth = (2 - sideWidth * 2) >> 1;
-
-		if (totalPages <= maxLength) {
-			return range(1, totalPages);
-		}
-		if (currentPage <= maxLength - sideWidth - 1 - rightWidth) {
-			return range(1, maxLength - sideWidth - 1).concat(
-				0,
-				range(totalPages - sideWidth + 1, totalPages)
-			);
-		}
-
-		if (currentPage >= totalPages - sideWidth - 1 - rightWidth) {
-			return range(1, sideWidth).concat(
-				0,
-				range(totalPages - sideWidth - 1 - rightWidth - leftWidth, totalPages)
-			);
-		}
-
-		return range(1, sideWidth).concat(
-			0,
-			range(currentPage - leftWidth - 1, currentPage + rightWidth + 1),
-			0,
-			range(totalPages - sideWidth + 1, totalPages)
-		);
-	}
-
-	$: paginationPages = getPageList(Number($currentPage), totalPages);
 
 	onMount(() => {
 		$currentPage = 1;
@@ -56,32 +23,51 @@
 			$currentPage = 1;
 		}
 	});
+
+	let innerWidth = 0;
+
+	const { prevButton, nextButton, pages, pageTrigger, root, page, options } = createPagination({
+		count: totalPages,
+		perPage: 1
+	});
+
+	$: {
+		if (innerWidth < 640 && $options.siblingCount !== 0) {
+			$options.siblingCount = 0;
+		} else if (innerWidth >= 640 && $options.siblingCount !== 1) {
+			$options.siblingCount = 1;
+		}
+	}
+
+	$: $currentPage = $page;
 </script>
+
+<svelte:window bind:innerWidth />
 
 <nav
 	class="mx-auto flex gap-4 max-sm:flex-col items-center max-sm:gap-8"
-	aria-label="Pagination Navigation"
+	aria-label="pagination"
+	{...root}
 >
 	<div class="flex gap-1 items-center">
 		<button
-			on:click={() => ($currentPage &&= $currentPage - 1)}
-			aria-label="Go to page {$currentPage ? $currentPage - 1 : 'previous'}"
+			{...$prevButton}
 			class="btn btn-ghost p-2 h-fit"
 			disabled={!$currentPage || $currentPage === 1 || totalPages <= 1}
 		>
 			<ArrowLeft size={20} />
 		</button>
-		{#each paginationPages as page, index (index)}
-			{@const isCurrentPage = $currentPage === page}
-			{#if page}
+		{#each $pages as page, index (page.key)}
+			{#if page.type === 'page'}
+				{@const isCurrentPage = $currentPage === page.value}
 				<button
-					on:click={() => ($currentPage = page)}
-					aria-pressed={isCurrentPage}
-					aria-label="Go to page {page}"
+					{...$pageTrigger(page)}
 					class="relative h-9 w-9 p-0 btn btn-text"
+					data-first={index === 0}
+					data-last={index === $pages.length - 1}
 				>
 					<span class="absolute text-sm p-1 inset-0 grid place-items-center z-[2]">
-						{page}
+						{page.value}
 					</span>
 					{#if isCurrentPage}
 						<div
@@ -101,14 +87,14 @@
 		{/each}
 
 		<button
-			aria-label="Go to page {$currentPage ? $currentPage + 1 : 'next'}"
-			on:click={() => ($currentPage &&= $currentPage + 1)}
+			{...$nextButton}
 			class="btn btn-ghost p-2 h-fit"
 			disabled={($currentPage && $currentPage >= totalPages) || totalPages <= 1}
 		>
 			<ArrowRight size={20} />
 		</button>
 	</div>
+
 	{#if totalPages > 1}
 		<form class="flex gap-2 max-sm:gap-4" on:submit|preventDefault>
 			<input
@@ -123,10 +109,10 @@
 			<button
 				class="btn btn-ghost group hover:pr-3.5 transition-all"
 				on:click={() =>
-					($currentPage =
+					($page =
 						desirablePage && desirablePage > 0 && desirablePage <= totalPages
 							? desirablePage
-							: $currentPage)}
+							: $page)}
 			>
 				Go <ChevronRight class="group-hover:ml-0.5 transition-[margin] h-4 w-4" size={16} />
 			</button>

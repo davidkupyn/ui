@@ -158,8 +158,10 @@
 								let:trigger
 								{...trigger}
 								class="btn btn-ghost p-2 h-fit"
-								use:tippy={{ content: 'Toggle columns' }}><Settings2 size={20} /></button
+								use:tippy={{ content: 'Toggle columns' }}
 							>
+								<Settings2 size={20} />
+							</button>
 							<ul slot="content" class="w-48 divide-y divide-base-200 dark:divide-base-900">
 								{#each tablesColumns as column (column.key)}
 									<li class="px-1 py-1">
