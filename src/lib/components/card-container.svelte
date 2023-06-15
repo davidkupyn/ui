@@ -2,7 +2,6 @@
 	import Card from '$lib/components/card.svelte';
 	import { randRange } from '$lib/helpers/random';
 
-	//TODO maybe a set?
 	type T = $$Generic<{ id: number | string }>;
 	interface $$Slots {
 		card: {
@@ -17,17 +16,20 @@
 	}[] = [];
 
 	let swipedCards: boolean[] = [];
-$: topIdx = swipedCards.findIndex((v) => !v);
+	let topIdx = 0;
+	$: topIdx = swipedCards.findIndex((v) => !v);
+	let splicedCards = [...cards];
+	$: console.log(splicedCards.splice(topIdx, topIdx + 10));
 </script>
 
-<div class="container mx-auto place-content-center stack drop-shadow-md">
+<div class="stack">
 	{#each cards as card, idx (card.id)}
 		<Card
 			on:swipe={(e) => (actions = [...actions, e.detail])}
 			id={card.id}
 			bind:swiped={swipedCards[idx]}
 			let:upcomingAction
-			rotation={randRange(-3, 3)}
+			rotation={randRange(-4, 4)}
 			isTop={topIdx === idx}
 		>
 			<slot name="card" {card} {upcomingAction} />

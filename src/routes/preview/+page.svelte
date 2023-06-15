@@ -6,12 +6,10 @@
 		X,
 		Eye,
 		Edit,
-		Lock,
 		EyeOff,
 		Trash2,
 		AppWindow,
 		Hash,
-		Fingerprint,
 		DollarSign,
 		MoreHorizontal,
 		Crown,
@@ -41,10 +39,6 @@
 
 	let tab = tabs[0];
 	let tab2 = tabs2[0];
-	let selectValue: {
-		value: string;
-		label: string;
-	};
 	const PAGE_SIZE = 10;
 	const currentPage = queryParam('page', ssp.number());
 
@@ -62,11 +56,9 @@
 		: items.slice(0, PAGE_SIZE);
 
 	let selected: string[] = [];
-	let openDialog: () => void;
 	let closeDialog: () => void;
 	let openDeleteDialog: () => void;
 
-	let closeDeleteDialog: () => void;
 	let labelInside = false;
 	$: totalPages = Math.ceil(items.length / PAGE_SIZE) || 1;
 
@@ -155,11 +147,9 @@
 				Custom Select
 			</span>
 			<Select
-				nonEmpty
 				placeholder="Select an option"
 				label={labelInside ? 'Custom Select' : undefined}
 				items={['Witalina', 'David', 'Wiktor', 'Gustaw']}
-				bind:selected={selectValue}
 			/>
 		</label>
 		<label class="input-label w-full" for="select">
@@ -176,8 +166,9 @@
 			Normal Text Area
 			<textarea class="h-24 input" placeholder="Placeholder" />
 		</label>
-		<Popover position="bottom-center" unstyled>
-			<button slot="button" let:button use:button class="input-group w-full">
+
+		<Popover class="bg-transparent border-none">
+			<button slot="trigger" let:trigger {...trigger} class="input-group w-full">
 				<CalendarIcon size={16} class="icon-left" />
 				{#if calendarValue}
 					{new Date(calendarValue).toLocaleDateString('en', {
@@ -189,8 +180,9 @@
 					<span class="dark:text-base-500 text-base-400">Select Date</span>
 				{/if}
 			</button>
-			<Calendar bind:value={calendarValue} slot="panel" />
+			<Calendar bind:value={calendarValue} slot="content" />
 		</Popover>
+
 		<div class="flex flex-wrap gap-2 w-full">
 			<button class="btn">
 				<Stars size={16} />
@@ -279,24 +271,33 @@
 		/>
 	</div>
 
-	<button on:click={openDialog} class="btn btn-lg w-fit">
-		<AppWindow size={16} />
-		Open Dialog
-	</button>
+	<Dialog>
+		<button slot="trigger" let:trigger {...trigger()} class="btn btn-lg w-fit">
+			<AppWindow size={16} />
+			Open Dialog
+		</button>
+		<svelte:fragment slot="title">Edit Profile</svelte:fragment>
 
-	<Dialog bind:close={closeDialog} bind:open={openDialog}>
-		<form class="grid gap-4" slot="panel" method="">
-			<h2 class="font-semibold text-md">Edit Profile</h2>
-			<label class="input-label w-full sm:w-72">
+		<svelte:fragment slot="description">
+			Make changes to your profile here. Click save when you're done.
+		</svelte:fragment>
+
+		<form class="grid gap-4" slot="content" let:close>
+			<label class="input-label w-full">
 				Username
 				<input class="input" placeholder="Dave Kupyn" />
 			</label>
-			<label class="input-label w-full sm:w-72">
+			<label class="input-label w-full">
 				Email
 				<input class="input" placeholder="dkupyn@gmail.com" />
 			</label>
 			<div class="flex gap-4 mt-4 w-full">
-				<button type="button" on:click={() => closeDialog()} class="btn btn-outline w-full">
+				<button
+					{...close()}
+					type="button"
+					on:click={() => closeDialog()}
+					class="btn btn-outline w-full"
+				>
 					Cancel
 				</button>
 				<button type="submit" class="btn w-full"> Confirm </button>
@@ -315,23 +316,18 @@
 			>
 				<!-- interactive
 				on:rowclick={({ detail: row }) => console.log('clicked on', row.name)} -->
-				<Popover
-					slot="actions"
-					let:row
-					let:index
-					position={index >= paginatedItems.length - 2 ? 'top-end' : 'bottom-end'}
-				>
+				<Popover slot="actions" let:row placement="bottom-end">
 					<button
-						slot="button"
-						let:button
-						use:button
+						slot="trigger"
+						let:trigger
+						{...trigger}
 						class="btn btn-ghost p-2 h-fit"
 						use:tippy={{ content: 'View Actions' }}
 						on:click|stopPropagation
 					>
 						<MoreHorizontal size={20} />
 					</button>
-					<ul slot="panel" class="w-40 divide-y divide-base-200 dark:divide-base-900">
+					<ul slot="content" class="w-40 divide-y divide-base-200 dark:divide-base-900">
 						<li class="px-1 py-1">
 							<button
 								class="btn btn-ghost w-full justify-start"
@@ -416,15 +412,38 @@
 						{selected.length === 1 ? 'item' : 'items'}
 					</span>
 					<div class="flex gap-4">
-						<button
-							on:click={openDeleteDialog}
-							aria-label="Delete items"
-							class="btn btn-ghost p-1.5 h-fit rounded-md"
-							use:tippy={{ content: 'Delete items' }}
-						>
-							<Trash2 size={20} />
-						</button>
+						<Dialog class="sm:w-96 p-4" crossButton={false}>
+							<button
+								slot="trigger"
+								let:trigger
+								{...trigger()}
+								aria-label="Delete items"
+								class="btn btn-ghost p-1.5 h-fit rounded-md"
+								use:tippy={{ content: 'Delete items' }}
+							>
+								<Trash2 size={20} />
+							</button>
+							<svelte:fragment slot="title">Are you sure?</svelte:fragment>
 
+							<form slot="content" class="grid gap-4 w-full" let:close>
+								<div class="flex gap-4 mt-4 w-full">
+									<button type="button" {...close()} class="btn btn-outline w-full">
+										Cancel
+									</button>
+									<button
+										type="submit"
+										class="btn btn-danger w-full"
+										on:click={() => {
+											items = items.filter((item) => !selected.includes(item.id));
+											selected = [];
+											// closeDeleteDialog();
+										}}
+									>
+										Delete
+									</button>
+								</div>
+							</form>
+						</Dialog>
 						<button
 							aria-label="Discard selection"
 							class="btn btn-ghost p-1.5 h-fit rounded-md"
@@ -440,26 +459,3 @@
 		<Pagination {totalPages} />
 	</div>
 </main>
-
-<Dialog bind:close={closeDeleteDialog} bind:open={openDeleteDialog}>
-	<form class="grid gap-4 w-full sm:w-72" slot="panel">
-		<h2 class="font-semibold text-lg">Are you sure?</h2>
-
-		<div class="flex gap-4 mt-4 w-full">
-			<button type="button" on:click={() => closeDeleteDialog()} class="btn btn-outline w-full">
-				Cancel
-			</button>
-			<button
-				type="submit"
-				class="btn btn-danger w-full"
-				on:click={() => {
-					items = items.filter((item) => !selected.includes(item.id));
-					selected = [];
-					closeDeleteDialog();
-				}}
-			>
-				Delete
-			</button>
-		</div>
-	</form>
-</Dialog>

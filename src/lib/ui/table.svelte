@@ -152,15 +152,15 @@
 				{/each}
 				<th class="relative px-4 py-2 align-middle text-right">
 					{#if columnsEditable}
-						<Popover>
+						<Popover placement="bottom-end">
 							<button
-								slot="button"
-								let:button
-								use:button
+								slot="trigger"
+								let:trigger
+								{...trigger}
 								class="btn btn-ghost p-2 h-fit"
 								use:tippy={{ content: 'Toggle columns' }}><Settings2 size={20} /></button
 							>
-							<ul slot="panel" class="w-48 divide-y divide-base-200 dark:divide-base-900">
+							<ul slot="content" class="w-48 divide-y divide-base-200 dark:divide-base-900">
 								{#each tablesColumns as column (column.key)}
 									<li class="px-1 py-1">
 										<label

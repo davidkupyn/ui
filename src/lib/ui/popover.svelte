@@ -1,40 +1,52 @@
 <script lang="ts">
-	import { createPopover } from 'svelte-headlessui';
-	import { Transition } from 'svelte-transition';
-	export let label = 'Menu';
-	const popover = createPopover({ label });
-	const { button } = popover;
-	export let unstyled = false;
-	export let position: 'top-start' | 'top-end' | 'bottom-start' | 'bottom-end' | 'bottom-center' =
-		'bottom-end';
+	import { cn } from '$lib/helpers/style';
+	import { createPopover } from '@melt-ui/svelte';
+	import { scale } from 'svelte/transition';
 
-	const positionValues = {
-		'top-start': 'origin-bottom-left mb-2 bottom-10',
-		'top-end': 'origin-bottom-right mb-2 right-0 bottom-10',
-		'bottom-start': 'origin-top-left mt-2',
-		'bottom-end': 'origin-top-right mt-2 right-0',
-		'bottom-center': 'origin-top mt-2 left-1/2 -translate-x-1/2'
-	};
+	let className = '';
+	let placement:
+		| 'top'
+		| 'top-start'
+		| 'top-end'
+		| 'right'
+		| 'right-start'
+		| 'right-end'
+		| 'bottom'
+		| 'bottom-start'
+		| 'bottom-end'
+		| 'left'
+		| 'left-start'
+		| 'left-end'
+		| undefined = undefined;
+
+	const { trigger, content, open, close } = createPopover({
+		positioning: {
+			placement: placement
+		}
+	});
+	interface $$Slots {
+		trigger: {
+			trigger: typeof $trigger;
+		};
+		content: {
+			close: typeof $close;
+		};
+	}
+
+	export { open, close, trigger, placement, className as class };
 </script>
 
-<div class="relative">
-	<slot name="button" {button} />
-	<Transition
-		show={$popover.expanded}
-		enter="transition ease-out duration-100"
-		enterFrom="transform opacity-0 scale-50"
-		enterTo="transform opacity-100 scale-100"
-		leave="transition ease-in duration-100"
-		leaveFrom="transform opacity-100 scale-100"
-		leaveTo="transform opacity-0 scale-50"
+<slot name="trigger" trigger={$trigger} />
+
+{#if $open}
+	<div
+		{...$content}
+		transition:scale|local={{ duration: 150, start: 0.85 }}
+		class={cn(
+			'rounded-2xl border border-subtle bg-base-50 dark:bg-base-950 backdrop-blur-md shadow-lg absolute z-10 focus:outline-none',
+			className
+		)}
 	>
-		<div
-			use:popover.panel
-			class="{positionValues[position]} {unstyled
-				? ''
-				: 'divide-y divide-base-200 dark:divide-base-900 rounded-2xl border border-subtle bg-base-50 dark:bg-base-950 backdrop-blur-md shadow-lg ring-opacity-5'} absolute z-20 focus:outline-none"
-		>
-			<slot name="panel" />
-		</div>
-	</Transition>
-</div>
+		<slot name="content" close={$close} />
+	</div>
+{/if}

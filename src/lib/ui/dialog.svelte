@@ -1,46 +1,60 @@
 <script lang="ts">
-	import { createDialog } from 'svelte-headlessui';
-	import Transition from 'svelte-transition';
+	import { cn } from '$lib/helpers/style';
+	import { fade, scale } from 'svelte/transition';
+	import { createDialog } from '@melt-ui/svelte';
+	import { X } from 'lucide-svelte';
 
-	export let label = 'Dialog';
-	const dialog = createDialog({ label });
-	export const close = dialog.close;
-	export const open = dialog.open;
+	const { trigger, portal, overlay, content, title, description, close, open } = createDialog();
+
+	let className = '';
+	let crossButton = true;
+	export { open, close, trigger, crossButton, className as class };
+
+	interface $$Slots {
+		trigger: {
+			trigger: typeof $trigger;
+		};
+		title: {};
+		description: {};
+		content: {
+			close: typeof $close;
+		};
+	}
 </script>
 
-<div class="relative z-20">
-	<slot name="button" {open} />
-	<Transition show={$dialog.expanded}>
-		<Transition
-			enter="ease-out duration-200"
-			enterFrom="opacity-0"
-			enterTo="opacity-100"
-			leave="ease-in duration-200"
-			leaveFrom="opacity-100"
-			leaveTo="opacity-0"
-		>
-			<!-- svelte-ignore a11y-click-events-have-key-events -->
-			<div class="fixed inset-0 bg-base-950/60 dark:bg-base-950/70" on:click={dialog.close} />
-		</Transition>
+<slot name="trigger" trigger={$trigger} />
 
-		<div class="fixed inset-0 overflow-y-auto">
-			<div class="flex min-h-full items-center justify-center p-4">
-				<Transition
-					enter="ease-out duration-150"
-					enterFrom="opacity-0 scale-75"
-					enterTo="opacity-100 scale-100"
-					leave="ease-in duration-150"
-					leaveFrom="opacity-100 scale-100"
-					leaveTo="opacity-0 scale-75"
-				>
-					<div
-						use:dialog.modal
-						class="w-full sm:w-fit rounded-3xl border border-subtle bg-base-50 dark:bg-base-950 backdrop-blur-md p-6 mx-2"
-					>
-						<slot name="panel" />
-					</div>
-				</Transition>
-			</div>
+<div use:portal>
+	{#if $open}
+		<div
+			{...$overlay}
+			transition:fade|local={{ duration: 100 }}
+			class="fixed z-50 inset-0 bg-base-50/70 dark:bg-base-950/70"
+		/>
+		<div
+			transition:scale|local={{ duration: 150, start: 0.85 }}
+			class={cn(
+				'fixed z-50 left-1/2 top-1/2 max-h-[85vh] w-[90vw] max-w-md -translate-x-1/2 -translate-y-1/2 shadow-lg focus:outline-none rounded-3xl border border-subtle bg-base-50 dark:bg-base-950 backdrop-blur-md p-6 mx-2',
+				className
+			)}
+			{...$content}
+		>
+			{#if $$slots.title}
+				<h2 {...title} class="font-semibold mb-2 text-md sm:text-lg">
+					<slot name="title" />
+				</h2>
+			{/if}
+			{#if $$slots.description}
+				<p {...description} class="mb-4 text-sm text-base-600">
+					<slot name="description" />
+				</p>
+			{/if}
+			<slot name="content" close={$close} />
+			{#if crossButton}
+				<button {...$close()} class="absolute right-4 top-4 btn btn-sm btn-ghost p-0 h-8 w-8">
+					<X size={20} />
+				</button>
+			{/if}
 		</div>
-	</Transition>
+	{/if}
 </div>

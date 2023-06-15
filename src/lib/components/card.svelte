@@ -20,7 +20,7 @@
 	let active = true;
 	let dragging = false;
 	let upcomingAction: 'left' | 'right' | undefined;
-	let position = spring({ x: 0, y: 0 }, { damping: 0.4, stiffness: 0.15 });
+	let position = spring({ x: 0, y: 0 }, { damping: 0.6, stiffness: 0.15 });
 	let bound = browser ? (window.innerWidth > 768 ? 150 : 50) : 150;
 
 	swipeDispatcher.addListenerOnMount((type) => {
