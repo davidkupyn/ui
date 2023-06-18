@@ -171,7 +171,7 @@
 										>
 											{column.value}
 											<Switch
-												id={column.key}
+												id={column.key.toString()}
 												bind:group={currentTableColumns}
 												value={column}
 												defaultChecked

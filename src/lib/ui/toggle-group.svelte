@@ -3,7 +3,9 @@
 	import { cubicOut } from 'svelte/easing';
 	import { createToggleGroup } from '@melt-ui/svelte';
 	import { cn } from '$lib/helpers/style';
+	import { createEventDispatcher } from 'svelte';
 
+	const dispatch = createEventDispatcher();
 	const { root, item, value } = createToggleGroup();
 
 	const [send, receive] = crossfade({});
@@ -20,6 +22,7 @@
 <div class="flex items-center w-full h-10 p-1 gap-2" {...$root}>
 	{#each tabs as tab (tab)}
 		<button
+			on:click={() => dispatch('change', tab)}
 			class="group relative btn btn-text w-full h-full p-0 rounded-lg"
 			{...$item(tab)}
 			disabled={disabled.includes(tab)}

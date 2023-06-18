@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { cn } from '$lib/helpers/style';
 	import { createPopover } from '@melt-ui/svelte';
-	import { scale } from 'svelte/transition';
+	import { fly } from 'svelte/transition';
 
 	let className = '';
 	let placement:
@@ -24,6 +24,9 @@
 			placement: placement
 		}
 	});
+
+	export { open, close, trigger, placement, className as class };
+
 	interface $$Slots {
 		trigger: {
 			trigger: typeof $trigger;
@@ -32,8 +35,6 @@
 			close: typeof $close;
 		};
 	}
-
-	export { open, close, trigger, placement, className as class };
 </script>
 
 <slot name="trigger" trigger={$trigger} />
@@ -41,9 +42,9 @@
 {#if $open}
 	<div
 		{...$content}
-		transition:scale|local={{ duration: 150, start: 0.85 }}
+		transition:fly|local={{ duration: 150, y: -10 }}
 		class={cn(
-			'rounded-2xl border border-subtle bg-base-50 dark:bg-base-950 backdrop-blur-md shadow-lg absolute z-10 focus:outline-none',
+			'rounded-2xl border border-subtle bg-base-50 dark:bg-base-950 backdrop-blur-md shadow-lg z-10 focus:outline-none',
 			className
 		)}
 	>

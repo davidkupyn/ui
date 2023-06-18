@@ -24,7 +24,10 @@
 
 <slot name="trigger" trigger={$trigger} />
 
-<div use:portal>
+<div
+	use:portal
+	class={cn('z-50 flex items-start justify-center sm:items-center', $open && 'fixed inset-0')}
+>
 	{#if $open}
 		<div
 			{...$overlay}
@@ -34,7 +37,7 @@
 		<div
 			transition:scale|local={{ duration: 150, start: 0.85 }}
 			class={cn(
-				'fixed z-50 left-1/2 top-1/2 max-h-[85vh] w-[90vw] max-w-md -translate-x-1/2 -translate-y-1/2 shadow-lg focus:outline-none rounded-3xl border border-subtle bg-base-50 dark:bg-base-950 backdrop-blur-md p-6 mx-2',
+				'fixed z-50 grid w-full sm:max-w-lg shadow-lg focus:outline-none rounded-b-3xl sm:rounded-3xl border border-subtle bg-base-50 dark:bg-base-950 backdrop-blur-md p-6',
 				className
 			)}
 			{...$content}
@@ -50,6 +53,7 @@
 				</p>
 			{/if}
 			<slot name="content" close={$close} />
+
 			{#if crossButton}
 				<button {...$close()} class="absolute right-4 top-4 btn btn-sm btn-ghost p-0 h-8 w-8">
 					<X size={20} />

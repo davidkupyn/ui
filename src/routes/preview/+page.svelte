@@ -29,7 +29,7 @@
 	import Disclosure from '$lib/ui/disclosure.svelte';
 	import Dialog from '$lib/ui/dialog.svelte';
 	import Popover from '$lib/ui/popover.svelte';
-	import Select from '$lib/ui/select.svelte';
+	import { Select, Option } from '$lib/ui/select';
 	import Combobox from '$lib/ui/combobox.svelte';
 	import Calendar from '$lib/ui/calendar.svelte';
 
@@ -56,9 +56,8 @@
 		: items.slice(0, PAGE_SIZE);
 
 	let selected: string[] = [];
-	let closeDialog: () => void;
-	let openDeleteDialog: () => void;
-
+	let customSelectValue = 'david';
+	$: console.log(customSelectValue);
 	let labelInside = false;
 	$: totalPages = Math.ceil(items.length / PAGE_SIZE) || 1;
 
@@ -142,25 +141,33 @@
 				]}
 			/>
 		</label>
-		<label class="input-label w-full" for="select">
-			<span class="{labelInside ? 'opacity-0' : 'opacity-100'} transition-opacity duration-100">
+		<form class="grid gap-4 border rounded-3xl border-subtle p-4">
+			<h2 class="font-semibold mb-2 text-md sm:text-lg text-center">Form with Select component</h2>
+			<label class="input-label w-full" for="select1">
 				Custom Select
-			</span>
-			<Select
-				placeholder="Select an option"
-				label={labelInside ? 'Custom Select' : undefined}
-				items={['Witalina', 'David', 'Wiktor', 'Gustaw']}
-			/>
-		</label>
-		<label class="input-label w-full" for="select">
-			Native Select
-			<select class="input">
-				<option value="witalina">Witalina</option>
-				<option value="david">David</option>
-				<option value="wiktor">Wiktor</option>
-				<option value="gustaw">Gustaw</option>
-			</select>
-		</label>
+				<Select
+					placeholder="Select an option"
+					id="select1"
+					name="custom"
+					bind:value={customSelectValue}
+				>
+					<Option value="witalina">Witalina</Option>
+					<Option value="david">David</Option>
+					<Option value="wiktor">Wiktor</Option>
+					<Option value="gustaw">Gustaw</Option>
+				</Select>
+			</label>
+			<label class="input-label w-full" for="select2">
+				Native Select
+				<select class="input" id="select2" name="native">
+					<option value="witalina">Witalina</option>
+					<option value="david">David</option>
+					<option value="wiktor">Wiktor</option>
+					<option value="gustaw">Gustaw</option>
+				</select>
+			</label>
+			<button class="btn mt-3">Submit</button>
+		</form>
 
 		<label class="input-label w-full">
 			Normal Text Area
@@ -208,7 +215,7 @@
 			<button class="btn btn-link btn-secondary">Link Secondary</button>
 		</div>
 		<div class="w-full border border-subtle rounded-xl">
-			<ToggleGroup {tabs} bind:value={tab} />
+			<ToggleGroup {tabs} bind:value={tab} on:change={(e) => console.log(e.detail)} />
 		</div>
 		<div class="w-full rounded-xl bg-base-300/50 dark:bg-base-800/50">
 			<ToggleGroup tabs={tabs2} bind:value={tab2} transparent>
@@ -271,8 +278,8 @@
 		/>
 	</div>
 
-	<Dialog>
-		<button slot="trigger" let:trigger {...trigger()} class="btn btn-lg w-fit">
+	<Dialog class="sm:max-w-[425px]">
+		<button slot="trigger" let:trigger {...trigger()} class="btn w-fit">
 			<AppWindow size={16} />
 			Open Dialog
 		</button>
@@ -292,14 +299,7 @@
 				<input class="input" placeholder="dkupyn@gmail.com" />
 			</label>
 			<div class="flex gap-4 mt-4 w-full">
-				<button
-					{...close()}
-					type="button"
-					on:click={() => closeDialog()}
-					class="btn btn-outline w-full"
-				>
-					Cancel
-				</button>
+				<button {...close()} type="button" class="btn btn-outline w-full"> Cancel </button>
 				<button type="submit" class="btn w-full"> Confirm </button>
 			</div>
 		</form>

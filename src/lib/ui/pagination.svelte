@@ -10,7 +10,7 @@
 	export let totalPages: number;
 	export let animationDuration = 200;
 	export let pushHistory = false;
-
+	// export let mode: 'navigate' | 'select' = 'navigate'; TODO: implement pagination mode
 	const currentPage = queryParam('page', ssp.number(), {
 		pushHistory
 	});
@@ -18,7 +18,6 @@
 	const [send, receive] = crossfade({});
 
 	onMount(() => {
-		$currentPage = 1;
 		if ($currentPage && $currentPage > totalPages) {
 			$currentPage = 1;
 		}
@@ -40,6 +39,8 @@
 	}
 
 	$: $currentPage = $page;
+
+	export { $page as currentPage };
 </script>
 
 <svelte:window bind:innerWidth />
@@ -53,7 +54,7 @@
 		<button
 			{...$prevButton}
 			class="btn btn-ghost p-2 h-fit"
-			disabled={!$currentPage || $currentPage === 1 || totalPages <= 1}
+			disabled={!$page || $page === 1 || totalPages <= 1}
 		>
 			<ArrowLeft size={20} />
 		</button>
@@ -89,7 +90,7 @@
 		<button
 			{...$nextButton}
 			class="btn btn-ghost p-2 h-fit"
-			disabled={($currentPage && $currentPage >= totalPages) || totalPages <= 1}
+			disabled={($page && $page >= totalPages) || totalPages <= 1}
 		>
 			<ArrowRight size={20} />
 		</button>
