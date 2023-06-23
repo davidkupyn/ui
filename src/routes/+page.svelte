@@ -50,7 +50,7 @@
 			<a
 				in:fadeScale={{ duration: 400 }}
 				href="/preview"
-				class="btn btn-lg gap-2 hover:pr-5 group transition-all"
+				class="btn btn-lg gap-2 hover:pr-7 group transition-all"
 			>
 				Explore Components
 				<ArrowRight class="w-4 h-4 group-hover:ml-1 transition-[margin]" size={16} />

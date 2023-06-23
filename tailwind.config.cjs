@@ -33,7 +33,26 @@ const config = {
 				error: {
 					DEFAULT: 'var(--color-error)',
 					foreground: 'var(--color-error-foreground)',
-					focus: 'var(--color-error-focus)'
+					focus: 'var(--color-error-focus)',
+					...colors.red
+				},
+				warning: {
+					DEFAULT: 'var(--color-warning)',
+					foreground: 'var(--color-warning-foreground)',
+					focus: 'var(--color-warning-focus)',
+					...colors.amber
+				},
+				success: {
+					DEFAULT: 'var(--color-success)',
+					foreground: 'var(--color-success-foreground)',
+					focus: 'var(--color-success-focus)',
+					...colors.green
+				},
+				info: {
+					DEFAULT: 'var(--color-info)',
+					foreground: 'var(--color-info-foreground)',
+					focus: 'var(--color-info-focus)',
+					...colors.sky
 				}
 			},
 			boxShadow: {

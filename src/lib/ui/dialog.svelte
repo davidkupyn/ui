@@ -8,7 +8,8 @@
 
 	let className = '';
 	let crossButton = true;
-	export { open, close, trigger, crossButton, className as class };
+	let alert = false;
+	export { open, close, trigger, crossButton, className as class, alert };
 
 	interface $$Slots {
 		trigger: {
@@ -26,7 +27,11 @@
 
 <div
 	use:portal
-	class={cn('z-50 flex items-start justify-center sm:items-center', $open && 'fixed inset-0')}
+	class={cn(
+		'z-50 flex justify-center sm:items-center',
+		$open && 'fixed inset-0',
+		alert ? 'items-end' : 'items-start'
+	)}
 >
 	{#if $open}
 		<div
@@ -38,6 +43,7 @@
 			transition:scale={{ duration: 150, start: 0.85 }}
 			class={cn(
 				'fixed z-50 grid w-full sm:max-w-lg shadow-lg focus:outline-none rounded-b-3xl sm:rounded-3xl border border-muted bg-background backdrop-blur-md p-6',
+				alert && 'max-sm:pb-12',
 				className
 			)}
 			{...$content}
@@ -54,7 +60,7 @@
 			{/if}
 			<slot name="content" close={$close} />
 
-			{#if crossButton}
+			{#if crossButton && !alert}
 				<button {...$close()} class="absolute right-4 top-4 btn btn-sm btn-ghost p-0 h-8 w-8">
 					<X size={20} />
 				</button>

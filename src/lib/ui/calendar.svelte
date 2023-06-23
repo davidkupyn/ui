@@ -16,7 +16,7 @@
 	<div class="mb-4 flex items-center justify-between">
 		<button
 			type="button"
-			class="btn btn-ghost p-2 h-fit"
+			class="btn btn-ghost btn-icon"
 			{...$prevButtonAttrs}
 			aria-label="Previous month"
 		>
@@ -25,7 +25,7 @@
 		<div class="flex-grow text-center font-semibold">{$title}</div>
 		<button
 			type="button"
-			class="btn btn-ghost p-2 h-fit"
+			class="btn btn-ghost btn-icon"
 			{...$nextButtonAttrs}
 			aria-label="Next month"
 		>
@@ -42,7 +42,7 @@
 			{#each $days as day}
 				<div
 					role="gridcell"
-					class="cursor-pointer btn h-9 w-9 data-[selected=false]:text-muted-foreground data-[selected=false]:btn-ghost max-sm:text-base"
+					class="cursor-pointer btn btn-icon data-[selected=false]:text-muted-foreground data-[selected=false]:btn-ghost max-sm:text-base"
 					{...day.dayAttrs}
 					class:opacity-50={day.isOutOfMonth &&
 						!$selected.includes(day.date.toISOString().split('T')[0])}

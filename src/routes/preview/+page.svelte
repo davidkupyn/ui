@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { cn } from '$lib/helpers/style';
 	import { queryParam, ssp } from 'sveltekit-search-params';
 	import { tippy } from '$lib/actions/tippy';
 	import {
@@ -204,9 +205,11 @@
 				<Flower2 size={16} />
 				Secondary
 			</button>
-			<button class="btn btn-danger"> Danger </button>
+			<button class="btn btn-error"> Error </button>
+			<button class="btn btn-success"> Success </button>
+			<button class="btn btn-warning"> Warning </button>
 			<button class="btn btn-ghost"> Ghost </button>
-			<button class="btn btn-ghost p-2 h-fit" use:tippy={{ content: 'Ghost icon button' }}>
+			<button class="btn btn-ghost btn-icon" use:tippy={{ content: 'Ghost icon button' }}>
 				<Save size={20} />
 			</button>
 
@@ -238,7 +241,9 @@
 			<span class="badge badge-accent capitalize"> Accent </span>
 			<span class="badge badge-success capitalize"> Success </span>
 
-			<span class="badge badge-danger capitalize"> Danger </span>
+			<span class="badge badge-error capitalize"> Error </span>
+			<span class="badge badge-warning capitalize"> Warning </span>
+			<span class="badge badge-info capitalize"> Info </span>
 		</div>
 	</div>
 	<div class="w-full max-w-md grid gap-4 border border-muted rounded-3xl p-4">
@@ -322,7 +327,7 @@
 						slot="trigger"
 						let:trigger
 						{...trigger}
-						class="btn btn-ghost p-2 h-fit"
+						class="btn btn-ghost btn-icon"
 						use:tippy={{ content: 'View Actions' }}
 						on:click|stopPropagation
 					>
@@ -356,7 +361,7 @@
 				</Popover>
 				<svelte:fragment slot="row-header" let:header>
 					{#if header.key === 'createdAt'}
-						<span class="flex items-center gap-2">
+						<span class="flex items-center gap-2 w-28">
 							<CalendarIcon size={16} />
 							{header.value}
 						</span>
@@ -364,12 +369,12 @@
 						{header.value}
 					{/if}
 				</svelte:fragment>
-				<svelte:fragment slot="row" let:cell>
+				<svelte:fragment slot="row" let:cell let:record>
 					{#if cell.key === 'description'}
-						<Disclosure>
+						<Disclosure class="group-data-[selected=true]/row:hover:bg-accent-500/20 -my-1">
 							<Hash size={16} slot="icon" />
 							<svelte:fragment slot="summary">
-								<span class="max-w-lg truncate max-sm:text-base">
+								<span class="max-w-sm truncate max-sm:text-base">
 									{cell.value}
 								</span>
 							</svelte:fragment>
@@ -380,15 +385,13 @@
 							</svelte:fragment>
 						</Disclosure>
 					{:else if cell.key === 'price'}
-						<span class="flex items-center">
+						<span class="flex justify-end items-center w-16">
 							<DollarSign class="text-base-500" size={16} />
 							{cell.value}
 						</span>
 					{:else if cell.key === 'status'}
 						<span
-							class="badge capitalize {cell.value === 'inactive'
-								? 'badge-danger'
-								: 'badge-success'}"
+							class="badge capitalize {cell.value === 'inactive' ? 'badge-error' : 'badge-success'}"
 						>
 							{cell.value}
 						</span>
@@ -400,11 +403,11 @@
 				</svelte:fragment>
 			</Table>
 		</div>
-		<div class="sticky bottom-24 z-20 h-12 w-96 max-md:w-full mx-auto my-2">
+		<div class="sticky bottom-24 z-20 h-11 w-96 max-md:w-full mx-auto my-2">
 			{#if selected.length > 0}
 				<div
 					transition:fly={{ y: 150, duration: 200, easing: cubicOut }}
-					class="drop-shadow-sm z-20 flex h-full w-full items-center justify-between rounded-xl bg-base-50/80 border dark:bg-base-950 border-muted backdrop-blur-md shadow-xl dark:shadow-base-900/50 p-2 px-4"
+					class="drop-shadow-sm z-20 flex h-full w-full items-center justify-between rounded-xl bg-base-50/80 border dark:bg-base-950/80 border-muted backdrop-blur-md shadow-xl dark:shadow-base-950 p-2 px-4"
 				>
 					<span class="text-sm">
 						Selected
@@ -413,27 +416,30 @@
 						{selected.length === 1 ? 'item' : 'items'}
 					</span>
 					<div class="flex gap-4">
-						<Dialog class="sm:w-96" crossButton={false}>
+						<Dialog class="sm:w-96" alert>
 							<button
 								slot="trigger"
 								let:trigger
 								{...trigger()}
 								aria-label="Delete items"
-								class="btn btn-ghost p-1.5 h-fit rounded-md"
+								class="btn btn-ghost btn-icon rounded-lg"
 								use:tippy={{ content: 'Delete items' }}
 							>
 								<Trash2 size={20} />
 							</button>
 							<svelte:fragment slot="title">Are you sure?</svelte:fragment>
-
+							<svelte:fragment slot="description"
+								>This action cannot be undone. This will permanently delete
+								{selected.length === 1 ? 'this item' : 'these items'}.
+							</svelte:fragment>
 							<form slot="content" class="grid gap-4 w-full" let:close>
-								<div class="flex gap-4 mt-4 w-full">
+								<div class="flex gap-4 mt-4 w-full max-sm:flex-col-reverse">
 									<button type="button" {...close()} class="btn btn-outline w-full">
 										Cancel
 									</button>
 									<button
 										type="submit"
-										class="btn btn-danger w-full"
+										class="btn btn-error w-full"
 										on:click={() => {
 											items = items.filter((item) => !selected.includes(item.id));
 											selected = [];
@@ -447,7 +453,7 @@
 						</Dialog>
 						<button
 							aria-label="Discard selection"
-							class="btn btn-ghost p-1.5 h-fit rounded-md"
+							class="btn btn-ghost btn-icon rounded-lg"
 							use:tippy={{ content: 'Discard selection' }}
 							on:click={() => (selected = [])}
 						>

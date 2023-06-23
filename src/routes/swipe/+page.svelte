@@ -30,8 +30,8 @@
 						let:card
 						class={cn(
 							'convex grid place-content-center border border-transparent',
-							upcomingAction === 'left' && 'border-red-500 dark:border-red-600',
-							upcomingAction === 'right' && 'border-green-500 dark:border-green-600',
+							upcomingAction === 'left' && 'border-error-500 dark:border-error-600',
+							upcomingAction === 'right' && 'border-success-500 dark:border-success-600',
 							'transition ease-out rounded-2xl w-72 h-96'
 						)}
 					>
@@ -60,10 +60,7 @@
 	</button>
 	<div class="flex flex-wrap gap-2 max-w-xs">
 		{#each actions as action}
-			<span
-				in:scale
-				class="badge {action.type === 'left' ? 'badge-danger' : 'badge-success'}"
-			>
+			<span in:scale class="badge {action.type === 'left' ? 'badge-danger' : 'badge-success'}">
 				Card {action.id}
 			</span>
 		{:else}

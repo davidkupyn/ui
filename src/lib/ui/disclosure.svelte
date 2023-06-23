@@ -19,6 +19,8 @@
 	export let label = summary;
 	export let independent = false;
 	export const toggle = toggleDisclosure;
+	let className = '';
+	export { className as class };
 	const componentId = id++;
 	$: expanded = independent ? expanded : $expandedId === componentId;
 
@@ -36,7 +38,8 @@
 		on:click={toggleDisclosure}
 		class={cn(
 			'btn btn-ghost active:scale-100 w-full justify-between',
-			expanded && 'text-foreground'
+			expanded && 'text-foreground',
+			className
 		)}
 		aria-expanded={expanded}
 		aria-label={label}

@@ -53,7 +53,7 @@
 	<div class="flex gap-1 items-center">
 		<button
 			{...$prevButton}
-			class="btn btn-ghost p-2 h-fit"
+			class="btn btn-ghost btn-icon"
 			disabled={!$page || $page === 1 || totalPages <= 1}
 		>
 			<ArrowLeft size={20} />
@@ -63,7 +63,7 @@
 				{@const isCurrentPage = $currentPage === page.value}
 				<button
 					{...$pageTrigger(page)}
-					class="relative h-9 w-9 p-0 btn btn-text"
+					class="relative btn-icon p-0 btn btn-text"
 					data-first={index === 0}
 					data-last={index === $pages.length - 1}
 				>
@@ -89,7 +89,7 @@
 
 		<button
 			{...$nextButton}
-			class="btn btn-ghost p-2 h-fit"
+			class="btn btn-ghost btn-icon"
 			disabled={($page && $page >= totalPages) || totalPages <= 1}
 		>
 			<ArrowRight size={20} />

@@ -19,7 +19,7 @@
 	class:border-b={$page.url.pathname !== '/'}
 	class:hidden={$page.url.pathname === '/sidebar'}
 >
-	<div class="container mx-auto flex justify-between items-center px-6 py-3">
+	<div class="container mx-auto flex justify-between items-center px-6 h-12">
 		<h2 class="flex items-center gap-2">
 			<!-- <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
 				<path
@@ -38,7 +38,7 @@
 			<a
 				href="/"
 				aria-label="Go to home page"
-				class="text-lg font-bold -ml-2 p-2 focus-visible:ring-2 focus-visible:outline-none rounded-xl transition ring-offset-base-50 dark:ring-offset-base-950 focus-visible:ring-primary-600"
+				class="text-md font-bold -ml-2 p-2 focus-visible:ring-2 focus-visible:outline-none rounded-xl transition ring-offset-base-50 dark:ring-offset-base-950 focus-visible:ring-primary-600"
 			>
 				Essence
 			</a>
@@ -48,11 +48,11 @@
 				<li>
 					<a
 						aria-label="Github Link"
-						class="btn btn-text p-2 h-fit"
+						class="btn btn-text btn-icon"
 						href="https://github.com/davidkupyn/ui"
 						target="_blank"
 					>
-						<Github size={20} />
+						<Github size={16} />
 					</a>
 				</li>
 				<span class="bg-base-300 dark:bg-base-800 w-px h-6" />
@@ -60,7 +60,8 @@
 					<a
 						href="/preview"
 						class="btn btn-text"
-						aria-current={$page.url.pathname.startsWith('/preview')}>Components</a
+						data-state={$page.url.pathname.startsWith('/preview') ? 'active' : undefined}
+						>Components</a
 					>
 				</li>
 			</ul>

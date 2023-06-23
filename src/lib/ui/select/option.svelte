@@ -14,7 +14,7 @@
 <li
 	{...$option({ value })}
 	class={cn(
-		'relative transition focus:outline-none rounded-xl sm:text-sm truncate data-[selected]:font-medium text-muted-foreground cursor-pointer select-none py-2 pl-10 pr-2 data-[selected]:bg-accent-500/20 data-[selected]:text-foreground focus:bg-muted data-[selected]:focus:bg-accent-500/30 focus:text-foreground',
+		'relative transition focus:outline-none rounded-xl sm:text-sm truncate data-[selected]:font-medium text-muted-foreground cursor-pointer select-none h-9 flex items-center pl-10 pr-2 data-[selected]:bg-accent-500/20 data-[selected]:text-foreground focus:bg-muted data-[selected]:focus:bg-accent-500/30 focus:text-foreground',
 		className
 	)}
 >

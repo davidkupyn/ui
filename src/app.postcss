@@ -22,21 +22,21 @@
 		--color-muted: theme('colors.base.200');
 		--color-muted-foreground: theme('colors.base.500');
 
-		--color-success: theme('colors.green.500');
-		--color-success-focus: theme('colors.green.600');
-		--color-success-foreground: theme('colors.green.50');
+		--color-success: theme('colors.success.400');
+		--color-success-focus: theme('colors.success.500');
+		--color-success-foreground: theme('colors.success.950');
 
-		--color-warning: theme('colors.yellow.500');
-		--color-warning-focus: theme('colors.yellow.600');
-		--color-warning-foreground: theme('colors.yellow.950');
+		--color-warning: theme('colors.warning.500');
+		--color-warning-focus: theme('colors.warning.400');
+		--color-warning-foreground: theme('colors.warning.950');
 
-		--color-error: theme('colors.red.500');
-		--color-error-focus: theme('colors.red.600');
-		--color-error-foreground: theme('colors.red.50');
+		--color-error: theme('colors.error.500');
+		--color-error-focus: theme('colors.error.600');
+		--color-error-foreground: theme('colors.error.50');
 
-		--color-info: theme('colors.blue.500');
-		--color-info-focus: theme('colors.blue.600');
-		--color-info-foreground: theme('colors.blue.50');
+		--color-info: theme('colors.info.500');
+		--color-info-focus: theme('colors.info.600');
+		--color-info-foreground: theme('colors.info.50');
 
 		/* --color-neutral: theme('colors.gray.500');
 		--color-neutral-focus: theme('colors.gray.600'); */
@@ -59,21 +59,21 @@
 			--color-muted: theme('colors.base.900');
 			--color-muted-foreground: theme('colors.base.400');
 
-			--color-success: theme('colors.green.500');
-			--color-success-focus: theme('colors.green.600');
-			--color-success-foreground: theme('colors.green.50');
+			--color-success: theme('colors.success.500');
+			--color-success-focus: theme('colors.success.600');
+			--color-success-foreground: theme('colors.success.950');
 
-			--color-warning: theme('colors.yellow.500');
-			--color-warning-focus: theme('colors.yellow.600');
-			--color-warning-foreground: theme('colors.yellow.950');
+			--color-warning: theme('colors.warning.500');
+			--color-warning-focus: theme('colors.warning.400');
+			--color-warning-foreground: theme('colors.warning.950');
 
-			--color-error: theme('colors.red.500');
-			--color-error-focus: theme('colors.red.600');
-			--color-error-foreground: theme('colors.red.50');
+			--color-error: theme('colors.error.600');
+			--color-error-focus: theme('colors.error.700');
+			--color-error-foreground: theme('colors.error.50');
 
-			--color-info: theme('colors.blue.500');
-			--color-info-focus: theme('colors.blue.600');
-			--color-info-foreground: theme('colors.blue.50');
+			--color-info: theme('colors.info.500');
+			--color-info-focus: theme('colors.info.600');
+			--color-info-foreground: theme('colors.info.50');
 		}
 	}
 }
@@ -140,7 +140,7 @@
 
 @layer components {
 	.input {
-		@apply border-0 disabled:cursor-not-allowed disabled:ring-0 resize-none disabled:opacity-50 hover:ring-accent text-foreground focus:ring-accent placeholder:text-muted-foreground bg-base-200/80 dark:bg-base-900 h-10 rounded-xl px-4 text-base sm:text-sm outline-none ring-1 ring-transparent transition duration-200 data-[invalid]:hover:ring-error data-[invalid]:focus:ring-error data-[invalid]:ring-error invalid:hover:ring-error invalid:focus:ring-error invalid:ring-error;
+		@apply border-0 disabled:cursor-not-allowed disabled:ring-0 resize-none disabled:opacity-50 hover:ring-accent text-foreground focus:ring-accent placeholder:text-muted-foreground bg-base-200/80 dark:bg-base-900 h-9 rounded-xl px-4 text-base sm:text-sm outline-none ring-1 ring-transparent transition duration-200 data-[invalid]:hover:ring-error data-[invalid]:focus:ring-error data-[invalid]:ring-error invalid:hover:ring-error invalid:focus:ring-error invalid:ring-error;
 
 		> .icon-left {
 			@apply text-muted-foreground focus-visible:text-foreground hover:text-foreground aria-pressed:text-foreground transition-colors focus-visible:ring-offset-0 min-w-[1.5rem] -ml-1 mr-2;
@@ -168,17 +168,17 @@
 	}
 
 	.checkbox {
-		@apply h-5 w-5 cursor-pointer rounded-md focus:ring-transparent border-base-400 dark:border-base-700 bg-transparent text-accent outline-0 ring-accent-focus focus-visible:ring-muted-foreground focus-visible:ring-offset-background focus-visible:ring-offset-2 focus:ring-offset-0;
+		@apply h-5 w-5 sm:h-4 sm:w-4 shrink-0 cursor-pointer rounded focus:ring-transparent border-base-400 dark:border-base-700 bg-transparent text-accent outline-0 ring-accent-focus focus-visible:ring-muted-foreground checked:focus-visible:ring-accent focus-visible:ring-offset-background focus-visible:ring-offset-2 focus:ring-offset-0;
 	}
 	.badge {
 		@apply inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-muted-foreground focus:ring-offset-2 bg-primary text-background;
 
-		&-danger {
-			@apply bg-red-500/20 border border-red-500/20 text-error dark:text-red-400;
+		&-error {
+			@apply bg-error-500/20 border border-error-500/20 text-error dark:text-error-400;
 		}
 
 		&-success {
-			@apply bg-green-500/20 border border-green-500/20 text-green-700 dark:text-green-400;
+			@apply bg-success-500/20 border border-success-500/20 text-success-700 dark:text-success-400;
 		}
 
 		&-accent {
@@ -188,6 +188,12 @@
 		&-outline {
 			@apply bg-transparent border dark:border-base-800 border-base-300 text-base-600 dark:text-base-300 dark:hover:text-base-50 hover:text-base-900;
 		}
+		&-warning {
+			@apply bg-warning-500/20 border border-warning-500/20 text-warning-700 dark:text-warning-400;
+		}
+		&-info {
+			@apply bg-info-500/20 border border-info-500/20 text-info-700 dark:text-info-400;
+		}
 	}
 
 	.skeleton {
@@ -195,42 +201,58 @@
 	}
 
 	.btn {
-		@apply gap-2 inline-flex text-primary-foreground items-center justify-center rounded-xl active:scale-95 text-sm font-medium transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-focus focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none bg-primary hover:bg-primary-focus ring-offset-background h-10 py-2 px-4;
+		@apply gap-2 inline-flex text-primary-foreground items-center justify-center rounded-xl active:scale-95 text-sm font-medium transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-focus focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none bg-primary hover:bg-primary-focus ring-offset-background h-9 py-2 px-4;
 
 		&-outline {
-			@apply bg-transparent border border-border text-foreground hover:bg-border;
+			@apply bg-transparent border border-border text-foreground hover:bg-border focus-visible:ring-muted-foreground;
 		}
 
 		&-secondary {
-			@apply bg-base-200/90 hover:bg-muted dark:bg-base-900/70 dark:hover:bg-muted text-foreground;
+			@apply bg-base-200/90 hover:bg-muted dark:bg-base-900/70 dark:hover:bg-muted text-foreground focus-visible:ring-muted-foreground;
 		}
 
 		&-text {
-			@apply hover:bg-transparent bg-transparent text-muted-foreground focus-visible:text-foreground hover:text-foreground aria-pressed:text-foreground data-[selected]:text-foreground aria-[current=true]:text-foreground aria-pressed:underline underline-offset-4 aria-[current=true]:underline focus-visible:ring-offset-0;
+			@apply hover:bg-transparent bg-transparent text-muted-foreground focus-visible:text-foreground hover:text-foreground aria-pressed:text-foreground data-[selected]:text-foreground data-[state=active]:text-foreground aria-pressed:underline underline-offset-4 data-[state=active]:underline focus-visible:ring-offset-0 focus-visible:ring-muted-foreground;
 		}
 
 		&-ghost {
-			@apply bg-transparent hover:bg-base-200 dark:hover:bg-base-800/50 text-muted-foreground focus-visible:text-foreground dark:focus-visible:text-base-300 hover:text-foreground aria-pressed:text-foreground;
+			@apply bg-transparent hover:bg-base-200 dark:hover:bg-base-800/50 text-muted-foreground focus-visible:text-foreground dark:focus-visible:text-base-300 hover:text-foreground aria-pressed:text-foreground focus-visible:ring-muted-foreground;
 		}
 
-		&-danger {
-			@apply bg-error text-error-foreground hover:bg-red-600 dark:bg-red-600 dark:hover:bg-red-700;
+		&-error {
+			@apply bg-error text-error-foreground hover:bg-error-focus focus-visible:ring-error;
+		}
+
+		&-success {
+			@apply bg-success text-success-foreground hover:bg-success-focus focus-visible:ring-success;
+		}
+
+		&-accent {
+			@apply bg-accent text-accent-foreground hover:bg-accent-focus focus-visible:ring-accent;
+		}
+
+		&-warning {
+			@apply bg-warning text-warning-foreground hover:bg-warning-focus focus-visible:ring-warning;
 		}
 
 		&-link {
-			@apply hover:bg-transparent bg-transparent underline-offset-4 underline text-accent hover:text-accent-focus;
+			@apply hover:bg-transparent bg-transparent underline-offset-4 underline text-accent hover:text-accent-focus focus-visible:ring-accent;
 
 			&.btn-secondary {
-				@apply text-foreground;
+				@apply text-foreground focus-visible:ring-muted-foreground;
 			}
 		}
 
 		&-sm {
-			@apply h-9 px-3 rounded-lg;
+			@apply h-8 px-3 rounded-lg text-xs;
 		}
 
 		&-lg {
-			@apply h-11 px-6 text-base;
+			@apply h-10 px-8 text-base;
+		}
+
+		&-icon {
+			@apply h-9 w-9 p-0;
 		}
 	}
 
