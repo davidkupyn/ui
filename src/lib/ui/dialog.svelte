@@ -48,7 +48,7 @@
 				</h2>
 			{/if}
 			{#if $$slots.description}
-				<p {...description} class="mb-4 text-sm text-base-600">
+				<p {...description} class="mb-4 text-sm text-base-500">
 					<slot name="description" />
 				</p>
 			{/if}

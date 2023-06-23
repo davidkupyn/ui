@@ -14,9 +14,9 @@ const config = {
 					DEFAULT: 'var(--color-primary)',
 					focus: 'var(--color-primary-focus)',
 					foreground: 'var(--color-primary-foreground)',
-					...colors.indigo
+					...colors.zinc
 				},
-				base: colors.gray,
+				base: colors.zinc,
 				background: 'var(--color-background)',
 				foreground: 'var(--color-foreground)',
 				muted: {
