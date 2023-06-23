@@ -30,7 +30,7 @@
 	<div class="flex items-center gap-4">
 		{#if expanded}
 			<a
-				in:fly|local={{ x: -10, duration: 400 }}
+				in:fly={{ x: -10, duration: 400 }}
 				href="/"
 				on:click|stopPropagation
 				aria-label="Go to home page"
@@ -41,11 +41,11 @@
 		{/if}
 		<button on:click={() => (expanded = !expanded)} class="btn btn-ghost p-3 h-fit w-fit ml-auto">
 			{#if expanded}
-				<span in:scale|local>
+				<span in:scale>
 					<SidebarClose size={20} />
 				</span>
 			{:else}
-				<span in:scale|local>
+				<span in:scale>
 					<SidebarOpen size={20} />
 				</span>
 			{/if}
@@ -74,19 +74,19 @@
 							</span>
 
 							{#if expanded}
-								<span in:fly|local={{ x: -10, duration: 200 }} class="whitespace-nowrap"
+								<span in:fly={{ x: -10, duration: 200 }} class="whitespace-nowrap"
 									>{item.label}</span
 								>
 							{/if}
 						</span>
 						{#if currentLink}
 							<div
-								in:receive|local={{
+								in:receive={{
 									key: 'background',
 									easing: cubicOut,
 									duration: 200
 								}}
-								out:send|local={{ key: 'background', easing: cubicOut, duration: 200 }}
+								out:send={{ key: 'background', easing: cubicOut, duration: 200 }}
 								class="w-full h-full rounded-xl bg-base-300/50 dark:bg-base-800/50"
 							/>
 						{/if}

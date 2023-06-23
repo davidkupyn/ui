@@ -227,7 +227,7 @@ export const createCalendar = (config?: CalendarConfig) => {
 
 	let rootNode: HTMLElement | null = null;
 
-	const useCalendar: Action = (node) => {
+	const useCalendar: Action<HTMLElement, any> = (node) => {
 		rootNode = node;
 
 		const removeListeners = delegateEventListeners(node, {

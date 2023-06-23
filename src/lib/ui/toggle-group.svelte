@@ -29,8 +29,8 @@
 		>
 			{#if tab === $value}
 				<div
-					in:receive|local={{ key: 'tab', easing: cubicOut, duration }}
-					out:send|local={{ key: 'tab', easing: cubicOut, duration }}
+					in:receive={{ key: 'tab', easing: cubicOut, duration }}
+					out:send={{ key: 'tab', easing: cubicOut, duration }}
 					class={cn(
 						'w-full h-full rounded-lg overflow-hidden bg-muted',
 						transparent && 'bg-background'

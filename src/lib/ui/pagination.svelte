@@ -72,12 +72,12 @@
 					</span>
 					{#if isCurrentPage}
 						<div
-							in:receive|local={{
+							in:receive={{
 								key: 'background',
 								easing: cubicOut,
 								duration: animationDuration
 							}}
-							out:send|local={{ key: 'background', easing: cubicOut, duration: animationDuration }}
+							out:send={{ key: 'background', easing: cubicOut, duration: animationDuration }}
 							class="w-full h-full rounded-xl bg-base-300/50 dark:bg-base-800/50"
 						/>
 					{/if}

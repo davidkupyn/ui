@@ -31,11 +31,11 @@
 	{#if $open}
 		<div
 			{...$overlay}
-			transition:fade|local={{ duration: 100 }}
+			transition:fade={{ duration: 100 }}
 			class="fixed z-50 inset-0 bg-base-50/70 dark:bg-base-950/70"
 		/>
 		<div
-			transition:scale|local={{ duration: 150, start: 0.85 }}
+			transition:scale={{ duration: 150, start: 0.85 }}
 			class={cn(
 				'fixed z-50 grid w-full sm:max-w-lg shadow-lg focus:outline-none rounded-b-3xl sm:rounded-3xl border border-muted bg-background backdrop-blur-md p-6',
 				className

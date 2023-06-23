@@ -61,13 +61,13 @@
 	<div class="flex flex-wrap gap-2 max-w-xs">
 		{#each actions as action}
 			<span
-				in:scale|local
+				in:scale
 				class="badge {action.type === 'left' ? 'badge-danger' : 'badge-success'}"
 			>
 				Card {action.id}
 			</span>
 		{:else}
-			<span in:scale|local class="badge badge-outline mx-auto"> No actions </span>
+			<span in:scale class="badge badge-outline mx-auto"> No actions </span>
 		{/each}
 	</div>
 </main>
