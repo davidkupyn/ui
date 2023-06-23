@@ -34,7 +34,7 @@
 				href="/"
 				on:click|stopPropagation
 				aria-label="Go to home page"
-				class="text-center w-fit font-bold whitespace-nowrap p-2 focus-visible:ring-2 focus-visible:outline-none rounded-xl transition ring-offset-base-50 dark:ring-offset-base-950 focus-visible:ring-primary-600"
+				class="text-center w-fit font-bold whitespace-nowrap p-2 focus-visible:ring-2 focus-visible:outline-none rounded-xl transition ring-offset-background focus-visible:ring-muted-foreground"
 			>
 				Essence</a
 			>
@@ -87,7 +87,7 @@
 									duration: 200
 								}}
 								out:send={{ key: 'background', easing: cubicOut, duration: 200 }}
-								class="w-full h-full rounded-xl bg-base-300/50 dark:bg-base-800/50"
+								class="w-full h-full rounded-xl bg-muted"
 							/>
 						{/if}
 					</button>
