@@ -1,7 +1,7 @@
 import defaultTheme from 'tailwindcss/defaultTheme';
 import colors from 'tailwindcss/colors';
 import tailwindForms from '@tailwindcss/forms';
-
+import tailwindAnimate from 'tailwindcss-animate';
 const config = {
 	future: {
 		hoverOnlyWhenSupported: true
@@ -10,16 +10,31 @@ const config = {
 	theme: {
 		extend: {
 			colors: {
-				primary: colors.indigo,
-				base: colors.gray
+				primary: {
+					DEFAULT: 'var(--color-primary)',
+					focus: 'var(--color-primary-focus)',
+					foreground: 'var(--color-primary-foreground)',
+					...colors.indigo
+				},
+				base: colors.gray,
+				background: 'var(--color-background)',
+				foreground: 'var(--color-foreground)',
+				muted: {
+					DEFAULT: 'var(--color-muted)',
+					foreground: 'var(--color-muted-foreground)'
+				},
+				error: {
+					DEFAULT: 'var(--color-error)',
+					foreground: 'var(--color-error-foreground)',
+					focus: 'var(--color-error-focus)'
+				}
 			},
 			boxShadow: {
 				convex:
 					'0 -4px 4px -4px var(--tw-shadow-color) inset, 0 4px 4px -4px var(--tw-shadow-color) inset'
 			},
 			fontFamily: {
-				sans: ['Inter', ...defaultTheme.fontFamily.sans],
-				roobert: ['Roobert', ...defaultTheme.fontFamily.sans]
+				sans: ['Figtree', ...defaultTheme.fontFamily.sans]
 			},
 			animation: {
 				text: 'text 8s ease infinite'
@@ -39,7 +54,7 @@ const config = {
 		}
 	},
 
-	plugins: [tailwindForms]
+	plugins: [tailwindForms, tailwindAnimate]
 };
 
 module.exports = config;

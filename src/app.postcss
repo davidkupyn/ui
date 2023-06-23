@@ -1,8 +1,74 @@
-@import url('https://fonts.cdnfonts.com/css/roobert');
+@import url('https://fonts.googleapis.com/css2?family=Figtree:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,500;1,600;1,700;1,800&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+	:root {
+		--radius: 0.75rem;
+		--border: theme('colors.base.200');
+
+		--color-primary: theme('colors.primary.500');
+		--color-primary-focus: theme('colors.primary.600');
+		--color-primary-foreground: theme('colors.primary.50');
+
+		--color-background: theme('colors.base.50');
+		--color-foreground: theme('colors.base.900');
+
+		--color-muted: theme('colors.base.200');
+		--color-muted-foreground: theme('colors.base.800');
+
+		--color-success: theme('colors.green.500');
+		--color-success-focus: theme('colors.green.600');
+		--color-success-foreground: theme('colors.green.50');
+
+		--color-warning: theme('colors.yellow.500');
+		--color-warning-focus: theme('colors.yellow.600');
+		--color-warning-foreground: theme('colors.yellow.950');
+
+		--color-error: theme('colors.red.500');
+		--color-error-focus: theme('colors.red.600');
+		--color-error-foreground: theme('colors.red.50');
+
+		--color-info: theme('colors.blue.500');
+		--color-info-focus: theme('colors.blue.600');
+		--color-info-foreground: theme('colors.blue.50');
+
+		/* --color-neutral: theme('colors.gray.500');
+		--color-neutral-focus: theme('colors.gray.600'); */
+	}
+	@media (prefers-color-scheme: dark) {
+		:root {
+			--border: theme('colors.base.800');
+
+			--color-primary: theme('colors.primary.600');
+			--color-primary-focus: theme('colors.primary.700');
+			--color-primary-foreground: theme('colors.primary.50');
+
+			--color-background: theme('colors.base.950');
+			--color-foreground: theme('colors.base.50');
+
+			--color-muted: theme('colors.base.900');
+			--color-muted-foreground: theme('colors.base.50');
+
+			--color-success: theme('colors.green.500');
+			--color-success-focus: theme('colors.green.600');
+			--color-success-foreground: theme('colors.green.50');
+
+			--color-warning: theme('colors.yellow.500');
+			--color-warning-focus: theme('colors.yellow.600');
+			--color-warning-foreground: theme('colors.yellow.950');
+
+			--color-error: theme('colors.red.500');
+			--color-error-focus: theme('colors.red.600');
+			--color-error-foreground: theme('colors.red.50');
+
+			--color-info: theme('colors.blue.500');
+			--color-info-focus: theme('colors.blue.600');
+			--color-info-foreground: theme('colors.blue.50');
+		}
+	}
+}
 @layer base {
 	input[data-autocompleted] {
 		background-color: transparent !important;
@@ -20,24 +86,13 @@
 	kbd {
 		@apply pointer-events-none hidden py-1 select-none items-center gap-1 rounded-md bg-base-50 dark:bg-base-950 px-1.5 font-mono text-xs font-medium opacity-100 sm:flex;
 	}
-	:root {
-		--color-primary-50: theme('colors.primary.50');
-		--color-primary-100: theme('colors.primary.100');
-		--color-primary-200: theme('colors.primary.200');
-		--color-primary-300: theme('colors.primary.300');
-		--color-primary-400: theme('colors.primary.400');
-		--color-primary-500: theme('colors.primary.500');
-		--color-primary-600: theme('colors.primary.600');
-		--color-primary-700: theme('colors.primary.700');
-		--color-primary-800: theme('colors.primary.800');
-		--color-primary-900: theme('colors.primary.900');
-		--color-primary-950: theme('colors.primary.950');
-	}
+
 	body {
-		@apply bg-base-50 dark:bg-base-950 min-h-screen text-base-800 dark:text-base-50 selection:bg-primary-500/30 overscroll-y-none transition-colors font-roobert;
+		@apply bg-background min-h-screen text-foreground selection:bg-primary-500/30 overscroll-y-none transition-colors font-sans;
 		-webkit-tap-highlight-color: transparent;
 	}
 }
+
 .tippy-box {
 	@apply inline-block rounded-lg bg-base-50 border border-base-300 text-base-700 dark:bg-base-950 dark:border-base-800 px-2.5 py-1 text-sm font-medium dark:text-base-300 shadow-sm;
 }
@@ -79,7 +134,7 @@
 
 @layer components {
 	.input {
-		@apply border-0 disabled:cursor-not-allowed resize-none disabled:opacity-50 hover:ring-primary-500 text-base-800 dark:text-base-50 dark:hover:ring-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 dark:placeholder:text-base-500 placeholder:text-base-400 bg-base-200/80 dark:bg-base-900 h-10 rounded-xl px-4 text-base sm:text-sm outline-none ring-1 ring-transparent transition duration-200 data-[invalid]:hover:ring-red-500 data-[invalid]:focus:ring-red-500 data-[invalid]:ring-red-500 invalid:hover:ring-red-500 invalid:focus:ring-red-500 invalid:ring-red-500 dark:data-[invalid]:hover:ring-red-600 dark:data-[invalid]:focus:ring-red-600 dark:data-[invalid]:ring-red-600 dark:invalid:hover:ring-red-600 dark:invalid:focus:ring-red-600 dark:invalid:ring-red-600;
+		@apply border-0 disabled:cursor-not-allowed disabled:ring-0 resize-none disabled:opacity-50 hover:ring-primary-500 text-base-800 dark:text-base-50 dark:hover:ring-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 dark:placeholder:text-base-500 placeholder:text-base-400 bg-base-200/80 dark:bg-base-900 h-10 rounded-xl px-4 text-base sm:text-sm outline-none ring-1 ring-transparent transition duration-200 data-[invalid]:hover:ring-red-500 data-[invalid]:focus:ring-red-500 data-[invalid]:ring-red-500 invalid:hover:ring-red-500 invalid:focus:ring-red-500 invalid:ring-red-500 dark:data-[invalid]:hover:ring-red-600 dark:data-[invalid]:focus:ring-red-600 dark:data-[invalid]:ring-red-600 dark:invalid:hover:ring-red-600 dark:invalid:focus:ring-red-600 dark:invalid:ring-red-600;
 
 		> .icon-left {
 			@apply text-base-500 dark:text-base-400 focus-visible:text-base-700 dark:focus-visible:text-base-100 hover:text-base-800 dark:hover:text-base-100 aria-pressed:text-base-800 dark:aria-pressed:text-base-100 transition-colors focus-visible:ring-offset-0 min-w-[1.5rem] -ml-1 mr-2;
@@ -134,7 +189,7 @@
 	}
 
 	.btn {
-		@apply gap-2 inline-flex text-base-50 items-center justify-center rounded-xl active:scale-95 text-sm font-medium transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-600 focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none bg-primary-500 hover:bg-primary-600 dark:bg-primary-600 dark:hover:bg-primary-700 ring-offset-base-50 dark:ring-offset-base-950 h-10 py-2 px-4;
+		@apply gap-2 inline-flex text-primary-foreground items-center justify-center rounded-xl active:scale-95 text-sm font-medium transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-focus focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none bg-primary hover:bg-primary-focus ring-offset-background h-10 py-2 px-4;
 
 		&-outline {
 			@apply bg-transparent border dark:border-base-800 border-base-300 text-base-600 dark:text-base-300 dark:hover:text-base-50 hover:text-base-900 hover:bg-base-200/50 dark:hover:bg-base-800;
@@ -153,7 +208,7 @@
 		}
 
 		&-danger {
-			@apply bg-red-500 hover:bg-red-600 dark:bg-red-600 dark:hover:bg-red-700;
+			@apply bg-red-500 text-error-foreground hover:bg-red-600 dark:bg-red-600 dark:hover:bg-red-700;
 		}
 
 		&-link {

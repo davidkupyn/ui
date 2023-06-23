@@ -30,7 +30,7 @@
 		<div class="p-6 flex flex-col justify-center items-center h-full gap-8">
 			<h1
 				in:fadeScale={{ duration: 400 }}
-				class="text-center antialiased text-5xl md:text-7xl font-semibold bg-clip-text text-transparent bg-gradient-to-t selection:text-base-900 dark:selection:text-base-100 from-base-950 via-base-800 to-base-400 dark:from-base-400 dark:via-base-100 dark:to-base-50"
+				class="text-center antialiased text-5xl md:text-7xl font-semibold bg-clip-text text-transparent bg-gradient-to-t selection:text-base-900 dark:selection:text-base-100 from-base-950 via-base-800 to-base-400 dark:from-base-400 dark:via-base-100 tracking-tight dark:to-base-50"
 			>
 				Unleash Your <span
 					class="animate-text bg-clip-text text-transparent bg-gradient-to-r from-primary-400 via-primary-500 to-primary-600 dark:from-primary-300 dark:via-primary-500 dark:to-primary-800 selection:text-primary-500 dark:selection:text-primary-400"

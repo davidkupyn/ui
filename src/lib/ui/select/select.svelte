@@ -1,13 +1,16 @@
 <script lang="ts">
+	import { readonly } from 'svelte/store';
 	import { ChevronsUpDown } from 'lucide-svelte';
 	import { createSelect } from '@melt-ui/svelte';
-	import { setContext } from 'svelte';
+	import { createEventDispatcher, setContext } from 'svelte';
 	import { cn } from '$lib/helpers/style';
 
+	const dispatch = createEventDispatcher();
 	export let id = '';
 	export let name = '';
 	export let required = false;
 	export let placeholder = '';
+	export let disabled = false;
 	export let value: unknown = undefined;
 	let className = '';
 	export { className as class };
@@ -15,24 +18,26 @@
 	const { selected, selectedText, trigger, menu, option, isSelected, open, input } = createSelect({
 		selected: value,
 		name,
+		disabled,
 		required
 	});
 
 	$: selected.set(value);
 	selected.subscribe((v) => {
 		value = v;
+		dispatch('change', v);
 	});
-
 	setContext('select', { option, isSelected });
 </script>
 
 <button
 	{...$trigger}
+	{disabled}
 	type="button"
 	class={cn('input-group w-full justify-between', className)}
 	aria-label={placeholder}
 >
-	{#if $selected}
+	{#if $selectedText}
 		{$selectedText}
 	{:else}
 		<span class="text-base-400 dark:text-base-500">{placeholder}</span>

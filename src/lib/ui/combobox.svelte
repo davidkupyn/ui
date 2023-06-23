@@ -41,7 +41,7 @@
 	<fieldset class="input-group w-full justify-between">
 		<input {id} name={id} use:combobox.input value={$combobox.selected.label ?? ''} {placeholder} />
 		<button use:combobox.button class="icon-right" aria-pressed={$combobox.expanded}>
-			<ChevronsUpDown size={20} />
+			<ChevronsUpDown size={16} />
 		</button>
 	</fieldset>
 

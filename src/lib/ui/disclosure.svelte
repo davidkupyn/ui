@@ -33,7 +33,9 @@
 <div class="w-full">
 	<button
 		on:click={toggleDisclosure}
-		class="btn btn-ghost w-full justify-between {expanded ? 'text-base-950 dark:text-base-50' : ''}"
+		class="btn btn-ghost active:scale-100 w-full justify-between {expanded
+			? 'text-base-950 dark:text-base-50'
+			: ''}"
 		aria-expanded={expanded}
 		aria-label={label}
 	>

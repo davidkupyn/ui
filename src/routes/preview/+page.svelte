@@ -57,7 +57,6 @@
 
 	let selected: string[] = [];
 	let customSelectValue = 'david';
-	$: console.log(customSelectValue);
 	let labelInside = false;
 	$: totalPages = Math.ceil(items.length / PAGE_SIZE) || 1;
 
@@ -150,7 +149,9 @@
 					id="select1"
 					name="custom"
 					bind:value={customSelectValue}
+					on:change={(e) => console.log(e.detail)}
 				>
+					<li class="input-label py-2 pl-5 pr-5 font-semibold text-foreground">Class 3</li>
 					<Option value="witalina">Witalina</Option>
 					<Option value="david">David</Option>
 					<Option value="wiktor">Wiktor</Option>
@@ -159,7 +160,7 @@
 			</label>
 			<label class="input-label w-full" for="select2">
 				Native Select
-				<select class="input" id="select2" name="native">
+				<select class="input" id="select2" name="native" value="david">
 					<option value="witalina">Witalina</option>
 					<option value="david">David</option>
 					<option value="wiktor">Wiktor</option>
@@ -412,7 +413,7 @@
 						{selected.length === 1 ? 'item' : 'items'}
 					</span>
 					<div class="flex gap-4">
-						<Dialog class="sm:w-96 p-4" crossButton={false}>
+						<Dialog class="sm:w-96" crossButton={false}>
 							<button
 								slot="trigger"
 								let:trigger
