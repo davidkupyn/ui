@@ -6,8 +6,8 @@ settings:
 
 dependencies:
   '@melt-ui/svelte':
-    specifier: ^0.11.1
-    version: 0.11.1(svelte@4.0.0)
+    specifier: ^0.12.0
+    version: 0.12.0(svelte@4.0.0)
   '@neodrag/svelte':
     specifier: ^2.0.3
     version: 2.0.3
@@ -15,17 +15,17 @@ dependencies:
     specifier: ^0.5.3
     version: 0.5.3(tailwindcss@3.3.2)
   lucide-svelte:
-    specifier: ^0.246.0
-    version: 0.246.0(svelte@4.0.0)
+    specifier: ^0.252.0
+    version: 0.252.0(svelte@4.0.0)
   svelte-headlessui:
-    specifier: ^0.0.16
-    version: 0.0.16
+    specifier: ^0.0.17
+    version: 0.0.17(svelte@4.0.0)
   svelte-tippy:
     specifier: ^1.3.2
     version: 1.3.2
   svelte-transition:
-    specifier: ^0.0.9
-    version: 0.0.9(svelte@4.0.0)
+    specifier: ^0.0.10
+    version: 0.0.10(svelte@4.0.0)
   sveltekit-search-params:
     specifier: ^1.0.12
     version: 1.0.12(@sveltejs/kit@1.20.5)(svelte@4.0.0)
@@ -38,7 +38,7 @@ devDependencies:
     specifier: ^2.1.0
     version: 2.1.0(@sveltejs/kit@1.20.5)
   '@sveltejs/kit':
-    specifier: ^1.20.4
+    specifier: ^1.20.5
     version: 1.20.5(svelte@4.0.0)(vite@4.3.9)
   '@typescript-eslint/eslint-plugin':
     specifier: ^5.60.0
@@ -59,7 +59,7 @@ devDependencies:
     specifier: ^8.8.0
     version: 8.8.0(eslint@8.43.0)
   eslint-plugin-svelte:
-    specifier: ^2.30.0
+    specifier: ^2.31.0
     version: 2.31.0(eslint@8.43.0)(svelte@4.0.0)
   postcss:
     specifier: ^8.4.24
@@ -80,10 +80,10 @@ devDependencies:
     specifier: ^4.0.0
     version: 4.0.0
   svelte-check:
-    specifier: ^3.4.3
+    specifier: ^3.4.4
     version: 3.4.4(postcss-load-config@4.0.1)(postcss@8.4.24)(svelte@4.0.0)
   svelte-preprocess:
-    specifier: ^5.0.3
+    specifier: ^5.0.4
     version: 5.0.4(postcss-load-config@4.0.1)(postcss@8.4.24)(svelte@4.0.0)(typescript@5.1.3)
   tailwind-merge:
     specifier: ^1.13.2
@@ -98,7 +98,7 @@ devDependencies:
     specifier: ^2.5.3
     version: 2.5.3
   typescript:
-    specifier: ^5.0.0
+    specifier: ^5.1.3
     version: 5.1.3
   vite:
     specifier: ^4.3.9
@@ -388,14 +388,15 @@ packages:
       '@jridgewell/resolve-uri': 3.1.0
       '@jridgewell/sourcemap-codec': 1.4.14
 
-  /@melt-ui/svelte@0.11.1(svelte@4.0.0):
-    resolution: {integrity: sha512-oHTLRCT3cRh6EKGDFCwN8WQ6cZ7Xy1wsdbnhfdgkP0X8EOA6xZ97PShdoCGisT8moLYNHHr4y6DLvsWYdBmHAw==}
+  /@melt-ui/svelte@0.12.0(svelte@4.0.0):
+    resolution: {integrity: sha512-JNsr0mdmGslgJMlkLIuRYNNirGVubBLad60RfkR0p7yg2druEUEuXbIJt+znzsuWe2COXwHJwkD8bTX/mfFhNw==}
     peerDependencies:
       svelte: ^3.58.0
     dependencies:
       '@floating-ui/core': 1.3.1
       '@floating-ui/dom': 1.4.2
       focus-trap: 7.4.3
+      nanoid: 4.0.2
       svelte: 4.0.0
     dev: false
 
@@ -1408,8 +1409,8 @@ packages:
       yallist: 4.0.0
     dev: true
 
-  /lucide-svelte@0.246.0(svelte@4.0.0):
-    resolution: {integrity: sha512-wAuFC8WUeRUaVli9xvSkrngD3nHrBI4Z/8Pq+Tu/FS4OqeKOWiUk5kCX35g97vAbbzjrgDGAPgRxImBzB2rLHg==}
+  /lucide-svelte@0.252.0(svelte@4.0.0):
+    resolution: {integrity: sha512-Uhvgwty52/46x8H9qTgGy7DzUct4GTDsrNIARjEtjk99GnctEdDfVB0sk45J0J+fW25cH38RfontRcnFF4xoMA==}
     peerDependencies:
       svelte: ^3.49.0
     dependencies:
@@ -1496,6 +1497,12 @@ packages:
     resolution: {integrity: sha512-BGcqMMJuToF7i1rt+2PWSNVnWIkGCU78jBG3RxO/bZlnZPK2Cmi2QaffxGO/2RvWi9sL+FAiRiXMgsyxQ1DIDA==}
     engines: {node: ^10 || ^12 || ^13.7 || ^14 || >=15.0.1}
     hasBin: true
+
+  /nanoid@4.0.2:
+    resolution: {integrity: sha512-7ZtY5KTCNheRGfEFxnedV5zFiORN1+Y1N6zvPTnHQd8ENUvfaDBeuJDZb2bN/oXwXxu3qkTXDzy57W5vAmDTBw==}
+    engines: {node: ^14 || ^16 || >=18}
+    hasBin: true
+    dev: false
 
   /natural-compare-lite@1.4.0:
     resolution: {integrity: sha512-Tj+HTDSJJKaZnfiuw+iaF9skdPpTo2GtEly5JHnWV/hfv2Qj/9RKsGISQtLh2ox3l5EAGw487hnBee0sIJ6v2g==}
@@ -1945,10 +1952,12 @@ packages:
       svelte: 4.0.0
     dev: true
 
-  /svelte-headlessui@0.0.16:
-    resolution: {integrity: sha512-/jzHXYmVOEl/pI5PekjwwrZJTUBzasSYEAYt4gOxFf4g+3RoHv24NTlNryu+kkE5024ZZlyoeTwO3ClibMxIUA==}
+  /svelte-headlessui@0.0.17(svelte@4.0.0):
+    resolution: {integrity: sha512-i7QYXWaVvAGj07KZL33Kafc3bWnNrL1T1V01LBk2vm2/BC6h+vSqycuY+lSJ9uudIHreilXymhPCxDLNMRFL5g==}
     dependencies:
-      svelte-transition: 0.0.7
+      svelte-transition: 0.0.10(svelte@4.0.0)
+    transitivePeerDependencies:
+      - svelte
     dev: false
 
   /svelte-hmr@0.15.2(svelte@4.0.0):
@@ -2014,12 +2023,8 @@ packages:
       tippy.js: 6.3.7
     dev: false
 
-  /svelte-transition@0.0.7:
-    resolution: {integrity: sha512-YMbl+eIkzeYKBz6E/I8KI8RMezhqB38t2B/Mx8BotmtiN+5wnKath7CWDc+8U9zKGJ/iUYHmx4MwQjIzo05nVg==}
-    dev: false
-
-  /svelte-transition@0.0.9(svelte@4.0.0):
-    resolution: {integrity: sha512-yN/A8zqbguku1nYxDZM1zQUT6gGo5x1ntbuT1u9H+DVo2N/Ee8KjGTKuF6GseKylrrnF5RSuSLdrjGpPWP+LHA==}
+  /svelte-transition@0.0.10(svelte@4.0.0):
+    resolution: {integrity: sha512-BN8XDA7dKyuh+Lmdn3vxCzJd3M7L4BLdRziIAJew2AiBFMcrJJg8srEMYYoTCOLtYJ2Oqlv3+3/K5b6uHM8LSg==}
     peerDependencies:
       svelte: ^3.59.1 || ^4.0.0
     dependencies:

@@ -369,7 +369,7 @@
 						{header.value}
 					{/if}
 				</svelte:fragment>
-				<svelte:fragment slot="row" let:cell let:record>
+				<svelte:fragment slot="row" let:cell>
 					{#if cell.key === 'description'}
 						<Disclosure class="group-data-[selected=true]/row:hover:bg-accent-500/20 -my-1">
 							<Hash size={16} slot="icon" />
@@ -386,7 +386,7 @@
 						</Disclosure>
 					{:else if cell.key === 'price'}
 						<span class="flex justify-end items-center w-16">
-							<DollarSign class="text-base-500" size={16} />
+							<DollarSign class="text-muted-foreground" size={16} />
 							{cell.value}
 						</span>
 					{:else if cell.key === 'status'}

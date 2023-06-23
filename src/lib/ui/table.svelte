@@ -127,7 +127,7 @@
 									size={16}
 									class="absolute ease-out group-focus-visible/button:opacity-100 
 													{sortingByCurrentColumn && $sortDir === 'desc'
-										? 'top-2.5 opacity-100 group-hover:top-[0.3125rem] group-focus-visible/button:top-[0.3125rem]'
+										? 'top-2 opacity-100 group-hover:top-[0.3125rem] group-focus-visible/button:top-[0.3125rem]'
 										: 'top-[0.3125rem] opacity-0'} 
 														transition-all group-hover:opacity-100 
 														{sortingByCurrentColumn && $sortDir === 'desc'

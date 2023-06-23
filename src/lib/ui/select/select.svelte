@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { readonly } from 'svelte/store';
 	import { ChevronsUpDown } from 'lucide-svelte';
 	import { createSelect } from '@melt-ui/svelte';
 	import { createEventDispatcher, setContext } from 'svelte';
@@ -15,15 +14,24 @@
 	let className = '';
 	export { className as class };
 
-	const { selected, selectedText, trigger, menu, option, isSelected, open, input } = createSelect({
-		selected: value,
+	const {
+		value: valueStore,
+		label,
+		trigger,
+		menu,
+		option,
+		isSelected,
+		open,
+		input
+	} = createSelect({
+		value,
 		name,
 		disabled,
 		required
 	});
 
-	$: selected.set(value);
-	selected.subscribe((v) => {
+	$: valueStore.set(value);
+	valueStore.subscribe((v) => {
 		value = v;
 		dispatch('change', v);
 	});
@@ -37,8 +45,8 @@
 	class={cn('input-group w-full justify-between', className)}
 	aria-label={placeholder}
 >
-	{#if $selectedText}
-		{$selectedText}
+	{#if $label}
+		{$label}
 	{:else}
 		<span class="text-muted-foreground">{placeholder}</span>
 	{/if}
