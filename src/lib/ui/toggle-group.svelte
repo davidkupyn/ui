@@ -32,8 +32,8 @@
 					in:receive|local={{ key: 'tab', easing: cubicOut, duration }}
 					out:send|local={{ key: 'tab', easing: cubicOut, duration }}
 					class={cn(
-						'w-full h-full rounded-lg overflow-hidden bg-base-300/50 dark:bg-base-800/50',
-						transparent && 'bg-base-50 dark:bg-base-950'
+						'w-full h-full rounded-lg overflow-hidden bg-muted',
+						transparent && 'bg-background'
 					)}
 				>
 					<slot name="background" />

@@ -37,7 +37,7 @@
 		<div
 			transition:scale|local={{ duration: 150, start: 0.85 }}
 			class={cn(
-				'fixed z-50 grid w-full sm:max-w-lg shadow-lg focus:outline-none rounded-b-3xl sm:rounded-3xl border border-subtle bg-base-50 dark:bg-base-950 backdrop-blur-md p-6',
+				'fixed z-50 grid w-full sm:max-w-lg shadow-lg focus:outline-none rounded-b-3xl sm:rounded-3xl border border-muted bg-background backdrop-blur-md p-6',
 				className
 			)}
 			{...$content}
@@ -48,7 +48,7 @@
 				</h2>
 			{/if}
 			{#if $$slots.description}
-				<p {...description} class="mb-4 text-sm text-base-500">
+				<p {...description} class="mb-4 text-sm text-muted-foreground">
 					<slot name="description" />
 				</p>
 			{/if}

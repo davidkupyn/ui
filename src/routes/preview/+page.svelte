@@ -121,8 +121,8 @@
 			</fieldset>
 		</label>
 		<label for="switch" class="flex items-center gap-2 text-sm w-fit">
-			Label Inside
-			<Switch id="switch" bind:checked={labelInside} />
+			Toggle switch
+			<Switch id="switch" defaultChecked />
 		</label>
 		<label class="input-label w-full" for="autocomplete">
 			<span class="{labelInside ? 'opacity-0' : 'opacity-100'} transition-opacity duration-100">
@@ -140,7 +140,7 @@
 				]}
 			/>
 		</label>
-		<form class="grid gap-4 border rounded-3xl border-subtle p-4">
+		<form class="grid gap-4 border rounded-3xl border-muted p-4">
 			<h2 class="font-semibold mb-2 text-md sm:text-lg text-center">Form with Select component</h2>
 			<label class="input-label w-full" for="select1">
 				Custom Select
@@ -215,7 +215,7 @@
 
 			<button class="btn btn-link btn-secondary">Link Secondary</button>
 		</div>
-		<div class="w-full border border-subtle rounded-xl">
+		<div class="w-full border border-muted rounded-xl">
 			<ToggleGroup {tabs} bind:value={tab} on:change={(e) => console.log(e.detail)} />
 		</div>
 		<div class="w-full rounded-xl bg-base-300/50 dark:bg-base-800/50">
@@ -235,13 +235,13 @@
 		<div class="flex flex-wrap gap-4">
 			<span class="badge badge-capitalize"> Primary </span>
 			<span class="badge badge-outline capitalize"> Outline </span>
-			<span class="badge badge-secondary capitalize"> Secondary </span>
+			<span class="badge badge-accent capitalize"> Accent </span>
 			<span class="badge badge-success capitalize"> Success </span>
 
 			<span class="badge badge-danger capitalize"> Danger </span>
 		</div>
 	</div>
-	<div class="w-full max-w-md grid gap-4 border border-subtle rounded-3xl p-4">
+	<div class="w-full max-w-md grid gap-4 border border-muted rounded-3xl p-4">
 		<Disclosure>
 			<svelte:fragment slot="summary">Why copy/paste and not a package?</svelte:fragment>
 			<svelte:fragment slot="content">
@@ -306,7 +306,7 @@
 		</form>
 	</Dialog>
 	<div class="flex flex-col items-center w-full">
-		<div class="w-full border border-subtle rounded-3xl overflow-hidden">
+		<div class="w-full border border-muted rounded-3xl overflow-hidden">
 			<Table
 				items={paginatedItems}
 				{headers}
@@ -369,7 +369,7 @@
 						<Disclosure>
 							<Hash size={16} slot="icon" />
 							<svelte:fragment slot="summary">
-								<span class="max-w-sm truncate max-sm:text-base">
+								<span class="max-w-lg truncate max-sm:text-base">
 									{cell.value}
 								</span>
 							</svelte:fragment>
@@ -404,7 +404,7 @@
 			{#if selected.length > 0}
 				<div
 					transition:fly={{ y: 150, duration: 200, easing: cubicOut }}
-					class="drop-shadow-sm z-20 flex h-full w-full items-center justify-between rounded-xl bg-base-50/80 border dark:bg-base-950 border-subtle backdrop-blur-md shadow-xl dark:shadow-base-900/50 p-2 px-4"
+					class="drop-shadow-sm z-20 flex h-full w-full items-center justify-between rounded-xl bg-base-50/80 border dark:bg-base-950 border-muted backdrop-blur-md shadow-xl dark:shadow-base-900/50 p-2 px-4"
 				>
 					<span class="text-sm">
 						Selected

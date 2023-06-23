@@ -24,7 +24,7 @@
 </script>
 
 <div
-	class="h-screen border-r border-subtle transition-all px-[1.4rem] w-[5.5rem] flex flex-col gap-8 py-12 data-[expanded=true]:w-56"
+	class="h-screen border-r border-muted transition-all px-[1.4rem] w-[5.5rem] flex flex-col gap-8 py-12 data-[expanded=true]:w-56"
 	data-expanded={expanded}
 >
 	<div class="flex items-center gap-4">

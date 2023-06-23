@@ -81,13 +81,11 @@
 <div class="w-full overflow-auto">
 	<table class="w-full caption-bottom overflow-x-scroll">
 		<thead
-			class="{filled
-				? 'bg-base-200 dark:bg-base-900 rounded-xl'
-				: 'hover:bg-base-200/50 dark:hover:bg-base-900/50'} {lined
+			class="{filled ? 'bg-muted rounded-xl' : 'hover:muted'} {lined
 				? '[&_tr]:border-b'
 				: ''} transition-colors"
 		>
-			<tr class="border-subtle">
+			<tr class="border-muted">
 				{#if selectable}
 					<th class="px-4 py-2 align-middle text-left">
 						<input
@@ -112,9 +110,7 @@
 						}}
 					>
 						<span class="flex items-center gap-2">
-							<span
-								class="uppercase btn btn-text p-0 font-semibold group-hover:text-base-800 dark:group-hover:text-base-100"
-							>
+							<span class="uppercase btn btn-text p-0 font-semibold group-hover:text-foreground">
 								<slot name="row-header" header={column}>
 									{column.value}
 								</slot>
@@ -132,8 +128,8 @@
 										: 'top-0.5 opacity-0'} 
 														transition-all group-hover:opacity-100 
 														{sortingByCurrentColumn && $sortDir === 'desc'
-										? 'group-hover:text-base-950 group-focus-visible/button:text-base-950 dark:group-hover:text-base-50 dark:group-focus-visible/button:text-base-50'
-										: 'group-hover:text-base-400 group-focus-visible/button:text-base-400 dark:group-hover:text-base-500 dark:group-focus-visible/button:text-base-500'}"
+										? 'group-hover:text-foreground group-focus-visible/button:text-foreground'
+										: 'group-hover:text-muted-foreground group-focus-visible/button:text-muted-foreground'}"
 								/>
 								<ChevronDown
 									size={20}
@@ -143,8 +139,8 @@
 										: 'bottom-0.5 opacity-0'} 
 														transition-all group-hover:opacity-100 
 														{sortingByCurrentColumn && $sortDir === 'asc'
-										? 'group-hover:text-base-950 group-focus-visible/button:text-base-950 dark:group-hover:text-base-50 dark:group-focus-visible/button:text-base-50'
-										: 'group-hover:text-base-400 group-focus-visible/button:text-base-400 dark:group-hover:text-base-500 dark:group-focus-visible/button:text-base-500'}"
+										? 'group-hover:text-foreground group-focus-visible/button:text-foreground'
+										: 'group-hover:text-muted-foreground group-focus-visible/button:text-muted-foreground'}"
 								/>
 							</button>
 						</span>
@@ -162,12 +158,12 @@
 							>
 								<Settings2 size={20} />
 							</button>
-							<ul slot="content" class="w-48 divide-y divide-base-200 dark:divide-base-900">
+							<ul slot="content" class="w-48 divide-y divide-muted">
 								{#each tablesColumns as column (column.key)}
 									<li class="px-1 py-1">
 										<label
 											for={column.key.toString()}
-											class="flex w-full text-left items-center justify-between rounded-xl p-2 text-sm font-medium capitalize transition hover:bg-base-200 dark:hover:bg-base-800/50 text-base-500 dark:text-base-400 focus-within:bg-base-200 dark:focus-within:bg-base-800/50 hover:text-base-800 dark:hover:text-base-100 focus-within:text-base-800 dark:focus-within:text-base-100"
+											class="flex w-full text-left items-center justify-between rounded-xl p-2 text-sm font-medium capitalize transition hover:bg-muted text-muted-foreground focus-within:bg-muted hover:text-foreground focus-within:text-foreground"
 										>
 											{column.value}
 											<Switch
@@ -215,7 +211,7 @@
 					}}
 					aria-disabled={disabledKeys.includes(item.id)}
 					animate:flip={{ duration: 200, easing: cubicOut }}
-					class="group aria-disabled:opacity-40 aria-disabled:pointer-events-none border-subtle transition-colors data-[state=selected]:bg-primary-500/10 data-[state=selected]:hover:bg-primary-600/10 hover:bg-base-200/50 dark:hover:bg-base-900/50 focus:bg-base-200/80 dark:focus:bg-base-900/80 outline-none data-[state=selected]:focus:bg-primary-600/20"
+					class="group aria-disabled:opacity-40 aria-disabled:pointer-events-none border-muted transition-colors data-[state=selected]:bg-accent-500/10 data-[state=selected]:hover:bg-accent-600/10 hover:bg-base-200/50 dark:hover:bg-base-900/50 focus:bg-base-200/80 dark:focus:bg-base-900/80 outline-none data-[state=selected]:focus:bg-accent-600/20"
 					data-state={selected.includes(item.id) ? 'selected' : null}
 				>
 					{#if selectable}
@@ -237,7 +233,7 @@
 					{#each currentTableColumns as column, columnIdx (column)}
 						<td
 							animate:flip={{ duration: 200, easing: cubicOut }}
-							class="px-4 py-4 tabular-nums max-w-[500px] truncate"
+							class="px-4 py-4 tabular-nums max-w-lg truncate"
 							class:pl-0={columnIdx === 0 && selectable}
 							class:pr-0={columnIdx === currentTableColumns.length - 1 && !$$slots.actions}
 						>
@@ -259,9 +255,7 @@
 					</td>
 				</tr>
 			{:else}
-				<tr
-					class="border-b p-4 border-subtle transition-colors hover:bg-base-300/50 dark:hover:bg-base-900/50"
-				>
+				<tr class="border-b p-4 border-muted transition-colors hover:bg-muted">
 					<td colspan={tablesColumns.length + 2} class="text-center py-8 text-sm"> No results.</td>
 				</tr>
 			{/each}

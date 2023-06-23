@@ -15,7 +15,7 @@
 <header
 	class="{$page.url.pathname === '/'
 		? 'fixed'
-		: 'sticky top-0 dark:bg-base-950/50 bg-base-50/50 backdrop-blur-md'} w-full z-20 border-subtle"
+		: 'sticky top-0 dark:bg-base-950/50 bg-base-50/50 backdrop-blur-md'} w-full z-20 border-muted"
 	class:border-b={$page.url.pathname !== '/'}
 	class:hidden={$page.url.pathname === '/sidebar'}
 >
@@ -70,7 +70,7 @@
 <slot />
 
 <footer
-	class="bottom-0 border-subtle w-full z-20"
+	class="bottom-0 border-muted w-full z-20"
 	class:border-t={$page.url.pathname !== '/'}
 	class:hidden={$page.url.pathname === '/sidebar'}
 	class:fixed={$page.url.pathname === '/'}

@@ -16,9 +16,16 @@ const config = {
 					foreground: 'var(--color-primary-foreground)',
 					...colors.zinc
 				},
+				accent: {
+					DEFAULT: 'var(--color-accent)',
+					focus: 'var(--color-accent-focus)',
+					foreground: 'var(--color-accent-foreground)',
+					...colors.rose
+				},
 				base: colors.zinc,
 				background: 'var(--color-background)',
 				foreground: 'var(--color-foreground)',
+				border: 'var(--border)',
 				muted: {
 					DEFAULT: 'var(--color-muted)',
 					foreground: 'var(--color-muted-foreground)'

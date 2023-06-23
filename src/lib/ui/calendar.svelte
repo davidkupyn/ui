@@ -11,7 +11,7 @@
 
 <div
 	use:calendar
-	class="flex w-80 flex-col overflow-clip rounded-3xl border border-subtle bg-base-50 dark:bg-base-950 p-4 backdrop-blur-md shadow-lg ring-opacity-5 focus:outline-none"
+	class="flex w-80 flex-col overflow-clip rounded-3xl border border-muted bg-background p-4 backdrop-blur-md shadow-lg ring-opacity-5 focus:outline-none"
 >
 	<div class="mb-4 flex items-center justify-between">
 		<button
@@ -42,7 +42,7 @@
 			{#each $days as day}
 				<div
 					role="gridcell"
-					class="cursor-pointer btn h-9 w-9 data-[selected=false]:text-base-600 data-[selected=false]:dark:text-base-300 data-[selected=false]:btn-ghost max-sm:text-base"
+					class="cursor-pointer btn h-9 w-9 data-[selected=false]:text-muted-foreground data-[selected=false]:btn-ghost max-sm:text-base"
 					{...day.dayAttrs}
 					class:opacity-50={day.isOutOfMonth &&
 						!$selected.includes(day.date.toISOString().split('T')[0])}

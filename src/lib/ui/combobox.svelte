@@ -57,11 +57,11 @@
 	>
 		<ul
 			use:combobox.items
-			class="absolute w-full z-10 mt-1.5 p-1 space-y-1 origin-top rounded-2xl border border-subtle bg-base-50 dark:bg-base-950 drop-shadow-lg focus:outline-none overflow-hidden"
+			class="absolute w-full z-10 mt-1.5 p-1 space-y-1 origin-top rounded-2xl border border-muted bg-background drop-shadow-lg focus:outline-none overflow-hidden"
 		>
 			{#if label}
 				<li
-					class="text-base-950 dark:text-base-50 max-h-60 w-full overflow-auto sm:text-sm font-medium py-2 pl-10 pr-2"
+					class="text-foreground max-h-60 w-full overflow-auto sm:text-sm font-medium py-2 pl-10 pr-2"
 				>
 					{label}
 				</li>
@@ -72,15 +72,15 @@
 				<li
 					class="relative transition rounded-xl text-base-500 dark:text-base-400 cursor-default select-none py-2 pl-10 pr-2 {active &&
 					!selected
-						? 'bg-base-200 dark:bg-base-800/50 text-base-950 dark:text-base-50'
-						: ''} {selected ? 'bg-primary-600/20 text-primary-900 dark:text-primary-50' : ''}"
+						? 'bg-muted text-foreground'
+						: ''} {selected ? 'bg-accent-600/20 text-foreground' : ''}"
 					use:combobox.item={{ value: item }}
 				>
 					<span class="block sm:text-sm truncate {selected ? 'font-medium' : 'font-normal'}">
 						{item.label}
 					</span>
 					{#if selected}
-						<span class="absolute inset-y-0 left-0 flex items-center pl-3 text-primary-600">
+						<span class="absolute inset-y-0 left-0 flex items-center pl-3 text-accent-foreground">
 							<Check class="h-5 w-5" />
 						</span>
 					{/if}
