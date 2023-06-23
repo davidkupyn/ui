@@ -23,6 +23,7 @@
 				key: keyof T;
 				value: any; //TODO fix this any
 			};
+			record: T;
 		};
 		actions: {
 			row: T;
@@ -79,7 +80,7 @@
 </script>
 
 <div class="w-full overflow-auto">
-	<table class="w-full caption-bottom overflow-x-scroll">
+	<table class="w-full caption-bottom overflow-x-scroll text-sm">
 		<thead
 			class="{filled ? 'bg-muted rounded-xl' : 'hover:muted'} {lined
 				? '[&_tr]:border-b'
@@ -87,7 +88,7 @@
 		>
 			<tr class="border-muted">
 				{#if selectable}
-					<th class="px-4 py-2 align-middle text-left">
+					<th class="px-4 py-1.5 align-middle text-left">
 						<input
 							type="checkbox"
 							aria-label="Select all"
@@ -101,7 +102,7 @@
 					{@const sortingByCurrentColumn = $sortBy === column.key}
 					<th
 						animate:flip={{ duration: 200, easing: cubicOut }}
-						class="px-4 py-2 group cursor-pointer transition select-text"
+						class="px-4 py-1.5 group cursor-pointer transition select-text"
 						class:pl-0={idx === 0 && selectable}
 						class:pr-0={idx === currentTableColumns.length - 1 && columnsEditable}
 						on:click={() => {
@@ -110,33 +111,35 @@
 						}}
 					>
 						<span class="flex items-center gap-2">
-							<span class="uppercase btn btn-text p-0 font-semibold group-hover:text-foreground">
+							<span
+								class="uppercase btn btn-text p-0 font-semibold group-hover:text-foreground text-xs"
+							>
 								<slot name="row-header" header={column}>
 									{column.value}
 								</slot>
 							</span>
 							<button
-								class="btn btn-ghost group/button relative h-9 w-9 focus-visible:ring-offset-0"
+								class="btn btn-ghost group/button relative btn-icon focus-visible:ring-offset-0"
 								aria-label="Sort by {column.key.toString()}"
 								use:tippy={{ content: `Sort by ${column.key.toString()}`, delay: 300 }}
 							>
 								<ChevronUp
-									size={20}
+									size={16}
 									class="absolute ease-out group-focus-visible/button:opacity-100 
 													{sortingByCurrentColumn && $sortDir === 'desc'
-										? 'top-2 opacity-100 group-hover:top-0.5  group-focus-visible/button:top-0.5'
-										: 'top-0.5 opacity-0'} 
+										? 'top-2.5 opacity-100 group-hover:top-[0.3125rem] group-focus-visible/button:top-[0.3125rem]'
+										: 'top-[0.3125rem] opacity-0'} 
 														transition-all group-hover:opacity-100 
 														{sortingByCurrentColumn && $sortDir === 'desc'
 										? 'group-hover:text-foreground group-focus-visible/button:text-foreground'
 										: 'group-hover:text-muted-foreground group-focus-visible/button:text-muted-foreground'}"
 								/>
 								<ChevronDown
-									size={20}
+									size={16}
 									class="absolute ease-out group-focus-visible/button:opacity-100 
 													{sortingByCurrentColumn && $sortDir === 'asc'
-										? 'bottom-2 opacity-100 group-hover:bottom-0.5 group-focus-visible/button:bottom-0.5'
-										: 'bottom-0.5 opacity-0'} 
+										? 'bottom-2.5 opacity-100 group-hover:bottom-[0.3125rem] group-focus-visible/button:bottom-[0.3125rem]'
+										: 'bottom-[0.3125rem] opacity-0'} 
 														transition-all group-hover:opacity-100 
 														{sortingByCurrentColumn && $sortDir === 'asc'
 										? 'group-hover:text-foreground group-focus-visible/button:text-foreground'
@@ -146,14 +149,14 @@
 						</span>
 					</th>
 				{/each}
-				<th class="relative px-4 py-2 align-middle text-right">
+				<th class="relative px-4 py-1.5 align-middle text-right">
 					{#if columnsEditable}
 						<Popover placement="bottom-end">
 							<button
 								slot="trigger"
 								let:trigger
 								{...trigger}
-								class="btn btn-ghost p-2 h-fit"
+								class="btn btn-ghost btn-icon"
 								use:tippy={{ content: 'Toggle columns' }}
 							>
 								<Settings2 size={20} />
@@ -163,7 +166,7 @@
 									<li class="px-1 py-1">
 										<label
 											for={column.key.toString()}
-											class="flex w-full text-left items-center justify-between rounded-xl p-2 text-sm font-medium capitalize transition hover:bg-muted text-muted-foreground focus-within:bg-muted hover:text-foreground focus-within:text-foreground"
+											class="flex w-full justify-between capitalize btn btn-ghost focus-within:bg-muted focus-within:text-foreground"
 										>
 											{column.value}
 											<Switch
@@ -215,7 +218,7 @@
 					data-state={selected.includes(item.id) ? 'selected' : null}
 				>
 					{#if selectable}
-						<td class="px-4 py-2 align-middle text-left">
+						<td class="px-4 py-1.5 align-middle text-left">
 							<input
 								type="checkbox"
 								aria-label="Select user"
@@ -233,7 +236,8 @@
 					{#each currentTableColumns as column, columnIdx (column)}
 						<td
 							animate:flip={{ duration: 200, easing: cubicOut }}
-							class="px-4 py-4 tabular-nums max-w-lg truncate"
+							data-selected={selected.includes(item.id)}
+							class="px-4 py-4 tabular-nums max-w-[500px] truncate group/row"
 							class:pl-0={columnIdx === 0 && selectable}
 							class:pr-0={columnIdx === currentTableColumns.length - 1 && !$$slots.actions}
 						>
@@ -243,12 +247,13 @@
 									key: column.key,
 									value: item[column.key]
 								}}
+								record={item}
 							>
 								{item[column.key]}
 							</slot>
 						</td>
 					{/each}
-					<td class="px-4 py-2 align-middle text-right">
+					<td class="px-4 py-1.5 align-middle text-right">
 						{#if $$slots.actions}
 							<slot row={item} index={idx} name="actions" />
 						{/if}
