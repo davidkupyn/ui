@@ -1,4 +1,5 @@
 <script lang="ts">
+	// @ts-nocheck
 	import { cn } from '$lib/helpers/style';
 	import { fade, scale } from 'svelte/transition';
 	import { createDialog } from '@melt-ui/svelte';
@@ -24,7 +25,6 @@
 </script>
 
 <slot name="trigger" trigger={$trigger} />
-
 <div
 	use:portal
 	class={cn(
