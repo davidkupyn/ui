@@ -2,6 +2,7 @@
 	import { page } from '$app/stores';
 	import { Github } from 'lucide-svelte';
 	import '../app.postcss';
+	import { cn } from '$lib/helpers/style';
 </script>
 
 <svelte:head>
@@ -13,11 +14,13 @@
 	<meta name="author" content="David Kupyn" />
 </svelte:head>
 <header
-	class="{$page.url.pathname === '/'
-		? 'fixed'
-		: 'sticky top-0 dark:bg-base-950/50 bg-base-50/50 backdrop-blur-md'} w-full z-20 border-muted"
-	class:border-b={$page.url.pathname !== '/'}
-	class:hidden={$page.url.pathname === '/sidebar'}
+	class={cn(
+		'w-full z-20 border-muted',
+		$page.url.pathname === '/'
+			? 'fixed'
+			: 'sticky top-0 bg-gradient-to-b from-background to-base-50/50 dark:to-base-950/50 backdrop-blur-md border-b',
+		$page.url.pathname === '/sidebar' && 'hidden'
+	)}
 >
 	<div class="container mx-auto flex justify-between items-center px-6 h-12">
 		<h2 class="flex items-center gap-2">
@@ -28,13 +31,13 @@
 					transform="translate(100 100)"
 				/>
 			</svg> -->
-			<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+			<!-- <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
 				<path
 					fill="var(--color-foreground)"
 					d="M38,-69.2C49.2,-59.3,58.3,-49.1,67.3,-37.5C76.3,-25.9,85.1,-13,85.6,0.3C86.1,13.5,78.2,27.1,69.5,39.1C60.8,51.1,51.2,61.6,39.4,67.3C27.7,73.1,13.9,74.2,0.6,73.2C-12.7,72.2,-25.4,69.1,-34.5,61.8C-43.6,54.5,-49.2,43.1,-56.4,32.1C-63.7,21.1,-72.6,10.5,-74.7,-1.2C-76.7,-12.9,-71.9,-25.8,-63.7,-35.2C-55.6,-44.5,-44,-50.3,-32.8,-60.2C-21.6,-70.1,-10.8,-84.1,1.3,-86.3C13.4,-88.6,26.8,-79,38,-69.2Z"
 					transform="translate(100 100)"
 				/>
-			</svg>
+			</svg> -->
 			<a
 				href="/"
 				aria-label="Go to home page"
@@ -44,7 +47,7 @@
 			</a>
 		</h2>
 		<nav>
-			<ul class="inline-flex gap-3 sm:gap-5 items-center">
+			<ul class="inline-flex gap-3 sm:gap-5 items-center -mr-4">
 				<li>
 					<a
 						aria-label="Github Link"

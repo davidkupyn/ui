@@ -38,8 +38,9 @@
 		--color-info-focus: theme('colors.info.600');
 		--color-info-foreground: theme('colors.info.50');
 
-		/* --color-neutral: theme('colors.gray.500');
-		--color-neutral-focus: theme('colors.gray.600'); */
+		--color-popover: theme('colors.base.50');
+		--color-popover-foreground: theme('colors.base.900');
+		--color-popover-border: theme('colors.base.200');
 	}
 	@media (prefers-color-scheme: dark) {
 		:root {
@@ -74,6 +75,10 @@
 			--color-info: theme('colors.info.500');
 			--color-info-focus: theme('colors.info.600');
 			--color-info-foreground: theme('colors.info.50');
+
+			--color-popover: theme('colors.base.950');
+			--color-popover-foreground: theme('colors.base.50');
+			--color-popover-border: theme('colors.base.800');
 		}
 	}
 }
@@ -96,7 +101,7 @@
 	}
 
 	body {
-		@apply bg-background min-h-screen text-foreground selection:bg-primary-500/30 overscroll-y-none transition-colors font-sans;
+		@apply bg-background min-h-screen text-foreground selection:bg-accent-500/30 overscroll-y-none transition-colors font-sans;
 		-webkit-tap-highlight-color: transparent;
 	}
 }
@@ -107,7 +112,7 @@
 
 @layer utilities {
 	.convex {
-		@apply bg-muted shadow-convex shadow-base-50 dark:shadow-base-500;
+		@apply shadow-convex shadow-base-50 dark:shadow-base-500;
 	}
 
 	.stack {
@@ -249,6 +254,10 @@
 
 		&-icon {
 			@apply h-9 w-9 p-0;
+
+			&.btn-sm {
+				@apply h-8 w-8 p-0;
+			}
 		}
 	}
 

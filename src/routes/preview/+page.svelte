@@ -427,7 +427,7 @@
 								let:trigger
 								{...trigger()}
 								aria-label="Delete items"
-								class="btn btn-ghost btn-icon rounded-lg"
+								class="btn btn-ghost btn-icon btn-sm rounded-lg"
 								use:tippy={{ content: 'Delete items' }}
 							>
 								<Trash2 size={20} />
@@ -458,7 +458,7 @@
 						</Dialog>
 						<button
 							aria-label="Discard selection"
-							class="btn btn-ghost btn-icon rounded-lg"
+							class="btn btn-ghost btn-icon btn-sm rounded-lg"
 							use:tippy={{ content: 'Discard selection' }}
 							on:click={() => (selected = [])}
 						>

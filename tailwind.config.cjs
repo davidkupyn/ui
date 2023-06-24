@@ -30,6 +30,11 @@ const config = {
 					DEFAULT: 'var(--color-muted)',
 					foreground: 'var(--color-muted-foreground)'
 				},
+				popover: {
+					DEFAULT: 'var(--color-popover)',
+					foreground: 'var(--color-popover-foreground)',
+					border: 'var(--color-popover-border)'
+				},
 				error: {
 					DEFAULT: 'var(--color-error)',
 					foreground: 'var(--color-error-foreground)',

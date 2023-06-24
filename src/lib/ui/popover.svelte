@@ -44,7 +44,7 @@
 		{...$content}
 		transition:fly={{ duration: 150, y: -10 }}
 		class={cn(
-			'rounded-2xl border border-muted bg-background backdrop-blur-md shadow-lg z-10 focus:outline-none',
+			'rounded-2xl border border-popover-border bg-popover backdrop-blur-md shadow-lg z-10 focus:outline-none',
 			className
 		)}
 	>

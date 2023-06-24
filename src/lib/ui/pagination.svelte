@@ -63,7 +63,7 @@
 				{@const isCurrentPage = $currentPage === page.value}
 				<button
 					{...$pageTrigger(page)}
-					class="relative btn-icon p-0 btn btn-text"
+					class="relative btn-icon btn btn-text"
 					data-first={index === 0}
 					data-last={index === $pages.length - 1}
 				>

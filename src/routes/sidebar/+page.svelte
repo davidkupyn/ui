@@ -24,7 +24,7 @@
 </script>
 
 <div
-	class="h-screen border-r border-muted transition-all px-[1.4rem] w-[5.5rem] flex flex-col gap-8 py-12 data-[expanded=true]:w-56"
+	class="h-screen border-r border-muted transition-all px-[1.375rem] w-20 flex flex-col gap-8 py-12 data-[expanded=true]:w-56"
 	data-expanded={expanded}
 >
 	<div class="flex items-center gap-4">
@@ -34,12 +34,12 @@
 				href="/"
 				on:click|stopPropagation
 				aria-label="Go to home page"
-				class="text-center w-fit font-bold whitespace-nowrap p-2 focus-visible:ring-2 focus-visible:outline-none rounded-xl transition ring-offset-background focus-visible:ring-muted-foreground"
+				class="text-center w-fit font-bold whitespace-nowrap p-2 h-9 focus-visible:ring-2 focus-visible:outline-none rounded-xl transition ring-offset-background focus-visible:ring-muted-foreground"
 			>
 				Essence</a
 			>
 		{/if}
-		<button on:click={() => (expanded = !expanded)} class="btn btn-ghost p-3 h-fit w-fit ml-auto">
+		<button on:click={() => (expanded = !expanded)} class="btn btn-ghost btn-icon ml-auto">
 			{#if expanded}
 				<span in:scale>
 					<SidebarClose size={20} />
@@ -60,14 +60,14 @@
 						on:click={() => (current = item.label)}
 						aria-pressed={currentLink}
 						aria-label={item.label}
-						class="relative btn btn-text transition h-11 p-0 {expanded
+						class="relative btn btn-text transition btn-icon {expanded
 							? 'w-44 transition-[width]'
-							: 'w-11'}"
+							: 'w-9'}"
 					>
 						<span
 							class="absolute text-sm inset-0 flex {expanded
 								? 'justify-start'
-								: 'justify-center'} items-center gap-3 p-3 z-[2]"
+								: 'justify-center'} items-center gap-3 p-2 z-[2]"
 						>
 							<span>
 								<svelte:component this={item.icon} size={20} />

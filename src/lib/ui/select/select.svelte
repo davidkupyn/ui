@@ -57,7 +57,7 @@
 <input {...$input} {id} />
 <ul
 	{...$menu}
-	class=" z-10 mt-1.5 p-1 flex flex-col space-y-1 origin-top rounded-2xl border border-muted bg-background drop-shadow-lg focus:outline-none overflow-y-auto"
+	class=" z-10 mt-1.5 p-1 flex flex-col space-y-1 origin-top rounded-2xl border border-popover-border bg-popover drop-shadow-lg focus:outline-none overflow-y-auto"
 >
 	<slot />
 </ul>

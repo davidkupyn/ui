@@ -57,7 +57,7 @@
 	>
 		<ul
 			use:combobox.items
-			class="absolute w-full z-10 mt-1.5 p-1 space-y-1 origin-top rounded-2xl border border-muted bg-background drop-shadow-lg focus:outline-none overflow-hidden"
+			class="absolute w-full z-10 mt-1.5 p-1 space-y-1 origin-top rounded-2xl border border-popover-border bg-popover drop-shadow-lg focus:outline-none overflow-hidden"
 		>
 			{#if label}
 				<li
@@ -70,7 +70,7 @@
 				{@const active = $combobox.active === item}
 				{@const selected = $combobox.selected === item}
 				<li
-					class="relative transition rounded-xl text-base-500 dark:text-base-400 cursor-default select-none py-2 pl-10 pr-2 {active &&
+					class="relative transition rounded-xl text-muted-foreground cursor-default select-none py-2 pl-10 pr-2 {active &&
 					!selected
 						? 'bg-muted text-foreground'
 						: ''} {selected ? 'bg-accent-600/20 text-foreground' : ''}"

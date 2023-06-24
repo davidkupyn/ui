@@ -130,7 +130,7 @@
 									class={cn(
 										'ease-out group-focus-visible/button:opacity-100 transition-all group-hover:opacity-100 -m-0.5',
 										sortingByCurrentColumn && $sortDir === 'desc'
-											? 'translate-y-1 opacity-100 group-hover:translate-y-0 group-focus-visible/button:translate-y-0 group-hover:text-foreground group-focus-visible/button:text-foreground'
+											? 'translate-y-[0.3125rem] opacity-100 group-hover:translate-y-0 group-focus-visible/button:translate-y-0 group-hover:text-foreground group-focus-visible/button:text-foreground'
 											: 'translate-y-0 opacity-0 group-hover:text-muted-foreground group-focus-visible/button:text-muted-foreground'
 									)}
 								/>
@@ -139,7 +139,7 @@
 									class={cn(
 										'ease-out group-focus-visible/button:opacity-100 transition-all group-hover:opacity-100 -m-0.5',
 										sortingByCurrentColumn && $sortDir === 'asc'
-											? '-translate-y-1.5 opacity-100 group-hover:translate-y-0 group-focus-visible/button:translate-y-0 group-hover:text-foreground group-focus-visible/button:text-foreground'
+											? '-translate-y-[0.4375rem] opacity-100 group-hover:translate-y-0 group-focus-visible/button:translate-y-0 group-hover:text-foreground group-focus-visible/button:text-foreground'
 											: 'translate-y-0 opacity-0 group-hover:text-muted-foreground group-focus-visible/button:text-muted-foreground'
 									)}
 								/>

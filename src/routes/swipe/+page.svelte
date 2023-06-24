@@ -29,7 +29,7 @@
 						let:upcomingAction
 						let:card
 						class={cn(
-							'convex grid place-content-center border border-transparent',
+							'convex grid bg-background place-content-center border border-muted',
 							upcomingAction === 'left' && 'border-error-500 dark:border-error-600',
 							upcomingAction === 'right' && 'border-success-500 dark:border-success-600',
 							'transition ease-out rounded-2xl w-72 h-96'
@@ -42,10 +42,10 @@
 		{/key}
 	</div>
 	<div class="mt-12 mb-4 flex gap-4 mx-auto">
-		<button class="btn btn-secondary h-fit p-2" on:click={() => swipeNextCard('left')}>
+		<button class="btn btn-secondary btn-icon" on:click={() => swipeNextCard('left')}>
 			<ArrowLeft size={20} />
 		</button>
-		<button class="btn btn-secondary h-fit p-2" on:click={() => swipeNextCard('right')}>
+		<button class="btn btn-secondary btn-icon" on:click={() => swipeNextCard('right')}>
 			<ArrowRight size={20} />
 		</button>
 	</div>
@@ -60,7 +60,7 @@
 	</button>
 	<div class="flex flex-wrap gap-2 max-w-xs">
 		{#each actions as action}
-			<span in:scale class="badge {action.type === 'left' ? 'badge-danger' : 'badge-success'}">
+			<span in:scale class="badge {action.type === 'left' ? 'badge-error' : 'badge-success'}">
 				Card {action.id}
 			</span>
 		{:else}

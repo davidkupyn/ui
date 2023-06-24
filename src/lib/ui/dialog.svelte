@@ -42,7 +42,7 @@
 		<div
 			transition:scale={{ duration: 150, start: 0.85 }}
 			class={cn(
-				'fixed z-50 grid w-full sm:max-w-lg shadow-lg focus:outline-none rounded-b-3xl sm:rounded-3xl border border-muted bg-background backdrop-blur-md p-6',
+				'fixed z-50 grid w-full sm:max-w-lg shadow-lg focus:outline-none rounded-b-3xl sm:rounded-3xl border border-popover-border bg-popover backdrop-blur-md p-6',
 				alert && 'max-sm:pb-12',
 				className
 			)}
@@ -61,8 +61,8 @@
 			<slot name="content" close={$close} />
 
 			{#if crossButton && !alert}
-				<button {...$close()} class="absolute right-4 top-4 btn btn-sm btn-ghost p-0 h-8 w-8">
-					<X size={20} />
+				<button {...$close()} class="absolute right-4 top-4 btn btn-sm btn-ghost btn-icon">
+					<X size={16} />
 				</button>
 			{/if}
 		</div>
