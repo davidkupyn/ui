@@ -341,7 +341,7 @@
 					<ul slot="content" class="w-40 divide-y divide-muted">
 						<li class="px-1 py-1">
 							<button
-								class="btn btn-ghost w-full justify-start"
+								class="btn btn-ghost w-full justify-start active:scale-100"
 								on:click|stopPropagation={() => {
 									console.log('edit');
 								}}
@@ -352,7 +352,7 @@
 						</li>
 						<li class="px-1 py-1">
 							<button
-								class="btn btn-ghost w-full justify-start"
+								class="btn btn-ghost w-full justify-start active:scale-100"
 								on:click|stopPropagation={() => {
 									items = items.filter((item) => item.id !== row.id);
 									selected = selected.filter((item) => item !== row.id);

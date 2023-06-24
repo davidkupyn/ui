@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { cn } from '$lib/helpers/style';
 	import { Check, ChevronsUpDown } from 'lucide-svelte';
 	import { createCombobox } from 'svelte-headlessui';
 	import Transition from 'svelte-transition';
@@ -70,10 +71,12 @@
 				{@const active = $combobox.active === item}
 				{@const selected = $combobox.selected === item}
 				<li
-					class="relative transition rounded-xl text-muted-foreground cursor-default select-none py-2 pl-10 pr-2 {active &&
-					!selected
-						? 'bg-muted text-foreground'
-						: ''} {selected ? 'bg-accent-600/20 text-foreground' : ''}"
+					class={cn(
+						'relative transition rounded-xl text-muted-foreground cursor-default select-none py-2 pl-10 pr-2 ',
+						active && 'bg-muted text-foreground',
+						selected && 'bg-accent-500/20 text-foreground',
+						selected && active && 'bg-accent-500/30'
+					)}
 					use:combobox.item={{ value: item }}
 				>
 					<span class="block sm:text-sm truncate {selected ? 'font-medium' : 'font-normal'}">

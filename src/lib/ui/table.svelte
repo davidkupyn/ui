@@ -164,7 +164,7 @@
 									<li class="px-1 py-1">
 										<label
 											for={column.key.toString()}
-											class="flex w-full justify-between capitalize btn btn-ghost focus-within:bg-muted focus-within:text-foreground"
+											class="flex w-full justify-between capitalize btn btn-ghost focus-within:bg-muted focus-within:text-foreground active:scale-100"
 										>
 											{column.value}
 											<Switch

@@ -42,8 +42,8 @@
 		<div
 			transition:scale={{ duration: 150, start: 0.85 }}
 			class={cn(
-				'fixed z-50 grid w-full sm:max-w-lg shadow-lg focus:outline-none rounded-b-3xl sm:rounded-3xl border border-popover-border bg-popover backdrop-blur-md p-6',
-				alert && 'max-sm:pb-12',
+				'fixed z-50 grid w-full sm:max-w-lg shadow-lg focus:outline-none sm:rounded-3xl sm:border border-popover-border bg-popover backdrop-blur-md p-6',
+				alert ? 'max-sm:pb-12 rounded-t-3xl border-t' : 'rounded-b-3xl border-b',
 				className
 			)}
 			{...$content}
