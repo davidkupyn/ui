@@ -42,7 +42,7 @@
 	{...$trigger}
 	{disabled}
 	type="button"
-	class={cn('input-group w-full justify-between', className)}
+	class={cn('input-group w-full justify-between data-[state=open]:ring-accent', className)}
 	aria-label={placeholder}
 >
 	{#if $label}

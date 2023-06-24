@@ -3,14 +3,34 @@
 	import { cn } from '$lib/helpers/style';
 	import { fade, scale } from 'svelte/transition';
 	import { createDialog } from '@melt-ui/svelte';
-	import { X } from 'lucide-svelte';
-
-	const { trigger, portal, overlay, content, title, description, close, open } = createDialog();
+	import { AlertCircle, AlertTriangle, CheckCircle2, Info, X } from 'lucide-svelte';
 
 	let className = '';
 	let crossButton = true;
 	let alert = false;
-	export { open, close, trigger, crossButton, className as class, alert };
+	let type: 'error' | 'warning' | 'success' | 'info' | undefined = undefined;
+
+	type AlertDialogProps = {
+		crossButton?: boolean;
+		class?: string;
+		alert: boolean;
+		type?: 'error' | 'warning' | 'success' | 'info';
+	};
+
+	type DialogProps = {
+		crossButton?: boolean;
+		class?: string;
+		alert?: never;
+		type?: never;
+	};
+
+	type $$Props = AlertDialogProps | DialogProps;
+	const { trigger, portal, overlay, content, title, description, close, open } = createDialog({
+		role: alert ? 'alertdialog' : 'dialog',
+		closeOnOutsideClick: !alert
+	});
+
+	export { open, close, trigger, crossButton, className as class, alert, type };
 
 	interface $$Slots {
 		trigger: {
@@ -49,7 +69,20 @@
 			{...$content}
 		>
 			{#if $$slots.title}
-				<h2 {...title} class="font-semibold mb-2 text-md sm:text-lg">
+				<h2 {...title} class="font-semibold mb-2 text-md sm:text-lg flex items-center gap-2">
+					{#if alert && type}
+						<span>
+							{#if type === 'error'}
+								<AlertCircle size={20} class="text-error" />
+							{:else if type === 'warning'}
+								<AlertTriangle size={20} class="text-warning" />
+							{:else if type === 'success'}
+								<CheckCircle2 size={20} class="text-success" />
+							{:else if type === 'info'}
+								<Info size={20} class="text-info" />
+							{/if}
+						</span>
+					{/if}
 					<slot name="title" />
 				</h2>
 			{/if}

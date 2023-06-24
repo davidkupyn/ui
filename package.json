@@ -20,7 +20,7 @@
 		"clsx": "^1.2.1",
 		"eslint": "^8.43.0",
 		"eslint-config-prettier": "^8.8.0",
-		"eslint-plugin-svelte": "^2.31.0",
+		"eslint-plugin-svelte": "^2.31.1",
 		"postcss": "^8.4.24",
 		"postcss-import": "^15.1.0",
 		"postcss-load-config": "^4.0.1",

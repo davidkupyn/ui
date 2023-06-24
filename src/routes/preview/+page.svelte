@@ -97,7 +97,7 @@
 				<input spellcheck="false" type="password" placeholder="Password" />
 				<button
 					type="button"
-					class="btn btn-text icon-right p-1 rounded-md h-fit"
+					class="btn btn-text icon-right btn-icon btn-sm"
 					on:click={() => {
 						showPassword = !showPassword;
 					}}
@@ -209,6 +209,8 @@
 			<button class="btn btn-error"> Error </button>
 			<button class="btn btn-success"> Success </button>
 			<button class="btn btn-warning"> Warning </button>
+			<button class="btn btn-info"> Info </button>
+
 			<button class="btn btn-ghost"> Ghost </button>
 			<button class="btn btn-ghost btn-icon" use:tippy={{ content: 'Ghost icon button' }}>
 				<Save size={20} />
@@ -316,17 +318,18 @@
 		</form>
 	</Dialog>
 	<div class="flex flex-col items-center w-full">
-		<div class="w-full border border-muted rounded-3xl overflow-hidden">
+		<div class="w-full">
 			<Table
 				items={paginatedItems}
 				{headers}
 				disabledKeys={[items[7].id]}
 				bind:selected
+				filled
 				selectable
 				columnsEditable
+				interactive
+				on:rowclick={({ detail: row }) => console.log('clicked on', row.name)}
 			>
-				<!-- interactive
-				on:rowclick={({ detail: row }) => console.log('clicked on', row.name)} -->
 				<Popover slot="actions" let:row placement="bottom-end">
 					<button
 						slot="trigger"
@@ -421,7 +424,7 @@
 						{selected.length === 1 ? 'item' : 'items'}
 					</span>
 					<div class="flex gap-4">
-						<Dialog class="sm:w-96" alert>
+						<Dialog class="sm:w-96" alert type="error">
 							<button
 								slot="trigger"
 								let:trigger

@@ -83,14 +83,10 @@
 
 <div class="w-full overflow-auto">
 	<table class="w-full caption-bottom overflow-x-scroll text-sm">
-		<thead
-			class="{filled ? 'bg-muted rounded-xl' : 'hover:muted'} {lined
-				? '[&_tr]:border-b'
-				: ''} transition-colors"
-		>
+		<thead class={cn(filled && 'bg-muted', lined && !filled && '[&_tr]:border-b')}>
 			<tr class="border-muted">
 				{#if selectable}
-					<th class="px-4 py-1.5 align-middle text-left">
+					<th class={cn('px-4 py-1.5 align-middle text-left', filled && 'rounded-l-2xl')}>
 						<input
 							type="checkbox"
 							aria-label="Select all"
@@ -147,7 +143,7 @@
 						</span>
 					</th>
 				{/each}
-				<th class="relative px-4 py-1.5 align-middle text-right">
+				<th class={cn('px-4 py-1.5 align-middle text-right', filled && 'rounded-r-2xl')}>
 					{#if columnsEditable}
 						<Popover placement="bottom-end">
 							<button
@@ -199,7 +195,13 @@
 				</th>
 			</tr>
 		</thead>
-		<tbody class="{lined ? '[&_tr]:border-b' : ''} [&_tr:last-child]:border-none relative">
+		<tbody
+			class={cn(
+				'[&_tr:last-child]:border-none relative',
+				filled && "before:content-['-'] before:leading-3 before:block before:invisible",
+				lined && '[&_tr]:border-b'
+			)}
+		>
 			{#each items as item, idx (item.id)}
 				<tr
 					tabindex={interactive ? 0 : null}
@@ -216,7 +218,12 @@
 					data-state={selected.includes(item.id) ? 'selected' : null}
 				>
 					{#if selectable}
-						<td class="px-4 py-1.5 align-middle text-left">
+						<td
+							class={cn(
+								'px-4 py-1.5 align-middle text-left',
+								filled && 'group-first:rounded-tl-2xl group-last:rounded-bl-2xl'
+							)}
+						>
 							<input
 								type="checkbox"
 								aria-label="Select user"
@@ -251,7 +258,12 @@
 							</slot>
 						</td>
 					{/each}
-					<td class="px-4 py-1.5 align-middle text-right">
+					<td
+						class={cn(
+							'px-4 py-1.5 align-middle text-right',
+							filled && 'group-first:rounded-tr-2xl group-last:rounded-br-2xl'
+						)}
+					>
 						{#if $$slots.actions}
 							<slot row={item} index={idx} name="actions" />
 						{/if}

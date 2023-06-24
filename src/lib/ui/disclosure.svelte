@@ -11,7 +11,9 @@
 	import { ChevronUp } from 'lucide-svelte';
 	import { slide } from 'svelte/transition';
 	import { cubicInOut } from 'svelte/easing';
+	import { createEventDispatcher } from 'svelte';
 
+	const dispatch = createEventDispatcher();
 	export let defaultExpanded = false;
 	export let expanded = defaultExpanded;
 	export let summary: string = '';
@@ -25,6 +27,7 @@
 	$: expanded = independent ? expanded : $expandedId === componentId;
 
 	function toggleDisclosure() {
+		dispatch('toggle', { expanded: !expanded });
 		if (independent) {
 			expanded = !expanded;
 		} else {
@@ -35,7 +38,7 @@
 
 <div class="w-full">
 	<button
-		on:click={toggleDisclosure}
+		on:click|stopPropagation={toggleDisclosure}
 		class={cn(
 			'btn btn-ghost active:scale-100 w-full justify-between',
 			expanded && 'text-foreground',
