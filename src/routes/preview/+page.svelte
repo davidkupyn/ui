@@ -19,7 +19,8 @@
 		BookTemplate,
 		Save,
 		Command,
-		CalendarIcon
+		CalendarIcon,
+		Loader2
 	} from 'lucide-svelte';
 	import ToggleGroup from '$lib/ui/toggle-group.svelte';
 	import Pagination from '$lib/ui/pagination.svelte';
@@ -217,6 +218,10 @@
 			<button class="btn btn-text">Text</button>
 
 			<button class="btn btn-link btn-secondary">Link Secondary</button>
+			<button class="btn" disabled>
+				<Loader2 class="animate-spin" size={16} />
+				Loading
+			</button>
 		</div>
 		<div class="w-full border border-muted rounded-xl">
 			<ToggleGroup {tabs} bind:value={tab} on:change={(e) => console.log(e.detail)} />
