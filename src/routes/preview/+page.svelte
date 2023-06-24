@@ -186,7 +186,7 @@
 						day: 'numeric'
 					})}
 				{:else}
-					<span class="dark:text-base-500 text-base-400">Select Date</span>
+					<span class="text-muted-foreground">Select Date</span>
 				{/if}
 			</button>
 			<Calendar bind:value={calendarValue} slot="content" />
@@ -221,7 +221,7 @@
 		<div class="w-full border border-muted rounded-xl">
 			<ToggleGroup {tabs} bind:value={tab} on:change={(e) => console.log(e.detail)} />
 		</div>
-		<div class="w-full rounded-xl bg-base-300/50 dark:bg-base-800/50">
+		<div class="w-full rounded-xl bg-muted">
 			<ToggleGroup tabs={tabs2} bind:value={tab2} transparent>
 				<span slot="tab" let:tab class="flex items-center">
 					{#if tab.toLowerCase() === 'david'}
@@ -333,7 +333,7 @@
 					>
 						<MoreHorizontal size={20} />
 					</button>
-					<ul slot="content" class="w-40 divide-y divide-base-200 dark:divide-base-900">
+					<ul slot="content" class="w-40 divide-y divide-muted">
 						<li class="px-1 py-1">
 							<button
 								class="btn btn-ghost w-full justify-start"
@@ -379,7 +379,7 @@
 								</span>
 							</svelte:fragment>
 							<svelte:fragment slot="content">
-								<p class="max-sm:text-base whitespace-normal">
+								<p class="max-sm:text-base max-w-sm whitespace-normal">
 									{cell.value}
 								</p>
 							</svelte:fragment>

@@ -48,7 +48,10 @@
 			<slot name="icon" />
 			<slot name="summary">{summary}</slot>
 		</span>
-		<ChevronUp class={cn('h-5 w-5 text-primary transition', expanded && 'rotate-180 transform')} />
+		<ChevronUp
+			size={16}
+			class={cn('h-4 w-4 text-primary transition', expanded && 'rotate-180 transform')}
+		/>
 	</button>
 	{#if expanded}
 		<div

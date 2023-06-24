@@ -1,4 +1,6 @@
 <script lang="ts">
+	import { cn } from '$lib/helpers/style';
+
 	import { ChevronDown, ChevronUp, Settings2 } from 'lucide-svelte';
 	import { tippy } from '$lib/actions/tippy';
 	import { flip } from 'svelte/animate';
@@ -119,31 +121,27 @@
 								</slot>
 							</span>
 							<button
-								class="btn btn-ghost group/button relative btn-icon focus-visible:ring-offset-0"
+								class="btn btn-ghost group/button relative btn-icon focus-visible:ring-offset-0 flex-col gap-0"
 								aria-label="Sort by {column.key.toString()}"
 								use:tippy={{ content: `Sort by ${column.key.toString()}`, delay: 300 }}
 							>
 								<ChevronUp
 									size={16}
-									class="absolute ease-out group-focus-visible/button:opacity-100 
-													{sortingByCurrentColumn && $sortDir === 'desc'
-										? 'top-2 opacity-100 group-hover:top-[0.3125rem] group-focus-visible/button:top-[0.3125rem]'
-										: 'top-[0.3125rem] opacity-0'} 
-														transition-all group-hover:opacity-100 
-														{sortingByCurrentColumn && $sortDir === 'desc'
-										? 'group-hover:text-foreground group-focus-visible/button:text-foreground'
-										: 'group-hover:text-muted-foreground group-focus-visible/button:text-muted-foreground'}"
+									class={cn(
+										'ease-out group-focus-visible/button:opacity-100 transition-all group-hover:opacity-100 -m-0.5',
+										sortingByCurrentColumn && $sortDir === 'desc'
+											? 'translate-y-1 opacity-100 group-hover:translate-y-0 group-focus-visible/button:translate-y-0 group-hover:text-foreground group-focus-visible/button:text-foreground'
+											: 'translate-y-0 opacity-0 group-hover:text-muted-foreground group-focus-visible/button:text-muted-foreground'
+									)}
 								/>
 								<ChevronDown
 									size={16}
-									class="absolute ease-out group-focus-visible/button:opacity-100 
-													{sortingByCurrentColumn && $sortDir === 'asc'
-										? 'bottom-2.5 opacity-100 group-hover:bottom-[0.3125rem] group-focus-visible/button:bottom-[0.3125rem]'
-										: 'bottom-[0.3125rem] opacity-0'} 
-														transition-all group-hover:opacity-100 
-														{sortingByCurrentColumn && $sortDir === 'asc'
-										? 'group-hover:text-foreground group-focus-visible/button:text-foreground'
-										: 'group-hover:text-muted-foreground group-focus-visible/button:text-muted-foreground'}"
+									class={cn(
+										'ease-out group-focus-visible/button:opacity-100 transition-all group-hover:opacity-100 -m-0.5',
+										sortingByCurrentColumn && $sortDir === 'asc'
+											? '-translate-y-1.5 opacity-100 group-hover:translate-y-0 group-focus-visible/button:translate-y-0 group-hover:text-foreground group-focus-visible/button:text-foreground'
+											: 'translate-y-0 opacity-0 group-hover:text-muted-foreground group-focus-visible/button:text-muted-foreground'
+									)}
 								/>
 							</button>
 						</span>
