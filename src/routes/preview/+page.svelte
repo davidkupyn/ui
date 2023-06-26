@@ -117,7 +117,7 @@
 
 		<label class="input-label w-full">
 			Text Area
-			<fieldset class="input-group h-64 flex flex-col" disabled={false}>
+			<fieldset class="input-group h-64 flex flex-col">
 				<input class="!text-xl font-semibold my-3" placeholder="Title" />
 				<textarea class="h-full sm:text-sm" placeholder="Description" />
 			</fieldset>
@@ -158,6 +158,9 @@
 					<Option value="david">David</Option>
 					<Option value="wiktor">Wiktor</Option>
 					<Option value="gustaw">Gustaw</Option>
+					<li class="input-label py-2 pl-5 pr-5 font-semibold text-foreground">Class 1</li>
+					<Option value="szymon">Szymon</Option>
+					<Option value="aleks">Aleks</Option>
 				</Select>
 			</label>
 			<label class="input-label w-full" for="select2">
