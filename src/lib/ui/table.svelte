@@ -84,7 +84,12 @@
 
 <div class="w-full overflow-auto">
 	<table class="w-full caption-bottom overflow-x-scroll text-sm">
-		<thead class={cn(filled && 'bg-muted', lined && !filled && '[&_tr]:border-b')}>
+		<thead
+			class={cn(
+				filled && 'bg-base-200/50 dark:bg-base-900/50',
+				lined && !filled && '[&_tr]:border-b'
+			)}
+		>
 			<tr class="border-muted">
 				{#if selectable}
 					<th class={cn('px-4 py-1.5 align-middle text-left', filled && 'rounded-l-2xl')}>

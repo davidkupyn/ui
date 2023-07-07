@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { cn } from '$lib/helpers/style';
 	import Content from './content.svelte';
 	import Trigger from './trigger.svelte';
 	import { createCollapsible } from '@melt-ui/svelte';
@@ -17,6 +18,6 @@
 	setContext('disclosure', disclosure);
 </script>
 
-<div class={className} {...root}>
+<div class={cn('group', className)} {...root}>
 	<slot {Trigger} {Content} />
 </div>

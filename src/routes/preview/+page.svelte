@@ -423,12 +423,8 @@
 				</svelte:fragment>
 				<svelte:fragment slot="row" let:cell>
 					{#if cell.key === 'description'}
-						<Disclosure
-							class="group-data-[selected=true]/row:hover:bg-accent-500/20 -my-1"
-							let:Trigger
-							let:Content
-						>
-							<Trigger>
+						<Disclosure let:Trigger let:Content>
+							<Trigger class="group-data-[selected=true]/row:hover:bg-accent-500/20 -my-1">
 								<Hash size={16} />
 								<span class="max-w-sm truncate max-sm:text-base">
 									{cell.value}
