@@ -243,7 +243,9 @@
 				Loading
 			</button>
 		</div>
-		<div class="w-full border border-muted rounded-xl">
+		<div
+			class="w-full border border-transparent ring-1 ring-base-950/10 shadow dark:border-border rounded-xl"
+		>
 			<ToggleGroup {tabs} bind:value={tab} on:change={(e) => console.log(e.detail)} />
 		</div>
 		<div class="w-full rounded-xl bg-muted">
@@ -298,7 +300,10 @@
 			</p>
 		</Content>
 	</Disclosure>
-	<Accordion let:Item class="w-full max-w-md border border-muted rounded-3xl p-4">
+	<Accordion
+		let:Item
+		class="w-full max-w-md border border-transparent ring-1 ring-base-950/10 shadow dark:border-border rounded-3xl p-4"
+	>
 		<Item let:Trigger let:Content>
 			<Trigger>Why copy/paste and not a package?</Trigger>
 			<Content>
