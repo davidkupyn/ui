@@ -39,7 +39,7 @@ const config = {
 					DEFAULT: 'var(--color-error)',
 					foreground: 'var(--color-error-foreground)',
 					focus: 'var(--color-error-focus)',
-					...colors.red
+					...colors.rose
 				},
 				warning: {
 					DEFAULT: 'var(--color-warning)',
@@ -57,7 +57,7 @@ const config = {
 					DEFAULT: 'var(--color-info)',
 					foreground: 'var(--color-info-foreground)',
 					focus: 'var(--color-info-focus)',
-					...colors.blue
+					...colors.sky
 				}
 			},
 			boxShadow: {

@@ -68,15 +68,4 @@
 			<span in:scale class="badge badge-outline mx-auto"> No actions </span>
 		{/each}
 	</div>
-	<Dialog let:Trigger let:Content>
-		<Trigger>
-			<button class="btn btn-primary">Open dialog</button>
-		</Trigger>
-		<Content let:Title let:Description>
-			<Title>Dialog title</Title>
-			<Description>dialog description</Description>
-
-			some content
-		</Content>
-	</Dialog>
 </main>

@@ -15,10 +15,10 @@
 </svelte:head>
 <header
 	class={cn(
-		'w-full z-20 border-muted',
+		'w-full z-20',
 		$page.url.pathname === '/'
 			? 'fixed'
-			: 'sticky top-0 bg-gradient-to-b from-background to-base-50/50 dark:to-base-950/50 backdrop-blur-md border-b',
+			: 'sticky top-0 bg-gradient-to-b from-background to-base-50/0 dark:to-base-950/0 via-base-50/75 dark:via-base-950/75',
 		$page.url.pathname === '/sidebar' && 'hidden'
 	)}
 >

@@ -25,6 +25,7 @@
 			on:click={() => dispatch('change', tab)}
 			class="group relative btn btn-text w-full h-full p-0 rounded-lg"
 			{...$item(tab)}
+			use:item
 			disabled={disabled.includes(tab)}
 		>
 			{#if tab === $value}
@@ -33,7 +34,7 @@
 					out:send={{ key: 'tab', easing: cubicOut, duration }}
 					class={cn(
 						'w-full h-full rounded-lg overflow-hidden bg-muted',
-						transparent && 'bg-background'
+						transparent && 'bg-background shadow'
 					)}
 				>
 					<slot name="background" />

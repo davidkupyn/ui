@@ -13,20 +13,16 @@
 
 <div
 	use:portal
-	class={cn(
-		'z-50 flex justify-center sm:items-center',
-		$open && 'fixed inset-0',
-		alert ? 'items-end' : 'items-start'
-	)}
+	class={cn('z-50 flex justify-center sm:items-center items-end', $open && 'fixed inset-0')}
 >
 	{#if $open}
 		<div
 			{...$overlay}
 			transition:fade={{ duration: 150 }}
-			class="fixed z-50 inset-0 bg-base-700/70 dark:bg-base-950/70"
+			class="fixed z-50 inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-base-500/50 to-base-500/75 dark:from-base-950/70 dark:to-base-950/95"
 		/>
 		<div
-			transition:scale={{ duration: 200, start: 0.9 }}
+			transition:scale={{ duration: 200, start: 0.95 }}
 			class={cn(dialog({ alert }).base(), className)}
 			{...$content}
 			use:content
