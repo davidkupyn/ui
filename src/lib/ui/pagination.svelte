@@ -53,6 +53,7 @@
 	<div class="flex gap-1 items-center">
 		<button
 			{...$prevButton}
+			use:prevButton
 			class="btn btn-ghost btn-icon"
 			disabled={!$page || $page === 1 || totalPages <= 1}
 		>
@@ -63,6 +64,7 @@
 				{@const isCurrentPage = $currentPage === page.value}
 				<button
 					{...$pageTrigger(page)}
+					use:pageTrigger
 					class="relative btn-icon btn btn-text"
 					data-first={index === 0}
 					data-last={index === $pages.length - 1}
@@ -89,6 +91,7 @@
 
 		<button
 			{...$nextButton}
+			use:nextButton
 			class="btn btn-ghost btn-icon"
 			disabled={($page && $page >= totalPages) || totalPages <= 1}
 		>

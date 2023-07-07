@@ -24,7 +24,6 @@
 			placement: placement
 		}
 	});
-
 	export { open, close, trigger, placement, className as class };
 
 	interface $$Slots {

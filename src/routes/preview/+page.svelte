@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { cn } from '$lib/helpers/style';
 	import { queryParam, ssp } from 'sveltekit-search-params';
 	import { tippy } from '$lib/actions/tippy';
 	import {
@@ -20,7 +19,8 @@
 		Save,
 		Command,
 		CalendarIcon,
-		Loader2
+		Loader2,
+		Bot
 	} from 'lucide-svelte';
 	import ToggleGroup from '$lib/ui/toggle-group.svelte';
 	import Pagination from '$lib/ui/pagination.svelte';
@@ -28,12 +28,14 @@
 	import Table from '$lib/ui/table.svelte';
 	import { fade, fly } from 'svelte/transition';
 	import { cubicOut } from 'svelte/easing';
-	import Disclosure from '$lib/ui/disclosure.svelte';
-	import Dialog from '$lib/ui/dialog.svelte';
-	import Popover from '$lib/ui/popover.svelte';
-	import { Select, Option } from '$lib/ui/select';
+	import { Select } from '$lib/ui/select';
 	import Combobox from '$lib/ui/combobox.svelte';
 	import Calendar from '$lib/ui/calendar.svelte';
+	import { Dialog } from '$lib/ui/dialog';
+	import { Avatar } from '$lib/ui/avatar';
+	import { Accordion } from '$lib/ui/accordion';
+	import { Disclosure } from '$lib/ui/disclosure';
+	import { Popover } from '$lib/ui/popover';
 
 	let showPassword = false;
 	const tabs = ['witalina', 'david', 'wiktor', 'gustaw'];
@@ -82,8 +84,8 @@
 			<input spellcheck="false" autocomplete="false" placeholder="Search..." />
 			<kbd class="group-focus-within:scale-90 group-focus-within:opacity-0 transition">
 				<Command size="14" />
-				K</kbd
-			>
+				K
+			</kbd>
 		</label>
 		<label class="input-label w-full">
 			Normal Input
@@ -147,29 +149,40 @@
 			<label class="input-label w-full" for="select1">
 				Custom Select
 				<Select
+					let:Group
 					placeholder="Select an option"
 					id="select1"
 					name="custom"
 					bind:value={customSelectValue}
 					on:change={(e) => console.log(e.detail)}
 				>
-					<li class="input-label py-2 pl-5 pr-5 font-semibold text-foreground">Class 3</li>
-					<Option value="witalina">Witalina</Option>
-					<Option value="david">David</Option>
-					<Option value="wiktor">Wiktor</Option>
-					<Option value="gustaw">Gustaw</Option>
-					<li class="input-label py-2 pl-5 pr-5 font-semibold text-foreground">Class 1</li>
-					<Option value="szymon">Szymon</Option>
-					<Option value="aleks">Aleks</Option>
+					<Group let:Option let:Label>
+						<Label>Class 3</Label>
+						<Option value="witalina">Witalina</Option>
+						<Option value="david">David</Option>
+						<Option value="wiktor">Wiktor</Option>
+						<Option value="gustaw">Gustaw</Option>
+					</Group>
+					<Group let:Option let:Label>
+						<Label>Class 1</Label>
+						<Option value="szymon">Szymon</Option>
+						<Option value="aleks">Aleks</Option>
+					</Group>
 				</Select>
 			</label>
 			<label class="input-label w-full" for="select2">
 				Native Select
 				<select class="input" id="select2" name="native" value="david">
-					<option value="witalina">Witalina</option>
-					<option value="david">David</option>
-					<option value="wiktor">Wiktor</option>
-					<option value="gustaw">Gustaw</option>
+					<optgroup label="Class 3">
+						<option value="witalina">Witalina</option>
+						<option value="david">David</option>
+						<option value="wiktor">Wiktor</option>
+						<option value="gustaw">Gustaw</option>
+					</optgroup>
+					<optgroup label="Class 1">
+						<option value="szymon">Szymon</option>
+						<option value="aleks">Aleks</option>
+					</optgroup>
 				</select>
 			</label>
 			<button class="btn mt-3">Submit</button>
@@ -180,8 +193,8 @@
 			<textarea class="h-24 input" placeholder="Placeholder" />
 		</label>
 
-		<Popover class="bg-transparent border-none">
-			<button slot="trigger" let:trigger {...trigger} class="input-group w-full">
+		<Popover let:Trigger let:Content>
+			<Trigger class="input-group w-full">
 				<CalendarIcon size={16} class="icon-left" />
 				{#if calendarValue}
 					{new Date(calendarValue).toLocaleDateString('en', {
@@ -192,8 +205,10 @@
 				{:else}
 					<span class="text-muted-foreground">Select Date</span>
 				{/if}
-			</button>
-			<Calendar bind:value={calendarValue} slot="content" />
+			</Trigger>
+			<Content class="bg-transparent border-none shadow-none">
+				<Calendar bind:value={calendarValue} />
+			</Content>
 		</Popover>
 
 		<div class="flex flex-wrap gap-2 w-full">
@@ -256,10 +271,37 @@
 			<span class="badge badge-info capitalize"> Info </span>
 		</div>
 	</div>
-	<div class="w-full max-w-md grid gap-4 border border-muted rounded-3xl p-4">
-		<Disclosure>
-			<svelte:fragment slot="summary">Why copy/paste and not a package?</svelte:fragment>
-			<svelte:fragment slot="content">
+	<div class="mt-4 flex gap-4 items-center">
+		<Avatar
+			src="https://avatars.githubusercontent.com/u/1162160?v=4"
+			alt="Rich Harris"
+			fallback="RH"
+		/>
+		<Avatar
+			class="w-16"
+			src="https://avatars.githubusercontent.com/u/1162160?v=4"
+			alt="Rich Harris"
+			let:Fallback
+		>
+			<Fallback>
+				<Bot size={16} />
+			</Fallback>
+		</Avatar>
+	</div>
+	<Disclosure class="w-full max-w-md" let:Trigger let:Content>
+		<Trigger>Just a Disclosure</Trigger>
+		<Content>
+			<p>
+				Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum. Quisquam,
+				voluptatum. Quisquam, voluptatum. Quisquam, voluptatum. Quisquam, voluptatum. Quisquam,
+				voluptatum. Quisquam, voluptatum. Quisquam, voluptatum. Quisquam, voluptatum. Quisquam,
+			</p>
+		</Content>
+	</Disclosure>
+	<Accordion let:Item class="w-full max-w-md border border-muted rounded-3xl p-4">
+		<Item let:Trigger let:Content>
+			<Trigger>Why copy/paste and not a package?</Trigger>
+			<Content>
 				<p>
 					The idea behind this is to give you ownership and control over the code, allowing you to
 					decide how the components are built and styled.
@@ -271,12 +313,14 @@
 					One of the drawback of packaging the components in an npm package is that the style is coupled
 					with the implementation. The design of your components should be separate from their implementation.
 				</p>
-			</svelte:fragment>
-		</Disclosure>
-		<Disclosure>
-			<Stars size={16} slot="icon" />
-			<svelte:fragment slot="summary">Why Essence?</svelte:fragment>
-			<svelte:fragment slot="content">
+			</Content>
+		</Item>
+		<Item let:Trigger let:Content>
+			<Trigger>
+				<Stars size={16} />
+				Why Essence?
+			</Trigger>
+			<Content>
 				<p>
 					We wanted to create a set of components that are easy to use, customizable and accessible.
 					<br />
@@ -286,39 +330,40 @@
 					or foundational UI elements, so you can focus on other parts of your app, where you can express
 					your creativity.
 				</p>
-			</svelte:fragment>
-		</Disclosure>
-		<Disclosure
-			summary="What about updates?"
-			content="Yes, we will be updating the components regularly. We will also be adding new components."
-		/>
-	</div>
-
-	<Dialog class="sm:max-w-[425px]">
-		<button slot="trigger" let:trigger {...trigger()} class="btn w-fit">
+			</Content>
+		</Item>
+		<Item let:Trigger let:Content>
+			<Trigger>What about updates?</Trigger>
+			<Content>
+				Yes, we will be updating the components regularly. We will also be adding new components.
+			</Content>
+		</Item>
+	</Accordion>
+	<Dialog let:Trigger let:Content>
+		<Trigger class="btn w-fit">
 			<AppWindow size={16} />
 			Open Dialog
-		</button>
-		<svelte:fragment slot="title">Edit Profile</svelte:fragment>
-
-		<svelte:fragment slot="description">
-			Make changes to your profile here. Click save when you're done.
-		</svelte:fragment>
-
-		<form class="grid gap-4" slot="content" let:close>
-			<label class="input-label w-full">
-				Username
-				<input class="input" placeholder="Dave Kupyn" />
-			</label>
-			<label class="input-label w-full">
-				Email
-				<input class="input" placeholder="dkupyn@gmail.com" />
-			</label>
-			<div class="flex gap-4 mt-4 w-full">
-				<button {...close()} type="button" class="btn btn-outline w-full"> Cancel </button>
-				<button type="submit" class="btn w-full"> Confirm </button>
-			</div>
-		</form>
+		</Trigger>
+		<Content let:Title let:Description let:close class="sm:max-w-[425px]">
+			<Title>Edit Profile</Title>
+			<Description>Make changes to your profile here. Click save when you're done.</Description>
+			<form class="grid gap-4">
+				<label class="input-label w-full">
+					Username
+					<input class="input" placeholder="Dave Kupyn" />
+				</label>
+				<label class="input-label w-full">
+					Email
+					<input class="input" placeholder="dkupyn@gmail.com" />
+				</label>
+				<div class="flex gap-4 mt-4 w-full">
+					<button {...close} use:close.action type="button" class="btn btn-outline w-full">
+						Cancel
+					</button>
+					<button type="submit" class="btn w-full"> Confirm </button>
+				</div>
+			</form>
+		</Content>
 	</Dialog>
 
 	<div class="flex flex-col items-center w-full">
@@ -334,42 +379,37 @@
 				interactive
 				on:rowclick={({ detail: row }) => console.log('clicked on', row.name)}
 			>
-				<Popover slot="actions" let:row placement="bottom-end">
-					<button
-						slot="trigger"
-						let:trigger
-						{...trigger}
-						class="btn btn-ghost btn-icon"
-						use:tippy={{ content: 'View Actions' }}
-						on:click|stopPropagation
-					>
-						<MoreHorizontal size={20} />
-					</button>
-					<ul slot="content" class="w-40 divide-y divide-muted">
-						<li class="px-1 py-1">
-							<button
-								class="btn btn-ghost w-full justify-start active:scale-100"
-								on:click|stopPropagation={() => {
-									console.log('edit');
-								}}
-							>
-								<Edit size={20} class="mr-2" />
-								Edit
-							</button>
-						</li>
-						<li class="px-1 py-1">
-							<button
-								class="btn btn-ghost w-full justify-start active:scale-100"
-								on:click|stopPropagation={() => {
-									items = items.filter((item) => item.id !== row.id);
-									selected = selected.filter((item) => item !== row.id);
-								}}
-							>
-								<Trash2 size={20} class="mr-2" />
-								Delete
-							</button>
-						</li>
-					</ul>
+				<Popover slot="actions" let:row>
+					<svelte:fragment let:Trigger let:Content>
+						<Trigger class="btn btn-ghost btn-icon">
+							<MoreHorizontal size={20} />
+						</Trigger>
+						<Content class="w-40 divide-y divide-muted">
+							<div class="px-1 py-1">
+								<button
+									class="btn btn-ghost w-full justify-start active:scale-100"
+									on:click|stopPropagation={() => {
+										console.log('edit');
+									}}
+								>
+									<Edit size={20} class="mr-2" />
+									Edit
+								</button>
+							</div>
+							<div class="px-1 py-1">
+								<button
+									class="btn btn-ghost w-full justify-start active:scale-100"
+									on:click|stopPropagation={() => {
+										items = items.filter((item) => item.id !== row.id);
+										selected = selected.filter((item) => item !== row.id);
+									}}
+								>
+									<Trash2 size={20} class="mr-2" />
+									Delete
+								</button>
+							</div>
+						</Content>
+					</svelte:fragment>
 				</Popover>
 				<svelte:fragment slot="row-header" let:header>
 					{#if header.key === 'createdAt'}
@@ -383,18 +423,22 @@
 				</svelte:fragment>
 				<svelte:fragment slot="row" let:cell>
 					{#if cell.key === 'description'}
-						<Disclosure class="group-data-[selected=true]/row:hover:bg-accent-500/20 -my-1">
-							<Hash size={16} slot="icon" />
-							<svelte:fragment slot="summary">
+						<Disclosure
+							class="group-data-[selected=true]/row:hover:bg-accent-500/20 -my-1"
+							let:Trigger
+							let:Content
+						>
+							<Trigger>
+								<Hash size={16} />
 								<span class="max-w-sm truncate max-sm:text-base">
 									{cell.value}
 								</span>
-							</svelte:fragment>
-							<svelte:fragment slot="content">
+							</Trigger>
+							<Content>
 								<p class="max-sm:text-base max-w-sm whitespace-normal">
 									{cell.value}
 								</p>
-							</svelte:fragment>
+							</Content>
 						</Disclosure>
 					{:else if cell.key === 'price'}
 						<span class="flex justify-end items-center w-16">
@@ -428,29 +472,21 @@
 						{selected.length === 1 ? 'item' : 'items'}
 					</span>
 					<div class="flex gap-4">
-						<Dialog class="sm:w-96" alert type="error">
-							<button
-								slot="trigger"
-								let:trigger
-								{...trigger()}
-								aria-label="Delete items"
-								class="btn btn-ghost btn-icon btn-sm rounded-lg"
-								use:tippy={{ content: 'Delete items' }}
-							>
+						<Dialog let:Trigger let:Content class="sm:max-w-[425px]" alert type="error">
+							<Trigger aria-label="Delete items" class="btn btn-ghost btn-icon btn-sm rounded-lg">
+								<!-- use:tippy={{ content: 'Delete items' }} -->
 								<Trash2 size={20} />
-							</button>
-							<svelte:fragment slot="title">Are you sure?</svelte:fragment>
-							<svelte:fragment slot="description"
-								>This action cannot be undone. This will permanently delete
-								{selected.length === 1 ? 'this item' : 'these items'}.
-							</svelte:fragment>
-							<form slot="content" class="grid gap-4 w-full" let:close>
+							</Trigger>
+							<Content let:Title let:Description let:close class="sm:w-96">
+								<Title>Edit Profile</Title>
+								<Description
+									>Make changes to your profile here. Click save when you're done.</Description
+								>
 								<div class="flex gap-4 mt-4 w-full max-sm:flex-col-reverse">
-									<button type="button" {...close()} class="btn btn-outline w-full">
+									<button {...close} use:close.action class="btn btn-outline w-full">
 										Cancel
 									</button>
 									<button
-										type="submit"
 										class="btn btn-error w-full"
 										on:click={() => {
 											items = items.filter((item) => !selected.includes(item.id));
@@ -461,8 +497,9 @@
 										Delete
 									</button>
 								</div>
-							</form>
+							</Content>
 						</Dialog>
+
 						<button
 							aria-label="Discard selection"
 							class="btn btn-ghost btn-icon btn-sm rounded-lg"

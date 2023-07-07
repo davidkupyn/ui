@@ -18,7 +18,6 @@
 	export let isTop = false;
 
 	let active = true;
-	let dragging = false;
 	let upcomingAction: 'left' | 'right' | undefined;
 	let position = spring({ x: 0, y: 0 }, { damping: 0.6, stiffness: 0.15 });
 	let bound = browser ? (window.innerWidth > 768 ? 150 : 50) : 150;
@@ -54,12 +53,6 @@
 
 {#if active}
 	<div
-		on:mousedown={() => {
-			dragging = true;
-		}}
-		on:mouseup={() => {
-			dragging = false;
-		}}
 		use:draggable={{
 			position: $position,
 			bounds: { top: 80, bottom: 80, left: -1200, right: -1200 },
@@ -80,7 +73,7 @@
 	>
 		<div
 			style="transform: rotate({$position.x * 0.02 + rotation}deg)"
-			class={dragging ? 'cursor-grabbing' : 'cursor-grab'}
+			class="cursor-grab active:cursor-grabbing"
 		>
 			<slot {upcomingAction} />
 		</div>

@@ -4,6 +4,8 @@
 	import { createEventDispatcher, setContext } from 'svelte';
 	import { cn } from '$lib/helpers/style';
 	import Option from './option.svelte';
+	import Group from './option-group.svelte';
+
 	const dispatch = createEventDispatcher();
 	export let id = '';
 	export let name = '';
@@ -11,6 +13,7 @@
 	export let placeholder = '';
 	export let disabled = false;
 	export let value: unknown = undefined;
+
 	let className = '';
 	export { className as class };
 
@@ -22,7 +25,8 @@
 		option,
 		isSelected,
 		open,
-		input
+		input,
+		createGroup
 	} = createSelect({
 		value,
 		name,
@@ -35,7 +39,7 @@
 		value = v;
 		dispatch('change', v);
 	});
-	setContext('select', { option, isSelected });
+	setContext('select', { option, isSelected, createGroup });
 </script>
 
 <button
@@ -59,7 +63,7 @@
 <ul
 	{...$menu}
 	use:menu
-	class=" z-10 mt-1.5 p-1 flex flex-col space-y-1 origin-top rounded-2xl border border-popover-border bg-popover drop-shadow-lg focus:outline-none overflow-y-auto"
+	class=" z-10 mt-1.5 p-1 flex flex-col gap-1 origin-top rounded-2xl border border-popover-border bg-popover drop-shadow-lg focus:outline-none overflow-y-auto"
 >
-	<slot {Option} />
+	<slot {Option} {Group} />
 </ul>

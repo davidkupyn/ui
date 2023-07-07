@@ -26,6 +26,7 @@
 
 <button
 	{...$root}
+	use:root
 	on:click={() => {
 		if (group.includes(value)) {
 			console.log('remove');

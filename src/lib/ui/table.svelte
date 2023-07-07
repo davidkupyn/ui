@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { Popover } from '$lib/ui/popover';
 	import { cn } from '$lib/helpers/style';
 
 	import { ChevronDown, ChevronUp, Settings2 } from 'lucide-svelte';
@@ -7,8 +8,8 @@
 	import { cubicOut } from 'svelte/easing';
 	import { queryParam, ssp } from 'sveltekit-search-params';
 	import Switch from './switch.svelte';
-	import Popover from './popover.svelte';
 	import { createEventDispatcher } from 'svelte';
+	import Trigger from './dialog/trigger.svelte';
 
 	const dispatch = createEventDispatcher();
 	type T = $$Generic<{ id: any }>;
@@ -145,19 +146,13 @@
 				{/each}
 				<th class={cn('px-4 py-1.5 align-middle text-right', filled && 'rounded-r-2xl')}>
 					{#if columnsEditable}
-						<Popover placement="bottom-end">
-							<button
-								slot="trigger"
-								let:trigger
-								{...trigger}
-								class="btn btn-ghost btn-icon"
-								use:tippy={{ content: 'Toggle columns' }}
-							>
+						<Popover let:Trigger let:Content>
+							<Trigger class="btn btn-ghost btn-icon">
 								<Settings2 size={20} />
-							</button>
-							<ul slot="content" class="w-48 divide-y divide-muted">
+							</Trigger>
+							<Content class="w-48 divide-y divide-muted">
 								{#each tablesColumns as column (column.key)}
-									<li class="px-1 py-1">
+									<div class="px-1 py-1">
 										<label
 											for={column.key.toString()}
 											class="flex w-full justify-between capitalize btn btn-ghost focus-within:bg-muted focus-within:text-foreground active:scale-100"
@@ -171,25 +166,10 @@
 												disabled={currentTableColumns.includes(column) &&
 													currentTableColumns.length === 1}
 											/>
-											<!-- <label class="relative inline-flex items-center cursor-pointer">
-												<input
-													id={column.key}
-													name={column.key}
-													value={column}
-													type="checkbox"
-													class="sr-only peer"
-													disabled={currentTableColumns.includes(column) &&
-														currentTableColumns.length === 1}
-													bind:group={currentTableColumns}
-												/>
-												<span
-													class="w-11 transition peer-disabled:after:dark:bg-zinc-300 peer-disabled:opacity-50 peer-disabled:pointer-events-none h-6 bg-base-300/50 dark:bg-base-800 peer-focus:outline-none peer-focus-visible:ring-2 peer-focus-visible:ring-primary-600 peer-focus-visible:ring-offset-2 peer-focus-visible:ring-offset-base-50 dark:peer-focus-visible:ring-offset-base-950 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-base-50 after:shadow-lg after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-base-600 peer-checked:bg-primary-500 dark:peer-checked:bg-primary-600"
-												/>
-											</label> -->
 										</label>
-									</li>
+									</div>
 								{/each}
-							</ul>
+							</Content>
 						</Popover>
 					{/if}
 				</th>

@@ -1,10 +1,10 @@
 <script lang="ts">
+	import { Dialog } from '$lib/ui/dialog';
 	import { fade, scale } from 'svelte/transition';
 	import CardContainer from '$lib/components/card-container.svelte';
 	import { ArrowLeft, ArrowRight } from 'lucide-svelte';
 	import { cn } from '$lib/helpers/style';
 	import { swipeDispatcher } from '$lib/components/card.svelte';
-	import Select from '$lib/ui/select/select.svelte';
 
 	let actions: { type: 'left' | 'right'; id: number | string }[] = [];
 	let reset = 0;
@@ -68,9 +68,15 @@
 			<span in:scale class="badge badge-outline mx-auto"> No actions </span>
 		{/each}
 	</div>
-	<Select placeholder="Select component" let:Option class="mt-12">
-		<Option value="thomas">Thomas</Option>
-		<Option value="hunter">Hunter</Option>
-		<Option value="dave">Dave</Option>
-	</Select>
+	<Dialog let:Trigger let:Content>
+		<Trigger>
+			<button class="btn btn-primary">Open dialog</button>
+		</Trigger>
+		<Content let:Title let:Description>
+			<Title>Dialog title</Title>
+			<Description>dialog description</Description>
+
+			some content
+		</Content>
+	</Dialog>
 </main>
