@@ -144,7 +144,9 @@
 				]}
 			/>
 		</label>
-		<form class="grid gap-4 border rounded-3xl border-muted p-4">
+		<form
+			class="grid gap-4 rounded-3xl border border-transparent ring-1 ring-base-950/10 shadow dark:border-border p-4"
+		>
 			<h2 class="font-semibold mb-2 text-md sm:text-lg text-center">Form with Select component</h2>
 			<label class="input-label w-full" for="select1">
 				Custom Select
