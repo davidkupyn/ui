@@ -57,7 +57,7 @@ const config = {
 					DEFAULT: 'var(--color-info)',
 					foreground: 'var(--color-info-foreground)',
 					focus: 'var(--color-info-focus)',
-					...colors.sky
+					...colors.blue
 				}
 			},
 			boxShadow: {
