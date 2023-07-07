@@ -4,7 +4,7 @@
 	import { fly } from 'svelte/transition';
 
 	let className = '';
-	let placement:
+	export let placement:
 		| 'top'
 		| 'top-start'
 		| 'top-end'
@@ -21,10 +21,10 @@
 
 	const { trigger, content, open, close } = createPopover({
 		positioning: {
-			placement: placement
+			placement
 		}
 	});
-	export { open, close, trigger, placement, className as class };
+	export { className as class };
 
 	interface $$Slots {
 		trigger: {

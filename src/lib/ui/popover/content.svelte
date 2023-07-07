@@ -16,6 +16,7 @@
 			className
 		)}
 		{...$content}
+		use:content
 	>
 		<slot />
 	</div>

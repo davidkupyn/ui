@@ -6,6 +6,6 @@
 	export { className as class };
 </script>
 
-<button use:trigger {...$trigger} class={className} {...$$restProps}>
+<button use:trigger on:click|stopPropagation {...$trigger} class={className} {...$$restProps}>
 	<slot />
 </button>

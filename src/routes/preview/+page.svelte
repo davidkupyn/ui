@@ -379,7 +379,7 @@
 				interactive
 				on:rowclick={({ detail: row }) => console.log('clicked on', row.name)}
 			>
-				<Popover slot="actions" let:row>
+				<Popover slot="actions" let:row placement="bottom-end">
 					<svelte:fragment let:Trigger let:Content>
 						<Trigger class="btn btn-ghost btn-icon">
 							<MoreHorizontal size={20} />

@@ -4,7 +4,7 @@
 	import Trigger from './trigger.svelte';
 	import Content from './content.svelte';
 
-	let placement:
+	export let placement:
 		| 'top'
 		| 'top-start'
 		| 'top-end'

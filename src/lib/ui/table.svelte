@@ -146,7 +146,7 @@
 				{/each}
 				<th class={cn('px-4 py-1.5 align-middle text-right', filled && 'rounded-r-2xl')}>
 					{#if columnsEditable}
-						<Popover let:Trigger let:Content>
+						<Popover let:Trigger let:Content placement="bottom-end">
 							<Trigger class="btn btn-ghost btn-icon">
 								<Settings2 size={20} />
 							</Trigger>
