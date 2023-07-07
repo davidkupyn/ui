@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { fly } from 'svelte/transition';
 	import { ChevronsUpDown } from 'lucide-svelte';
 	import { createSelect } from '@melt-ui/svelte';
 	import { createEventDispatcher, setContext } from 'svelte';
@@ -60,10 +61,13 @@
 	</span>
 </button>
 <input {...$input} {id} />
-<ul
-	{...$menu}
-	use:menu
-	class=" z-10 mt-1.5 p-1 flex flex-col gap-1 origin-top rounded-2xl border border-popover-border bg-popover drop-shadow-lg focus:outline-none overflow-y-auto"
->
-	<slot {Option} {Group} />
-</ul>
+{#if $open}
+	<ul
+		transition:fly={{ duration: 150, y: -10 }}
+		{...$menu}
+		use:menu
+		class=" z-10 mt-1.5 p-1 flex flex-col gap-1 origin-top rounded-2xl border border-popover-border bg-popover drop-shadow-lg focus:outline-none overflow-y-auto"
+	>
+		<slot {Option} {Group} />
+	</ul>
+{/if}
