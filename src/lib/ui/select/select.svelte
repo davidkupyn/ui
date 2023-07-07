@@ -3,7 +3,7 @@
 	import { createSelect } from '@melt-ui/svelte';
 	import { createEventDispatcher, setContext } from 'svelte';
 	import { cn } from '$lib/helpers/style';
-
+	import Option from './option.svelte';
 	const dispatch = createEventDispatcher();
 	export let id = '';
 	export let name = '';
@@ -41,6 +41,7 @@
 <button
 	{...$trigger}
 	{disabled}
+	use:trigger
 	type="button"
 	class={cn('input-group w-full justify-between data-[state=open]:ring-accent', className)}
 	aria-label={placeholder}
@@ -57,7 +58,8 @@
 <input {...$input} {id} />
 <ul
 	{...$menu}
+	use:menu
 	class=" z-10 mt-1.5 p-1 flex flex-col space-y-1 origin-top rounded-2xl border border-popover-border bg-popover drop-shadow-lg focus:outline-none overflow-y-auto"
 >
-	<slot />
+	<slot {Option} />
 </ul>

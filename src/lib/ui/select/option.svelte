@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { cn } from '$lib/helpers/style';
-	import type { createSelect } from '@melt-ui/svelte/index';
+	import type { createSelect } from '@melt-ui/svelte';
 	import { Check } from 'lucide-svelte';
 	import { getContext } from 'svelte';
 
@@ -13,6 +13,7 @@
 
 <li
 	{...$option({ value })}
+	use:option
 	class={cn(
 		'relative transition focus:outline-none rounded-xl sm:text-sm truncate data-[selected]:font-medium text-muted-foreground cursor-pointer select-none h-9 flex items-center pl-10 pr-2 data-[selected]:bg-accent-500/20 data-[selected]:text-foreground focus:bg-muted data-[selected]:focus:bg-accent-500/30 focus:text-foreground',
 		className
