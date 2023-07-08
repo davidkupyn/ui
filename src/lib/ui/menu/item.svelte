@@ -42,7 +42,7 @@
 
 <div
   class={cn(
-      'flex cursor-default select-none text-muted-foreground items-center rounded-xl disabled:opacity-50 disabled:pointer-events-none px-4 py-1.5 h-9 outline-none focus:bg-muted focus:text-foreground sm:text-sm',
+      'flex cursor-default gap-2 select-none text-muted-foreground items-center rounded-xl disabled:opacity-50 disabled:pointer-events-none px-4 py-1.5 h-9 outline-none focus:bg-muted focus:text-foreground sm:text-sm',
     className,
     checked && checkbox && 'rounded-full bg-muted'
   )}

@@ -1,4 +1,7 @@
 <script lang="ts">
+	import Label from './item-label.svelte';
+	import RadioGroup from './radio-group.svelte';
+	import Separator from './separator.svelte';
 	import { cn } from '$lib/helpers/style';
 	import { fly } from 'svelte/transition';
 	import { getSubMenuContext } from '.';
@@ -19,6 +22,6 @@
 		{...$subMenu}
 		use:subMenu
 	>
-		<slot />
+			<slot {Separator} {RadioGroup} {Label}/>
 	</div>
 {/if}

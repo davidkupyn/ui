@@ -1,4 +1,5 @@
 <script lang="ts">
+	import RadioGroup from './../../lib/ui/menu/radio-group.svelte';
 import { Menu } from '$lib/ui/menu';
 import { createDropdownMenu } from '@melt-ui/svelte';
 	import { AlignJustify, Check, ChevronRight } from 'lucide-svelte';
@@ -105,11 +106,14 @@ import { createDropdownMenu } from '@melt-ui/svelte';
       <Trigger>
         Profiles
       </Trigger>
-      <Content>
-        <Item>People</Item>
-        <Item>Thomas G. Lopes</Item>
-        <Item>Adrian Gonz</Item>
-        <Item>Franck Poingt</Item>
+      <Content let:RadioGroup> 
+        <RadioGroup let:Item value={personsArr[0]}>
+          {#each personsArr as person}
+            <Item value={person}>
+              {person}
+            </Item>
+          {/each}
+        </RadioGroup> 
       </Content>
       </Submenu>
     <Separator />

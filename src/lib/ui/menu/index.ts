@@ -10,3 +10,8 @@ type CreateSubMenuReturnType = ReturnType<ReturnType<typeof createDropdownMenu>[
 export const getSubMenuContext = () => getContext<
 CreateSubMenuReturnType
   >('sub-dropdown')
+
+type CreateRadioGroupReturnType = ReturnType<ReturnType<typeof createDropdownMenu>['createMenuRadioGroup']>;
+export const getRadioGroupContext = () => getContext<
+CreateRadioGroupReturnType
+  >('radio-group')

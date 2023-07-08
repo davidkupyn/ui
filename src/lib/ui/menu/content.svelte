@@ -1,4 +1,5 @@
 <script lang="ts">
+	import RadioGroup from './radio-group.svelte';
 	import Separator from './separator.svelte';
 	import Label from './item-label.svelte';
 	import Item from './item.svelte';
@@ -22,6 +23,6 @@
 		{...$menu}
 		use:menu
 	>
-		<slot {Item} {Submenu} {Label} {Separator}/>
+		<slot {Item} {Submenu} {Label} {Separator} {RadioGroup}/>
 	</div>
 {/if}

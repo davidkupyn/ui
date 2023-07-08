@@ -10,7 +10,7 @@
 
 	<button
 		class={cn(
-      'flex cursor-default select-none text-muted-foreground items-center rounded-xl disabled:opacity-50 disabled:pointer-events-none px-4 w-full h-9 outline-none focus:bg-muted focus:text-foreground data-[state=open]:bg-muted data-[state=open]:text-foreground sm:text-sm',
+      'flex cursor-default gap-2 select-none text-muted-foreground items-center rounded-xl disabled:opacity-50 disabled:pointer-events-none px-4 w-full h-9 outline-none focus:bg-muted focus:text-foreground data-[state=open]:bg-muted data-[state=open]:text-foreground sm:text-sm',
 			className
 		)}
 		use:subTrigger

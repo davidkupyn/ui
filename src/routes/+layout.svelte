@@ -6,6 +6,7 @@
 	import { Menu } from '$lib/ui/menu';
 	import ThemeProvider from '$lib/theme-switcher/theme-provider.svelte';
 	import { themeStore } from '$lib/theme-switcher';
+	import RadioGroup from '$lib/ui/menu/radio-group.svelte';
 </script>
 
 <svelte:head>
@@ -75,10 +76,12 @@
 
 										 
 							</Trigger>
-							<Content let:Item divide>
-								<Item on:select={() => $themeStore.theme = 'dark'}>Dark</Item>
-								<Item on:select={() => $themeStore.theme = 'light'}>Light</Item>
-								<Item on:select={() => $themeStore.theme = 'system'}>System</Item>
+							<Content let:RadioGroup>
+								<RadioGroup let:Item value={$themeStore.theme} on:change={e => $themeStore.theme = e.detail}>
+									<Item value='dark'>Dark</Item>
+									<Item value='light'>Light</Item>
+									<Item value='system'>System</Item>
+								</RadioGroup>
 							</Content>
 						</Menu>
 				</li>
