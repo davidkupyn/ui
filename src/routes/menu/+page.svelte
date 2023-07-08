@@ -98,7 +98,7 @@ import { createDropdownMenu } from '@melt-ui/svelte';
     <Item>About Melt UI</Item>
     <Item>Check for Updates...</Item>
     <Separator />
-    <Item checkbox bind:checked={$settingsSync}>
+    <Item checkbox checked={$settingsSync}>
       Settings Sync is On
     </Item>
     <Submenu let:Trigger let:Content>
@@ -113,7 +113,7 @@ import { createDropdownMenu } from '@melt-ui/svelte';
       </Content>
       </Submenu>
     <Separator />
-    <Item checkbox bind:checked={$hideMeltUI}>
+    <Item checkbox checked={$hideMeltUI}>
       Hide Melt UI
       <span class="rightSlot">⌘H</span>
     </Item>

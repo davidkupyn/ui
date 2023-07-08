@@ -7,7 +7,8 @@
   export { className as class };
 </script>
 
-<div {...$separator} 
+<div {...$separator}
+  data-orientation='horizontal'
   class={cn(
     '-mx-1 my-1 h-px bg-popover-border',
     className
