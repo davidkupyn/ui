@@ -1,29 +1,36 @@
 <script lang="ts">
-	import { ChevronDown, ChevronUp, ChevronsUpDown } from 'lucide-svelte';
-	import { createCombobox, createSelect } from '@melt-ui/svelte';
+	import Item from './item.svelte';
+	import { ChevronDown, ChevronUp } from 'lucide-svelte';
+	import { createCombobox } from '@melt-ui/svelte';
 	import { createEventDispatcher, setContext } from 'svelte';
-	import { cn } from '$lib/helpers/style';
-	import Option from './item.svelte';
-	import Group from './option-group.svelte';
+	import { writable } from 'svelte/store';
 
 	const dispatch = createEventDispatcher();
-	export let id = '';
-	export let name = '';
-	export let required = false;
-	export let placeholder = '';
-	export let disabled = false;
-	export let value: unknown = undefined;
-
+	// export let id = '';
+	// export let name = '';
+	// export let required = false;
+	// export let placeholder = '';
+	// export let disabled = false;
+	export let value: {
+		label: string;
+		value: string;
+	} | undefined = undefined;
+	const items = writable([])
 	let className = '';
 	export { className as class };
 
 	const { open, input, menu, item, inputValue, isSelected, filteredItems, selectedItem } =
-		createCombobox({
-			value,
-			name,
-			disabled,
-
-			required
+		createCombobox<{
+			label: string;
+			value: string;
+		}>({
+			items: $items,
+			itemToString(item) {
+				return item.value as string;
+			},
+			filterFunction(item, input) {
+				return item.value.toLowerCase().includes(input.toLowerCase());
+			},
 		});
 
 	$: selectedItem.set(value);
@@ -31,7 +38,7 @@
 		value = v;
 		dispatch('change', v);
 	});
-	setContext('auto-complete', { open, input, menu, item, inputValue, isSelected, filteredItems });
+	setContext('auto-complete', { open, input, menu, item, inputValue, isSelected, filteredItems,  });
 </script>
 
 <div class="relative">
@@ -50,7 +57,17 @@
 <ul
 	{...$menu}
 	use:menu
-	class=" z-10 mt-1.5 p-1 flex flex-col gap-1 origin-top rounded-2xl border border-popover-border bg-popover drop-shadow-lg focus:outline-none overflow-y-auto"
+	class="z-10 mt-1.5 p-1 flex flex-col gap-1 origin-top rounded-2xl border border-popover-border bg-popover drop-shadow-lg focus:outline-none overflow-y-auto"
 >
-	<slot {Option} {Group} />
+	<slot {Item}>
+		{#each $filteredItems as itemObj, idx (itemObj.value)}
+			<Item
+				{...$item}
+				index={idx}
+				value={itemObj.value}
+			>
+				{itemObj.label}
+			</Item>
+		{/each}
+	</slot>
 </ul>

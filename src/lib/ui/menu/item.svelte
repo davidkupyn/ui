@@ -36,7 +36,7 @@
 <div class="px-1 py-1">
 	<div
 		class={cn(
-			'gap-2 items-center rounded-xl text-sm transition focus:outline-none disabled:opacity-50 disabled:pointer-events-none h-9 py-2 px-4 text-muted-foreground flex w-full justify-start hover:bg-transparent focus:bg-muted focus:text-foreground active:scale-100 focus:ring-transparent',
+			'gap-2 items-center rounded-xl text-sm transition focus:outline-none disabled:opacity-50 disabled:pointer-events-none aria-disabled:opacity-50 aria-disabled:pointer-events-none h-9 py-2 px-4 text-muted-foreground flex w-full justify-start hover:bg-transparent focus:bg-muted focus:text-foreground active:scale-100 focus:ring-transparent',
 			className
 		)}
 		{...$item}
@@ -46,6 +46,7 @@
 				dispatch('select', e);
 			}
 		}}
+    {...$$restProps}
 	>
 		<slot />
 		{#if checkbox && $checkboxStore}

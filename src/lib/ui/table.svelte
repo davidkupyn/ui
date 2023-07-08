@@ -157,7 +157,7 @@
 								<Settings2 size={20} />
 							</Trigger>
 							<Content let:Item class="w-48" divide let:Label>
-								<Label >Columns</Label>
+								<Label>Columns</Label>
 								{#each tablesColumns as column (column.key)}
 									<Item
 										class="justify-between capitalize"

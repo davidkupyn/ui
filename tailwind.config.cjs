@@ -20,7 +20,7 @@ const config = {
 					DEFAULT: 'var(--color-accent)',
 					focus: 'var(--color-accent-focus)',
 					foreground: 'var(--color-accent-foreground)',
-					...colors.emerald
+					...colors.indigo
 				},
 				base: colors.zinc,
 				background: 'var(--color-background)',

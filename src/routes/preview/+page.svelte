@@ -40,12 +40,13 @@
 	import { Tabs } from '$lib/ui/tabs';
 	import { Menu } from '$lib/ui/menu';
 	import { HoverCard } from '$lib/ui/hover-card';
+	import { AutoComplete } from '$lib/ui/auto-complete';
+	import Item from '$lib/ui/accordion/item.svelte';
 
 	let showPassword = false;
 	const tabs = ['witalina', 'david', 'wiktor', 'gustaw'];
 	const tabs2 = ['witalina', 'david', 'wiktor', 'gustaw'];
 
-	let tab = tabs[0];
 	let tab2 = tabs2[0];
 	const PAGE_SIZE = 10;
 	const currentPage = queryParam('page', ssp.number());
@@ -394,7 +395,10 @@
 			</form>
 		</Content>
 	</Dialog>
-
+	<!-- <AutoComplete let:Item>
+		<Item index={0} value="1">One</Item>
+		<Item index={1} value="1">One</Item>
+	</AutoComplete> -->
 	<div class="flex flex-col items-center w-full">
 		<div class="w-full">
 			<Table

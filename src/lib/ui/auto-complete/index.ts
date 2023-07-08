@@ -1,8 +1,15 @@
 import type { createCombobox } from '@melt-ui/svelte'
 import { getContext } from 'svelte'
+import type { Writable } from 'svelte/store'
 
-export { default as Select } from './root.svelte'
-export { default as Option } from './item.svelte'
+export { default as AutoComplete } from './root.svelte'
 
 export const getAutoCompleteContext = () => getContext<
-  ReturnType<typeof createCombobox>>('auto-complete')
+  ReturnType<typeof createCombobox> & {
+    items: Writable<{
+      value: string
+      label: string
+
+    }[]>
+  }>('auto-complete')
+
