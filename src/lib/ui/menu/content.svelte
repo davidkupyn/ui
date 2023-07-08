@@ -1,4 +1,5 @@
 <script lang="ts">
+	import Separator from './separator.svelte';
 	import Label from './item-label.svelte';
 	import Item from './item.svelte';
 	import { cn } from '$lib/helpers/style';
@@ -23,6 +24,6 @@
 		{...$menu}
 		use:menu
 	>
-		<slot {Item} {Submenu} {Label}/>
+		<slot {Item} {Submenu} {Label} {Separator}/>
 	</div>
 {/if}

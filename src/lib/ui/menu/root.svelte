@@ -28,40 +28,4 @@
 	setContext('dropdown', dropdown);
 </script>
 
-<slot {Trigger} {Content} />
-<!-- 
-<Menu let:Trigger let:Content>
-	<Trigger />
-	<Content let:Item let:Separator let:Menu>
-		<Item />
-		<Item />
-		<Separator />
-		<Menu let:Trigger let:Content>
-			<Trigger />
-			<Content let:Item let:Separator>
-				<Item />
-				<Item />
-				<Separator />
-				<Item />
-			</Content>
-		</Menu>
-	</Content>
-</Menu>
-
-<Menu let:Trigger let:Content>
-	<Trigger />
-	<Content let:Item let:Separator let:SubMenu>
-		<Item />
-		<Item />
-		<Separator />
-		<SubMenu let:SubMenuTrigger let:SubContent>
-			<SubMenuTrigger />
-			<SubContent let:Item let:Separator>
-				<Item />
-				<Item />
-				<Separator />
-				<Item />
-			</SubContent>
-		</SubMenu>
-	</Content>
-</Menu> -->
+<slot {Trigger} {Content}/>

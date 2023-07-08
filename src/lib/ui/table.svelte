@@ -11,7 +11,6 @@
 	import { queryParam, ssp } from 'sveltekit-search-params';
 	import Switch from './switch.svelte';
 	import { createEventDispatcher } from 'svelte';
-	import Trigger from './dialog/trigger.svelte';
 
 	const dispatch = createEventDispatcher();
 	type T = $$Generic<{ id: any }>;
