@@ -1,4 +1,5 @@
 <script lang="ts">
+	import Separator from '$lib/ui/separator.svelte';
 	import { queryParam, ssp } from 'sveltekit-search-params';
 	import { tippy } from '$lib/actions/tippy';
 	import {
@@ -36,6 +37,9 @@
 	import { Accordion } from '$lib/ui/accordion';
 	import { Disclosure } from '$lib/ui/disclosure';
 	import { Popover } from '$lib/ui/popover';
+	import { Tabs } from '$lib/ui/tabs';
+	import { Menu } from '$lib/ui/menu';
+	import { HoverCard } from '$lib/ui/hover-card';
 
 	let showPassword = false;
 	const tabs = ['witalina', 'david', 'wiktor', 'gustaw'];
@@ -208,7 +212,7 @@
 					<span class="text-muted-foreground">Select Date</span>
 				{/if}
 			</Trigger>
-			<Content class="bg-transparent border-none shadow-none">
+			<Content class="bg-transdparent border-none shadow-none">
 				<Calendar bind:value={calendarValue} />
 			</Content>
 		</Popover>
@@ -245,11 +249,23 @@
 				Loading
 			</button>
 		</div>
-		<div
-			class="w-full border border-transparent ring-1 ring-base-950/10 shadow dark:border-border rounded-xl"
-		>
-			<ToggleGroup {tabs} bind:value={tab} on:change={(e) => console.log(e.detail)} />
-		</div>
+
+		<Tabs let:List let:Content defaultTab={tabs[0]}>
+			<List
+				{tabs}
+				class="w-full border border-transparent ring-1 ring-base-950/10 shadow dark:border-border rounded-xl"
+			/>
+			<!-- {#each tabs as tab (tab)}
+					<Trigger value={tab} />
+				{/each} -->
+			<!-- </List> -->
+			{#each tabs as tab (tab)}
+				<Content value={tab} class="capitalize">
+					{tab} content
+				</Content>
+			{/each}
+		</Tabs>
+		<Separator />
 		<div class="w-full rounded-xl bg-muted">
 			<ToggleGroup tabs={tabs2} bind:value={tab2} transparent>
 				<span slot="tab" let:tab class="flex items-center">
@@ -264,6 +280,7 @@
 				</span>
 			</ToggleGroup>
 		</div>
+
 		<div class="flex flex-wrap gap-4">
 			<span class="badge badge-capitalize"> Primary </span>
 			<span class="badge badge-outline capitalize"> Outline </span>
@@ -281,16 +298,21 @@
 			alt="Rich Harris"
 			fallback="RH"
 		/>
-		<Avatar
-			class="w-16"
-			src="https://avatars.githubusercontent.com/u/1162160?v=4"
-			alt="Rich Harris"
-			let:Fallback
-		>
-			<Fallback>
-				<Bot size={16} />
-			</Fallback>
-		</Avatar>
+		<HoverCard let:Trigger let:Content>
+			<Trigger>
+				<Avatar
+					class="w-16"
+					src="https://avatars.githubusercontent.com/u/1162160?v=4"
+					alt="Rich Harris"
+					let:Fallback
+				>
+					<Fallback>
+						<Bot size={16} />
+					</Fallback>
+				</Avatar>
+			</Trigger>
+			<Content>Hover Card!</Content>
+		</HoverCard>
 	</div>
 	<Disclosure class="w-full max-w-md" let:Trigger let:Content>
 		<Trigger>Just a Disclosure</Trigger>
@@ -386,38 +408,33 @@
 				interactive
 				on:rowclick={({ detail: row }) => console.log('clicked on', row.name)}
 			>
-				<Popover slot="actions" let:row placement="bottom-end">
+				<Menu slot="actions" let:row placement="bottom-end">
 					<svelte:fragment let:Trigger let:Content>
 						<Trigger class="btn btn-ghost btn-icon">
 							<MoreHorizontal size={20} />
 						</Trigger>
-						<Content class="w-40 divide-y divide-muted">
-							<div class="px-1 py-1">
-								<button
-									class="btn btn-ghost w-full justify-start active:scale-100"
-									on:click|stopPropagation={() => {
-										console.log('edit');
-									}}
-								>
-									<Edit size={20} class="mr-2" />
-									Edit
-								</button>
-							</div>
-							<div class="px-1 py-1">
-								<button
-									class="btn btn-ghost w-full justify-start active:scale-100"
-									on:click|stopPropagation={() => {
-										items = items.filter((item) => item.id !== row.id);
-										selected = selected.filter((item) => item !== row.id);
-									}}
-								>
-									<Trash2 size={20} class="mr-2" />
-									Delete
-								</button>
-							</div>
+						<Content let:Item class="w-40" divide>
+							<Item
+								on:select={() => {
+									console.log('edit');
+								}}
+							>
+								<Edit size={20} class="mr-2" />
+								Edit
+							</Item>
+							<Item
+								on:select={() => {
+									items = items.filter((item) => item.id !== row.id);
+									selected = selected.filter((item) => item !== row.id);
+								}}
+							>
+								<Trash2 size={20} class="mr-2" />
+
+								Delete
+							</Item>
 						</Content>
 					</svelte:fragment>
-				</Popover>
+				</Menu>
 				<svelte:fragment slot="row-header" let:header>
 					{#if header.key === 'createdAt'}
 						<span class="flex items-center gap-2 w-28">
@@ -477,7 +494,6 @@
 					<div class="flex gap-4">
 						<Dialog let:Trigger let:Content class="sm:max-w-[425px]" alert type="error">
 							<Trigger aria-label="Delete items" class="btn btn-ghost btn-icon btn-sm rounded-lg">
-								<!-- use:tippy={{ content: 'Delete items' }} -->
 								<Trash2 size={20} />
 							</Trigger>
 							<Content let:Title let:Description let:close class="sm:w-96">

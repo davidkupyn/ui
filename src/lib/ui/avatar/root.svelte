@@ -19,9 +19,7 @@
 
 <div class={cn(avatar().root(), className)}>
 	<img {...$image} {alt} class="h-full w-full rounded-[inherit]" />
-	{#if $$slots.default}
-		<slot {Fallback} />
-	{:else}
+	<slot {Fallback}>
 		<span {...$fallbackAttrs} class={avatar().fallback()}>{fallback}</span>
-	{/if}
+	</slot>
 </div>

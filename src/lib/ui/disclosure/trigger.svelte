@@ -4,7 +4,8 @@
 	import { getDisclosureContext } from '.';
 
 	const { trigger } = getDisclosureContext();
-
+	export let arrow = true;
+	export let styled = true;
 	let className = '';
 	export { className as class };
 </script>
@@ -13,13 +14,15 @@
 	{...$trigger}
 	use:trigger
 	class={cn(
-		'btn btn-ghost active:scale-100 w-full group data-[state=open]:text-foreground',
+		styled && 'btn btn-ghost active:scale-100 w-full group data-[state=open]:text-foreground',
 		className
 	)}
 >
 	<slot />
-	<ChevronRight
-		size={16}
-		class="h-4 w-4 ml-auto text-primary transition group-data-[state=open]:rotate-90 group-data-[state=open]:transform"
-	/>
+	{#if arrow}
+		<ChevronRight
+			size={16}
+			class="h-4 w-4 ml-auto text-accent-fo transition group-data-[state=open]:rotate-90 group-data-[state=open]:transform"
+		/>
+	{/if}
 </button>

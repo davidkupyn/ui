@@ -1,0 +1,26 @@
+<script lang="ts">
+	import { cn } from '$lib/helpers/style';
+	import { fly } from 'svelte/transition';
+	import { getSubMenuContext } from '.';
+
+	const { subMenu, subOpen } = getSubMenuContext();
+	let className = '';
+	export let divide = false;
+
+	export { className as class };
+</script>
+
+{#if $subOpen}
+	<div
+		transition:fly={{ duration: 150, x: -10 }}
+		class={cn(
+			'rounded-2xl border border-popover-border bg-popover backdrop-blur-md w-48 shadow-lg z-10 focus:outline-none',
+			divide && 'divide-y divide-popover-border',
+			className
+		)}
+		{...$subMenu}
+		use:subMenu
+	>
+		<slot />
+	</div>
+{/if}

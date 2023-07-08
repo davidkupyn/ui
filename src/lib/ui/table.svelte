@@ -1,4 +1,6 @@
 <script lang="ts">
+	import { Menu } from './menu';
+
 	import { Popover } from '$lib/ui/popover';
 	import { cn } from '$lib/helpers/style';
 
@@ -151,31 +153,34 @@
 				{/each}
 				<th class={cn('px-4 py-1.5 align-middle text-right', filled && 'rounded-r-2xl')}>
 					{#if columnsEditable}
-						<Popover let:Trigger let:Content placement="bottom-end">
+						<Menu let:Trigger let:Content placement="bottom-end">
 							<Trigger class="btn btn-ghost btn-icon">
 								<Settings2 size={20} />
 							</Trigger>
-							<Content class="w-48 divide-y divide-muted">
+							<Content let:Item class="w-48" divide let:Label>
+								<Label >Columns</Label>
 								{#each tablesColumns as column (column.key)}
-									<div class="px-1 py-1">
-										<label
-											for={column.key.toString()}
-											class="flex w-full justify-between capitalize btn btn-ghost focus-within:bg-muted focus-within:text-foreground active:scale-100"
-										>
+									<Item
+										class="justify-between capitalize"
+										on:select={(e) => {
+											e.detail.preventDefault();
+										}}
+									>
+										<label for={column.key.toString()}>
 											{column.value}
-											<Switch
-												id={column.key.toString()}
-												bind:group={currentTableColumns}
-												value={column}
-												defaultChecked
-												disabled={currentTableColumns.includes(column) &&
-													currentTableColumns.length === 1}
-											/>
 										</label>
-									</div>
+										<Switch
+											id={column.key.toString()}
+											bind:group={currentTableColumns}
+											value={column}
+											defaultChecked
+											disabled={currentTableColumns.includes(column) &&
+												currentTableColumns.length === 1}
+										/>
+									</Item>
 								{/each}
 							</Content>
-						</Popover>
+						</Menu>
 					{/if}
 				</th>
 			</tr>

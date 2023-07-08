@@ -19,7 +19,7 @@
 		<div
 			{...$overlay}
 			transition:fade={{ duration: 150 }}
-			class="fixed z-50 inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-base-500/50 to-base-500/75 dark:from-base-950/70 dark:to-base-950/95"
+			class="fixed z-50 inset-0 bg-[radial-gradient(ellipse_at_bottom,_var(--tw-gradient-stops))] sm:bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-base-600/50 to-base-600/95 dark:from-base-950/70 dark:to-base-950/95"
 		/>
 		<div
 			transition:scale={{ duration: 200, start: 0.95 }}

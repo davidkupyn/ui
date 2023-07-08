@@ -11,7 +11,7 @@
 		open,
 		disabled
 	});
-	const { root } = disclosure;
+	const { root, open: openStore } = disclosure;
 	let className = '';
 	export { className as class };
 
@@ -19,5 +19,5 @@
 </script>
 
 <div class={cn('group', className)} {...root}>
-	<slot {Trigger} {Content} />
+	<slot {Trigger} {Content} open={$openStore} />
 </div>
