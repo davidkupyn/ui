@@ -1,6 +1,4 @@
 <script lang="ts">
-	import Content from '$lib/ui/accordion/content.svelte';
-import Trigger from '$lib/ui/accordion/trigger.svelte';
 import { Menu } from '$lib/ui/menu';
 import { createDropdownMenu } from '@melt-ui/svelte';
 	import { AlignJustify, Check, ChevronRight } from 'lucide-svelte';
@@ -107,7 +105,7 @@ import { createDropdownMenu } from '@melt-ui/svelte';
       <Trigger>
         Profiles
       </Trigger>
-      <Content class="w-40">
+      <Content>
         <Item>People</Item>
         <Item>Thomas G. Lopes</Item>
         <Item>Adrian Gonz</Item>

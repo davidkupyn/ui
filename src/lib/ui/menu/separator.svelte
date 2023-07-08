@@ -7,7 +7,7 @@
   export { className as class };
 </script>
 
-<hr {...$separator} 
+<div {...$separator} 
   class={cn(
     '-mx-1 my-1 h-px bg-popover-border',
     className
