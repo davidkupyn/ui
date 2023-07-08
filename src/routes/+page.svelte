@@ -34,7 +34,7 @@
 			>
 				Unleash Your
 				<span
-					class="animate-text bg-clip-text text-transparent bg-gradient-to-r from-primary-400 via-primary-500 to-primary-600 dark:from-primary-300 dark:via-primary-500 dark:to-primary-800 selection:text-primary-500 dark:selection:text-primary-400"
+					class="animate-text bg-clip-text text-transparent bg-gradient-to-r from-accent-400 via-accent-500 to-accent-600 dark:from-accent-300 dark:via-accent-500 dark:to-accent-800 selection:text-accent-500 dark:selection:text-accent-400"
 				>
 					Creativity.
 				</span>

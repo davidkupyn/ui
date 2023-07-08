@@ -1,8 +1,11 @@
 <script>
 	import { page } from '$app/stores';
-	import { Github } from 'lucide-svelte';
+	import { Github, Monitor, Moon, Sun } from 'lucide-svelte';
 	import '../app.postcss';
 	import { cn } from '$lib/helpers/style';
+	import { Menu } from '$lib/ui/menu';
+	import ThemeProvider from '$lib/theme-switcher/theme-provider.svelte';
+	import { themeStore } from '$lib/theme-switcher';
 </script>
 
 <svelte:head>
@@ -13,6 +16,7 @@
 	/>
 	<meta name="author" content="David Kupyn" />
 </svelte:head>
+<ThemeProvider attribute="class" disableTransitionOnChange />
 <header
 	class={cn(
 		'w-full z-20',
@@ -57,6 +61,26 @@
 					>
 						<Github size={16} />
 					</a>
+				</li>
+					<li>
+						<Menu let:Trigger let:Content>
+							<Trigger class="btn btn-text btn-icon">
+									{#if $themeStore.theme === 'dark'}
+										<Moon size={16} />
+									{:else if $themeStore.theme === 'light'}
+										<Sun size={16} />
+									{:else}
+										<Monitor size={16} />
+									{/if}
+
+										 
+							</Trigger>
+							<Content let:Item divide>
+								<Item on:select={() => $themeStore.theme = 'dark'}>Dark</Item>
+								<Item on:select={() => $themeStore.theme = 'light'}>Light</Item>
+								<Item on:select={() => $themeStore.theme = 'system'}>System</Item>
+							</Content>
+						</Menu>
 				</li>
 				<span class="bg-base-300 dark:bg-base-800 w-px h-6" />
 				<li>

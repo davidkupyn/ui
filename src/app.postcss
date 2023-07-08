@@ -42,8 +42,7 @@
 		--color-popover-foreground: theme('colors.base.900');
 		--color-popover-border: theme('colors.base.200');
 	}
-	@media (prefers-color-scheme: dark) {
-		:root {
+	.dark {
 			--border: theme('colors.base.800');
 
 			--color-primary: theme('colors.primary.50');
@@ -80,7 +79,6 @@
 			--color-popover-foreground: theme('colors.base.50');
 			--color-popover-border: theme('colors.base.800');
 		}
-	}
 }
 @layer base {
 	input[data-autocompleted] {

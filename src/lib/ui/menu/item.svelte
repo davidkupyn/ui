@@ -33,24 +33,22 @@
 	const dispatch = createEventDispatcher();
 </script>
 
-<div class="px-1 py-1">
-	<div
-		class={cn(
-			'gap-2 items-center rounded-xl text-sm transition focus:outline-none disabled:opacity-50 disabled:pointer-events-none aria-disabled:opacity-50 aria-disabled:pointer-events-none h-9 py-2 px-4 text-muted-foreground flex w-full justify-start hover:bg-transparent focus:bg-muted focus:text-foreground active:scale-100 focus:ring-transparent',
-			className
-		)}
-		{...$item}
-		use:item.action={{
-			checked: checkboxStore,
-			onSelect: (e) => {
-				dispatch('select', e);
-			}
-		}}
-    {...$$restProps}
-	>
-		<slot />
-		{#if checkbox && $checkboxStore}
-			<Check class="icon" />
-		{/if}
-	</div>
+<div
+  class={cn(
+      'flex cursor-default select-none text-muted-foreground items-center rounded-xl disabled:opacity-50 disabled:pointer-events-none px-4 py-1.5 h-9 outline-none focus:bg-muted focus:text-foreground sm:text-sm',
+    className
+  )}
+  {...$item}
+  use:item.action={{
+    checked: checkboxStore,
+    onSelect: (e) => {
+      dispatch('select', e);
+    }
+  }}
+  {...$$restProps}
+>
+  <slot />
+  {#if checkbox && $checkboxStore}
+    <Check class="icon" />
+  {/if}
 </div>

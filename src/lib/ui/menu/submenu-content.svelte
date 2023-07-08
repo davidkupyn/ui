@@ -5,7 +5,6 @@
 
 	const { subMenu, subOpen } = getSubMenuContext();
 	let className = '';
-	export let divide = false;
 
 	export { className as class };
 </script>
@@ -14,8 +13,7 @@
 	<div
 		transition:fly={{ duration: 150, x: -10 }}
 		class={cn(
-			'rounded-2xl border border-popover-border bg-popover backdrop-blur-md w-48 shadow-lg z-10 focus:outline-none',
-			divide && 'divide-y divide-popover-border',
+			'rounded-2xl p-1 border border-popover-border bg-popover backdrop-blur-md min-w-[8rem] shadow-lg z-10 focus:outline-none',
 			className
 		)}
 		{...$subMenu}

@@ -9,7 +9,7 @@
 
 <hr {...$separator} 
   class={cn(
-    'border-t border-popover-border',
+    '-mx-1 my-1 h-px bg-popover-border',
     className
   )}
 />

@@ -156,8 +156,9 @@
 							<Trigger class="btn btn-ghost btn-icon">
 								<Settings2 size={20} />
 							</Trigger>
-							<Content let:Item class="w-48" divide let:Label>
+							<Content let:Separator let:Item class="w-48" let:Label>
 								<Label>Columns</Label>
+								<Separator />
 								{#each tablesColumns as column (column.key)}
 									<Item
 										class="justify-between capitalize"
@@ -177,6 +178,7 @@
 												currentTableColumns.length === 1}
 										/>
 									</Item>
+								
 								{/each}
 							</Content>
 						</Menu>

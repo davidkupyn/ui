@@ -2,11 +2,13 @@ import defaultTheme from 'tailwindcss/defaultTheme';
 import colors from 'tailwindcss/colors';
 import tailwindForms from '@tailwindcss/forms';
 import tailwindAnimate from 'tailwindcss-animate';
+
 const config = {
 	future: {
 		hoverOnlyWhenSupported: true
 	},
 	content: ['./src/**/*.{html,js,svelte,ts}'],
+	darkMode: 'class',
 	theme: {
 		extend: {
 			colors: {

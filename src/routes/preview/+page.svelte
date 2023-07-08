@@ -417,7 +417,7 @@
 						<Trigger class="btn btn-ghost btn-icon">
 							<MoreHorizontal size={20} />
 						</Trigger>
-						<Content let:Item class="w-40" divide>
+						<Content let:Item class="w-40">
 							<Item
 								on:select={() => {
 									console.log('edit');

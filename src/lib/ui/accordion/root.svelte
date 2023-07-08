@@ -5,7 +5,7 @@
 	import { setContext } from 'svelte';
 	export let multiple = false;
 	const accordion = createAccordion({
-		type: multiple ? 'multiple' : 'single'
+		type: multiple ? 'multiple' : 'single'    
 	});
 	const { root } = accordion;
 	let className = '';
@@ -14,6 +14,6 @@
 	setContext('accordion', accordion);
 </script>
 
-<div class={cn('grid gap-4', className)} {...root}>
+<div class={cn('grid gap-4', className)} {...$root}>
 	<slot {Item} />
 </div>
