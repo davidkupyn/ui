@@ -395,6 +395,31 @@
 			</form>
 		</Content>
 	</Dialog>
+
+	<Menu placement="bottom-start" let:Trigger let:Content>
+						<Trigger class="btn btn-ghost btn-icon">
+							<MoreHorizontal size={20} />
+						</Trigger>
+						<Content let:Item class="w-40">
+							<Item
+								on:select={() => {
+									console.log('edit');
+								}}
+							>
+								<Edit size={16} />
+								Edit
+							</Item>
+							<Item
+								on:select={() => {
+									console.log('smth')
+								}}
+							>
+								<Trash2 size={16} />
+
+								Delete
+							</Item>
+						</Content>
+				</Menu>
 	<!-- <AutoComplete let:Item>
 		<Item index={0} value="1">One</Item>
 		<Item index={1} value="1">One</Item>

@@ -2,7 +2,7 @@
 	import RadioGroup from './../../lib/ui/menu/radio-group.svelte';
 import { Menu } from '$lib/ui/menu';
 import { createDropdownMenu } from '@melt-ui/svelte';
-	import { AlignJustify, Check, ChevronRight } from 'lucide-svelte';
+	import { AlignJustify, BookTemplate, Check, ChevronRight, Flower2, Loader2, Save, Stars } from 'lucide-svelte';
 	import { writable } from 'svelte/store';
 
 	const {
@@ -27,7 +27,39 @@ import { createDropdownMenu } from '@melt-ui/svelte';
 	const settingsSync = writable(true);
 	const hideMeltUI = writable(false);
 </script>
-<main class="h-96 p-24 items-center justify-center flex gap-24">
+<div class="flex flex-wrap gap-2 w-full p-6 h-[40vh]">
+			<button class="btn">
+				<Stars size={16} />
+				Primary
+			</button>
+			<button class="btn btn-outline">
+				<BookTemplate size={16} />
+				Outline
+			</button>
+			<button class="btn btn-secondary">
+				<Flower2 size={16} />
+				Secondary
+			</button>
+			<button class="btn btn-error"> Error </button>
+			<button class="btn btn-success"> Success </button>
+			<button class="btn btn-warning"> Warning </button>
+			<button class="btn btn-info"> Info </button>
+
+			<button class="btn btn-ghost"> Ghost </button>
+			<button class="btn btn-ghost btn-icon" use:tippy={{ content: 'Ghost icon button' }}>
+				<Save size={20} />
+			</button>
+
+			<button class="btn btn-link">Link</button>
+			<button class="btn btn-text">Text</button>
+
+			<button class="btn btn-link btn-secondary">Link Secondary</button>
+			<button class="btn" disabled>
+				<Loader2 class="animate-spin" size={16} />
+				Loading
+			</button>
+		</div>
+<main class="h-[70vh] p-24 items-center justify-center flex gap-24">
 
 <button type="button" class="trigger" {...$trigger} use:trigger aria-label="Update dimensions">
 	<AlignJustify class="h-4 w-4" />
