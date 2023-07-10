@@ -1,4 +1,5 @@
 <script lang="ts">
+	import Item from './../../lib/ui/menu/item.svelte';
 	import Separator from '$lib/ui/separator.svelte';
 	import { queryParam, ssp } from 'sveltekit-search-params';
 	import { tippy } from '$lib/actions/tippy';
@@ -40,8 +41,8 @@
 	import { Tabs } from '$lib/ui/tabs';
 	import { Menu } from '$lib/ui/menu';
 	import { HoverCard } from '$lib/ui/hover-card';
-	import { AutoComplete } from '$lib/ui/auto-complete';
-	import Item from '$lib/ui/accordion/item.svelte';
+	import Trigger from '$lib/ui/popover/trigger.svelte';
+	import Content from '$lib/ui/popover/content.svelte';
 
 	let showPassword = false;
 	const tabs = ['witalina', 'david', 'wiktor', 'gustaw'];
@@ -437,12 +438,11 @@
 				interactive
 				on:rowclick={({ detail: row }) => console.log('clicked on', row.name)}
 			>
-				<Menu slot="actions" let:row placement="bottom-end">
-					<svelte:fragment let:Trigger let:Content>
+				<Popover slot="actions" let:row placement="bottom-end">
 						<Trigger class="btn btn-ghost btn-icon">
 							<MoreHorizontal size={20} />
 						</Trigger>
-						<Content let:Item class="w-40">
+						<Content class="w-40">
 							<Item
 								on:select={() => {
 									console.log('edit');
@@ -462,8 +462,7 @@
 								Delete
 							</Item>
 						</Content>
-					</svelte:fragment>
-				</Menu>
+				</Popover>
 				<svelte:fragment slot="row-header" let:header>
 					{#if header.key === 'createdAt'}
 						<span class="flex items-center gap-2 w-28">
