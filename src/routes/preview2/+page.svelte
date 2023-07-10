@@ -39,10 +39,8 @@
 	import { Disclosure } from '$lib/ui/disclosure';
 	import { Popover } from '$lib/ui/popover';
 	import { Tabs } from '$lib/ui/tabs';
-	import { Menu } from '$lib/ui/menu';
+	import { Menu, menuStyles } from '$lib/ui/menu';
 	import { HoverCard } from '$lib/ui/hover-card';
-	import { AutoComplete } from '$lib/ui/auto-complete';
-	import Item from '$lib/ui/accordion/item.svelte';
 import { createDropdownMenu } from '@melt-ui/svelte';
 	import {  } from 'lucide-svelte';
 	import { writable } from 'svelte/store';
@@ -105,9 +103,110 @@ import { createDropdownMenu } from '@melt-ui/svelte';
 				.replace(/^./, (str) => str.toUpperCase())
 		}))
 		.filter((header) => header.key !== 'id');
+
+		
 </script>
 
 <main in:fade={{ duration: 100 }} class="py-8 w-full space-y-6 container mx-auto px-6">
+
+<button type="button" class="trigger" {...$trigger} use:trigger aria-label="Update dimensions">
+	<AlignJustify class="h-4 w-4" />
+	<span class="sr-only">Open Popover</span>
+</button>
+
+<div class={menuStyles().content()} {...$menu} use:menu>
+	<div class={menuStyles().item()} {...$item} use:item>About Melt UI</div>
+	<div class={menuStyles().item()} {...$item} use:item>Check for Updates...</div>
+	<div class="separator" {...$separator} />
+	<div class={menuStyles().item()} {...$checkboxItem} use:checkboxItem={{ checked: settingsSync }}>
+		<div class="check">
+			{#if $settingsSync}
+				<Check class="icon" />
+			{/if}
+		</div>
+		Settings Sync is On
+	</div>
+	<div class={menuStyles().item()} {...$subTriggerA} use:subTriggerA>
+		Profiles
+		<div class="rightSlot">
+			<ChevronRight class="icon" />
+		</div>
+	</div>
+	<div class="menu subMenu" {...$subMenuA} use:subMenuA>
+		<div class="text">People</div>
+		<div {...$radioGroup}>
+			{#each personsArr as person}
+				<div class={menuStyles().item()} {...$radioItem({ value: person })} use:radioItem>
+					<div class="check">
+						{#if $isChecked(person)}
+							<div class="dot" />
+						{/if}
+					</div>
+					{person}
+				</div>
+			{/each}
+		</div>
+	</div>
+	<div {...$separator} class="separator" />
+
+	<div class={menuStyles().item()} {...$checkboxItem} use:checkboxItem={{ checked: hideMeltUI }}>
+		<div class="check">
+			{#if $hideMeltUI}
+				<Check class="icon" />
+			{/if}
+		</div>
+		Hide Melt UI
+		<div class="rightSlot">⌘H</div>
+	</div>
+	<div class={menuStyles().item()} {...$item} use:item aria-disabled="true">
+		Show All Components
+		<div class="rightSlot">⇧⌘N</div>
+	</div>
+	<div {...$separator} class="separator" />
+	<div class={menuStyles().item()} {...$item} use:item>
+		Quit Melt UI
+		<div class="rightSlot">⌘Q</div>
+	</div>
+	<div {...$arrow} />
+</div>
+<!-- 
+<Menu let:Trigger let:Content>
+  <Trigger class="btn btn-outline btn-icon">
+    <AlignJustify class="h-4 w-4" />
+    <span class="sr-only">Open Popover</span>
+  </Trigger>
+  <Content let:Item let:Submenu let:Separator>
+    <Item>About Melt UI</Item>
+    <Item>Check for Updates...</Item>
+    <Separator />
+    <Item checkbox checked={$settingsSync}>
+      Settings Sync is On
+    </Item>
+    <Submenu let:Trigger let:Content>
+      <Trigger>
+        Profiles
+      </Trigger>
+      <Content let:RadioGroup> 
+        <RadioGroup let:Item value={personsArr[0]}>
+          {#each personsArr as person}
+            <Item value={person}>
+              {person}
+            </Item>
+          {/each}
+        </RadioGroup> 
+      </Content>
+      </Submenu>
+    <Separator />
+    <Item checkbox checked={$hideMeltUI}>
+      Hide Melt UI
+      <span class="rightSlot">⌘H</span>
+    </Item>
+    <Item aria-disabled="true">Show All Components</Item>
+    <Separator />
+    <Item>Quit Melt UI</Item>
+  </Content>
+</Menu> -->
+
 	<div class="w-full max-w-[40rem] flex flex-col gap-6">
 		<label class="input-group group">
 			<Search size={16} class="icon-left" />
