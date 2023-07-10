@@ -17,7 +17,6 @@
 
 {#if $open}
 	<div
-		transition:fly={{ duration: 150, y: -10 }}
 		class={cn(
 			content(),
 			className
