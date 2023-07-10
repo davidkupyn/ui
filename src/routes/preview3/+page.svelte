@@ -427,7 +427,7 @@
 	</AutoComplete> -->
 	<div class="flex flex-col items-center w-full">
 		<div class="w-full">
-			<Table
+			<!-- <Table
 				items={paginatedItems}
 				{headers}
 				disabledKeys={[items[7].id]}
@@ -503,7 +503,7 @@
 						{cell.value}
 					{/if}
 				</svelte:fragment>
-			</Table>
+			</Table> -->
 		</div>
 		<div class="sticky bottom-24 z-20 h-11 w-96 max-md:w-full mx-auto my-2">
 			{#if selected.length > 0}
