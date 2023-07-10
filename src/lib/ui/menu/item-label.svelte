@@ -1,10 +1,13 @@
 <script lang="ts">
 	import { cn } from '$lib/helpers/style';
+	import { menuStyles } from '.';
 
 	let className = '';
+  const { itemLabel } = menuStyles();
+
 	export { className as class };
 </script>
 
-<span class={cn('input-label py-2 pl-5 pr-5 font-semibold text-foreground', className)}>
+<span class={cn(itemLabel(), className)}>
 	<slot />
 </span>

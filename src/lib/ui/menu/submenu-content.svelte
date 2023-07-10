@@ -4,10 +4,11 @@
 	import Separator from './separator.svelte';
 	import { cn } from '$lib/helpers/style';
 	import { fly } from 'svelte/transition';
-	import { getSubMenuContext } from '.';
+	import { getSubMenuContext, menuStyles } from '.';
 
 	const { subMenu, subOpen } = getSubMenuContext();
 	let className = '';
+  const { content } = menuStyles();
 
 	export { className as class };
 </script>
@@ -16,7 +17,7 @@
 	<div
 		transition:fly={{ duration: 150, x: -10 }}
 		class={cn(
-			'rounded-2xl p-1 border border-popover-border bg-popover backdrop-blur-md min-w-[8rem] shadow-lg z-10 focus:outline-none',
+			content(),
 			className
 		)}
 		{...$subMenu}

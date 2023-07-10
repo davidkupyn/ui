@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { Check } from 'lucide-svelte';
 	import { writable, type Writable } from 'svelte/store';
-	import { getMenuContext } from '.';
+	import { getMenuContext, menuStyles } from '.';
 	import type { CheckboxItemArgs, ItemArgs } from '@melt-ui/svelte/dist/builders/menu';
 	import { cn } from '$lib/helpers/style';
 	import { createEventDispatcher } from 'svelte';
@@ -24,6 +24,7 @@
 
 
 	let className = '';
+  const { item: itemStyles } = menuStyles()
   export let checked = false;
 	export { className as class };
 
@@ -42,9 +43,8 @@
 
 <div
   class={cn(
-      'flex cursor-default gap-2 select-none text-muted-foreground items-center rounded-xl disabled:opacity-50 disabled:pointer-events-none px-4 py-1.5 h-9 outline-none focus:bg-muted focus:text-foreground sm:text-sm',
+    itemStyles(),
     className,
-    checked && checkbox && 'rounded-full bg-muted'
   )}
   {...$item}
   use:item.action={{
