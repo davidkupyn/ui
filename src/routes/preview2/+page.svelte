@@ -21,6 +21,7 @@
 		Command,
 		CalendarIcon,
 		Loader2,
+		AlignJustify, Check, ChevronRight,
 		Bot
 	} from 'lucide-svelte';
 	import ToggleGroup from '$lib/ui/toggle-group.svelte';
@@ -42,7 +43,31 @@
 	import { HoverCard } from '$lib/ui/hover-card';
 	import { AutoComplete } from '$lib/ui/auto-complete';
 	import Item from '$lib/ui/accordion/item.svelte';
+import { createDropdownMenu } from '@melt-ui/svelte';
+	import {  } from 'lucide-svelte';
+	import { writable } from 'svelte/store';
 
+	const {
+		trigger,
+		menu,
+		item,
+		checkboxItem,
+		arrow,
+		separator,
+		createSubMenu,
+		createMenuRadioGroup,
+	} = createDropdownMenu();
+
+	const { subMenu: subMenuA, subTrigger: subTriggerA } = createSubMenu();
+
+	const { radioGroup, radioItem, isChecked } = createMenuRadioGroup({
+		value: 'Hunter Johnston',
+	});
+
+	const personsArr = ['Hunter Johnston', 'Thomas G. Lopes', 'Adrian Gonz', 'Franck Poingt'];
+
+	const settingsSync = writable(true);
+	const hideMeltUI = writable(false);
 	let showPassword = false;
 	const tabs = ['witalina', 'david', 'wiktor', 'gustaw'];
 	const tabs2 = ['witalina', 'david', 'wiktor', 'gustaw'];
