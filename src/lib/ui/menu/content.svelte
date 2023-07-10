@@ -15,6 +15,7 @@
 	export { className as class };
 </script>
 
+{#if $open}
 	<div
 		transition:fly={{ duration: 150, y: -10 }}
 		class={cn(
@@ -26,3 +27,4 @@
 	>
 		<slot {Item} {Submenu} {Label} {Separator} {RadioGroup}/>
 	</div>
+{/if}

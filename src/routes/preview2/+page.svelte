@@ -54,7 +54,11 @@ import { createDropdownMenu } from '@melt-ui/svelte';
 		separator,
 		createSubMenu,
 		createMenuRadioGroup,
-	} = createDropdownMenu();
+	} = createDropdownMenu({
+	positioning: {
+		placement: 'bottom-end'
+	}
+	});
 
 	const { subMenu: subMenuA, subTrigger: subTriggerA } = createSubMenu();
 
@@ -536,33 +540,67 @@ import { createDropdownMenu } from '@melt-ui/svelte';
 				interactive
 				on:rowclick={({ detail: row }) => console.log('clicked on', row.name)}
 			>
-				<Menu slot="actions" let:row placement="bottom-end">
-					<svelte:fragment let:Trigger let:Content>
-						<Trigger class="btn btn-ghost btn-icon">
-							<MoreHorizontal size={20} />
-						</Trigger>
-						<Content let:Item class="w-40">
-							<Item
-								on:select={() => {
-									console.log('edit');
-								}}
-							>
-								<Edit size={16} />
-								Edit
-							</Item>
-							<Item
-								on:select={() => {
-									items = items.filter((item) => item.id !== row.id);
-									selected = selected.filter((item) => item !== row.id);
-								}}
-							>
-								<Trash2 size={16} />
+				
+<button slot="actions" type="button" class="btn btn-ghost btn-icon" {...$trigger} use:trigger aria-label="Update dimensions">
+	<MoreHorizontal class="h-4 w-4" />
+	<span class="sr-only">Open Popover</span>
+</button>
 
-								Delete
-							</Item>
-						</Content>
-					</svelte:fragment>
-				</Menu>
+<div class={menuStyles().content()} {...$menu} use:menu>
+	<div class={menuStyles().item()} {...$item} use:item>About Melt UI</div>
+	<div class={menuStyles().item()} {...$item} use:item>Check for Updates...</div>
+	<div class="separator" {...$separator} />
+	<div class={menuStyles().item()} {...$checkboxItem} use:checkboxItem={{ checked: settingsSync }}>
+		<div class="check">
+			{#if $settingsSync}
+				<Check class="icon" />
+			{/if}
+		</div>
+		Settings Sync is On
+	</div>
+	<div class={menuStyles().item()} {...$subTriggerA} use:subTriggerA>
+		Profiles
+		<div class="rightSlot">
+			<ChevronRight class="icon" />
+		</div>
+	</div>
+	<div class="menu subMenu" {...$subMenuA} use:subMenuA>
+		<div class="text">People</div>
+		<div {...$radioGroup}>
+			{#each personsArr as person}
+				<div class={menuStyles().item()} {...$radioItem({ value: person })} use:radioItem>
+					<div class="check">
+						{#if $isChecked(person)}
+							<div class="dot" />
+						{/if}
+					</div>
+					{person}
+				</div>
+			{/each}
+		</div>
+	</div>
+	<div {...$separator} class="separator" />
+
+	<div class={menuStyles().item()} {...$checkboxItem} use:checkboxItem={{ checked: hideMeltUI }}>
+		<div class="check">
+			{#if $hideMeltUI}
+				<Check class="icon" />
+			{/if}
+		</div>
+		Hide Melt UI
+		<div class="rightSlot">⌘H</div>
+	</div>
+	<div class={menuStyles().item()} {...$item} use:item aria-disabled="true">
+		Show All Components
+		<div class="rightSlot">⇧⌘N</div>
+	</div>
+	<div {...$separator} class="separator" />
+	<div class={menuStyles().item()} {...$item} use:item>
+		Quit Melt UI
+		<div class="rightSlot">⌘Q</div>
+	</div>
+	<div {...$arrow} />
+</div>
 				<svelte:fragment slot="row-header" let:header>
 					{#if header.key === 'createdAt'}
 						<span class="flex items-center gap-2 w-28">
