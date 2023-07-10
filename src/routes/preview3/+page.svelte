@@ -39,7 +39,7 @@
 	import { Disclosure } from '$lib/ui/disclosure';
 	import { Popover } from '$lib/ui/popover';
 	import { Tabs } from '$lib/ui/tabs';
-	import { Menu } from '$lib/ui/menu';
+	import { Menu, menuStyles } from '$lib/ui/menu';
 	import { HoverCard } from '$lib/ui/hover-card';
 	import Trigger from '$lib/ui/popover/trigger.svelte';
 	import Content from '$lib/ui/popover/content.svelte';
@@ -439,29 +439,27 @@
 				on:rowclick={({ detail: row }) => console.log('clicked on', row.name)}
 			>
 				<Popover slot="actions" let:row placement="bottom-end">
+					<svelte:fragment let:Trigger let:Content>
 						<Trigger class="btn btn-ghost btn-icon">
 							<MoreHorizontal size={20} />
 						</Trigger>
-						<Content class="w-40">
-							<Item
-								on:select={() => {
-									console.log('edit');
-								}}
+						<Content class="w-40 p-1">
+							<div
+							class={menuStyles().item()}
 							>
 								<Edit size={16} />
 								Edit
-							</Item>
-							<Item
-								on:select={() => {
-									items = items.filter((item) => item.id !== row.id);
-									selected = selected.filter((item) => item !== row.id);
-								}}
+							</div>
+							<div
+							class={menuStyles().item()}
+							
 							>
 								<Trash2 size={16} />
 
 								Delete
-							</Item>
+						</div>
 						</Content>
+						</svelte:fragment>
 				</Popover>
 				<svelte:fragment slot="row-header" let:header>
 					{#if header.key === 'createdAt'}
