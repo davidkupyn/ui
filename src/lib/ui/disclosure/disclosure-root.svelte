@@ -13,6 +13,8 @@
 	});
 	const { root, open: openStore } = disclosure;
 	let className = '';
+	export let details: string | undefined = undefined;
+	export let summary: string | undefined = undefined;
 	export { className as class };
 	setContext('disclosure', disclosure);
 	const dispatch = createEventDispatcher();
@@ -25,5 +27,12 @@
 </script>
 
 <div class={cn('group', className)} {...root}>
-	<slot {Trigger} {Content} open={$openStore} />
+	<slot {Trigger} {Content} open={$openStore}>
+		<Trigger>
+			<slot name="summary">{summary}</slot>
+		</Trigger>
+		<Content>
+			<slot name="details">{details}</slot>	
+		</Content>
+	</slot>
 </div>

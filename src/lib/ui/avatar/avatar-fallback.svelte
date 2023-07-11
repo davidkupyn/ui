@@ -2,9 +2,9 @@
 	import { cn } from '$lib/helpers/style';
 	import { getAvatarContext } from '.';
 
-	const { fallback, defaultClass } = getAvatarContext();
+	const { fallback } = getAvatarContext();
 	let className = '';
 	export { className as class };
 </script>
 
-<span {...$fallback} class={cn(defaultClass, className)}><slot /></span>
+<span {...$fallback} class={cn('font-medium', className)}><slot /></span>

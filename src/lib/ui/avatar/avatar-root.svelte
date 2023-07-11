@@ -3,23 +3,24 @@
 	import { cn } from '$lib/helpers/style';
 	import { createAvatar } from '@melt-ui/svelte';
 	import { setContext } from 'svelte';
-	import { avatar } from '.';
 
 	export let fallback = '';
 	export let alt: string;
 	export let src: string;
 	let className = '';
 	export { className as class };
-	const { image, fallback: fallbackAttrs } = createAvatar({
+	const avatar = createAvatar({
 		src
 	});
-
-	setContext('avatar', { fallback: fallbackAttrs, defaultClass: avatar().fallback() });
+	const { image } = avatar;
+	setContext('avatar', avatar);
 </script>
 
-<div class={cn(avatar().root(), className)}>
+<div class={cn('grid w-9 aspect-square place-content-center rounded-full bg-muted', className)}>
 	<img {...$image} {alt} class="h-full w-full rounded-[inherit]" />
 	<slot {Fallback}>
-		<span {...$fallbackAttrs} class={avatar().fallback()}>{fallback}</span>
+		<Fallback>
+			<slot name="fallback">{fallback}</slot>
+		</Fallback>
 	</slot>
 </div>

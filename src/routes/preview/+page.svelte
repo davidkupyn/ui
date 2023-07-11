@@ -20,7 +20,10 @@
 		Command,
 		CalendarIcon,
 		Loader2,
-		Bot
+		Bot,
+
+		InfoIcon
+
 	} from 'lucide-svelte';
 	import ToggleGroup from '$lib/ui/toggle-group.svelte';
 	import Pagination from '$lib/ui/pagination.svelte';
@@ -363,7 +366,7 @@
 	</Disclosure>
 	<Accordion
 		let:Item
-		value={['smth']}
+		value="smth"
 		class="w-full max-w-md border border-transparent ring-1 ring-base-950/10 shadow dark:border-border rounded-3xl p-4"
 	>
 		<Item value='smth2' let:Trigger let:Content>
@@ -399,12 +402,7 @@
 				</p>
 			</Content>
 		</Item>
-		<Item let:Trigger let:Content>
-			<Trigger>What about updates?</Trigger>
-			<Content>
-				Yes, we will be updating the components regularly. We will also be adding new components.
-			</Content>
-		</Item>
+		<Item summary="What about updates?" details="Yes, we will be updating the components regularly. We will also be adding new components."/>
 	</Accordion>
 	<Dialog let:Trigger let:Content bind:open={dialogOpen}>
 		<Trigger class="btn w-fit">

@@ -32,7 +32,13 @@
 		openDelay: delayIn,
 		closeDelay: delayOut
 	});
+	const { trigger } = hoverCard; //TODO fix this, not working
 	setContext('hover-card', hoverCard);
 </script>
 
-<slot {Trigger} {Content} />
+<slot {Trigger} {Content}>
+	<slot name="trigger" trigger={$trigger} />
+	<Content>
+		<slot name="content" />
+	</Content>
+</slot>

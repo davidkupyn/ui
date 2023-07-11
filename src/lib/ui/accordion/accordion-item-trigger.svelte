@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { cn } from '$lib/helpers/style';
-	import { ChevronRight, ChevronUp } from 'lucide-svelte';
+	import { ChevronRight } from 'lucide-svelte';
 	import { getAccordionContext, getAccordionItemContext } from '.';
 
 	const { trigger } = getAccordionContext();
