@@ -12,7 +12,7 @@
 	export let page = 1;
 	export let mode: 'navigate' | 'select' = 'navigate';
 
-	const currentPage = queryParam('page', ssp.number(), {
+	const currentPage = queryParam('page', ssp.number(1), {
 		pushHistory
 	});
 
