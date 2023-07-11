@@ -2,7 +2,7 @@
 	import { AlertCircle, AlertTriangle, CheckCircle2, Info } from 'lucide-svelte';
 	import { dialog, getDialogContext } from '.';
 
-	const { title, type, alert } = getDialogContext();
+	const { title, type } = getDialogContext();
 </script>
 
 <h2 class={dialog({ hasIcon: !!type || $$slots.icon }).title()} {...$title}>
