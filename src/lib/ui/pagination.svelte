@@ -37,14 +37,13 @@
 	}
 
 	pageStore.subscribe((value) => {
-		if (value !== page) {
-			page = value;
-		}
+		page = value;
+		
 		if (mode === 'navigate') {
 			currentPage.set(value);
 		}
 
-		if (value> totalPages || value < 1) {
+		if (value > totalPages || value < 1) {
 			pageStore.set(1);
 		}
 	});

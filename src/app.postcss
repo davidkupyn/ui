@@ -171,13 +171,13 @@
 	}
 
 	.checkbox {
-		@apply h-5 w-5 sm:h-4 sm:w-4 my-1 shadow-sm shrink-0 cursor-pointer rounded-md sm:rounded focus:ring-transparent border-base-400/50 dark:border-base-700 bg-transparent text-accent outline-0 ring-accent-focus focus-visible:ring-muted-foreground checked:focus-visible:ring-accent focus-visible:ring-offset-background focus-visible:ring-offset-2 focus:ring-offset-0;
+		@apply h-5 w-5 sm:h-4 sm:w-4 my-1 shadow-sm shrink-0 cursor-pointer rounded-md sm:rounded focus:ring-transparent border-base-400/50 dark:border-base-700 bg-transparent text-accent outline-0 ring-accent-focus focus-visible:ring-border checked:focus-visible:ring-accent focus-visible:ring-offset-background focus-visible:ring-offset-2 focus:ring-offset-0;
 	}
 	.badge {
-		@apply inline-flex items-center rounded-lg px-2.5 py-0.5 text-xs font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-muted-foreground focus:ring-offset-2 bg-primary text-background;
+		@apply inline-flex items-center rounded-lg px-2.5 py-0.5 text-xs font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-border focus:ring-offset-2 bg-primary text-background;
 
 		&-error {
-			@apply bg-error-500/20 text-error dark:text-error-400;
+			@apply bg-error-500/10 text-error dark:text-error;
 		}
 
 		&-success {
@@ -207,19 +207,19 @@
 		@apply gap-2 inline-flex text-primary-foreground items-center justify-center rounded-xl active:scale-95 text-sm font-medium transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-focus focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none bg-primary hover:bg-primary-focus ring-offset-background h-9 py-2 px-4;
 
 		&-outline {
-			@apply bg-transparent shadow ring-1 ring-base-950/10 focus-visible:border-border border border-transparent dark:border-border text-foreground hover:bg-border focus-visible:ring-muted-foreground;
+			@apply bg-transparent shadow ring-1 ring-base-950/10 focus-visible:border-border border border-transparent dark:border-border text-foreground hover:bg-border focus-visible:ring-border;
 		}
 
 		&-secondary {
-			@apply bg-base-200/90 hover:bg-muted dark:bg-base-900/70 dark:hover:bg-muted text-foreground focus-visible:ring-muted-foreground;
+			@apply bg-base-200/90 hover:bg-muted dark:bg-base-900/70 dark:hover:bg-muted text-foreground focus-visible:ring-border;
 		}
 
 		&-text {
-			@apply hover:bg-transparent bg-transparent text-muted-foreground focus-visible:text-foreground hover:text-foreground aria-pressed:text-foreground data-[selected]:text-foreground data-[state=active]:text-foreground aria-pressed:underline underline-offset-4 data-[state=active]:underline focus-visible:ring-offset-0 focus-visible:ring-muted-foreground;
+			@apply hover:bg-transparent bg-transparent text-muted-foreground focus-visible:text-foreground hover:text-foreground aria-pressed:text-foreground data-[selected]:text-foreground data-[state=active]:text-foreground aria-pressed:underline underline-offset-4 data-[state=active]:underline focus-visible:ring-offset-0 focus-visible:ring-border;
 		}
 
 		&-ghost {
-			@apply bg-transparent hover:bg-base-300/50 dark:hover:bg-base-800/50 text-muted-foreground focus-visible:text-foreground dark:focus-visible:text-base-300 hover:text-foreground aria-pressed:text-foreground focus-visible:ring-muted-foreground;
+			@apply bg-transparent hover:bg-base-300/50 dark:hover:bg-base-800/50 text-muted-foreground focus-visible:text-foreground dark:focus-visible:text-base-300 hover:text-foreground aria-pressed:text-foreground focus-visible:ring-border;
 		}
 
 		&-error {
@@ -242,7 +242,7 @@
 			@apply hover:bg-transparent bg-transparent underline-offset-4 underline text-accent hover:text-accent-focus focus-visible:ring-accent;
 
 			&.btn-secondary {
-				@apply text-foreground bg-transparent focus-visible:ring-muted-foreground;
+				@apply text-foreground bg-transparent focus-visible:ring-border;
 			}
 		}
 

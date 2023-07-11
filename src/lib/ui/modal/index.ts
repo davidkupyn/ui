@@ -2,9 +2,9 @@ import type { createDialog } from '@melt-ui/svelte';
 import { getContext } from 'svelte';
 import { tv } from 'tailwind-variants';
 
-export { default as Dialog } from './dialog-root.svelte';
+export { default as Modal } from './modal-root.svelte';
 
-export const dialog = tv({
+export const modal = tv({
 	slots: {
 		base: 'fixed z-50 grid w-full sm:max-w-lg shadow-lg focus:outline-none sm:rounded-3xl sm:border border-popover-border bg-popover backdrop-blur-md p-6 max-sm:pb-12 rounded-t-3xl border-t',
 		title: 'font-semibold mb-2 text-md sm:text-lg flex items-center',
@@ -27,7 +27,7 @@ export const dialog = tv({
 	}
 });
 
-export const getDialogContext = () =>
+export const getModalContext = () =>
 	getContext<
 		ReturnType<typeof createDialog> & {
 			alert: boolean;

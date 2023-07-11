@@ -1,8 +1,8 @@
 <script lang="ts">
 	import { createDialog } from '@melt-ui/svelte';
 	import { createEventDispatcher, setContext } from 'svelte';
-	import Trigger from './dialog-trigger.svelte';
-	import Content from './dialog-content.svelte';
+	import Trigger from './modal-trigger.svelte';
+	import Content from './modal-content.svelte';
 
 	export let crossButton = true;
 	export let alert = false;

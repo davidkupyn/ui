@@ -29,13 +29,13 @@
 	import ToggleGroup from '$lib/ui/toggle-group.svelte';
 	import Pagination from '$lib/ui/pagination.svelte';
 	import Switch from '$lib/ui/switch.svelte';
-	import Table from '$lib/ui/table.svelte';
+	import Table from '$lib/ui/old-table.svelte';
 	import { fade, fly } from 'svelte/transition';
 	import { cubicOut } from 'svelte/easing';
 	import { Select } from '$lib/ui/select';
 	import Combobox from '$lib/ui/combobox.svelte';
 	import Calendar from '$lib/ui/calendar.svelte';
-	import { Dialog } from '$lib/ui/dialog';
+	import { Modal } from '$lib/ui/modal';
 	import { Avatar } from '$lib/ui/avatar';
 	import { Accordion } from '$lib/ui/accordion';
 	import { Disclosure } from '$lib/ui/disclosure';
@@ -262,8 +262,9 @@
 
 		<Tabs let:List let:Content value={tabs[1]} on:change={(e) => console.log(e.detail)}>
 			<List
+			disabled={[tabs[3]]}
 				{tabs}
-				class="w-full border border-transparent ring-1 ring-base-950/10 shadow dark:border-border rounded-xl"
+				class="w-full border border-transparent ring-1 ring-base-950/10 shadow dark:border-border data-[orientation=vertical]:rounded-2xl rounded-xl"
 			/>
 			{#each tabs as tab (tab)}
 				<Content value={tab} class="capitalize">
@@ -370,10 +371,10 @@
 		</Item>
 		<Item summary="What about updates?" details="Yes, we will be updating the components regularly. We will also be adding new components."/>
 	</Accordion>
-	<Dialog let:Trigger let:Content bind:open={dialogOpen}>
+	<Modal let:Trigger let:Content bind:open={dialogOpen}>
 		<Trigger class="btn w-fit">
 			<AppWindow size=16 />
-			Open Dialog
+			Open Modal
 		</Trigger>
 		<Content let:Title let:Description let:close class="sm:max-w-[425px]">
 			<Title>Edit Profile</Title>
@@ -395,7 +396,7 @@
 				</div>
 			</form>
 		</Content>
-	</Dialog>
+	</Modal>
 	<!-- <AutoComplete let:Item>
 		<Item index={0} value="1">One</Item>
 		<Item index={1} value="1">One</Item>
@@ -428,6 +429,7 @@
 								Edit
 							</Item>
 							<Item
+								danger
 								on:select={() => {
 									items = items.filter((item) => item.id !== row.id);
 									selected = selected.filter((item) => item !== row.id);
@@ -497,7 +499,7 @@
 						{selected.length === 1 ? 'item' : 'items'}
 					</span>
 					<div class="flex gap-4">
-						<Dialog let:Trigger let:Content class="sm:max-w-[425px]" alert type="error" on:open={() => console.log('open')}>
+						<Modal let:Trigger let:Content class="sm:max-w-[425px]" alert type="error" on:open={() => console.log('open')}>
 							<Trigger aria-label="Delete items" class="btn btn-ghost btn-icon btn-sm rounded-lg">
 								<Trash2 size=16 />
 							</Trigger>
@@ -522,7 +524,7 @@
 									</button>
 								</div>
 							</Content>
-						</Dialog>
+						</Modal>
 
 						<button
 							aria-label="Discard selection"

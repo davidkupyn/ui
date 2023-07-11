@@ -5,16 +5,17 @@
 
 	const { trigger, value: valueStore } = getTabsContext();
 	let className = '';
+	export let disabled = false;
 	export { className as class };
 	export let value: string;
 	const [send, receive] = crossfade({});
 </script>
 
 <button
-	{...$trigger(value)}
+	{...$trigger({value, disabled})}
 	use:trigger
 	class={cn(
-		'group relative capitalize btn btn-text active:scale-100 w-full h-full p-0 rounded-lg',
+		'group relative capitalize btn btn-text active:scale-100 w-full h-full data-[orientation=vertical]:h-9 data-[orientation=vertical]:rounded-xl p-0 rounded-lg',
 		className
 	)}
 >
@@ -30,7 +31,7 @@
 			in:receive={{ key: 'tab', duration: 200 }}
 			out:send={{ key: 'tab', duration: 200 }}
 			class={cn(
-				'w-full h-full rounded-lg overflow-hidden bg-muted'
+				'w-full h-full group-data-[orientation=vertical]:rounded-xl rounded-lg overflow-hidden bg-muted'
 				// transparent && 'bg-background shadow'
 			)}
 		/>

@@ -6,6 +6,7 @@
 	import { cn } from '$lib/helpers/style';
 	import Option from './select-option.svelte';
 	import Group from './select-option-group.svelte';
+	import { menuStyles } from '../menu';
 
 	const dispatch = createEventDispatcher();
 	export let id = '';
@@ -71,7 +72,7 @@
 		transition:fly={{ duration: 150, y: -10 }}
 		{...$menu}
 		use:menu
-		class=" z-10 mt-1.5 p-1 flex flex-col gap-1 origin-top rounded-2xl border border-popover-border bg-popover drop-shadow-lg focus:outline-none overflow-y-auto"
+		class={menuStyles().content()}
 	>
 		<slot {Option} {Group} />
 	</ul>

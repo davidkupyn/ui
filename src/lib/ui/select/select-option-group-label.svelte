@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { cn } from '$lib/helpers/style';
 	import { getOptionGroupContext, getSelectContext } from '.';
+	import { menuStyles } from '../menu';
 
 	const key = getOptionGroupContext();
 	const { groupLabel } = getSelectContext();
@@ -9,6 +10,6 @@
 	export { className as class };
 </script>
 
-<span {...$groupLabel(key)} class={cn('input-label py-2 pl-5 pr-5 font-semibold text-foreground', className)}>
+<span {...$groupLabel(key)} class={cn(menuStyles().itemLabel(), className)}>
 	<slot />
 </span>

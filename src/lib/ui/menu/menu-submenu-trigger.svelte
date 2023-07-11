@@ -6,6 +6,7 @@
   const { item } = menuStyles()
 
 	let className = '';
+	export let danger = false
 	export { className as class };
 </script>
 
@@ -13,6 +14,7 @@
 		class={cn(
       item(),
       'w-full focus:ring-0 data-[state=open]:bg-muted data-[state=open]:text-foreground',
+   		danger && 'text-error focus:text-danger focus:bg-error-500/10',
 			className
 		)}
 		use:subTrigger

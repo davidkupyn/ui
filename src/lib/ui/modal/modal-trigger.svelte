@@ -1,6 +1,6 @@
 <script lang="ts">
-	import { getDialogContext } from '.';
-	const { trigger } = getDialogContext();
+	import { getModalContext } from '.';
+	const { trigger } = getModalContext();
 
 	let className = '';
 	export { className as class };

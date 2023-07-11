@@ -1,12 +1,12 @@
 <script lang="ts">
 	import { fade, scale } from 'svelte/transition';
-	import Title from './dialog-title.svelte';
-	import Description from './dialog-description.svelte';
-	import { dialog, getDialogContext } from '.';
+	import Title from './modal-title.svelte';
+	import Description from './modal-description.svelte';
+	import { modal, getModalContext } from '.';
 	import { cn } from '$lib/helpers/style';
 	import { X } from 'lucide-svelte';
 
-	const { portal, open, alert, overlay, content, close, crossButton } = getDialogContext();
+	const { portal, open, alert, overlay, content, close, crossButton } = getModalContext();
 	let className = '';
 	export { className as class };
 </script>
@@ -23,7 +23,7 @@
 		/>
 		<div
 			transition:scale={{ duration: 200, start: 0.95 }}
-			class={cn(dialog({ alert }).base(), className)}
+			class={cn(modal({ alert }).base(), className)}
 			{...$content}
 			use:content
 		>

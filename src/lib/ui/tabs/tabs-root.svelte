@@ -7,9 +7,10 @@
 	export let value = '';
 	export let loop = false;
 	export let activateOnFocus = true;
+	export let orientation: 'horizontal' | 'vertical' = 'horizontal';
 	const dispatch = createEventDispatcher();
 
-	const tabs = createTabs({ value, loop, activateOnFocus, onChange: (v) => {
+	const tabs = createTabs({ value, loop, activateOnFocus, orientation , onChange: (v) => {
 		value = v;
 		dispatch('change', v);
 	} });

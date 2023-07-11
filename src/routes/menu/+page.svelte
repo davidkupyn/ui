@@ -1,7 +1,7 @@
 <script>
 
 	import { Accordion } from "$lib/ui/accordion";
-	import { Dialog } from "$lib/ui/dialog";
+	import { Modal } from "$lib/ui/modal";
 	import { Popover } from "$lib/ui/popover";
 	import { AppWindow, MoreHorizontal } from "lucide-svelte";
 </script>
@@ -28,10 +28,10 @@
 				Popover content
 			</p>
 		</Popover>
-			<Dialog let:Trigger let:Content >
+			<Modal let:Trigger let:Content >
 		<Trigger class="btn w-fit">
 			<AppWindow size=16 />
-			Open Dialog
+			Open Modal
 		</Trigger>
 		<Content let:Title let:Description let:close class="sm:max-w-[425px]">
 			<Title>Edit Profile</Title>
@@ -54,5 +54,5 @@
 				</div>
 			</form>
 		</Content>
-	</Dialog>
+	</Modal>
 </main>

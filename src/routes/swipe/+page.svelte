@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { Dialog } from '$lib/ui/dialog';
+	import { Dialog } from '$lib/ui/modal';
 	import { fade, scale } from 'svelte/transition';
 	import CardContainer from '$lib/components/card-container.svelte';
 	import { ArrowLeft, ArrowRight } from 'lucide-svelte';

@@ -8,6 +8,7 @@
 
 	export let checkbox = false;
   export let disabled = false;
+  export let danger = false;
 	const { item: regularItem, checkboxItem } = getMenuContext();
 
 	const baseItem = checkbox ? checkboxItem : regularItem;
@@ -47,6 +48,7 @@
   class={cn(
     itemStyles(),
     checkbox && 'relative pl-8',
+    danger && 'text-error focus:text-danger focus:bg-error-500/10',
     className,
   )}
   {...$item}

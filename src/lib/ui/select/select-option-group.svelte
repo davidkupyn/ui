@@ -7,8 +7,10 @@
 	const { group } = getSelectContext();
 	const key: string = crypto.randomUUID();
 	setContext('option-group', key);
+	let className = '';
+	export { className as class };
 </script>
 
-<div {...$group(key)} class="flex flex-col gap-1">
+<div {...$group(key)} class={className}>
 	<slot {Label} {Option} />
 </div>
