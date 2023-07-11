@@ -1,9 +1,11 @@
 <script lang="ts">
 	import { createHoverCard } from '@melt-ui/svelte';
 	import { setContext } from 'svelte';
-	import Trigger from './trigger.svelte';
-	import Content from './content.svelte';
+	import Trigger from './hover-card-trigger.svelte';
+	import Content from './hover-card-content.svelte';
 
+	export let open = false;
+	export let closeOnOutsideClick = true;
 	export let placement:
 		| 'top'
 		| 'top-start'
@@ -22,8 +24,10 @@
 	export let delayIn = delay || 700;
 	export let delayOut = delay || 300;
 	const hoverCard = createHoverCard({
+		defaultOpen: open,
+		closeOnOutsideClick,
 		positioning: {
-			placement: placement
+			placement: placement,
 		},
 		openDelay: delayIn,
 		closeDelay: delayOut

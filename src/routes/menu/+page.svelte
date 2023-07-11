@@ -1,5 +1,5 @@
 <script lang="ts">
-	import RadioGroup from './../../lib/ui/menu/radio-group.svelte';
+	import RadioGroup from '../../lib/ui/menu/menu-radio-group.svelte';
 import { Menu } from '$lib/ui/menu';
 import { createDropdownMenu } from '@melt-ui/svelte';
 	import { AlignJustify, BookTemplate, Check, ChevronRight, Flower2, Loader2, Save, Stars } from 'lucide-svelte';

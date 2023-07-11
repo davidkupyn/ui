@@ -7,6 +7,7 @@
 	import { createEventDispatcher } from 'svelte';
 
 	export let checkbox = false;
+  export let disabled = false;
 	const { item: regularItem, checkboxItem } = getMenuContext();
 
 	const baseItem = checkbox ? checkboxItem : regularItem;
@@ -42,8 +43,10 @@
 </script>
 
 <div
+  aria-disabled={disabled}
   class={cn(
     itemStyles(),
+    checkbox && 'relative pl-8',
     className,
   )}
   {...$item}
@@ -54,10 +57,15 @@
     }
   }}
   {...$$restProps}
->
+> 
   <slot />
   {#if checked && checkbox}
-    <Check size={16} class="absolute left-0"/>
+    <Check size={16} class="absolute left-2 top-1/2 -translate-y-1/2"/>
+  {/if}
+  {#if $$slots.after}
+    <span class="ml-auto">
+      <slot name="after" />
+    </span>
   {/if}
 </div>
 

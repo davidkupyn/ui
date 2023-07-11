@@ -1,5 +1,5 @@
 <script lang="ts">
-	import Fallback from './fallback.svelte';
+	import Fallback from './avatar-fallback.svelte';
 	import { cn } from '$lib/helpers/style';
 	import { createAvatar } from '@melt-ui/svelte';
 	import { setContext } from 'svelte';

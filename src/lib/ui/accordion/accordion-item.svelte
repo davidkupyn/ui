@@ -1,6 +1,6 @@
 <script lang="ts">
-	import Trigger from './trigger.svelte';
-	import Content from './content.svelte';
+	import Trigger from './accordion-item-trigger.svelte';
+	import Content from './accordion-item-content.svelte';
 	import { cn } from '$lib/helpers/style';
 	import { setContext } from 'svelte';
 	import { getAccordionContext } from '.';

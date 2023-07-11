@@ -1,8 +1,9 @@
 <script lang="ts">
 	import { cn } from '$lib/helpers/style';
 	import { ChevronRight } from 'lucide-svelte';
-	import { getSubMenuContext } from '.';
+	import { getSubMenuContext, menuStyles } from '.';
 	const { subTrigger } = getSubMenuContext();
+  const { item } = menuStyles()
 
 	let className = '';
 	export { className as class };
@@ -10,7 +11,8 @@
 
 	<button
 		class={cn(
-      'flex cursor-default gap-2 select-none text-muted-foreground items-center rounded-xl disabled:opacity-50 disabled:pointer-events-none px-4 w-full h-9 outline-none focus:bg-muted focus:text-foreground data-[state=open]:bg-muted data-[state=open]:text-foreground sm:text-sm',
+      item(),
+      'w-full focus:ring-0 data-[state=open]:bg-muted data-[state=open]:text-foreground',
 			className
 		)}
 		use:subTrigger

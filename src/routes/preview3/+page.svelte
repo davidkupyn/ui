@@ -1,5 +1,5 @@
 <script lang="ts">
-	import Item from './../../lib/ui/menu/item.svelte';
+	import Item from '../../lib/ui/menu/menu-item.svelte';
 	import Separator from '$lib/ui/separator.svelte';
 	import { queryParam, ssp } from 'sveltekit-search-params';
 	import { tippy } from '$lib/actions/tippy';
@@ -41,8 +41,8 @@
 	import { Tabs } from '$lib/ui/tabs';
 	import { Menu, menuStyles } from '$lib/ui/menu';
 	import { HoverCard } from '$lib/ui/hover-card';
-	import Trigger from '$lib/ui/popover/trigger.svelte';
-	import Content from '$lib/ui/popover/content.svelte';
+	import Trigger from '$lib/ui/popover/popover-trigger.svelte';
+	import Content from '$lib/ui/popover/popover-content.svelte';
 
 	let showPassword = false;
 	const tabs = ['witalina', 'david', 'wiktor', 'gustaw'];

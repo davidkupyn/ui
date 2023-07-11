@@ -51,7 +51,7 @@
 	<span
 		data-state={$isChecked ? 'checked' : 'unchecked'}
 		class={cn(
-			"peer-disabled:dark:bg-zinc-300s content-[''] absolute top-[2px] bg-white shadow-md rounded-full scale-90 transition-all block h-5 w-5 group-active:w-6 translate-x-0.5 will-change-transform group-active:data-[state=checked]:-ml-1 data-[state=checked]:translate-x-[22px]"
+			"peer-disabled:dark:bg-zinc-300s content-[''] absolute top-1 bg-white shadow-md rounded-full scale-90 transition-all block h-4 w-4 group-active:w-5 translate-x-1 will-change-transform group-active:data-[state=checked]:-ml-1 data-[state=checked]:translate-x-6"
 		)}
 	/>
 </button>

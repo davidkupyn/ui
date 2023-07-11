@@ -1,5 +1,4 @@
 <script lang="ts">
-	import Separator from '$lib/ui/separator.svelte';
 	import { queryParam, ssp } from 'sveltekit-search-params';
 	import { tippy } from '$lib/actions/tippy';
 	import {
@@ -40,8 +39,7 @@
 	import { Tabs } from '$lib/ui/tabs';
 	import { Menu } from '$lib/ui/menu';
 	import { HoverCard } from '$lib/ui/hover-card';
-	import { AutoComplete } from '$lib/ui/auto-complete';
-	import Item from '$lib/ui/accordion/item.svelte';
+	import Separator from '$lib/ui/separator.svelte';
 
 	let showPassword = false;
 	const tabs = ['witalina', 'david', 'wiktor', 'gustaw'];
@@ -80,9 +78,47 @@
 				.replace(/^./, (str) => str.toUpperCase())
 		}))
 		.filter((header) => header.key !== 'id');
+
+		let disclosureOpen = true;
+		let dialogOpen = false;
+		let menuOpen = false;
+		$: console.log(disclosureOpen)
 </script>
 
 <main in:fade={{ duration: 100 }} class="py-8 w-full space-y-6 container mx-auto px-6">
+<Menu let:Trigger let:Content>
+	<Trigger class="btn btn-icon">
+		<MoreHorizontal size={20} />
+	</Trigger>
+	<Content let:Item let:Submenu let:Separator={MenuSeparator}>
+		<Item>
+			Item 1
+		</Item>
+		<Item>
+			Item 2
+		</Item>
+		<Item>
+			Item 3
+		</Item>
+		<MenuSeparator />
+		<Submenu let:Trigger let:Content>
+			<Trigger>
+				More
+			</Trigger>
+			<Content>
+				<Item>
+					Item 1
+				</Item>
+				<Item>
+					Item 2
+				</Item>
+				<Item>
+					Item 3
+				</Item>
+			</Content>
+		</Submenu>
+	</Content>
+</Menu>
 	<div class="w-full max-w-[40rem] flex flex-col gap-6">
 		<label class="input-group group">
 			<Search size={16} class="icon-left" />
@@ -219,7 +255,7 @@
 		</Popover>
 
 		<div class="flex flex-wrap gap-2 w-full">
-			<button class="btn">
+			<button class="btn" on:click={() => dialogOpen = false}>
 				<Stars size={16} />
 				Primary
 			</button>
@@ -315,7 +351,7 @@
 			<Content>Hover Card!</Content>
 		</HoverCard>
 	</div>
-	<Disclosure class="w-full max-w-md" let:Trigger let:Content>
+	<Disclosure class="w-full max-w-md" let:Trigger let:Content bind:open={disclosureOpen}>
 		<Trigger>Just a Disclosure</Trigger>
 		<Content>
 			<p>
@@ -327,9 +363,10 @@
 	</Disclosure>
 	<Accordion
 		let:Item
+		value={['smth']}
 		class="w-full max-w-md border border-transparent ring-1 ring-base-950/10 shadow dark:border-border rounded-3xl p-4"
 	>
-		<Item let:Trigger let:Content>
+		<Item value='smth2' let:Trigger let:Content>
 			<Trigger>Why copy/paste and not a package?</Trigger>
 			<Content>
 				<p>
@@ -345,7 +382,7 @@
 				</p>
 			</Content>
 		</Item>
-		<Item let:Trigger let:Content>
+		<Item value='smth' let:Trigger let:Content>
 			<Trigger>
 				<Stars size={16} />
 				Why Essence?
@@ -369,7 +406,7 @@
 			</Content>
 		</Item>
 	</Accordion>
-	<Dialog let:Trigger let:Content>
+	<Dialog let:Trigger let:Content bind:open={dialogOpen}>
 		<Trigger class="btn w-fit">
 			<AppWindow size={16} />
 			Open Dialog
@@ -414,8 +451,8 @@
 			>
 				<Menu slot="actions" let:row placement="bottom-end">
 					<svelte:fragment let:Trigger let:Content>
-						<Trigger class="btn btn-ghost btn-icon">
-							<MoreHorizontal size={20} />
+						<Trigger class="btn btn-ghost btn-icon data-[state=open]:bg-muted data-[state=open]:text-foreground">
+							<MoreHorizontal size={16} />
 						</Trigger>
 						<Content let:Item class="w-40">
 							<Item
@@ -496,9 +533,9 @@
 						{selected.length === 1 ? 'item' : 'items'}
 					</span>
 					<div class="flex gap-4">
-						<Dialog let:Trigger let:Content class="sm:max-w-[425px]" alert type="error">
+						<Dialog let:Trigger let:Content class="sm:max-w-[425px]" alert type="error" on:open={() => console.log('open')}>
 							<Trigger aria-label="Delete items" class="btn btn-ghost btn-icon btn-sm rounded-lg">
-								<Trash2 size={20} />
+								<Trash2 size={16} />
 							</Trigger>
 							<Content let:Title let:Description let:close class="sm:w-96">
 								<Title>Edit Profile</Title>
@@ -529,7 +566,7 @@
 							use:tippy={{ content: 'Discard selection' }}
 							on:click={() => (selected = [])}
 						>
-							<X size={20} />
+							<X size={16} />
 						</button>
 					</div>
 				</div>

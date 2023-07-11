@@ -11,6 +11,8 @@
 	import { queryParam, ssp } from 'sveltekit-search-params';
 	import Switch from './switch.svelte';
 	import { createEventDispatcher } from 'svelte';
+	import Submenu from './menu/menu-submenu.svelte';
+	import Separator from './menu/menu-separator.svelte';
 
 	const dispatch = createEventDispatcher();
 	type T = $$Generic<{ id: any }>;
@@ -153,33 +155,43 @@
 				<th class={cn('px-4 py-1.5 align-middle text-right', filled && 'rounded-r-2xl')}>
 					{#if columnsEditable}
 						<Menu let:Trigger let:Content placement="bottom-end">
-							<Trigger class="btn btn-ghost btn-icon">
-								<Settings2 size={20} />
+							<Trigger class="btn btn-ghost btn-icon data-[state=open]:bg-muted data-[state=open]:text-foreground">
+								<Settings2 size={16} />
 							</Trigger>
-							<Content let:Separator let:Item class="w-48" let:Label>
+							<Content let:Separator let:Item class="w-48" let:Label let:Submenu>
 								<Label>Columns</Label>
 								<Separator />
 								{#each tablesColumns as column (column.key)}
 									<Item
+									checkbox
 										class="justify-between capitalize"
 										on:select={(e) => {
 											e.detail.preventDefault();
 										}}
 									>
-										<label for={column.key.toString()}>
 											{column.value}
-										</label>
-										<Switch
+										<!-- <Switch
 											id={column.key.toString()}
 											bind:group={currentTableColumns}
 											value={column}
 											defaultChecked
 											disabled={currentTableColumns.includes(column) &&
 												currentTableColumns.length === 1}
-										/>
+										/> -->
 									</Item>
-								
+									
 								{/each}
+								<Separator />
+								<Submenu let:Trigger let:Content>
+									<Trigger>
+										More
+									</Trigger>
+									<Content>
+										<Item>Export</Item>
+										<Item>Share</Item>
+									</Content>
+									
+								</Submenu>
 							</Content>
 						</Menu>
 					{/if}

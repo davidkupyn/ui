@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { fade, scale } from 'svelte/transition';
-	import Title from './title.svelte';
-	import Description from './description.svelte';
+	import Title from './dialog-title.svelte';
+	import Description from './dialog-description.svelte';
 	import { dialog, getDialogContext } from '.';
 	import { cn } from '$lib/helpers/style';
 	import { X } from 'lucide-svelte';

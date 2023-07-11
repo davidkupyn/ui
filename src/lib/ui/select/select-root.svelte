@@ -4,8 +4,8 @@
 	import { createSelect } from '@melt-ui/svelte';
 	import { createEventDispatcher, setContext } from 'svelte';
 	import { cn } from '$lib/helpers/style';
-	import Option from './option.svelte';
-	import Group from './option-group.svelte';
+	import Option from './select-option.svelte';
+	import Group from './select-option-group.svelte';
 
 	const dispatch = createEventDispatcher();
 	export let id = '';

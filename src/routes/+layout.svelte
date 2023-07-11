@@ -6,7 +6,7 @@
 	import { Menu } from '$lib/ui/menu';
 	import ThemeProvider from '$lib/theme-switcher/theme-provider.svelte';
 	import { themeStore } from '$lib/theme-switcher';
-	import RadioGroup from '$lib/ui/menu/radio-group.svelte';
+	import RadioGroup from '$lib/ui/menu/menu-radio-group.svelte';
 </script>
 
 <svelte:head>
@@ -65,7 +65,7 @@
 				</li>
 					<li>
 						<Menu let:Trigger let:Content>
-							<Trigger class="btn btn-text btn-icon">
+							<Trigger class="btn btn-ghost btn-icon data-[state=open]:bg-muted data-[state=open]:text-foreground">
 									{#if $themeStore.theme === 'dark'}
 										<Moon size={16} />
 									{:else if $themeStore.theme === 'light'}

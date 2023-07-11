@@ -1,8 +1,8 @@
 <script lang="ts">
 	import { setContext } from 'svelte';
 	import { getSelectContext } from '.';
-	import Label from './option-group-label.svelte';
-	import Option from './option.svelte';
+	import Label from './select-option-group-label.svelte';
+	import Option from './select-option.svelte';
 
 	const { createGroup } = getSelectContext();
 	const { group, label } = createGroup();
