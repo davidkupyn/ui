@@ -21,7 +21,7 @@
 	<slot />
 	{#if arrow}
 		<ChevronRight
-			size={16}
+			size=16
 			class="h-4 w-4 ml-auto text-accent-fo transition group-data-[state=open]:rotate-90 group-data-[state=open]:transform"
 		/>
 	{/if}

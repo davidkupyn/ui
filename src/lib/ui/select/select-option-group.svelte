@@ -4,11 +4,11 @@
 	import Label from './select-option-group-label.svelte';
 	import Option from './select-option.svelte';
 
-	const { createGroup } = getSelectContext();
-	const { group, label } = createGroup();
-	setContext('optgroup', label);
+	const { group } = getSelectContext();
+	const key: string = crypto.randomUUID();
+	setContext('option-group', key);
 </script>
 
-<div {...group} class="flex flex-col gap-1">
+<div {...$group(key)} class="flex flex-col gap-1">
 	<slot {Label} {Option} />
 </div>

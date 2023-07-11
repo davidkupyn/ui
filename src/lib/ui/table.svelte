@@ -1,18 +1,12 @@
 <script lang="ts">
 	import { Menu } from './menu';
-
-	import { Popover } from '$lib/ui/popover';
 	import { cn } from '$lib/helpers/style';
-
 	import { ChevronDown, ChevronUp, Settings2 } from 'lucide-svelte';
 	import { tippy } from '$lib/actions/tippy';
 	import { flip } from 'svelte/animate';
 	import { cubicOut } from 'svelte/easing';
 	import { queryParam, ssp } from 'sveltekit-search-params';
-	import Switch from './switch.svelte';
 	import { createEventDispatcher } from 'svelte';
-	import Submenu from './menu/menu-submenu.svelte';
-	import Separator from './menu/menu-separator.svelte';
 
 	const dispatch = createEventDispatcher();
 	type T = $$Generic<{ id: any }>;
@@ -131,7 +125,7 @@
 								use:tippy={{ content: `Sort by ${column.key.toString()}`, delay: 300 }}
 							>
 								<ChevronUp
-									size={16}
+									size=16
 									class={cn(
 										'ease-out group-focus-visible/button:opacity-100 transition-all group-hover:opacity-100 -m-0.5',
 										sortingByCurrentColumn && $sortDir === 'desc'
@@ -140,7 +134,7 @@
 									)}
 								/>
 								<ChevronDown
-									size={16}
+									size=16
 									class={cn(
 										'ease-out group-focus-visible/button:opacity-100 transition-all group-hover:opacity-100 -m-0.5',
 										sortingByCurrentColumn && $sortDir === 'asc'
@@ -156,9 +150,9 @@
 					{#if columnsEditable}
 						<Menu let:Trigger let:Content placement="bottom-end">
 							<Trigger class="btn btn-ghost btn-icon data-[state=open]:bg-muted data-[state=open]:text-foreground">
-								<Settings2 size={16} />
+								<Settings2 size=16 />
 							</Trigger>
-							<Content let:Separator let:Item class="w-48" let:Label let:Submenu>
+							<Content let:Separator let:Item class="w-48" let:Label>
 								<Label>Columns</Label>
 								<Separator />
 								{#each tablesColumns as column (column.key)}
@@ -181,17 +175,6 @@
 									</Item>
 									
 								{/each}
-								<Separator />
-								<Submenu let:Trigger let:Content>
-									<Trigger>
-										More
-									</Trigger>
-									<Content>
-										<Item>Export</Item>
-										<Item>Share</Item>
-									</Content>
-									
-								</Submenu>
 							</Content>
 						</Menu>
 					{/if}

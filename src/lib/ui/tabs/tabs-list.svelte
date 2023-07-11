@@ -1,5 +1,5 @@
 <script lang="ts">
-	import Trigger from './trigger.svelte';
+	import Trigger from './tabs-trigger.svelte';
 	import { getTabsContext } from '.';
 	import { cn } from '$lib/helpers/style';
 

@@ -13,7 +13,7 @@
 
 <div
 	use:portal
-	class={cn('z-50 flex justify-center sm:items-center items-end', $open && 'fixed inset-0')}
+	class={cn($open && 'z-50 flex justify-center sm:items-center items-end fixed inset-0')}
 >
 	{#if $open}
 		<div
@@ -31,7 +31,7 @@
 
 			{#if crossButton && !alert}
 				<button {...$close} use:close class="absolute right-4 top-4 btn btn-sm btn-ghost btn-icon">
-					<X size={16} />
+					<X size=16 />
 				</button>
 			{/if}
 		</div>

@@ -17,7 +17,7 @@
 >
 	<slot />
 	<ChevronRight
-		size={16}
+		size=16
 		class="h-4 w-4 ml-auto text-primary transition group-aria-expanded:rotate-90 group-aria-expanded:transform"
 	/>
 </button>

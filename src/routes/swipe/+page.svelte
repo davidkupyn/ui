@@ -44,10 +44,10 @@
 	</div>
 	<div class="mt-12 mb-4 flex gap-4 mx-auto">
 		<button class="btn btn-secondary btn-icon" on:click={() => swipeNextCard('left')}>
-			<ArrowLeft size={20} />
+			<ArrowLeft size=20 />
 		</button>
 		<button class="btn btn-secondary btn-icon" on:click={() => swipeNextCard('right')}>
-			<ArrowRight size={20} />
+			<ArrowRight size=20 />
 		</button>
 	</div>
 	<button

@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { page } from '$app/stores';
 	import { queryParam, ssp } from 'sveltekit-search-params';
 	import { tippy } from '$lib/actions/tippy';
 	import {
@@ -85,46 +86,15 @@
 		let disclosureOpen = true;
 		let dialogOpen = false;
 		let menuOpen = false;
-		$: console.log(disclosureOpen)
+		const tab = 'witalina'
+
+		let pagePagination = 1;
 </script>
 
 <main in:fade={{ duration: 100 }} class="py-8 w-full space-y-6 container mx-auto px-6">
-<Menu let:Trigger let:Content>
-	<Trigger class="btn btn-icon">
-		<MoreHorizontal size={20} />
-	</Trigger>
-	<Content let:Item let:Submenu let:Separator={MenuSeparator}>
-		<Item>
-			Item 1
-		</Item>
-		<Item>
-			Item 2
-		</Item>
-		<Item>
-			Item 3
-		</Item>
-		<MenuSeparator />
-		<Submenu let:Trigger let:Content>
-			<Trigger>
-				More
-			</Trigger>
-			<Content>
-				<Item>
-					Item 1
-				</Item>
-				<Item>
-					Item 2
-				</Item>
-				<Item>
-					Item 3
-				</Item>
-			</Content>
-		</Submenu>
-	</Content>
-</Menu>
 	<div class="w-full max-w-[40rem] flex flex-col gap-6">
 		<label class="input-group group">
-			<Search size={16} class="icon-left" />
+			<Search size=16 class="icon-left" />
 			<input spellcheck="false" autocomplete="false" placeholder="Search..." />
 			<kbd class="group-focus-within:scale-90 group-focus-within:opacity-0 transition">
 				<Command size="14" />
@@ -150,11 +120,11 @@
 				>
 					{#if showPassword}
 						<span>
-							<Eye size={20} />
+							<Eye size=20 />
 						</span>
 					{:else}
 						<span>
-							<EyeOff size={20} />
+							<EyeOff size=20 />
 						</span>
 					{/if}
 				</button>
@@ -241,7 +211,7 @@
 
 		<Popover let:Trigger let:Content>
 			<Trigger class="input-group w-full">
-				<CalendarIcon size={16} class="icon-left" />
+				<CalendarIcon size=16 class="icon-left" />
 				{#if calendarValue}
 					{new Date(calendarValue).toLocaleDateString('en', {
 						year: 'numeric',
@@ -259,15 +229,15 @@
 
 		<div class="flex flex-wrap gap-2 w-full">
 			<button class="btn" on:click={() => dialogOpen = false}>
-				<Stars size={16} />
+				<Stars size=16 />
 				Primary
 			</button>
 			<button class="btn btn-outline">
-				<BookTemplate size={16} />
+				<BookTemplate size=16 />
 				Outline
 			</button>
 			<button class="btn btn-secondary">
-				<Flower2 size={16} />
+				<Flower2 size=16 />
 				Secondary
 			</button>
 			<button class="btn btn-error"> Error </button>
@@ -277,7 +247,7 @@
 
 			<button class="btn btn-ghost"> Ghost </button>
 			<button class="btn btn-ghost btn-icon" use:tippy={{ content: 'Ghost icon button' }}>
-				<Save size={20} />
+				<Save size=20 />
 			</button>
 
 			<button class="btn btn-link">Link</button>
@@ -285,20 +255,16 @@
 
 			<button class="btn btn-link btn-secondary">Link Secondary</button>
 			<button class="btn" disabled>
-				<Loader2 class="animate-spin" size={16} />
+				<Loader2 class="animate-spin" size=16 />
 				Loading
 			</button>
 		</div>
 
-		<Tabs let:List let:Content defaultTab={tabs[0]}>
+		<Tabs let:List let:Content value={tabs[1]} on:change={(e) => console.log(e.detail)}>
 			<List
 				{tabs}
 				class="w-full border border-transparent ring-1 ring-base-950/10 shadow dark:border-border rounded-xl"
 			/>
-			<!-- {#each tabs as tab (tab)}
-					<Trigger value={tab} />
-				{/each} -->
-			<!-- </List> -->
 			{#each tabs as tab (tab)}
 				<Content value={tab} class="capitalize">
 					{tab} content
@@ -310,7 +276,7 @@
 			<ToggleGroup tabs={tabs2} bind:value={tab2} transparent>
 				<span slot="tab" let:tab class="flex items-center">
 					{#if tab.toLowerCase() === 'david'}
-						<Crown class="mr-1 {tab2 === tab ? 'text-amber-500' : ''}" size={16} />
+						<Crown class="mr-1 {tab2 === tab ? 'text-amber-500' : ''}" size=16 />
 						<span class="capitalize">
 							{tab}
 						</span>
@@ -347,7 +313,7 @@
 					let:Fallback
 				>
 					<Fallback>
-						<Bot size={16} />
+						<Bot size=16 />
 					</Fallback>
 				</Avatar>
 			</Trigger>
@@ -387,7 +353,7 @@
 		</Item>
 		<Item value='smth' let:Trigger let:Content>
 			<Trigger>
-				<Stars size={16} />
+				<Stars size=16 />
 				Why Essence?
 			</Trigger>
 			<Content>
@@ -406,7 +372,7 @@
 	</Accordion>
 	<Dialog let:Trigger let:Content bind:open={dialogOpen}>
 		<Trigger class="btn w-fit">
-			<AppWindow size={16} />
+			<AppWindow size=16 />
 			Open Dialog
 		</Trigger>
 		<Content let:Title let:Description let:close class="sm:max-w-[425px]">
@@ -450,7 +416,7 @@
 				<Menu slot="actions" let:row placement="bottom-end">
 					<svelte:fragment let:Trigger let:Content>
 						<Trigger class="btn btn-ghost btn-icon data-[state=open]:bg-muted data-[state=open]:text-foreground">
-							<MoreHorizontal size={16} />
+							<MoreHorizontal size=16 />
 						</Trigger>
 						<Content let:Item class="w-40">
 							<Item
@@ -458,7 +424,7 @@
 									console.log('edit');
 								}}
 							>
-								<Edit size={16} />
+								<Edit size=16 />
 								Edit
 							</Item>
 							<Item
@@ -467,7 +433,7 @@
 									selected = selected.filter((item) => item !== row.id);
 								}}
 							>
-								<Trash2 size={16} />
+								<Trash2 size=16 />
 
 								Delete
 							</Item>
@@ -477,7 +443,7 @@
 				<svelte:fragment slot="row-header" let:header>
 					{#if header.key === 'createdAt'}
 						<span class="flex items-center gap-2 w-28">
-							<CalendarIcon size={16} />
+							<CalendarIcon size=16 />
 							{header.value}
 						</span>
 					{:else}
@@ -488,7 +454,7 @@
 					{#if cell.key === 'description'}
 						<Disclosure let:Trigger let:Content>
 							<Trigger class="group-data-[selected=true]/row:hover:bg-accent-500/20 -my-1">
-								<Hash size={16} />
+								<Hash size=16 />
 								<span class="max-w-sm truncate max-sm:text-base">
 									{cell.value}
 								</span>
@@ -501,7 +467,7 @@
 						</Disclosure>
 					{:else if cell.key === 'price'}
 						<span class="flex justify-end items-center w-16">
-							<DollarSign class="text-muted-foreground" size={16} />
+							<DollarSign class="text-muted-foreground" size=16 />
 							{cell.value}
 						</span>
 					{:else if cell.key === 'status'}
@@ -533,7 +499,7 @@
 					<div class="flex gap-4">
 						<Dialog let:Trigger let:Content class="sm:max-w-[425px]" alert type="error" on:open={() => console.log('open')}>
 							<Trigger aria-label="Delete items" class="btn btn-ghost btn-icon btn-sm rounded-lg">
-								<Trash2 size={16} />
+								<Trash2 size=16 />
 							</Trigger>
 							<Content let:Title let:Description let:close class="sm:w-96">
 								<Title>Edit Profile</Title>
@@ -564,12 +530,12 @@
 							use:tippy={{ content: 'Discard selection' }}
 							on:click={() => (selected = [])}
 						>
-							<X size={16} />
+							<X size=16 />
 						</button>
 					</div>
 				</div>
 			{/if}
 		</div>
-		<Pagination {totalPages} />
+			<Pagination {totalPages}/>
 	</div>
 </main>

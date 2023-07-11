@@ -86,7 +86,7 @@
 <main in:fade={{ duration: 100 }} class="py-8 w-full space-y-6 container mx-auto px-6">
 	<div class="w-full max-w-[40rem] flex flex-col gap-6">
 		<label class="input-group group">
-			<Search size={16} class="icon-left" />
+			<Search size=16 class="icon-left" />
 			<input spellcheck="false" autocomplete="false" placeholder="Search..." />
 			<kbd class="group-focus-within:scale-90 group-focus-within:opacity-0 transition">
 				<Command size="14" />
@@ -112,11 +112,11 @@
 				>
 					{#if showPassword}
 						<span>
-							<Eye size={20} />
+							<Eye size=20 />
 						</span>
 					{:else}
 						<span>
-							<EyeOff size={20} />
+							<EyeOff size=20 />
 						</span>
 					{/if}
 				</button>
@@ -203,7 +203,7 @@
 
 		<Popover let:Trigger let:Content>
 			<Trigger class="input-group w-full">
-				<CalendarIcon size={16} class="icon-left" />
+				<CalendarIcon size=16 class="icon-left" />
 				{#if calendarValue}
 					{new Date(calendarValue).toLocaleDateString('en', {
 						year: 'numeric',
@@ -221,15 +221,15 @@
 
 		<div class="flex flex-wrap gap-2 w-full">
 			<button class="btn">
-				<Stars size={16} />
+				<Stars size=16 />
 				Primary
 			</button>
 			<button class="btn btn-outline">
-				<BookTemplate size={16} />
+				<BookTemplate size=16 />
 				Outline
 			</button>
 			<button class="btn btn-secondary">
-				<Flower2 size={16} />
+				<Flower2 size=16 />
 				Secondary
 			</button>
 			<button class="btn btn-error"> Error </button>
@@ -239,7 +239,7 @@
 
 			<button class="btn btn-ghost"> Ghost </button>
 			<button class="btn btn-ghost btn-icon" use:tippy={{ content: 'Ghost icon button' }}>
-				<Save size={20} />
+				<Save size=20 />
 			</button>
 
 			<button class="btn btn-link">Link</button>
@@ -247,7 +247,7 @@
 
 			<button class="btn btn-link btn-secondary">Link Secondary</button>
 			<button class="btn" disabled>
-				<Loader2 class="animate-spin" size={16} />
+				<Loader2 class="animate-spin" size=16 />
 				Loading
 			</button>
 		</div>
@@ -272,7 +272,7 @@
 			<ToggleGroup tabs={tabs2} bind:value={tab2} transparent>
 				<span slot="tab" let:tab class="flex items-center">
 					{#if tab.toLowerCase() === 'david'}
-						<Crown class="mr-1 {tab2 === tab ? 'text-amber-500' : ''}" size={16} />
+						<Crown class="mr-1 {tab2 === tab ? 'text-amber-500' : ''}" size=16 />
 						<span class="capitalize">
 							{tab}
 						</span>
@@ -309,7 +309,7 @@
 					let:Fallback
 				>
 					<Fallback>
-						<Bot size={16} />
+						<Bot size=16 />
 					</Fallback>
 				</Avatar>
 			</Trigger>
@@ -348,7 +348,7 @@
 		</Item>
 		<Item let:Trigger let:Content>
 			<Trigger>
-				<Stars size={16} />
+				<Stars size=16 />
 				Why Essence?
 			</Trigger>
 			<Content>
@@ -372,7 +372,7 @@
 	</Accordion>
 	<Dialog let:Trigger let:Content>
 		<Trigger class="btn w-fit">
-			<AppWindow size={16} />
+			<AppWindow size=16 />
 			Open Dialog
 		</Trigger>
 		<Content let:Title let:Description let:close class="sm:max-w-[425px]">
@@ -399,7 +399,7 @@
 
 	<Menu placement="bottom-start" let:Trigger let:Content>
 						<Trigger class="btn btn-ghost btn-icon">
-							<MoreHorizontal size={20} />
+							<MoreHorizontal size=20 />
 						</Trigger>
 						<Content let:Item class="w-40">
 							<Item
@@ -407,7 +407,7 @@
 									console.log('edit');
 								}}
 							>
-								<Edit size={16} />
+								<Edit size=16 />
 								Edit
 							</Item>
 							<Item
@@ -415,7 +415,7 @@
 									console.log('smth')
 								}}
 							>
-								<Trash2 size={16} />
+								<Trash2 size=16 />
 
 								Delete
 							</Item>
@@ -441,20 +441,20 @@
 				<Popover slot="actions" let:row placement="bottom-end">
 					<svelte:fragment let:Trigger let:Content>
 						<Trigger class="btn btn-ghost btn-icon">
-							<MoreHorizontal size={20} />
+							<MoreHorizontal size=20 />
 						</Trigger>
 						<Content class="w-40 p-1">
 							<div
 							class={menuStyles().item()}
 							>
-								<Edit size={16} />
+								<Edit size=16 />
 								Edit
 							</div>
 							<div
 							class={menuStyles().item()}
 							
 							>
-								<Trash2 size={16} />
+								<Trash2 size=16 />
 
 								Delete
 						</div>
@@ -464,7 +464,7 @@
 				<svelte:fragment slot="row-header" let:header>
 					{#if header.key === 'createdAt'}
 						<span class="flex items-center gap-2 w-28">
-							<CalendarIcon size={16} />
+							<CalendarIcon size=16 />
 							{header.value}
 						</span>
 					{:else}
@@ -475,7 +475,7 @@
 					{#if cell.key === 'description'}
 						<Disclosure let:Trigger let:Content>
 							<Trigger class="group-data-[selected=true]/row:hover:bg-accent-500/20 -my-1">
-								<Hash size={16} />
+								<Hash size=16 />
 								<span class="max-w-sm truncate max-sm:text-base">
 									{cell.value}
 								</span>
@@ -488,7 +488,7 @@
 						</Disclosure>
 					{:else if cell.key === 'price'}
 						<span class="flex justify-end items-center w-16">
-							<DollarSign class="text-muted-foreground" size={16} />
+							<DollarSign class="text-muted-foreground" size=16 />
 							{cell.value}
 						</span>
 					{:else if cell.key === 'status'}
@@ -520,7 +520,7 @@
 					<div class="flex gap-4">
 						<Dialog let:Trigger let:Content class="sm:max-w-[425px]" alert type="error">
 							<Trigger aria-label="Delete items" class="btn btn-ghost btn-icon btn-sm rounded-lg">
-								<Trash2 size={20} />
+								<Trash2 size=20 />
 							</Trigger>
 							<Content let:Title let:Description let:close class="sm:w-96">
 								<Title>Edit Profile</Title>
@@ -551,7 +551,7 @@
 							use:tippy={{ content: 'Discard selection' }}
 							on:click={() => (selected = [])}
 						>
-							<X size={20} />
+							<X size=20 />
 						</button>
 					</div>
 				</div>

@@ -60,7 +60,7 @@
 > 
   <slot />
   {#if checked && checkbox}
-    <Check size={16} class="absolute left-2 top-1/2 -translate-y-1/2"/>
+    <Check size=16 class="absolute left-2 top-1/2 -translate-y-1/2"/>
   {/if}
   {#if $$slots.after}
     <span class="ml-auto">

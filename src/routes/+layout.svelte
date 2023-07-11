@@ -60,18 +60,18 @@
 						href="https://github.com/davidkupyn/ui"
 						target="_blank"
 					>
-						<Github size={16} />
+						<Github size=16 />
 					</a>
 				</li>
 					<li>
 						<Menu let:Trigger let:Content>
 							<Trigger class="btn btn-ghost btn-icon data-[state=open]:bg-muted data-[state=open]:text-foreground">
 									{#if $themeStore.theme === 'dark'}
-										<Moon size={16} />
+										<Moon size=16 />
 									{:else if $themeStore.theme === 'light'}
-										<Sun size={16} />
+										<Sun size=16 />
 									{:else}
-										<Monitor size={16} />
+										<Monitor size=16 />
 									{/if}
 
 										 

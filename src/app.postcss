@@ -43,42 +43,42 @@
 		--color-popover-border: theme('colors.base.200');
 	}
 	.dark {
-			--border: theme('colors.base.800');
+		--border: theme('colors.base.800');
 
-			--color-primary: theme('colors.primary.50');
-			--color-primary-focus: theme('colors.primary.200');
-			--color-primary-foreground: theme('colors.primary.950');
+		--color-primary: theme('colors.primary.50');
+		--color-primary-focus: theme('colors.primary.200');
+		--color-primary-foreground: theme('colors.primary.950');
 
-			--color-accent: theme('colors.accent.600');
-			--color-accent-focus: theme('colors.accent.500');
-			--color-accent-foreground: theme('colors.accent.500');
+		--color-accent: theme('colors.accent.600');
+		--color-accent-focus: theme('colors.accent.500');
+		--color-accent-foreground: theme('colors.accent.500');
 
-			--color-background: theme('colors.base.950');
-			--color-foreground: theme('colors.base.50');
+		--color-background: theme('colors.base.950');
+		--color-foreground: theme('colors.base.50');
 
-			--color-muted: theme('colors.base.900');
-			--color-muted-foreground: theme('colors.base.400');
+		--color-muted: theme('colors.base.900');
+		--color-muted-foreground: theme('colors.base.400');
 
-			--color-success: theme('colors.success.500');
-			--color-success-focus: theme('colors.success.600');
-			--color-success-foreground: theme('colors.success.950');
+		--color-success: theme('colors.success.500');
+		--color-success-focus: theme('colors.success.600');
+		--color-success-foreground: theme('colors.success.950');
 
-			--color-warning: theme('colors.warning.500');
-			--color-warning-focus: theme('colors.warning.400');
-			--color-warning-foreground: theme('colors.warning.950');
+		--color-warning: theme('colors.warning.500');
+		--color-warning-focus: theme('colors.warning.400');
+		--color-warning-foreground: theme('colors.warning.950');
 
-			--color-error: theme('colors.error.600');
-			--color-error-focus: theme('colors.error.700');
-			--color-error-foreground: theme('colors.error.50');
+		--color-error: theme('colors.error.600');
+		--color-error-focus: theme('colors.error.700');
+		--color-error-foreground: theme('colors.error.50');
 
-			--color-info: theme('colors.info.500');
-			--color-info-focus: theme('colors.info.600');
-			--color-info-foreground: theme('colors.info.50');
+		--color-info: theme('colors.info.500');
+		--color-info-focus: theme('colors.info.600');
+		--color-info-foreground: theme('colors.info.50');
 
-			--color-popover: theme('colors.base.950');
-			--color-popover-foreground: theme('colors.base.50');
-			--color-popover-border: theme('colors.base.800');
-		}
+		--color-popover: theme('colors.base.950');
+		--color-popover-foreground: theme('colors.base.50');
+		--color-popover-border: theme('colors.base.800');
+	}
 }
 @layer base {
 	input[data-autocompleted] {
@@ -171,8 +171,7 @@
 	}
 
 	.checkbox {
-				@apply h-5 w-5 sm:h-4 sm:w-4 my-1 shadow-sm shrink-0 cursor-pointer rounded-md sm:rounded focus:ring-transparent border-base-400/50 dark:border-base-700 bg-transparent text-accent outline-0 ring-accent-focus focus-visible:ring-muted-foreground checked:focus-visible:ring-accent focus-visible:ring-offset-background focus-visible:ring-offset-2 focus:ring-offset-0;
-
+		@apply h-5 w-5 sm:h-4 sm:w-4 my-1 shadow-sm shrink-0 cursor-pointer rounded-md sm:rounded focus:ring-transparent border-base-400/50 dark:border-base-700 bg-transparent text-accent outline-0 ring-accent-focus focus-visible:ring-muted-foreground checked:focus-visible:ring-accent focus-visible:ring-offset-background focus-visible:ring-offset-2 focus:ring-offset-0;
 	}
 	.badge {
 		@apply inline-flex items-center rounded-lg px-2.5 py-0.5 text-xs font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-muted-foreground focus:ring-offset-2 bg-primary text-background;
@@ -190,7 +189,7 @@
 		}
 
 		&-outline {
-			@apply bg-transparent ring-1 ring-base-950/10 shadow dark:border-border border border-transparent focus-visible:border-border text-foreground	;
+			@apply bg-transparent ring-1 ring-base-950/10 shadow dark:border-border border border-transparent focus-visible:border-border text-foreground;
 		}
 		&-warning {
 			@apply bg-warning-500/20 text-warning-700 dark:text-warning-400;

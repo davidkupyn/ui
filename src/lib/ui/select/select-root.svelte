@@ -14,7 +14,9 @@
 	export let placeholder = '';
 	export let disabled = false;
 	export let value: unknown = undefined;
-
+	export let loop = false;
+	export let preventScroll = true;
+	
 	let className = '';
 	export { className as class };
 
@@ -27,12 +29,15 @@
 		isSelected,
 		open,
 		input,
-		createGroup
+		group,
+		groupLabel
 	} = createSelect({
 		value,
 		name,
 		disabled,
-		required
+		required,
+		loop,
+		preventScroll,
 	});
 
 	$: valueStore.set(value);
@@ -40,7 +45,7 @@
 		value = v;
 		dispatch('change', v);
 	});
-	setContext('select', { option, isSelected, createGroup });
+	setContext('select', { option, isSelected, group, groupLabel });
 </script>
 
 <button
@@ -57,7 +62,7 @@
 		<span class="text-muted-foreground">{placeholder}</span>
 	{/if}
 	<span class="icon-right" aria-pressed={$open}>
-		<ChevronsUpDown size={16} />
+		<ChevronsUpDown size=16 />
 	</span>
 </button>
 <input {...$input} {id} />

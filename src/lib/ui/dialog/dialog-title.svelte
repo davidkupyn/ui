@@ -8,13 +8,13 @@
 <h2 class={dialog({ hasIcon: !!type || $$slots.icon }).title()} {...$title}>
 	<span>
 		{#if type === 'error'}
-			<AlertCircle size={20} class="text-error" />
+			<AlertCircle size=20 class="text-error" />
 		{:else if type === 'warning'}
-			<AlertTriangle size={20} class="text-warning" />
+			<AlertTriangle size=20 class="text-warning" />
 		{:else if type === 'success'}
-			<CheckCircle2 size={20} class="text-success" />
+			<CheckCircle2 size=20 class="text-success" />
 		{:else if type === 'info'}
-			<Info size={20} class="text-info" />
+			<Info size=20 class="text-info" />
 		{:else}
 			<slot name="icon" />
 		{/if}

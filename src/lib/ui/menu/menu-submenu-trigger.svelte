@@ -20,5 +20,5 @@
 		{...$subTrigger}
 	>
 		<slot />
-		<ChevronRight class="ml-auto" size={16} />
+		<ChevronRight class="ml-auto" size=16 />
 	</button>

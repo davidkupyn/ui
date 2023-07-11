@@ -13,7 +13,7 @@ export const getTheme = (key: string, fallback?: string): string | undefined => 
 };
 
 export const disableAnimation = () => {
-  if (!browser) return () => {};
+	if (!browser) return () => {};
 	const css = document.createElement('style');
 	css.appendChild(
 		document.createTextNode(
@@ -30,11 +30,11 @@ export const disableAnimation = () => {
 		setTimeout(() => {
 			document.head.removeChild(css);
 		}, 1);
-	};  
+	};
 };
 
 export const getSystemTheme = (e?: MediaQueryList): string => {
-  if (!browser) return 'light';
+	if (!browser) return 'light';
 	if (!e) {
 		e = window.matchMedia(MEDIA);
 	}

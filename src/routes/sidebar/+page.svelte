@@ -44,11 +44,11 @@
 			<button on:click={() => (expanded = !expanded)} class="btn btn-ghost btn-icon ml-auto">
 				{#if expanded}
 					<span in:scale>
-						<SidebarClose size={20} />
+						<SidebarClose size=20 />
 					</span>
 				{:else}
 					<span in:scale>
-						<SidebarOpen size={20} />
+						<SidebarOpen size=20 />
 					</span>
 				{/if}
 			</button>
