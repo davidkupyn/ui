@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { createHoverCard } from '@melt-ui/svelte';
-	import { setContext } from 'svelte';
+	import { createEventDispatcher, setContext } from 'svelte';
 	import Trigger from './hover-card-trigger.svelte';
 	import Content from './hover-card-content.svelte';
 
@@ -32,8 +32,18 @@
 		openDelay: delayIn,
 		closeDelay: delayOut
 	});
-	const { trigger } = hoverCard; //TODO fix this, not working
+	const dispatch = createEventDispatcher();
+	const { trigger, open: openStore } = hoverCard;
+	$: openStore.set(open);
+	openStore.subscribe((v) => {
+    open = v;
+		dispatch('change', v);
+		if (v) dispatch('open');
+		else dispatch('close');
+	})
 	setContext('hover-card', hoverCard);
+	
+	export { trigger }
 </script>
 
 <slot {Trigger} {Content}>

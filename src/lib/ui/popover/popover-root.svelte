@@ -38,7 +38,7 @@
 		if (v) dispatch('open');
 		else dispatch('close');
 	})
-	export { trigger, close }
+	export { trigger }
 </script>
 
 <slot {Trigger} {Content} close={$close}>
