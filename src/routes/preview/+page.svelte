@@ -301,7 +301,7 @@
 			<Badge subtle variant="info">Info</Badge>
 		</div>
 	</div>
-	<Slider />
+	<Slider value={20} class="max-w-md" />
 	<div class="mt-4 flex gap-4 items-center">
 		<Avatar
 			src="https://avatars.githubusercontent.com/u/1162160?v=4"
