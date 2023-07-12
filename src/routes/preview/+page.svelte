@@ -415,8 +415,6 @@
 				filled
 				selectable
 				columnsEditable
-				interactive
-				on:rowclick={({ detail: row }) => console.log('clicked on', row.name)}
 			>
 				<Menu slot="actions" let:row placement="bottom-end">
 					<svelte:fragment let:Trigger let:Content>
