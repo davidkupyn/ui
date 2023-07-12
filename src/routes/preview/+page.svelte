@@ -105,7 +105,7 @@
 			<span>
 				Normal Input <span class="text-muted-foreground text-xs">(optional)</span>
 			</span>
-			<input spellcheck="false" type='text' class="input" placeholder="Placeholder" />
+			<input spellcheck="false" type='text' class="input" />
 		</label>
 		<label class="input-label w-full">
 			<span>
@@ -275,7 +275,7 @@
 			{/each}
 		</Tabs>
 		<Separator />
-		<div class="w-full rounded-xl bg-muted">
+		<div class="w-full rounded-xl bg-muted ring-foreground/10 ring-1">
 			<ToggleGroup tabs={tabs2} bind:value={tab2} transparent>
 				<span slot="tab" let:tab class="flex items-center">
 					{#if tab.toLowerCase() === 'david'}

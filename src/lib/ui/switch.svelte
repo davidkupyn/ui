@@ -39,7 +39,7 @@
 		});
 	}}
 	class={cn(
-		'relative group w-11 transition disabled:opacity-50 disabled:pointer-events-none h-6 bg-border focus:outline-none focus-visible:ring-2 focus-visible:ring-muted-foreground focus-visible:ring-offset-2 focus-visible:ring-offset-background rounded-full',
+		'relative group w-10 transition disabled:opacity-50 disabled:pointer-events-none h-6 bg-border focus:outline-none focus-visible:ring-2 focus-visible:ring-muted-foreground focus-visible:ring-offset-2 focus-visible:ring-offset-background rounded-full',
 		$isChecked && 'bg-accent dark:bg-accent',
 		className
 	)}
@@ -49,7 +49,7 @@
 	<span
 		data-state={$isChecked ? 'checked' : 'unchecked'}
 		class={cn(
-			"peer-disabled:dark:bg-zinc-300s content-[''] absolute top-1 bg-background shadow-md rounded-full scale-90 transition-all block h-4 w-4 group-active:w-5 translate-x-1 will-change-transform group-active:data-[state=checked]:-ml-1 data-[state=checked]:translate-x-6"
+			"peer-disabled:dark:bg-zinc-300s content-[''] absolute top-1 bg-background shadow-md rounded-full scale-90 transition-all block h-4 w-4 group-active:w-5 translate-x-1 will-change-transform group-active:data-[state=checked]:-ml-1 data-[state=checked]:translate-x-5"
 		)}
 	/>
 </button>

@@ -25,8 +25,8 @@ const config = {
 					...colors.indigo
 				},
 				base: colors.zinc,
-				background: 'var(--color-background)',
-				foreground: 'var(--color-foreground)',
+				background: 'hsl(var(--color-background))',
+				foreground: 'hsl(var(--color-foreground))',
 				border: 'var(--border)',
 				muted: {
 					DEFAULT: 'var(--color-muted)',
@@ -67,7 +67,7 @@ const config = {
 					'0 -4px 4px -4px var(--tw-shadow-color) inset, 0 4px 4px -4px var(--tw-shadow-color) inset'
 			},
 			fontFamily: {
-				sans: ['Figtree', ...defaultTheme.fontFamily.sans]
+				sans: ['Inter', ...defaultTheme.fontFamily.sans]
 			},
 			animation: {
 				text: 'text 8s ease infinite'

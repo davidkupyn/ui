@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Figtree:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,500;1,600;1,700;1,800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -16,8 +17,8 @@
 		--color-accent-focus: theme('colors.accent.600');
 		--color-accent-foreground: theme('colors.accent.950');
 
-		--color-background: theme('colors.base.50');
-		--color-foreground: theme('colors.base.900');
+		--color-background: 0 0% 98%;
+		--color-foreground: 240 6% 10%;
 
 		--color-muted: theme('colors.base.200');
 		--color-muted-foreground: theme('colors.base.500');
@@ -53,8 +54,8 @@
 		--color-accent-focus: theme('colors.accent.500');
 		--color-accent-foreground: theme('colors.accent.500');
 
-		--color-background: theme('colors.base.950');
-		--color-foreground: theme('colors.base.50');
+		--color-background: 240 10% 4%;
+		--color-foreground: 0 0% 98%;
 
 		--color-muted: theme('colors.base.900');
 		--color-muted-foreground: theme('colors.base.400');
@@ -143,7 +144,7 @@
 
 @layer components {
 	.input {
-		@apply border-0 disabled:cursor-not-allowed disabled:ring-0 resize-none disabled:opacity-50 hover:ring-accent text-foreground focus:ring-accent placeholder:text-muted-foreground bg-base-200/80 dark:bg-base-900 h-9 rounded-xl px-4 text-base sm:text-sm outline-none ring-1 ring-transparent transition duration-200 data-[invalid]:hover:ring-error data-[invalid]:focus:ring-error data-[invalid]:ring-error invalid:hover:ring-error invalid:focus:ring-error invalid:ring-error;
+		@apply border-0 disabled:cursor-not-allowed shadow ring-foreground/10 resize-none disabled:opacity-50 hover:ring-accent text-foreground focus:ring-accent placeholder:text-muted-foreground bg-background dark:bg-base-900 h-9 rounded-xl px-4 text-base sm:text-sm outline-none ring-1 transition duration-200 data-[invalid]:hover:ring-error data-[invalid]:focus:ring-error data-[invalid]:ring-error invalid:hover:ring-error invalid:focus:ring-error invalid:ring-error;
 
 		> .icon-left {
 			@apply text-muted-foreground focus-visible:text-foreground hover:text-foreground aria-pressed:text-foreground transition-colors focus-visible:ring-offset-0 min-w-[1.5rem] -ml-1 mr-2;
@@ -153,7 +154,7 @@
 		}
 
 		&-label {
-			@apply text-muted-foreground flex flex-col gap-2 text-sm;
+			@apply flex flex-col gap-2 text-sm;
 		}
 
 		&-group {
@@ -242,7 +243,7 @@
 			@apply hover:bg-transparent bg-transparent underline-offset-4 underline text-accent hover:text-accent-focus focus-visible:ring-accent;
 
 			&.btn-secondary {
-				@apply text-foreground bg-transparent focus-visible:ring-border;
+				@apply text-foreground bg-transparent focus-visible:ring-border hover:bg-transparent;
 			}
 		}
 

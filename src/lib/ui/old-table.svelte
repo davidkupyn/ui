@@ -89,14 +89,16 @@
 		>
 			<tr class="border-muted">
 				{#if selectable}
-					<th class={cn('px-4 py-1.5 align-middle text-left', filled && 'rounded-l-2xl')}>
-						<input
-							type="checkbox"
-							aria-label="Select all"
-							on:change={selectAll}
-							checked={allSelected}
-							class="checkbox"
-						/>
+					<th class={cn('px-2.5 align-middle text-left', filled && 'rounded-l-2xl')}>
+						<label class="p-1.5 grid place-content-center">
+							<input
+								type="checkbox"
+								aria-label="Select all"
+								on:change={selectAll}
+								checked={allSelected}
+								class="checkbox"
+							/>
+						</label>
 					</th>
 				{/if}
 				{#each currentTableColumns as column, idx (column.key)}
@@ -206,22 +208,24 @@
 					{#if selectable}
 						<td
 							class={cn(
-								'px-4 py-1.5 align-middle text-left',
+								'px-2.5 align-middle text-left',
 								filled && 'group-first:rounded-tl-2xl group-last:rounded-bl-2xl'
 							)}
 						>
-							<input
-								type="checkbox"
-								aria-label="Select user"
-								checked={selected.includes(item.id)}
-								on:click|stopPropagation
-								on:change={() =>
-									(selected = selected.includes(item.id)
-										? selected.filter((idx) => idx !== item.id)
-										: [...selected, item.id])}
-								value={item.id}
-								class="checkbox"
-							/>
+							<label class="p-1.5 grid place-content-center">
+								<input
+									type="checkbox"
+									aria-label="Select user"
+									checked={selected.includes(item.id)}
+									on:click|stopPropagation
+									on:change={() =>
+										(selected = selected.includes(item.id)
+											? selected.filter((idx) => idx !== item.id)
+											: [...selected, item.id])}
+									value={item.id}
+									class="checkbox"
+								/>
+							</label>
 						</td>
 					{/if}
 					{#each currentTableColumns as column, columnIdx (column)}
