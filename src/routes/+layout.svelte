@@ -77,7 +77,7 @@
 										 
 							</Trigger>
 							<Content let:RadioGroup>
-								<RadioGroup let:Item value={$themeStore.theme} on:change={e => $themeStore.theme = e.detail}>
+								<RadioGroup let:Item bind:value={$themeStore.theme}>
 									<Item value='dark'>Dark</Item>
 									<Item value='light'>Light</Item>
 									<Item value='system'>System</Item>

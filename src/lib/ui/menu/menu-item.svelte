@@ -48,7 +48,7 @@
   class={cn(
     itemStyles(),
     checkbox && 'relative pl-8',
-    danger && 'text-error focus:text-danger focus:bg-error-500/10',
+    danger && 'text-error focus:text-error focus:bg-error-500/10 dark:focus:text-error-400',
     className,
   )}
   {...$item}

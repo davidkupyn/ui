@@ -11,8 +11,9 @@
 	export let pushHistory = false;
 	export let page = 1;
 	export let mode: 'navigate' | 'select' = 'navigate';
-
-	const currentPage = queryParam('page', ssp.number(1), {
+	const currentPage = queryParam('page', ssp.number(
+		mode === 'navigate' ? page : undefined
+	), {
 		pushHistory
 	});
 
@@ -38,8 +39,8 @@
 
 	pageStore.subscribe((value) => {
 		page = value;
-		
 		if (mode === 'navigate') {
+			console.log('change')
 			currentPage.set(value);
 		}
 

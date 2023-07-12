@@ -51,7 +51,7 @@
 
 	let tab2 = tabs2[0];
 	const PAGE_SIZE = 10;
-	const currentPage = queryParam('page', ssp.number());
+	let currentPage = 3;
 
 	let items = Array.from({ length: 100 }, (_, i) => ({
 		id: crypto.randomUUID().slice(0, 16),
@@ -62,8 +62,8 @@
 		status: Math.random() > 0.41 ? 'active' : 'inactive'
 	}));
 
-	$: paginatedItems = $currentPage
-		? items.slice(($currentPage - 1) * PAGE_SIZE, $currentPage * PAGE_SIZE)
+	$: paginatedItems = currentPage
+		? items.slice((currentPage - 1) * PAGE_SIZE, currentPage * PAGE_SIZE)
 		: items.slice(0, PAGE_SIZE);
 
 	let selected: string[] = [];
@@ -102,12 +102,14 @@
 			</kbd>
 		</label>
 		<label class="input-label w-full">
-			Normal Input
+			<span>
+				Normal Input <span class="text-muted-foreground text-xs">(optional)</span>
+			</span>
 			<input spellcheck="false" type='text' class="input" placeholder="Placeholder" />
 		</label>
 		<label class="input-label w-full">
 			<span>
-				Password <span class="text-red-500">*</span>
+				Password
 			</span>
 			<fieldset class="input-group" disabled={false}>
 				<input spellcheck="false" type="password" placeholder="Password" />
@@ -539,6 +541,6 @@
 				</div>
 			{/if}
 		</div>
-			<Pagination {totalPages}/>
+			<Pagination {totalPages} bind:page={currentPage}/>
 	</div>
 </main>
