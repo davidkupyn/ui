@@ -386,11 +386,11 @@
 				</label>
 				<label class="input-label w-full">
 					Email
-					<input class="input" placeholder="dkupyn@gmail.com" />
+					<input class="input" type='text' placeholder="dkupyn@gmail.com" />
 				</label>
-				<label class="input-label flex flex-col w-full">
+				<label class="input-label w-full">
 					Age
-					<input class="input" type='text'placeholder="18" />
+					<input class="input" placeholder="18" />
 				</label>
 					<input class="input" type='text'placeholder="Text" />
 
