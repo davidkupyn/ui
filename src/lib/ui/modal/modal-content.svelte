@@ -61,7 +61,7 @@ let innerWidth = 0;
 $: isMobile = innerWidth < 640;
 function modalTransition(element: HTMLElement, isMobile: boolean) {
 	return isMobile
-		? fly(element, { y: 100, duration: 150 })
+		? fly(element, { y: 80, duration: 200 })
 		: scale(element, { duration: 150, start: 0.95 });
 }
 </script>
