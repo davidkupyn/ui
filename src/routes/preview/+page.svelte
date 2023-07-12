@@ -1,6 +1,4 @@
 <script lang="ts">
-	import { page } from '$app/stores';
-	import { queryParam, ssp } from 'sveltekit-search-params';
 	import { tippy } from '$lib/actions/tippy';
 	import {
 		Search,
@@ -22,9 +20,6 @@
 		CalendarIcon,
 		Loader2,
 		Bot,
-
-		InfoIcon
-
 	} from 'lucide-svelte';
 	import ToggleGroup from '$lib/ui/toggle-group.svelte';
 	import Pagination from '$lib/ui/pagination.svelte';
@@ -85,10 +80,6 @@
 
 		let disclosureOpen = true;
 		let dialogOpen = false;
-		let menuOpen = false;
-		const tab = 'witalina'
-
-		let pagePagination = 1;
 </script>
 
 <main in:fade={{ duration: 100 }} class="py-8 w-full space-y-6 container mx-auto px-6">
@@ -96,7 +87,7 @@
 		<label class="input-group group">
 			<Search size=16 class="icon-left" />
 			<input spellcheck="false" autocomplete="false" placeholder="Search..." />
-			<kbd class="group-focus-within:scale-90 group-focus-within:opacity-0 transition">
+			<kbd class="group-focus-within:scale-90 bg-muted dark:bg-background group-focus-within:opacity-0 transition">
 				<Command size="14" />
 				K
 			</kbd>
