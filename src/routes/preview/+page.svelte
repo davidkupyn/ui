@@ -388,6 +388,10 @@
 					Email
 					<input class="input" placeholder="dkupyn@gmail.com" />
 				</label>
+				<label class="input-label flex flex-col w-full">
+					Age
+					<input class="input" type='number'placeholder="Dave Kupyn" />
+				</label>
 				<div class="flex gap-4 mt-4 w-full">
 					<button {...close} use:close.action type="button" class="btn btn-outline w-full">
 						Cancel
