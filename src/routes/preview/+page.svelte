@@ -103,7 +103,7 @@
 		</label>
 		<label class="input-label w-full">
 			Normal Input
-			<input spellcheck="false" autocomplete="false" class="input" placeholder="Placeholder" />
+			<input spellcheck="false" type='text' class="input" placeholder="Placeholder" />
 		</label>
 		<label class="input-label w-full">
 			<span>
@@ -382,23 +382,18 @@
 			<form class="grid gap-4">
 				<label class="input-label w-full">
 					Username
-					<input class="input" placeholder="Dave Kupyn" />
+					<input class="input" type='text' placeholder="Dave Kupyn" />
 				</label>
 				<label class="input-label w-full">
 					Email
 					<input class="input" type='text' placeholder="dkupyn@gmail.com" />
 				</label>
-				<label class="input-label w-full">
-					Age
-					<input class="input" placeholder="18" />
-				</label>
-					<input class="input" type='text'placeholder="Text" />
 
-				<div class="flex gap-4 mt-4 w-full">
-					<button {...close} use:close.action type="button" class="btn btn-outline w-full">
+				<div class="flex gap-4 mt-4 w-full flex-col-reverse sm:flex-row sm:justify-end">
+					<button {...close} use:close.action type="button" class="btn btn-outline">
 						Cancel
 					</button>
-					<button type="submit" class="btn w-full"> Confirm </button>
+					<button type="submit" class="btn"> Confirm </button>
 				</div>
 			</form>
 		</Content>
