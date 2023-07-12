@@ -6,7 +6,7 @@
 	const { trigger } = getDisclosureContext();
 	export let arrow = true;
 	export let styled = true;
-	let className = '';
+	let className: string | undefined | null = undefined;
 	export { className as class };
 </script>
 

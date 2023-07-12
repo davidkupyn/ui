@@ -16,7 +16,7 @@
 		value: string;
 	} | undefined = undefined;
 	const items = writable([])
-	let className = '';
+	let className: string | undefined | null = undefined;
 	export { className as class };
 
 	const { open, input, menu, item, inputValue, isSelected, filteredItems, selectedItem } =

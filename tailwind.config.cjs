@@ -13,7 +13,7 @@ const config = {
 		extend: {
 			colors: {
 				primary: {
-					DEFAULT: 'var(--color-primary)',
+					DEFAULT: 'hsl(var(--color-primary))',
 					focus: 'var(--color-primary-focus)',
 					foreground: 'var(--color-primary-foreground)',
 					...colors.zinc
@@ -67,7 +67,7 @@ const config = {
 					'0 -4px 4px -4px var(--tw-shadow-color) inset, 0 4px 4px -4px var(--tw-shadow-color) inset'
 			},
 			fontFamily: {
-				sans: ['Inter', ...defaultTheme.fontFamily.sans]
+				sans: ['Figtree', ...defaultTheme.fontFamily.sans]
 			},
 			animation: {
 				text: 'text 8s ease infinite'

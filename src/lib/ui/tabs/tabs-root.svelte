@@ -15,7 +15,7 @@
 		dispatch('change', v);
 	} });
 	const { root, value: valueStore } = tabs;
-	let className = '';
+	let className: string | undefined | null = undefined;
 	export { className as class };
 	setContext('tabs', tabs);
 

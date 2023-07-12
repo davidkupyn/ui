@@ -7,7 +7,7 @@
 	export let value: string;
 	export let index: number;
 	export let disabled = false;
-	let className = '';
+	let className: string | undefined | null = undefined;
 	export { className as class };
 
 	const { item: autoCompleteItem, isSelected, items } = getAutoCompleteContext();

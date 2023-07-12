@@ -21,7 +21,6 @@
 		Loader2,
 		Bot,
 	} from 'lucide-svelte';
-	import ToggleGroup from '$lib/ui/toggle-group.svelte';
 	import Pagination from '$lib/ui/pagination.svelte';
 	import Switch from '$lib/ui/switch.svelte';
 	import Table from '$lib/ui/old-table.svelte';
@@ -39,12 +38,15 @@
 	import { Menu } from '$lib/ui/menu';
 	import { HoverCard } from '$lib/ui/hover-card';
 	import Separator from '$lib/ui/separator.svelte';
+	import Kbd from '$lib/ui/kbd.svelte';
+	import Badge from '$lib/ui/badge.svelte';
+	import { error } from '@sveltejs/kit';
+	import Slider from '$lib/ui/slider.svelte';
 
 	let showPassword = false;
 	const tabs = ['witalina', 'david', 'wiktor', 'gustaw'];
 	const tabs2 = ['witalina', 'david', 'wiktor', 'gustaw'];
 
-	let tab2 = tabs2[0];
 	const PAGE_SIZE = 10;
 	let currentPage = 3;
 
@@ -87,10 +89,10 @@
 		<label class="input-group group">
 			<Search size=16 class="icon-left" />
 			<input spellcheck="false" autocomplete="false" placeholder="Search..." />
-			<kbd class="group-focus-within:scale-90 bg-muted dark:bg-background group-focus-within:opacity-0 transition">
-				<Command size="14" />
+			<Kbd class="group-focus-within:scale-90 hidden sm:flex transition group-focus-within:opacity-0">
+				<Command size="12" />
 				K
-			</kbd>
+			</Kbd>
 		</label>
 		<label class="input-label w-full">
 			<span>
@@ -257,7 +259,6 @@
 			<List
 			disabled={[tabs[3]]}
 				{tabs}
-				class="w-full border border-transparent ring-1 ring-base-950/10 shadow dark:border-border data-[orientation=vertical]:rounded-2xl rounded-xl"
 			/>
 			{#each tabs as tab (tab)}
 				<Content value={tab} class="capitalize">
@@ -266,7 +267,7 @@
 			{/each}
 		</Tabs>
 		<Separator />
-		<div class="w-full rounded-xl bg-muted ring-foreground/10 ring-1">
+		<!-- <div class="w-full rounded-xl bg-muted ring-foreground/10 ring-1">
 			<ToggleGroup tabs={tabs2} bind:value={tab2} transparent>
 				<span slot="tab" let:tab class="flex items-center">
 					{#if tab.toLowerCase() === 'david'}
@@ -279,19 +280,28 @@
 					{/if}
 				</span>
 			</ToggleGroup>
-		</div>
+		</div> -->
 
 		<div class="flex flex-wrap gap-4">
-			<span class="badge badge-capitalize"> Primary </span>
-			<span class="badge badge-outline capitalize"> Outline </span>
-			<span class="badge badge-accent capitalize"> Accent </span>
-			<span class="badge badge-success capitalize"> Success </span>
-
-			<span class="badge badge-error capitalize"> Error </span>
-			<span class="badge badge-warning capitalize"> Warning </span>
-			<span class="badge badge-info capitalize"> Info </span>
+			<Badge>Default</Badge>
+			<Badge variant="outline">Outline</Badge>
+			<Badge variant="accent">Accent</Badge>
+			<Badge variant="success">Success</Badge>
+			<Badge variant="error">Error</Badge>
+			<Badge variant="warning">Warning</Badge>
+			<Badge variant="info">Info</Badge>
+		</div>
+		<div class="flex flex-wrap gap-4">
+			<Badge subtle>Default</Badge>
+			<Badge subtle variant="outline">Outline</Badge>
+			<Badge subtle variant="accent">Accent</Badge>
+			<Badge subtle variant="success">Success</Badge>
+			<Badge subtle variant="error">Error</Badge>
+			<Badge subtle variant="warning">Warning</Badge>
+			<Badge subtle variant="info">Info</Badge>
 		</div>
 	</div>
+	<Slider />
 	<div class="mt-4 flex gap-4 items-center">
 		<Avatar
 			src="https://avatars.githubusercontent.com/u/1162160?v=4"
@@ -467,11 +477,9 @@
 							{cell.value}
 						</span>
 					{:else if cell.key === 'status'}
-						<span
-							class="badge capitalize {cell.value === 'inactive' ? 'badge-error' : 'badge-success'}"
-						>
+						<Badge subtle variant={cell.value === 'inactive' ? 'error' : 'success'} class="capitalize">
 							{cell.value}
-						</span>
+						</Badge>
 					{:else if cell.key === 'createdAt'}
 						{cell.value.toLocaleDateString('pl')}
 					{:else}

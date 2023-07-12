@@ -5,7 +5,7 @@
 	const { subTrigger } = getSubMenuContext();
   const { item } = menuStyles()
 
-	let className = '';
+	let className: string | undefined | null = undefined;
 	export let danger = false
 	export { className as class };
 </script>

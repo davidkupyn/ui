@@ -1,10 +1,10 @@
 <script lang="ts">
-	import { Dialog } from '$lib/ui/modal';
 	import { fade, scale } from 'svelte/transition';
 	import CardContainer from '$lib/components/card-container.svelte';
 	import { ArrowLeft, ArrowRight } from 'lucide-svelte';
 	import { cn } from '$lib/helpers/style';
 	import { swipeDispatcher } from '$lib/components/card.svelte';
+	import Badge from '$lib/ui/badge.svelte';
 
 	let actions: { type: 'left' | 'right'; id: number | string }[] = [];
 	let reset = 0;
@@ -31,8 +31,8 @@
 						let:card
 						class={cn(
 							'convex grid bg-background place-content-center border border-muted',
-							upcomingAction === 'left' && 'border-error-500 dark:border-error-600',
-							upcomingAction === 'right' && 'border-success-500 dark:border-success-600',
+							// upcomingAction === 'left' && 'border-error-500 dark:border-error-600',
+							// upcomingAction === 'right' && 'border-success-500 dark:border-success-600',
 							'transition ease-out rounded-2xl w-72 h-96'
 						)}
 					>
@@ -61,11 +61,15 @@
 	</button>
 	<div class="flex flex-wrap gap-2 max-w-xs">
 		{#each actions as action}
-			<span in:scale class="badge {action.type === 'left' ? 'badge-error' : 'badge-success'}">
+			<span in:scale>
+				<Badge subtle variant={action.type === 'left' ? 'error' : 'success'}>
 				Card {action.id}
+				</Badge>
 			</span>
 		{:else}
-			<span in:scale class="badge badge-outline mx-auto"> No actions </span>
+			<span in:scale class="mx-auto">
+				<Badge subtle variant='info'>No actions</Badge>
+			</span>
 		{/each}
 	</div>
 </main>

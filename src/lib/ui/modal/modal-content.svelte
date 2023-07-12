@@ -8,7 +8,7 @@
 	import { cubicOut } from 'svelte/easing';
 
 	const { portal, open, alert, overlay, content, close, crossButton } = getModalContext();
-	let className = '';
+	let className: string | undefined | null = undefined;
 	export { className as class };
 
 	function modalAnimation(element: HTMLElement, {

@@ -2,7 +2,7 @@
 	import { getModalContext } from '.';
 	const { trigger } = getModalContext();
 
-	let className = '';
+	let className: string | undefined | null = undefined;
 	export { className as class };
 </script>
 

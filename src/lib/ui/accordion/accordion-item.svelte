@@ -16,7 +16,7 @@
 	};
 
 	const { item } = getAccordionContext();
-	let className = '';
+	let className: string | undefined | null = undefined;
 	export { className as class };
 
 	setContext('accordion-item', itemOptions);

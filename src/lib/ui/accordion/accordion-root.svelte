@@ -11,7 +11,7 @@
     generateAccordionOptions(multiple, value)
   );
 	const { root, value: valueStore } = accordion;
-	let className = '';
+	let className: string | undefined | null = undefined;
 	export { className as class };
 
 	setContext('accordion', accordion);

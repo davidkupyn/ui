@@ -6,7 +6,7 @@
 
 	const { content, isSelected } = getAccordionContext();
 	const item = getAccordionItemContext();
-	let className = '';
+	let className: string | undefined | null = undefined;
 	export { className as class };
 </script>
 

@@ -25,7 +25,7 @@
 	};
 
 
-	let className = '';
+	let className: string | undefined | null = undefined;
   const { item: itemStyles } = menuStyles()
   export let checked = false;
 	export { className as class };

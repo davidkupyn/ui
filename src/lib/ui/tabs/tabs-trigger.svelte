@@ -4,7 +4,7 @@
 	import { getTabsContext } from '.';
 
 	const { trigger, value: valueStore } = getTabsContext();
-	let className = '';
+	let className: string | undefined | null = undefined;
 	export let disabled = false;
 	export { className as class };
 	export let value: string;
@@ -31,7 +31,7 @@
 			in:receive={{ key: 'tab', duration: 200 }}
 			out:send={{ key: 'tab', duration: 200 }}
 			class={cn(
-				'w-full h-full group-data-[orientation=vertical]:rounded-xl rounded-lg overflow-hidden bg-muted'
+				'w-full h-full group-data-[orientation=vertical]:rounded-xl rounded-lg overflow-hidden bg-background shadow'
 				// transparent && 'bg-background shadow'
 			)}
 		/>

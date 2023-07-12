@@ -5,7 +5,7 @@
 	import { cubicInOut } from 'svelte/easing';
 
 	const { content, open } = getDisclosureContext();
-	let className = '';
+	let className: string | undefined | null = undefined;
 	export { className as class };
 </script>
 

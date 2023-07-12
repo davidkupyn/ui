@@ -7,7 +7,7 @@
 	export let value = '';
 	export let disabled = false;
 
-	let className = '';
+	let className: string | undefined | null = undefined;
 	export { className as class };
 
 	const { option, isSelected } = getSelectContext();

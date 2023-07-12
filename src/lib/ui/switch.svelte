@@ -12,7 +12,7 @@
 	export let disabled = false;
 	export let required = false;
 	export let group: any[] = [];
-	let className = '';
+	let className: string | undefined | null = undefined;
 	export { className as class };
 
 	const { root, input, isChecked } = createSwitch({

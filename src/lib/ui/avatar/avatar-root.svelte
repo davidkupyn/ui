@@ -7,7 +7,7 @@
 	export let fallback = '';
 	export let alt: string;
 	export let src: string;
-	let className = '';
+	let className: string | undefined | null = undefined;
 	export { className as class };
 	const avatar = createAvatar({
 		src

@@ -18,7 +18,7 @@
 	export let loop = false;
 	export let preventScroll = true;
 	
-	let className = '';
+	let className: string | undefined | null = undefined;
 	export { className as class };
 
 	const {

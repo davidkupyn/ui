@@ -3,7 +3,7 @@
 	import { getHoverCardContext } from '.';
 	import { cn } from '$lib/helpers/style';
 
-	let className = '';
+	let className: string | undefined | null = undefined;
 	export { className as class };
 	const { open, content } = getHoverCardContext();
 </script>

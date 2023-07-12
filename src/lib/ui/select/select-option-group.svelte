@@ -7,7 +7,7 @@
 	const { group } = getSelectContext();
 	const key: string = crypto.randomUUID();
 	setContext('option-group', key);
-	let className = '';
+	let className: string | undefined | null = undefined;
 	export { className as class };
 </script>
 

@@ -6,7 +6,7 @@
 	import { getSubMenuContext, menuStyles } from '.';
 
 	const { subMenu } = getSubMenuContext();
-	let className = '';
+	let className: string | undefined | null = undefined;
   const { content } = menuStyles();
 
 	export { className as class };

@@ -9,7 +9,7 @@
 	import Submenu from './menu-submenu.svelte';
 
 	const { menu, open } = getMenuContext();
-	let className = '';
+	let className: string | undefined | null = undefined;
   const { content } = menuStyles();
 
 	export { className as class };

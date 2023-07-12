@@ -2,7 +2,7 @@
 	import { cn } from '$lib/helpers/style';
 	import { menuStyles } from '.';
 
-	let className = '';
+	let className: string | undefined | null = undefined;
   const { itemLabel } = menuStyles();
 
 	export { className as class };

@@ -3,7 +3,7 @@
 	import { createLabel } from '@melt-ui/svelte';
   export let required = false;
 	const label = createLabel();
-  let className = '';
+  let className: string | undefined | null = undefined;
   export { className as class };
 </script>
 

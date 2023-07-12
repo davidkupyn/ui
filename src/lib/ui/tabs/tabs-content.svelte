@@ -2,7 +2,7 @@
 	import { cn } from '$lib/helpers/style';
 	import { getTabsContext } from '.';
 	const { content } = getTabsContext();
-	let className = '';
+	let className: string | undefined | null = undefined;
 	export { className as class };
 	export let value: string;
 </script>

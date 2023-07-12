@@ -3,7 +3,7 @@
 	import { getMenuContext, menuStyles } from '.';
 	const { separator } = getMenuContext();
 
-  let className = '';
+  let className: string | undefined | null = undefined;
   const {separator: seperatorStyles} = menuStyles()
   export { className as class };
 </script>

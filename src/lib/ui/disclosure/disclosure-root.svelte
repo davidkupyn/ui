@@ -12,7 +12,7 @@
 		disabled
 	});
 	const { root, open: openStore } = disclosure;
-	let className = '';
+	let className: string | undefined | null = undefined;
 	export let details: string | undefined = undefined;
 	export let summary: string | undefined = undefined;
 	export { className as class };
