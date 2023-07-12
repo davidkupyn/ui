@@ -390,8 +390,10 @@
 				</label>
 				<label class="input-label flex flex-col w-full">
 					Age
-					<input class="input" type='number'placeholder="Dave Kupyn" />
+					<input class="input" type='number'placeholder="18" />
 				</label>
+					<input class="input" type='text'placeholder="Text" />
+
 				<div class="flex gap-4 mt-4 w-full">
 					<button {...close} use:close.action type="button" class="btn btn-outline w-full">
 						Cancel
