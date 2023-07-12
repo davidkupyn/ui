@@ -390,7 +390,7 @@
 				</label>
 				<label class="input-label flex flex-col w-full">
 					Age
-					<input class="input" type='number'placeholder="18" />
+					<input class="input" type='text'placeholder="18" />
 				</label>
 					<input class="input" type='text'placeholder="Text" />
 
