@@ -42,13 +42,13 @@
 	import Slider from '$lib/ui/slider.svelte';
 	import { RadioGroup } from '$lib/ui/radio-group';
 	import Progress from '$lib/ui/progress.svelte';
+	import Button from '$lib/ui/button.svelte';
 
 	let showPassword = false;
 	const tabs = ['witalina', 'david', 'wiktor', 'gustaw'];
-	const tabs2 = ['witalina', 'david', 'wiktor', 'gustaw'];
 	const PAGE_SIZE = 10;
 	let currentPage = 3;
-
+let buttonLoading = false;
 	let items = Array.from({ length: 100 }, (_, i) => ({
 		id: crypto.randomUUID().slice(0, 16),
 		name: `Item ${i + 1}`,
@@ -88,7 +88,7 @@
 		<label class="input-group group">
 			<Search size=16 class="icon-left" />
 			<input spellcheck="false" autocomplete="false" placeholder="Search..."/>
-			<Kbd class="group-focus-within:scale-90 hidden sm:flex transition group-focus-within:opacity-0">
+			<Kbd class="group-focus-within:scale-75 max-sm:hidden transition group-focus-within:opacity-0">
 				<Command size="12" />
 				K
 			</Kbd>
@@ -221,36 +221,42 @@
 		</Popover>
 
 		<div class="flex flex-wrap gap-2 w-full">
-			<button class="btn" on:click={() => dialogOpen = false}>
+			<Button>
 				<Stars size=16 />
 				Primary
-			</button>
-			<button class="btn btn-outline">
+			</Button>
+			<Button variant="outline">
 				<BookTemplate size=16 />
 				Outline
-			</button>
-			<button class="btn btn-secondary">
+			</Button>
+			<Button variant="secondary">
 				<Flower2 size=16 />
 				Secondary
-			</button>
-			<button class="btn btn-error"> Error </button>
-			<button class="btn btn-success"> Success </button>
-			<button class="btn btn-warning"> Warning </button>
-			<button class="btn btn-info"> Info </button>
-
-			<button class="btn btn-ghost"> Ghost </button>
-			<button class="btn btn-ghost btn-icon" use:tippy={{ content: 'Ghost icon button' }}>
+			</Button>
+			<Button variant="error"> Error </Button>
+			<Button variant="success"> Success </Button>
+			<Button variant="warning"> Warning </Button>
+			<Button variant="info"> Info </Button>
+			<Button variant="ghost"> Ghost </Button>
+			<Button variant="link">Link</Button>
+			<Button size='icon' variant="ghost">
 				<Save size=20 />
-			</button>
+			</Button>
+			<Button variant="text">
+				Text
+			</Button>
 
-			<button class="btn btn-link">Link</button>
-			<button class="btn btn-text">Text</button>
+			<Button disabled={buttonLoading} loading={buttonLoading} on:click={
+				() => {
+					buttonLoading = true;
+					setTimeout(() => {
+						buttonLoading = false;
+					}, 2500);
+				}
+			}>
+				Submit
+			</Button>
 
-			<button class="btn btn-link btn-secondary">Link Secondary</button>
-			<button class="btn" disabled>
-				<Loader2 class="animate-spin" size=16 />
-				Loading
-			</button>
 		</div>
 
 		<Tabs let:List let:Content value={tabs[1]} on:change={(e) => console.log(e.detail)}>
@@ -308,6 +314,7 @@
 	<Progress bind:value={sliderValue} class="max-w-md" />
 	<div class="mt-4 flex gap-4 items-center">
 		<Avatar
+			squared
 			src="https://avatars.githubusercontent.com/u/1162160?v=4"
 			alt="Rich Harris"
 			fallback="RH"

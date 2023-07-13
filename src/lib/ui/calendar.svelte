@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { ChevronLeft, ChevronRight } from 'lucide-svelte';
 	import { createCalendar } from './headless/calendar';
+	import Button from './button.svelte';
 
 	const { calendar, nextButtonAttrs, prevButtonAttrs, title, days, weekdays, selected } =
 		createCalendar();
@@ -14,23 +15,25 @@
 	class="flex w-80 flex-col overflow-clip rounded-3xl border border-popover-border bg-popover p-4 backdrop-blur-md shadow-lg ring-opacity-5 focus:outline-none"
 >
 	<div class="mb-4 flex items-center justify-between">
-		<button
+		<Button
+			variant="ghost"
+			size="icon"
 			type="button"
-			class="btn btn-ghost btn-icon"
 			{...$prevButtonAttrs}
 			aria-label="Previous month"
 		>
 			<ChevronLeft size=20 />
-		</button>
+		</Button>
 		<div class="flex-grow text-center font-semibold">{$title}</div>
-		<button
+		<Button
+			variant="ghost"
+			size="icon"
 			type="button"
-			class="btn btn-ghost btn-icon"
 			{...$nextButtonAttrs}
 			aria-label="Next month"
 		>
 			<ChevronRight size=20 />
-		</button>
+		</Button>
 	</div>
 	<div>
 		<div class="mb-2 grid w-full grid-cols-7 gap-1 text-center text-xs font-medium uppercase">

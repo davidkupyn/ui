@@ -6,7 +6,7 @@
 
 	export let fallback = '';
 	export let alt: string;
-	export let squared = true;
+	export let squared = false;
 	export let src: string;
 	let className: string | undefined | null = undefined;
 	export { className as class };
