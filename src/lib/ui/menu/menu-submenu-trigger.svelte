@@ -14,7 +14,7 @@
 		class={cn(
       item(),
       'w-full focus:ring-0 data-[state=open]:bg-muted data-[state=open]:text-foreground',
-   		danger && 'text-error focus:text-error focus:bg-error-500/10 dark:focus:text-error-400',
+   		danger && 'focus:bg-error-400/20 text-error dark:focus:text-error-200 dark:focus:bg-error-600/20 focus:text-error',
 			className
 		)}
 		use:subTrigger

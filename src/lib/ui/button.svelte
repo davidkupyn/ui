@@ -6,13 +6,13 @@
     base: 'inline-flex items-center justify-center rounded-xl active:scale-95 text-sm font-medium transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 ring-offset-background disabled:pointer-events-none disabled:opacity-50',
     variants: {
       variant: {
-        default: 'bg-primary hover:bg-primary-focus text-primary-foreground focus-visible:ring-primary',
+        default: 'bg-primary hover:bg-primary-focus text-primary-foreground focus-visible:ring-primary [box-shadow:_inset_0_1px_0px_0px_hsl(var(--color-background)/0.1)] border border-primary hover:border-primary-focus',
         outline: 'shadow dark:shadow-black ring-1 ring-base-950/10 focus-visible:border-border border border-transparent dark:border-border text-foreground hover:bg-border focus-visible:ring-border',
         secondary: 'bg-base-200/90 hover:bg-muted dark:bg-base-900/70 dark:hover:bg-muted focus-visible:ring-border',
-        error: 'bg-error hover:bg-error-focus text-error-foreground focus-visible:ring-error',
-        success: 'bg-success hover:bg-success-focus text-success-foreground focus-visible:ring-success',
-        warning: 'bg-warning hover:bg-warning-focus text-warning-foreground focus-visible:ring-warning',
-        info: 'bg-info hover:bg-info-focus text-info-foreground focus-visible:ring-info',
+        error: 'bg-error hover:bg-error-focus text-error-foreground focus-visible:ring-error [box-shadow:_inset_0_1px_0px_0px_hsl(0_0%_98%/0.3)] border border-error hover:border-error-focus',
+        success: 'bg-success hover:bg-success-focus text-success-foreground focus-visible:ring-success [box-shadow:_inset_0_1px_0px_0px_hsl(0_0%_98%/0.3)] border border-success hover:border-success-focus',
+        warning: 'bg-warning hover:bg-warning-focus text-warning-foreground focus-visible:ring-warning [box-shadow:_inset_0_1px_0px_0px_hsl(0_0%_98%/0.3)] border border-warning hover:border-warning-focus',
+        info: 'bg-info hover:bg-info-focus text-info-foreground focus-visible:ring-info [box-shadow:_inset_0_1px_0px_0px_hsl(0_0%_98%_/_0.3)] border-info border hover:border-info-focus',
         ghost: 'hover:bg-base-300/50 dark:hover:bg-base-800/50 text-muted-foreground focus-visible:text-foreground dark:focus-visible:text-base-300 hover:text-foreground aria-pressed:text-foreground focus-visible:ring-border',
         text: 'text-muted-foreground focus-visible:text-foreground hover:text-foreground aria-pressed:text-foreground data-[selected]:text-foreground data-[state=active]:text-foreground aria-pressed:underline underline-offset-4 data-[state=active]:underline focus-visible:ring-offset-0 focus-visible:ring-border',
         link: 'underline-offset-4 underline text-accent hover:text-accent-focus focus-visible:ring-accent',
@@ -33,6 +33,7 @@
 	} from "svelte/elements";
 	import { Loader2 } from "lucide-svelte";
 	import { cn } from '$lib/helpers/style';
+	import type { Action } from 'svelte/action';
 
 	let className: string | undefined | null = undefined;
 	export { className as class };
@@ -42,12 +43,14 @@
 		"default";
 	export let size: VariantProps<typeof buttonStyles>["size"] = "default";
   export let loading = false;
-  
+  export let use: [any, {}] = [() => {}, {}];
+  const [action, actionProps] = use;
 	type Props = {
 		class?: string | null;
 		variant?: VariantProps<typeof buttonStyles>["variant"];
 		size?: VariantProps<typeof buttonStyles>["size"];
     loading?: boolean;
+    use?: [Action, {}];
 	};
 
 	interface AnchorElement extends Props, HTMLAnchorAttributes {
@@ -76,13 +79,14 @@
 	on:keyup
 	on:mouseenter
 	on:mouseleave
+  use:action={actionProps}
 >
   {#if loading}
     <span transition:scale class="absolute inset-0 grid place-content-center">
       <Loader2 class="animate-spin" size=16 />
     </span>
     {/if}
-    <span class={cn('transition inline-flex gap-2 items-center justify-center', loading ? 'scale-75 opacity-0' : 'scale-100 opacity-100 pointer-events-none')}>
+    <span class={cn('transition-[transform,opacity] inline-flex gap-2 items-center justify-center', loading ? 'scale-75 opacity-0' : 'scale-100 opacity-100 pointer-events-none', ['info', 'error'].includes(variant ?? 'default') && 'text-shadow')}>
       <slot />
     </span>
 </svelte:element>

@@ -15,7 +15,7 @@
           statusDot: 'bg-primary'
         },
         accent: {
-          base: 'bg-accent-400/20 text-accent-600 dark:bg-accent-500/20  dark:text-accent-400',
+          base: 'bg-accent-400/20 text-accent-600 dark:bg-accent-500/20  dark:text-accent-200 dark:bg-accent-600/20',
           statusDot: 'bg-accent-400'
         },
         outline: {
@@ -23,19 +23,19 @@
           statusDot: 'bg-transparent'
         },
         success: {
-          base: 'bg-success-500/20 text-success-700 dark:text-success-400',
+          base: 'bg-success-400/20 text-success-700 dark:text-success-200 dark:bg-success-600/20',
           statusDot: 'bg-success-500'
         },
         error: {
-          base: 'bg-error-500/20 text-error dark:text-error-400',
+          base: 'bg-error-400/20 text-error dark:text-error-200 dark:bg-error-600/20',
           statusDot: 'bg-error-500'
         },
         warning: {
-          base: 'bg-warning-500/20 text-warning-700 dark:text-warning-400',
+          base: 'bg-warning-400/20 text-warning-700 dark:text-warning-200 dark:bg-warning-600/20',
           statusDot: 'bg-warning-500'
         },
         info: {
-          base: 'bg-info-500/20 text-info-700 dark:text-info-400',
+          base: 'bg-info-400/20 text-info-700 dark:text-info-200 dark:bg-info-600/20',
           statusDot: 'bg-info-500'
         },
       },

@@ -237,7 +237,7 @@ let buttonLoading = false;
 			<Button variant="success"> Success </Button>
 			<Button variant="warning"> Warning </Button>
 			<Button variant="info"> Info </Button>
-			<Button variant="ghost"> Ghost </Button>
+			<Button variant="ghost" use={[tippy, { content: 'Smth'}]}> Ghost </Button>
 			<Button variant="link">Link</Button>
 			<Button size='icon' variant="ghost">
 				<Save size=20 />
@@ -404,10 +404,15 @@ let buttonLoading = false;
 				</label>
 
 				<div class="flex gap-4 mt-4 w-full flex-col-reverse sm:flex-row sm:justify-end">
-					<button {...close} use:close.action type="button" class="btn btn-outline">
+					<Button 
+						{...close}
+						use={[close.action, {}]}
+						type="button"
+						variant='outline'
+						>
 						Cancel
-					</button>
-					<button type="submit" class="btn"> Confirm </button>
+					</Button>
+					<Button type="submit">Confirm</Button>
 				</div>
 			</form>
 		</Content>
@@ -519,20 +524,22 @@ let buttonLoading = false;
 								<Description
 									>Make changes to your profile here. Click save when you're done.</Description
 								>
-								<div class="flex gap-4 mt-4 w-full max-sm:flex-col-reverse">
-									<button {...close} use:close.action class="btn btn-outline w-full">
+								<div class="flex gap-4 mt-4 w-full flex-col-reverse sm:flex-row sm:justify-end">
+									<Button 
+										{...close}
+										use={[close.action, {}]}
+										type="button"
+										variant='outline'
+										>
 										Cancel
-									</button>
-									<button
-										class="btn btn-error w-full"
+									</Button>
+									<Button type="submit" variant='error' 
 										on:click={() => {
 											items = items.filter((item) => !selected.includes(item.id));
 											selected = [];
 											// closeDeleteDialog();
 										}}
-									>
-										Delete
-									</button>
+									>Delete</Button>
 								</div>
 							</Content>
 						</Modal>
