@@ -6,6 +6,7 @@
 
 	export let fallback = '';
 	export let alt: string;
+	export let squared = true;
 	export let src: string;
 	let className: string | undefined | null = undefined;
 	export { className as class };
@@ -16,7 +17,7 @@
 	setContext('avatar', avatar);
 </script>
 
-<div class={cn('grid w-9 aspect-square place-content-center rounded-full bg-muted', className)}>
+<div class={cn('grid w-9 aspect-square place-content-center rounded-full bg-muted', squared ? 'rounded-xl' : 'rounded-full', className)}>
 	<img {...$image} {alt} class="h-full w-full rounded-[inherit]" />
 	<slot {Fallback}>
 		<Fallback>

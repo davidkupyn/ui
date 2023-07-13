@@ -1,8 +1,8 @@
 <script lang="ts">
 	import { cn } from '$lib/helpers/style';
-	import { createSeparator, type CreateSeparatorArgs } from '@melt-ui/svelte';
+	import { createSeparator, type CreateSeparatorProps } from '@melt-ui/svelte';
 
-	export let orientation: CreateSeparatorArgs['orientation'] = 'horizontal';
+	export let orientation: CreateSeparatorProps['orientation'] = 'horizontal';
 
 	const { root } = createSeparator({
 		orientation,

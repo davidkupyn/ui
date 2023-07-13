@@ -4,14 +4,14 @@
 	import { getDisclosureContext } from '.';
 	import { cubicInOut } from 'svelte/easing';
 
-	const { content, open } = getDisclosureContext();
+	const { content, open, unstyled } = getDisclosureContext();
 	let className: string | undefined | null = undefined;
 	export { className as class };
 </script>
 
 {#if $open}
 	<div
-		class={cn('px-4 mt-2 text-sm text-muted-foreground overflow-hidden', className)}
+		class={cn(!unstyled && 'px-4 mt-2 text-sm text-muted-foreground overflow-hidden', className)}
 		{...$content}
 		transition:slide={{ duration: 150, easing: cubicInOut }}
 	>

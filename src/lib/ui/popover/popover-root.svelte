@@ -24,7 +24,7 @@
 		positioning: {
 			placement: placement
 		},
-		open
+		defaultOpen: open
 	});
 	const { close, open: openStore, trigger } = popover;
 	setContext('popover', popover);

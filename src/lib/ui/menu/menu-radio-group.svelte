@@ -1,5 +1,5 @@
 <script lang="ts">
-	import Item from './menu-radio-group-item.svelte';
+	import Radio from './menu-radio-item.svelte';
 	import { getMenuContext } from '.';
 	import { createEventDispatcher, setContext } from 'svelte';
 
@@ -18,5 +18,5 @@
 
 </script>
 <div {...$root}>
-	<slot {Item} />
+	<slot {Radio} />
 </div>

@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { fade, scale, fly } from 'svelte/transition';
+	import { fade, scale, fly, type TransitionConfig } from 'svelte/transition';
 	import Title from './modal-title.svelte';
 	import Description from './modal-description.svelte';
 	import { modal, getModalContext } from '.';
@@ -11,61 +11,41 @@
 	let className: string | undefined | null = undefined;
 	export { className as class };
 
-	function modalAnimation(element: HTMLElement, {
-		duration = 200,
-		easing = 'ease-out'
-	} ) {
-		const keyframes = [
-			{ transform: 'translateY(var(--modal-y-from))', scale: 'var(--modal-scale-from)' },
-			{ transform: 'translateY(var(--modal-y-to))', scale: 'var(--modal-scale-to)' },
-		];
-		const animation = element.animate(keyframes, {
-			duration,
-			easing,
-			fill: 'forwards'
-		});
-		animation.onfinish = () => {
-			console.log('finished');
-		};	
-	}
-
-// 	function modalTransition(element: Element, { delay = 0, duration = 400, easing = cubicOut } = {}): TransitionConfig {
-// 	const s = +getComputedStyle(element).scale;
-// 	return {
-// 		delay,
-// 		duration,
-// 		easing,
-// 		css: (t) => `scale: ${t * s}`
-// 	};
-// }
-// function modalTransition(
-// 	node: Element,
-// 	{ delay = 0, duration = 400, easing = cubicOut, start = 0, opacity = 0 } = {}
-// ): TransitionConfig {
-// 	const style = getComputedStyle(node);
-// 	const target_opacity = +style.opacity;
-// 	const transform = style.transform === 'none' ? '' : style.transform;
-// 	const sd = 1 - start;
-// 	const od = target_opacity * (1 - opacity);
-// 	return {
-// 		delay,
-// 		duration,
-// 		easing,
-// 		css: (_t, u) => `
-// 			transform: ${transform} scale(${1 - sd * u});
-// 			opacity: ${target_opacity - od * u}
-// 		`
-// 	};
-// }
-let innerWidth = 0;
-$: isMobile = innerWidth < 640;
-function modalTransition(element: HTMLElement, isMobile: boolean) {
-	return isMobile
-		? fly(element, { y: 80, duration: 200 })
-		: scale(element, { duration: 150, start: 0.95 });
+function split_css_unit(value: number | string): [number, string] {
+	const split = typeof value === 'string' && value.match(/^\s*(-?[\d.]+)([^\s]*)\s*$/);
+	return split ? [parseFloat(split[1]), split[2] || 'px'] : [(value as number), 'px'];
+}
+function modalTransition(
+	node: Element,
+	{ delay = 0, duration = 400, easing = cubicOut, x = 0, y = 0, opacity = 0, scale = 0.95 }: {
+		delay?: number;
+		duration?: number;
+		easing?: (t: number) => number;
+		x?: number | string;
+		y?: number | string;
+		opacity?: number;
+		scale?: number | string;
+	} = {}
+): TransitionConfig {
+	const style = getComputedStyle(node);
+	const target_opacity = +style.opacity;
+	const transform = style.transform === 'none' ? '' : style.transform;
+	const od = target_opacity * (1 - opacity);
+	const sd = typeof scale === 'string' ? 1 - Number(style.getPropertyValue(scale)) : 1 - scale;
+	const isXVar = typeof x === 'string' && x.startsWith('--');
+	const isYVar = typeof y === 'string' && y.startsWith('--');
+	const [xValue, xUnit] = split_css_unit(isXVar ? style.getPropertyValue(x) : x);
+	const [yValue, yUnit] = split_css_unit(isYVar ? style.getPropertyValue(y) : y);
+	return {
+		delay,
+		duration,
+		easing,
+		css: (t, u) => `
+			transform: ${transform} translate(${(1 - t) * xValue}${xUnit}, ${(1 - t) * yValue}${yUnit}) scale(${1 - sd * u});
+			opacity: ${target_opacity - od * u}`
+	};
 }
 </script>
-<svelte:window bind:innerWidth />
 <div use:portal>
 	{#if $open}
 		<div class='z-50 flex justify-center sm:items-center items-end fixed inset-0'>
@@ -75,7 +55,11 @@ function modalTransition(element: HTMLElement, isMobile: boolean) {
 				class="fixed z-50 inset-0 bg-[radial-gradient(ellipse_at_bottom,_var(--tw-gradient-stops))] sm:bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-base-600/50 to-base-600/95 dark:from-base-950/70 dark:to-base-950/95"
 			/>
 			<div
-				transition:modalTransition={isMobile}
+				transition:modalTransition={{
+					duration: 200,
+					y: '--modal-y',
+					scale: '--modal-scale'
+				}}
 				class={cn(modal({ alert }).base(), className)}
 				{...$content}
 				use:content

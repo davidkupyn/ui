@@ -2,9 +2,9 @@
 	import { Check } from 'lucide-svelte';
 	import { writable, type Writable } from 'svelte/store';
 	import { getMenuContext, menuStyles } from '.';
-	import type { CheckboxItemArgs, ItemArgs } from '@melt-ui/svelte/dist/builders/menu';
 	import { cn } from '$lib/helpers/style';
 	import { createEventDispatcher } from 'svelte';
+	import type { CheckboxItemProps, ItemProps } from '@melt-ui/svelte/dist/builders/menu';
 
 	export let checkbox = false;
   export let disabled = false;
@@ -14,9 +14,9 @@
 	const baseItem = checkbox ? checkboxItem : regularItem;
 	const item = {
 		...baseItem,
-		action(node: HTMLElement, options: CheckboxItemArgs | ItemArgs) {
+		action(node: HTMLElement, options: CheckboxItemProps | ItemProps) {
 			if (checkbox) {
-				const checkboxOptions = options as CheckboxItemArgs;
+				const checkboxOptions = options as CheckboxItemProps;
 				checkboxItem(node, checkboxOptions);
 			} else {
 				regularItem(node, options);

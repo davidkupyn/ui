@@ -3,9 +3,8 @@
 	import { ChevronRight } from 'lucide-svelte';
 	import { getDisclosureContext } from '.';
 
-	const { trigger } = getDisclosureContext();
+	const { trigger, unstyled } = getDisclosureContext();
 	export let arrow = true;
-	export let styled = true;
 	let className: string | undefined | null = undefined;
 	export { className as class };
 </script>
@@ -14,7 +13,7 @@
 	{...$trigger}
 	use:trigger
 	class={cn(
-		styled && 'btn btn-ghost active:scale-100 w-full group data-[state=open]:text-foreground',
+		!unstyled && 'btn btn-ghost active:scale-100 w-full group data-[state=open]:text-foreground',
 		className
 	)}
 >

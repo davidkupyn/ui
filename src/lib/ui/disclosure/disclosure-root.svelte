@@ -6,6 +6,7 @@
 	import { createEventDispatcher, setContext } from 'svelte';
 	export let disabled = false;
 	export let defaultOpen = false;
+	export let unstyled = false;
 	export let open = defaultOpen;
 	const disclosure = createCollapsible({
 		open,
@@ -16,7 +17,7 @@
 	export let details: string | undefined = undefined;
 	export let summary: string | undefined = undefined;
 	export { className as class };
-	setContext('disclosure', disclosure);
+	setContext('disclosure', {unstyled, ...disclosure});
 	const dispatch = createEventDispatcher();
 
 	 $: openStore.set(open)

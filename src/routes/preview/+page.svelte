@@ -11,7 +11,6 @@
 		Hash,
 		DollarSign,
 		MoreHorizontal,
-		Crown,
 		Stars,
 		Flower2,
 		BookTemplate,
@@ -40,13 +39,13 @@
 	import Separator from '$lib/ui/separator.svelte';
 	import Kbd from '$lib/ui/kbd.svelte';
 	import Badge from '$lib/ui/badge.svelte';
-	import { error } from '@sveltejs/kit';
 	import Slider from '$lib/ui/slider.svelte';
+	import { RadioGroup } from '$lib/ui/radio-group';
+	import Progress from '$lib/ui/progress.svelte';
 
 	let showPassword = false;
 	const tabs = ['witalina', 'david', 'wiktor', 'gustaw'];
 	const tabs2 = ['witalina', 'david', 'wiktor', 'gustaw'];
-
 	const PAGE_SIZE = 10;
 	let currentPage = 3;
 
@@ -58,7 +57,7 @@
 		createdAt: new Date(),
 		status: Math.random() > 0.41 ? 'active' : 'inactive'
 	}));
-
+	let sliderValue = 20;
 	$: paginatedItems = currentPage
 		? items.slice((currentPage - 1) * PAGE_SIZE, currentPage * PAGE_SIZE)
 		: items.slice(0, PAGE_SIZE);
@@ -88,7 +87,7 @@
 	<div class="w-full max-w-[40rem] flex flex-col gap-6">
 		<label class="input-group group">
 			<Search size=16 class="icon-left" />
-			<input spellcheck="false" autocomplete="false" placeholder="Search..." />
+			<input spellcheck="false" autocomplete="false" placeholder="Search..."/>
 			<Kbd class="group-focus-within:scale-90 hidden sm:flex transition group-focus-within:opacity-0">
 				<Command size="12" />
 				K
@@ -203,7 +202,6 @@
 			Normal Text Area
 			<textarea class="h-24 input" placeholder="Placeholder" />
 		</label>
-
 		<Popover let:Trigger let:Content>
 			<Trigger class="input-group w-full">
 				<CalendarIcon size=16 class="icon-left" />
@@ -301,7 +299,13 @@
 			<Badge subtle variant="info">Info</Badge>
 		</div>
 	</div>
-	<Slider value={20} class="max-w-md" />
+	<Slider bind:value={sliderValue} class="max-w-md" />
+	<RadioGroup let:Radio value='3'>
+		<Radio value="1">One</Radio>
+		<Radio value="2">Two</Radio>
+		<Radio value="3">Three</Radio>
+	</RadioGroup>
+	<Progress bind:value={sliderValue} class="max-w-md" />
 	<div class="mt-4 flex gap-4 items-center">
 		<Avatar
 			src="https://avatars.githubusercontent.com/u/1162160?v=4"

@@ -25,7 +25,7 @@
 
 {#key mounted}
 	<main
-		class="h-[100dvh] w-full bg-gradient-to-br dark:from-primary-950/50 dark:via-base-950 dark:to-base-950 from-primary-400/50 via-base-50 to-base-50 transition"
+		class="h-[100dvh] w-full bg-gradient-to-tl dark:from-primary-950/50 dark:via-base-950 dark:to-base-950 from-primary-400/50 via-base-50 to-base-50 transition"
 	>
 		<div class="p-6 flex flex-col justify-center items-center h-full gap-8">
 			<h1

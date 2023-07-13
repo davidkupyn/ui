@@ -7,7 +7,7 @@
     base: 'inline-flex items-center rounded-lg px-2.5 py-0.5 text-xs font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-border focus:ring-offset-2',
     variants: {
       variant: {
-        default: 'bg-primary text-background',
+        primary: 'bg-primary text-background',
         accent: 'bg-accent-400/20 text-accent-600 dark:bg-accent-500/20  dark:text-accent-400',
         outline: 'ring-1 ring-base-950/10 shadow dark:border-border border border-transparent focus-visible:border-border text-foreground',
         success: 'bg-success-500/20 text-success-700 dark:text-success-400',
@@ -28,7 +28,7 @@
     base: 'w-1 h-1 rounded-full',
     variants: {
       variant: {
-        default: 'bg-primary',
+        primary: 'bg-primary',
         accent: 'bg-accent-400',
         outline: 'bg-transparent',
         success: 'bg-success-500',
@@ -43,7 +43,7 @@
 <script lang="ts">
   export let href: HTMLAnchorAttributes["href"] = undefined;
 	export let variant: VariantProps<typeof badgeStyles>["variant"] =
-		"default";
+		"primary";
   export let subtle: VariantProps<typeof badgeStyles>["subtle"] = false;
   export let round: VariantProps<typeof badgeStyles>["round"] = false;
 	let className: string | undefined | null = undefined;

@@ -3,10 +3,15 @@
 	import { Accordion } from "$lib/ui/accordion";
 	import { Modal } from "$lib/ui/modal";
 	import { Popover } from "$lib/ui/popover";
+	import { RadioGroup } from "$lib/ui/radio-group";
 	import { AppWindow, MoreHorizontal } from "lucide-svelte";
 </script>
 <main class="h-[calc(100vh-4rem)] grid place-content-center gap-8">
-
+	<RadioGroup let:Radio value='3'>
+		<Radio value="1">One</Radio>
+		<Radio value="2">Two</Radio>
+		<Radio value="3">Three</Radio>
+	</RadioGroup>
 	<Accordion
 		multiple
 		let:Item

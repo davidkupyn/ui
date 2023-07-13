@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { cn } from '$lib/helpers/style';
   import { createSlider } from '@melt-ui/svelte';
+	import { createEventDispatcher } from 'svelte';
 
   export let value: number | number[] = 0;
   export let disabled = false;
@@ -17,6 +18,13 @@
     orientation,
     step,
     disabled
+  });
+  const dispatch = createEventDispatcher();
+  $: valueStore.set(Array.isArray(value) ? value : [value]);
+  valueStore.subscribe((v) => {
+    const newValue = Array.isArray(v) ? v : [v];
+    value = newValue;
+    dispatch('change', newValue);
   });
 </script>
  
