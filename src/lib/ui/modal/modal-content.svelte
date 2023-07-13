@@ -15,7 +15,7 @@ function split_css_unit(value: number | string): [number, string] {
 	const split = typeof value === 'string' && value.match(/^\s*(-?[\d.]+)([^\s]*)\s*$/);
 	return split ? [parseFloat(split[1]), split[2] || 'px'] : [(value as number), 'px'];
 }
-function modalTransition(
+function css(
 	node: Element,
 	{ delay = 0, duration = 400, easing = cubicOut, x = 0, y = 0, opacity = 0, scale = 0.95 }: {
 		delay?: number;
@@ -56,7 +56,7 @@ function modalTransition(
 				class="fixed z-50 inset-0 bg-[radial-gradient(ellipse_at_bottom,_var(--tw-gradient-stops))] sm:bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-base-600/50 to-base-600/95 dark:from-base-950/70 dark:to-base-950/95"
 			/>
 			<div
-				transition:modalTransition={{
+				transition:css={{
 					duration: '--modal-duration',
 					y: '--modal-y',
 					scale: '--modal-scale'
