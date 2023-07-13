@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { fade, scale, fly, type TransitionConfig } from 'svelte/transition';
+	import { fade, type TransitionConfig } from 'svelte/transition';
 	import Title from './modal-title.svelte';
 	import Description from './modal-description.svelte';
 	import { modal, getModalContext } from '.';
@@ -19,7 +19,7 @@ function modalTransition(
 	node: Element,
 	{ delay = 0, duration = 400, easing = cubicOut, x = 0, y = 0, opacity = 0, scale = 0.95 }: {
 		delay?: number;
-		duration?: number;
+		duration?: number | string;
 		easing?: (t: number) => number;
 		x?: number | string;
 		y?: number | string;
@@ -36,6 +36,7 @@ function modalTransition(
 	const isYVar = typeof y === 'string' && y.startsWith('--');
 	const [xValue, xUnit] = split_css_unit(isXVar ? style.getPropertyValue(x) : x);
 	const [yValue, yUnit] = split_css_unit(isYVar ? style.getPropertyValue(y) : y);
+	duration = typeof duration === 'string' ? parseFloat(style.getPropertyValue(duration)) : duration; 
 	return {
 		delay,
 		duration,
@@ -56,7 +57,7 @@ function modalTransition(
 			/>
 			<div
 				transition:modalTransition={{
-					duration: 200,
+					duration: '--modal-duration',
 					y: '--modal-y',
 					scale: '--modal-scale'
 				}}
