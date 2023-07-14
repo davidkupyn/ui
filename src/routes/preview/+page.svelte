@@ -43,6 +43,7 @@
 	import { RadioGroup } from '$lib/ui/radio-group';
 	import Progress from '$lib/ui/progress.svelte';
 	import Button from '$lib/ui/button.svelte';
+	import { Card } from '$lib/ui/card';
 
 	let showPassword = false;
 	const tabs = ['witalina', 'david', 'wiktor', 'gustaw'];
@@ -152,51 +153,56 @@ let buttonLoading = false;
 				]}
 			/>
 		</label>
-		<form
-			class="grid gap-4 rounded-3xl border border-transparent ring-1 ring-base-950/10 shadow dark:border-border p-4"
-		>
-			<h2 class="font-semibold mb-2 text-md sm:text-lg text-center">Form with Select component</h2>
-			<label class="input-label w-full" for="select1">
-				Custom Select
-				<Select
-					let:Group
-					placeholder="Select an option"
-					id="select1"
-					name="custom"
-					bind:value={customSelectValue}
-					on:change={(e) => console.log(e.detail)}
+		<Card let:Header let:Footer class="max-w-md">
+			<Header let:Title let:Description>
+				<Title>Form example</Title>
+				<Description>Using custom and native select components</Description>
+			</Header>
+				<form
+					class="grid gap-4"
 				>
-					<Group let:Option let:Label>
-						<Label>Class 3</Label>
-						<Option value="witalina">Witalina</Option>
-						<Option value="david">David</Option>
-						<Option value="wiktor">Wiktor</Option>
-						<Option value="gustaw">Gustaw</Option>
-					</Group>
-					<Group let:Option let:Label>
-						<Label>Class 1</Label>
-						<Option value="szymon">Szymon</Option>
-						<Option value="aleks">Aleks</Option>
-					</Group>
-				</Select>
-			</label>
-			<label class="input-label w-full" for="select2">
-				Native Select
-				<select class="input" id="select2" name="native" value="david">
-					<optgroup label="Class 3">
-						<option value="witalina">Witalina</option>
-						<option value="david">David</option>
-						<option value="wiktor">Wiktor</option>
-						<option value="gustaw">Gustaw</option>
-					</optgroup>
-					<optgroup label="Class 1">
-						<option value="szymon">Szymon</option>
-						<option value="aleks">Aleks</option>
-					</optgroup>
-				</select>
-			</label>
-			<button class="btn mt-3">Submit</button>
-		</form>
+					<label class="input-label w-full" for="select1">
+						Custom Select
+						<Select
+							let:Group
+							placeholder="Select an option"
+							id="select1"
+							name="custom"
+							bind:value={customSelectValue}
+							on:change={(e) => console.log(e.detail)}
+						>
+							<Group let:Option let:Label>
+								<Label>Class 3</Label>
+								<Option value="witalina">Witalina</Option>
+								<Option value="david">David</Option>
+								<Option value="wiktor">Wiktor</Option>
+								<Option value="gustaw">Gustaw</Option>
+							</Group>
+							<Group let:Option let:Label>
+								<Label>Class 1</Label>
+								<Option value="szymon">Szymon</Option>
+								<Option value="aleks">Aleks</Option>
+							</Group>
+						</Select>
+					</label>
+					<label class="input-label w-full" for="select2">
+						Native Select
+						<select class="input" id="select2" name="native" value="david">
+							<optgroup label="Class 3">
+								<option value="witalina">Witalina</option>
+								<option value="david">David</option>
+								<option value="wiktor">Wiktor</option>
+								<option value="gustaw">Gustaw</option>
+							</optgroup>
+							<optgroup label="Class 1">
+								<option value="szymon">Szymon</option>
+								<option value="aleks">Aleks</option>
+							</optgroup>
+						</select>
+					</label>
+					<Button class="btn mt-3">Submit</Button>
+				</form>
+		</Card>
 
 		<label class="input-label w-full">
 			Normal Text Area
@@ -271,21 +277,7 @@ let buttonLoading = false;
 			{/each}
 		</Tabs>
 		<Separator />
-		<!-- <div class="w-full rounded-xl bg-muted ring-foreground/10 ring-1">
-			<ToggleGroup tabs={tabs2} bind:value={tab2} transparent>
-				<span slot="tab" let:tab class="flex items-center">
-					{#if tab.toLowerCase() === 'david'}
-						<Crown class="mr-1 {tab2 === tab ? 'text-amber-500' : ''}" size=16 />
-						<span class="capitalize">
-							{tab}
-						</span>
-					{:else}
-						{tab}
-					{/if}
-				</span>
-			</ToggleGroup>
-		</div> -->
-
+	
 		<div class="flex flex-wrap gap-4">
 			<Badge>Default</Badge>
 			<Badge variant="outline">Outline</Badge>
@@ -345,55 +337,58 @@ let buttonLoading = false;
 			</p>
 		</Content>
 	</Disclosure>
-	<Accordion
-		let:Item
-		value="smth"
-		class="w-full max-w-md border border-transparent ring-1 ring-base-950/10 shadow dark:border-border rounded-3xl p-4"
-	>
-		<Item value='smth2' let:Trigger let:Content>
-			<Trigger>Why copy/paste and not a package?</Trigger>
-			<Content>
-				<p>
-					The idea behind this is to give you ownership and control over the code, allowing you to
-					decide how the components are built and styled.
-					<br />
-					<br />
-					Start with some sensible defaults, then customize the components to your needs.
-					<br />
-					<br />
-					One of the drawback of packaging the components in an npm package is that the style is coupled
-					with the implementation. The design of your components should be separate from their implementation.
-				</p>
-			</Content>
-		</Item>
-		<Item value='smth' let:Trigger let:Content>
-			<Trigger>
-				<Stars size=16 />
-				Why Essence?
-			</Trigger>
-			<Content>
-				<p>
-					We wanted to create a set of components that are easy to use, customizable and accessible.
-					<br />
-
-					<br />
-					The word "essence" suggests something fundamental or core. Our library aims to provide essential
-					or foundational UI elements, so you can focus on other parts of your app, where you can express
-					your creativity.
-				</p>
-			</Content>
-		</Item>
-		<Item summary="What about updates?" details="Yes, we will be updating the components regularly. We will also be adding new components."/>
-	</Accordion>
+	<Card class="max-w-md p-4">
+		<Accordion
+			let:Item
+			value="smth"
+		>
+			<Item value='smth2' let:Trigger let:Content>
+				<Trigger>Why copy/paste and not a package?</Trigger>
+				<Content>
+					<p>
+						The idea behind this is to give you ownership and control over the code, allowing you to
+						decide how the components are built and styled.
+						<br />
+						<br />
+						Start with some sensible defaults, then customize the components to your needs.
+						<br />
+						<br />
+						One of the drawback of packaging the components in an npm package is that the style is coupled
+						with the implementation. The design of your components should be separate from their implementation.
+					</p>
+				</Content>
+			</Item>
+			<Item value='smth' let:Trigger let:Content>
+				<Trigger>
+					<Stars size=16 />
+					Why Essence?
+				</Trigger>
+				<Content>
+					<p>
+						We wanted to create a set of components that are easy to use, customizable and accessible.
+						<br />
+	
+						<br />
+						The word "essence" suggests something fundamental or core. Our library aims to provide essential
+						or foundational UI elements, so you can focus on other parts of your app, where you can express
+						your creativity.
+					</p>
+				</Content>
+			</Item>
+			<Item summary="What about updates?" details="Yes, we will be updating the components regularly. We will also be adding new components."/>
+		</Accordion>
+	</Card>
 	<Modal let:Trigger let:Content bind:open={dialogOpen}>
 		<Trigger class="btn w-fit">
 			<AppWindow size=16 />
 			Open Modal
 		</Trigger>
-		<Content let:Title let:Description let:close class="sm:max-w-[425px]">
-			<Title>Edit Profile</Title>
-			<Description>Make changes to your profile here. Click save when you're done.</Description>
-			<form class="grid gap-4">
+		<Content let:Header let:Footer let:close class="sm:max-w-[425px]">
+			<Header let:Title let:Description>
+				<Title>Edit Profile</Title>
+				<Description>Make changes to your profile here. Click save when you're done.</Description>
+			</Header>
+			<form class="grid gap-2">
 				<label class="input-label w-full">
 					Username
 					<input class="input" type='text' placeholder="Dave Kupyn" />
@@ -402,8 +397,7 @@ let buttonLoading = false;
 					Email
 					<input class="input" type='text' placeholder="dkupyn@gmail.com" />
 				</label>
-
-				<div class="flex gap-4 mt-4 w-full flex-col-reverse sm:flex-row sm:justify-end">
+				<Footer class="mt-6">
 					<Button 
 						{...close}
 						use={[close.action, {}]}
@@ -413,7 +407,7 @@ let buttonLoading = false;
 						Cancel
 					</Button>
 					<Button type="submit">Confirm</Button>
-				</div>
+				</Footer>
 			</form>
 		</Content>
 	</Modal>
@@ -519,12 +513,12 @@ let buttonLoading = false;
 							<Trigger aria-label="Delete items" class="btn btn-ghost btn-icon btn-sm rounded-lg">
 								<Trash2 size=16 />
 							</Trigger>
-							<Content let:Title let:Description let:close class="sm:w-96">
-								<Title>Edit Profile</Title>
-								<Description
-									>Make changes to your profile here. Click save when you're done.</Description
-								>
-								<div class="flex gap-4 mt-4 w-full flex-col-reverse sm:flex-row sm:justify-end">
+							<Content let:Header let:Footer let:close class="sm:w-96">
+								<Header let:Title let:Description>
+									<Title>Edit Profile</Title>
+									<Description>Make changes to your profile here. Click save when you're done.</Description>
+								</Header>
+								<Footer>
 									<Button 
 										{...close}
 										use={[close.action, {}]}
@@ -540,7 +534,7 @@ let buttonLoading = false;
 											// closeDeleteDialog();
 										}}
 									>Delete</Button>
-								</div>
+								</Footer>
 							</Content>
 						</Modal>
 

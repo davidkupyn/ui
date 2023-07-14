@@ -23,7 +23,7 @@
           statusDot: 'bg-transparent'
         },
         success: {
-          base: 'bg-success-400/20 text-success-700 dark:text-success-200 dark:bg-success-600/20',
+          base: 'bg-success-500/20 text-success-800 dark:text-success-200 dark:bg-success-600/20',
           statusDot: 'bg-success-500'
         },
         error: {
@@ -31,11 +31,11 @@
           statusDot: 'bg-error-500'
         },
         warning: {
-          base: 'bg-warning-400/20 text-warning-700 dark:text-warning-200 dark:bg-warning-600/20',
+          base: 'bg-warning-400/20 text-warning-800 dark:text-warning-200 dark:bg-warning-600/20',
           statusDot: 'bg-warning-500'
         },
         info: {
-          base: 'bg-info-400/20 text-info-700 dark:text-info-200 dark:bg-info-600/20',
+          base: 'bg-info-400/20 text-info-800 dark:text-info-200 dark:bg-info-600/20',
           statusDot: 'bg-info-500'
         },
       },

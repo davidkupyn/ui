@@ -1,7 +1,7 @@
 <script lang="ts">
+	import Header from './modal-header.svelte';
+	import Footer from './modal-footer.svelte';
 	import { fade, type TransitionConfig } from 'svelte/transition';
-	import Title from './modal-title.svelte';
-	import Description from './modal-description.svelte';
 	import { modal, getModalContext } from '.';
 	import { cn } from '$lib/helpers/style';
 	import { X } from 'lucide-svelte';
@@ -61,12 +61,11 @@ function css(
 					y: '--modal-y',
 					scale: '--modal-scale'
 				}}
-				class={cn(modal({ alert }).base(), className)}
+				class={cn(modal().base(), className)}
 				{...$content}
 				use:content
-			>
-				<slot {Title} {Description} close={$close} />
-	
+				>
+				<slot {Header} {Footer} close={$close} />
 				{#if crossButton && !alert}
 					<button {...$close} use:close class="absolute right-4 top-4 btn btn-sm btn-ghost btn-icon">
 						<X size=16 />
