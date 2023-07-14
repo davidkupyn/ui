@@ -50,6 +50,11 @@
         }
       },
     },
+    defaultVariants: {
+      variant: 'default',
+      subtle: false,
+      round: false,
+    }
   })
 </script>
 

@@ -83,7 +83,7 @@
 	<table class="w-full caption-bottom overflow-x-scroll text-sm">
 		<thead
 			class={cn(
-				filled && 'bg-base-200/50 dark:bg-base-900/50',
+				filled && 'bg-base-200/50 dark:bg-base-900/50 [box-shadow:_inset_0_1px_0.5px_0px_hsl(0_0%_100%/0.06)] rounded-2xl',
 				lined && !filled && '[&_tr]:border-b'
 			)}
 		>
@@ -151,7 +151,7 @@
 				<th class={cn('px-4 py-1.5 align-middle text-right', filled && 'rounded-r-2xl')}>
 					{#if columnsEditable}
 						<Menu let:Trigger let:Content placement="bottom-end">
-							<Trigger class="btn btn-ghost btn-icon data-[state=open]:bg-muted data-[state=open]:text-foreground">
+							<Trigger variant="ghost" size="icon">
 								<Settings2 size=16 />
 							</Trigger>
 							<Content let:Separator let:Item class="w-48" let:Label>

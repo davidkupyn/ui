@@ -27,7 +27,7 @@
 	})
 </script>
 
-<div class={cn('group', className)} {...root}>
+<div class={cn('group', className)} {...$root}>
 	<slot {Trigger} {Content} open={$openStore}>
 		<Trigger>
 			<slot name="summary">{summary}</slot>

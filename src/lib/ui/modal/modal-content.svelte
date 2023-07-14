@@ -6,6 +6,7 @@
 	import { cn } from '$lib/helpers/style';
 	import { X } from 'lucide-svelte';
 	import { cubicOut } from 'svelte/easing';
+	import Button from '../button.svelte';
 
 	const { portal, open, alert, overlay, content, close, crossButton } = getModalContext();
 	let className: string | undefined | null = undefined;
@@ -67,9 +68,9 @@ function css(
 				>
 				<slot {Header} {Footer} close={$close} />
 				{#if crossButton && !alert}
-					<button {...$close} use:close class="absolute right-4 top-4 btn btn-sm btn-ghost btn-icon">
+					<Button variant="ghost" size="icon" use={[close]} {...$close} class="absolute right-4 top-4">
 						<X size=16 />
-					</button>
+					</Button>
 				{/if}
 			</div>
 		</div>

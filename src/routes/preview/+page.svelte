@@ -23,7 +23,7 @@
 	import Pagination from '$lib/ui/pagination.svelte';
 	import Switch from '$lib/ui/switch.svelte';
 	import Table from '$lib/ui/old-table.svelte';
-	import { fade, fly } from 'svelte/transition';
+	import { fade, fly, scale } from 'svelte/transition';
 	import { cubicOut } from 'svelte/easing';
 	import { Select } from '$lib/ui/select';
 	import Combobox from '$lib/ui/combobox.svelte';
@@ -42,13 +42,15 @@
 	import Slider from '$lib/ui/slider.svelte';
 	import { RadioGroup } from '$lib/ui/radio-group';
 	import Progress from '$lib/ui/progress.svelte';
-	import Button from '$lib/ui/button.svelte';
+	import Button, { buttonStyles } from '$lib/ui/button.svelte';
 	import { Card } from '$lib/ui/card';
+	import { cn } from '$lib/helpers/style';
+	import { page } from '$app/stores';
 
 	let showPassword = false;
 	const tabs = ['witalina', 'david', 'wiktor', 'gustaw'];
 	const PAGE_SIZE = 10;
-	let currentPage = 3;
+	$: currentPage = Number($page.url.searchParams.get('page') || '1');
 let buttonLoading = false;
 	let items = Array.from({ length: 100 }, (_, i) => ({
 		id: crypto.randomUUID().slice(0, 16),
@@ -106,9 +108,11 @@ let buttonLoading = false;
 			</span>
 			<fieldset class="input-group" disabled={false}>
 				<input spellcheck="false" type="password" placeholder="Password" />
-				<button
+				<Button
 					type="button"
-					class="btn btn-text icon-right btn-icon btn-sm"
+					class="icon-right p-0"
+					size="icon"
+					variant="text"
 					on:click={() => {
 						showPassword = !showPassword;
 					}}
@@ -122,7 +126,7 @@ let buttonLoading = false;
 							<EyeOff size=20 />
 						</span>
 					{/if}
-				</button>
+					</Button>
 			</fieldset>
 		</label>
 
@@ -200,7 +204,7 @@ let buttonLoading = false;
 							</optgroup>
 						</select>
 					</label>
-					<Button class="btn mt-3">Submit</Button>
+					<Button class="mt-4">Submit</Button>
 				</form>
 		</Card>
 
@@ -298,12 +302,28 @@ let buttonLoading = false;
 		</div>
 	</div>
 	<Slider bind:value={sliderValue} class="max-w-md" />
+	<Disclosure let:Trigger let:Content class="max-w-md" unstyled let:open>
+		<Progress bind:value={sliderValue} />
+		<Trigger class={cn(buttonStyles({variant: 'text'}),"flex gap-2 mx-auto mt-4")}>
+			{#if open}
+				<span class="w-32" in:scale={{start: 0.95}}>Hide extra variants</span>
+			{:else}
+				<span class="w-32" in:scale={{start: 0.95}}>Show more variants</span>
+			{/if}
+		</Trigger>
+		<Content class="space-y-6 mt-4">
+			<Progress bind:value={sliderValue} variant="success"/>
+			<Progress bind:value={sliderValue} variant="error"/>
+			<Progress bind:value={sliderValue} variant="warning"/>
+			<Progress bind:value={sliderValue} variant="info"/>
+		</Content>
+	</Disclosure>
+	
 	<RadioGroup let:Radio value='3'>
 		<Radio value="1">One</Radio>
 		<Radio value="2">Two</Radio>
 		<Radio value="3">Three</Radio>
 	</RadioGroup>
-	<Progress bind:value={sliderValue} class="max-w-md" />
 	<div class="mt-4 flex gap-4 items-center">
 		<Avatar
 			squared
@@ -327,16 +347,6 @@ let buttonLoading = false;
 			<Content>Hover Card!</Content>
 		</HoverCard>
 	</div>
-	<Disclosure class="w-full max-w-md" let:Trigger let:Content bind:open={disclosureOpen}>
-		<Trigger>Just a Disclosure</Trigger>
-		<Content>
-			<p>
-				Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum. Quisquam,
-				voluptatum. Quisquam, voluptatum. Quisquam, voluptatum. Quisquam, voluptatum. Quisquam,
-				voluptatum. Quisquam, voluptatum. Quisquam, voluptatum. Quisquam, voluptatum. Quisquam,
-			</p>
-		</Content>
-	</Disclosure>
 	<Card class="max-w-md p-4">
 		<Accordion
 			let:Item
@@ -379,7 +389,7 @@ let buttonLoading = false;
 		</Accordion>
 	</Card>
 	<Modal let:Trigger let:Content bind:open={dialogOpen}>
-		<Trigger class="btn w-fit">
+		<Trigger>
 			<AppWindow size=16 />
 			Open Modal
 		</Trigger>
@@ -400,7 +410,7 @@ let buttonLoading = false;
 				<Footer class="mt-6">
 					<Button 
 						{...close}
-						use={[close.action, {}]}
+						use={[close.action]}
 						type="button"
 						variant='outline'
 						>
@@ -428,7 +438,7 @@ let buttonLoading = false;
 			>
 				<Menu slot="actions" let:row placement="bottom-end">
 					<svelte:fragment let:Trigger let:Content>
-						<Trigger class="btn btn-ghost btn-icon data-[state=open]:bg-muted data-[state=open]:text-foreground">
+						<Trigger variant="ghost" size="icon" class="">
 							<MoreHorizontal size=16 />
 						</Trigger>
 						<Content let:Item class="w-40">
@@ -510,7 +520,7 @@ let buttonLoading = false;
 					</span>
 					<div class="flex gap-4">
 						<Modal let:Trigger let:Content class="sm:max-w-[425px]" alert type="error" on:open={() => console.log('open')}>
-							<Trigger aria-label="Delete items" class="btn btn-ghost btn-icon btn-sm rounded-lg">
+							<Trigger variant="ghost" size="icon" aria-label="Delete items" class="h-8 w-8">
 								<Trash2 size=16 />
 							</Trigger>
 							<Content let:Header let:Footer let:close class="sm:w-96">
@@ -521,7 +531,7 @@ let buttonLoading = false;
 								<Footer>
 									<Button 
 										{...close}
-										use={[close.action, {}]}
+										use={[close.action]}
 										type="button"
 										variant='outline'
 										>
@@ -538,18 +548,15 @@ let buttonLoading = false;
 							</Content>
 						</Modal>
 
-						<button
-							aria-label="Discard selection"
-							class="btn btn-ghost btn-icon btn-sm rounded-lg"
-							use:tippy={{ content: 'Discard selection' }}
+						<Button variant="ghost" use={[tippy, { content: 'Discard selection'}]} size="icon" aria-label="Discard selection" class="h-8 w-8"
 							on:click={() => (selected = [])}
 						>
 							<X size=16 />
-						</button>
+						</Button>
 					</div>
 				</div>
 			{/if}
 		</div>
-			<Pagination {totalPages} bind:page={currentPage}/>
+			<Pagination {totalPages} />
 	</div>
 </main>

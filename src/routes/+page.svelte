@@ -3,6 +3,7 @@
 	import { cubicOut } from 'svelte/easing';
 	import { fade } from 'svelte/transition';
 	import { onMount } from 'svelte';
+	import Button from '$lib/ui/button.svelte';
 
 	let mounted = false;
 	onMount(() => (mounted = true));
@@ -47,14 +48,16 @@
 					>Essence</span
 				> Transcends Expectations
 			</p>
-			<a
-				in:fadeScale={{ duration: 400 }}
-				href="/preview"
-				class="btn btn-lg gap-2 hover:pr-7 group transition-all"
-			>
-				Explore Components
-				<ArrowRight class="w-4 h-4 group-hover:ml-1 transition-[margin]" size=16 />
-			</a>
+			<!-- <span in:fadeScale={{ duration: 400 }}> -->
+				<Button
+					size='lg'
+					href="/preview"
+					class="hover:pr-7 group transition-all"
+				>
+					Explore Components
+					<ArrowRight class="w-4 h-4 group-hover:ml-1 transition-[margin]" size=16 />
+				</Button>
+			<!-- </span> -->
 		</div>
 	</main>
 {/key}

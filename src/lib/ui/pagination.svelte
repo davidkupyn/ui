@@ -4,6 +4,7 @@
 	import { queryParam, ssp } from 'sveltekit-search-params';
 	import { crossfade } from 'svelte/transition';
 	import { createPagination } from '@melt-ui/svelte';
+	import Button from './button.svelte';
 
 	let desirablePage: number;
 	export let totalPages: number;
@@ -58,23 +59,24 @@
 	{...$root}
 >
 	<div class="flex gap-1 items-center">
-		<button
+		<Button 
+			variant="ghost" 
+			size="icon"
 			{...$prevButton}
-			use:prevButton
-			class="btn btn-ghost btn-icon"
+			use={[prevButton]}
 			disabled={!$pageStore || $pageStore === 1 || totalPages <= 1}
 		>
 			<ArrowLeft size=20 />
-		</button>
+		</Button>
 		{#each $pages as page, index (page.key)}
 			{#if page.type === 'page'}
 				{@const isCurrentPage = $pageStore === page.value}
-				<button
+				<Button
 					{...$pageTrigger(page)}
-					use:pageTrigger
-					class="relative btn-icon btn btn-text"
-					data-first={index === 0}
-					data-last={index === $pages.length - 1}
+					use={[pageTrigger]}
+					size="icon"
+					variant="text"
+					class="relative"
 				>
 					<span class="absolute text-sm p-1 inset-0 grid place-items-center z-[2]">
 						{page.value}
@@ -87,27 +89,32 @@
 								duration: animationDuration
 							}}
 							out:send={{ key: 'background', easing: cubicOut, duration: animationDuration }}
-							class="w-full h-full rounded-xl bg-muted"
+							class="w-full h-full rounded-xl bg-muted [box-shadow:_inset_0_1px_0.5px_0px_hsl(0_0%_100%/0.06)]"
 						/>
 					{/if}
-				</button>
+				</Button>
 			{:else}
 				<span class="p-2 text-muted-foreground">...</span>
 			{/if}
 		{/each}
-
-		<button
+		
+		<Button 
+			variant="ghost" 
+			size="icon"
 			{...$nextButton}
-			use:nextButton
-			class="btn btn-ghost btn-icon"
+			use={[nextButton]}
 			disabled={($pageStore && $pageStore >= totalPages) || totalPages <= 1}
 		>
 			<ArrowRight size=20 />
-		</button>
+		</Button>
 	</div>
 
 	{#if totalPages > 1}
-		<form class="flex gap-2 max-sm:gap-4" on:submit|preventDefault>
+		<form class="flex gap-2 max-sm:gap-4" on:submit|preventDefault={() =>
+					($pageStore =
+						desirablePage && desirablePage > 0 && desirablePage <= totalPages
+							? desirablePage
+							: $pageStore)}>
 			<input
 				min="1"
 				max={totalPages}
@@ -117,16 +124,12 @@
 				class="w-16 input"
 				bind:value={desirablePage}
 			/>
-			<button
-				class="btn btn-ghost group hover:pr-3.5 transition-all"
-				on:click={() =>
-					($pageStore =
-						desirablePage && desirablePage > 0 && desirablePage <= totalPages
-							? desirablePage
-							: $pageStore)}
+			<Button
+				variant="ghost"
+				class="group hover:pr-3.5 transition-all"
 			>
 				Go <ChevronRight class="group-hover:ml-0.5 transition-[margin] h-4 w-4" size=16 />
-			</button>
+			</Button>
 		</form>
 	{/if}
 </nav>

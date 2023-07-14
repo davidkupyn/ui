@@ -1,11 +1,13 @@
 <script lang="ts">
 	import { getModalContext } from '.';
+	import Button from '../button.svelte';
 	const { trigger } = getModalContext();
 
 	let className: string | undefined | null = undefined;
 	export { className as class };
+
 </script>
 
-<button use:trigger on:click|stopPropagation {...$trigger} class={className} {...$$restProps}>
+<Button use={[trigger]} on:click {...$trigger} class={className} {...$$restProps}>
 	<slot />
-</button>
+</Button>

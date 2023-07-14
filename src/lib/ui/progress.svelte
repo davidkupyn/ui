@@ -1,14 +1,14 @@
-<script lang='ts' context="module">
+<script script lang='ts' context="module">
  const progressStyles = tv({
   slots: {
     base: 'relative h-2 w-full overflow-hidden rounded-full',
-    indicator: 'h-full w-full rounded-full transition-transform duration-500 ease-[cubic-bezier(0.65,0,0.35,1)] [box-shadow:_inset_0_1px_0px_0px_hsl(0_0%_100%/0.3)] dark:[box-shadow:_inset_0_-1px_1px_0px_hsl(240_6%_10%/0.3)]'
+    indicator: 'h-full w-full rounded-full transition-transform duration-500 ease-[cubic-bezier(0.65,0,0.35,1)] [box-shadow:_inset_0_1px_0.5px_0px_hsl(0_0%_100%/0.4)]'
   },
   variants: {
     variant: {
-      primary: {
+      default: {
         base: 'bg-primary-500/20',
-        indicator: 'bg-primary'
+        indicator: 'bg-primary dark:[box-shadow:_inset_0_-1px_0.5px_0px_hsl(240_6%_10%/0.4)]'
       },
       accent: {
         base: 'bg-accent-500/20',
@@ -40,7 +40,7 @@
 	import { createEventDispatcher } from 'svelte';
 	import { tv, type VariantProps } from 'tailwind-variants';
   export let value: number;
-  export let variant: VariantProps<typeof progressStyles>["variant"] = 'primary'
+  export let variant: VariantProps<typeof progressStyles>["variant"] = 'default'
   export let max = 100
   let className: string | undefined | null = undefined;
   export { className as class };

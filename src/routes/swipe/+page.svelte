@@ -5,6 +5,7 @@
 	import { cn } from '$lib/helpers/style';
 	import { swipeDispatcher } from '$lib/components/card.svelte';
 	import Badge from '$lib/ui/badge.svelte';
+	import Button from '$lib/ui/button.svelte';
 
 	let actions: { type: 'left' | 'right'; id: number | string }[] = [];
 	let reset = 0;
@@ -27,13 +28,9 @@
 				<CardContainer bind:cards bind:actions>
 					<div
 						slot="card"
-						let:upcomingAction
 						let:card
 						class={cn(
-							'convex grid bg-background place-content-center border border-muted',
-							// upcomingAction === 'left' && 'border-error-500 dark:border-error-600',
-							// upcomingAction === 'right' && 'border-success-500 dark:border-success-600',
-							'transition ease-out rounded-2xl w-72 h-96'
+							'convex grid bg-background place-content-center border border-muted transition ease-out rounded-2xl w-72 h-96',
 						)}
 					>
 						{card.name}
@@ -43,22 +40,24 @@
 		{/key}
 	</div>
 	<div class="mt-12 mb-4 flex gap-4 mx-auto">
-		<button class="btn btn-secondary btn-icon" on:click={() => swipeNextCard('left')}>
+		<Button variant="secondary" size="icon" on:click={() => swipeNextCard('left')}>
 			<ArrowLeft size=20 />
-		</button>
-		<button class="btn btn-secondary btn-icon" on:click={() => swipeNextCard('right')}>
+		</Button>
+		<Button variant="secondary" size="icon" on:click={() => swipeNextCard('right')}>
 			<ArrowRight size=20 />
-		</button>
+		</Button>
 	</div>
-	<button
-		class="mb-12 btn btn-secondary w-[5.5rem] mx-auto"
+	<Button
+		variant="secondary"
+		size="icon"
+		class="mb-12 w-[5.5rem] mx-auto"
 		on:click={() => {
 			actions = [];
 			reset++;
 		}}
 	>
 		Reset
-	</button>
+	</Button>
 	<div class="flex flex-wrap gap-2 max-w-xs">
 		{#each actions as action}
 			<span in:scale>

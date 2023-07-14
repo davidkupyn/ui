@@ -3,6 +3,8 @@
 	import { ScrollText, SidebarClose, SidebarOpen, Star } from 'lucide-svelte';
 	import { cubicOut } from 'svelte/easing';
 	import Home from '$lib/icons/home.svelte';
+	import Button from '$lib/ui/button.svelte';
+	import { cn } from '$lib/helpers/style';
 
 	let expanded = false;
 
@@ -41,7 +43,7 @@
 					Essence</a
 				>
 			{/if}
-			<button on:click={() => (expanded = !expanded)} class="btn btn-ghost btn-icon ml-auto">
+			<Button size="icon" variant="ghost" on:click={() => (expanded = !expanded)} class="ml-auto">
 				{#if expanded}
 					<span in:scale>
 						<SidebarClose size=20 />
@@ -51,20 +53,25 @@
 						<SidebarOpen size=20 />
 					</span>
 				{/if}
-			</button>
+			</Button>
 		</div>
 		<nav>
 			<ul class="flex flex-col gap-3 items-center">
 				{#each items as item}
 					{@const currentLink = current === item.label}
 					<li class="w-full">
-						<button
+						<Button
+							size="icon"
+							variant="text"
 							on:click={() => (current = item.label)}
 							aria-pressed={currentLink}
 							aria-label={item.label}
-							class="relative btn btn-text transition btn-icon {expanded
+							class={cn(
+								"relative transition", 
+								expanded
 								? 'w-44 transition-[width]'
-								: 'w-9'}"
+								: 'w-9'
+							)}
 						>
 							<span
 								class="absolute text-sm inset-0 flex {expanded
@@ -89,10 +96,10 @@
 										duration: 200
 									}}
 									out:send={{ key: 'background', easing: cubicOut, duration: 200 }}
-									class="w-full h-full rounded-xl bg-background dark:bg-muted"
+									class="w-full h-full rounded-xl bg-background dark:bg-muted [box-shadow:_inset_0_1px_0.5px_0px_hsl(0_0%_100%/0.06)]"
 								/>
 							{/if}
-						</button>
+						</Button>
 					</li>
 				{/each}
 			</ul>
