@@ -68,10 +68,9 @@
 		href?: never;
 	}
 	type $$Props = AnchorElement | ButtonElement;
-  const meltConfig = _melt ? {
-    melt: _melt
-  } : {}
 </script>
+
+{#if _melt?.action}
 
 <svelte:element
   role={href ? 'a' : "button"}
@@ -87,7 +86,7 @@
 	on:mouseenter
 	on:mouseleave
   use:action={actionProps}
-  {...meltConfig}
+  melt={_melt}
   >
   <!-- {#if loading}
     <span transition:scale class="absolute inset-0 grid place-content-center">
@@ -98,3 +97,33 @@
       <slot />
     <!-- </span> -->
 </svelte:element>
+
+{:else}
+
+<svelte:element
+  role={href ? 'a' : "button"}
+  this={href ? 'a' : "button"}
+	type={href ? undefined : type}
+	{href}
+	class={cn(buttonStyles({ variant, size }), loading && 'relative', className)}
+	{...$$restProps}
+	on:click
+	on:change
+	on:keydown
+	on:keyup
+	on:mouseenter
+	on:mouseleave
+  use:action={actionProps}
+  >
+  <!-- melt={melt} -->
+  <!-- {#if loading}
+    <span transition:scale class="absolute inset-0 grid place-content-center">
+      <Loader2 class="animate-spin" size=16 />
+    </span>
+    {/if} -->
+    <!-- <span class={cn('relative transition-[transform,opacity] inline-flex gap-2 items-center justify-center', loading ? 'scale-75 opacity-0' : 'scale-100 opacity-100 pointer-events-none', ['info', 'error'].includes(variant ?? 'default') && 'text-shadow')}> -->
+      <slot />
+    <!-- </span> -->
+</svelte:element>
+
+{/if}
