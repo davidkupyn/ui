@@ -7,6 +7,6 @@
 	export { className as class };
 </script>
 
-<Button _melt={$trigger} on:click class={className} {...$$restProps}>
+<Button melted={$trigger} on:click class={className} {...$$restProps}>
 	<slot />
 </Button>
