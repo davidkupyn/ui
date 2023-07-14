@@ -53,7 +53,7 @@ const config = {
 					DEFAULT: 'var(--color-success)',
 					foreground: 'var(--color-success-foreground)',
 					focus: 'var(--color-success-focus)',
-					...colors.lime
+					...colors.green
 				},
 				info: {
 					DEFAULT: 'var(--color-info)',

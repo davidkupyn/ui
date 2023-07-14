@@ -30,7 +30,7 @@
  
 <span {...$slider} class={cn("group relative flex w-full touch-none select-none items-center", className)}>
   <span class="relative h-1.5 w-full grow overflow-hidden rounded-full bg-accent-500/20">
-    <span {...$range} class="absolute h-full bg-accent [box-shadow:_inset_0_1px_0.5px_0px_hsl(0_0%_100%/0.4)] rounded-full" />
+    <span {...$range} class="absolute h-full bg-accent [box-shadow:_inset_0_1px_0.5px_0px_hsl(0_0%_100%/0.3)] rounded-full" />
   </span>
  
   {#each { length: $valueStore.length } as _}
