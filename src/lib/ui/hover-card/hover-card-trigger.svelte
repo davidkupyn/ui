@@ -6,6 +6,6 @@
 	export { className as class };
 </script>
 
-<div use:trigger {...$trigger} class={className} {...$$restProps}>
+<div melt={$trigger} class={className} {...$$restProps}>
 	<slot />
 </div>

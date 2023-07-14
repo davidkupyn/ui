@@ -50,9 +50,8 @@
 </script>
 
 <button
-	{...$trigger}
+	melt={$trigger}
 	{disabled}
-	use:trigger
 	type="button"
 	class={cn('input-group w-full justify-between data-[state=open]:ring-accent', className)}
 	aria-label={placeholder}
@@ -66,12 +65,11 @@
 		<ChevronsUpDown size=16 />
 	</span>
 </button>
-<input {...$input} {id} />
+<input melt={$input} {id} />
 {#if $open}
 	<ul
 		transition:fly={{ duration: 150, y: -10 }}
-		{...$menu}
-		use:menu
+		melt={$menu}
 		class={menuStyles().content()}
 	>
 		<slot {Option} {Group} />

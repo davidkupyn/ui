@@ -19,12 +19,12 @@
 	// binding changes of value in the parent component to the local value would be nice.
 </script>
 
-<div class="flex items-center w-full h-9 p-1 gap-2" {...$root}>
+<div class="flex items-center w-full h-9 p-1 gap-2" melt={$root}>
 	{#each tabs as tab (tab)}
 		<button
 			on:click={() => dispatch('change', tab)}
 			class="group relative btn btn-text w-full h-full p-0 rounded-lg"
-			{...$item(tab)}
+			melt={$item(tab)}
 			use:item
 			disabled={disabled.includes(tab)}
 		>

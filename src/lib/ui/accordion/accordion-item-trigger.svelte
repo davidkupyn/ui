@@ -12,8 +12,7 @@
 </script>
 
 <Button
-	{...$trigger(item)}
-	use={[trigger]}
+	_melt={$trigger(item)}
 	variant="ghost"
 	class={cn('active:scale-100 w-full group aria-expanded:text-foreground', className)}
 >

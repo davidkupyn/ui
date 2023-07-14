@@ -34,7 +34,7 @@
 		HTMLAnchorAttributes,
 		HTMLButtonAttributes
 	} from "svelte/elements";
-	import { Loader2 } from "lucide-svelte";
+	// import { Loader2 } from "lucide-svelte";
 	import { cn } from '$lib/helpers/style';
 	import type { Action } from 'svelte/action';
 
@@ -47,6 +47,7 @@
 	export let size: VariantProps<typeof buttonStyles>["size"] = "default";
   export let loading = false;
   export let use: [any, {}?] = [() => {}, {}];
+  export let _melt: Record<string, any> & { action: Action<any, any> } | undefined = undefined;
   const [action, actionProps] = use;
 	type Props = {
 		class?: string | null;
@@ -54,6 +55,7 @@
 		size?: VariantProps<typeof buttonStyles>["size"];
     loading?: boolean;
     use?: [Action, {}?];
+    _melt?: Record<string, any> & { action: Action<any, any> };
 	};
 
 	interface AnchorElement extends Props, HTMLAnchorAttributes {
@@ -66,11 +68,14 @@
 		href?: never;
 	}
 	type $$Props = AnchorElement | ButtonElement;
+  const meltConfig = _melt ? {
+    melt: _melt
+  } : {}
 </script>
 
 <svelte:element
   role={href ? 'a' : "button"}
-	this={href ? "a" : "button"}
+  this={href ? 'a' : "button"}
 	type={href ? undefined : type}
 	{href}
 	class={cn(buttonStyles({ variant, size }), loading && 'relative', className)}
@@ -82,7 +87,8 @@
 	on:mouseenter
 	on:mouseleave
   use:action={actionProps}
->
+  {...meltConfig}
+  >
   <!-- {#if loading}
     <span transition:scale class="absolute inset-0 grid place-content-center">
       <Loader2 class="animate-spin" size=16 />

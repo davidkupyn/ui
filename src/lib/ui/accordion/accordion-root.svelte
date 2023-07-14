@@ -25,6 +25,6 @@
 	})
 </script>
 
-<div class={cn('grid gap-4', className)} {...$root}>
+<div class={cn('grid gap-4', className)} melt={$root}>
 	<slot {Item} />
 </div>

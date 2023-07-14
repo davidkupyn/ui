@@ -22,7 +22,7 @@
 	setContext('accordion-item', itemOptions);
 </script>
 
-<div {...$item(value)} class={cn(className)}>
+<div melt={$item(value)} class={cn(className)}>
 	<slot {Content} {Trigger}>
 		<Trigger>
 			<slot name="summary">{summary}</slot>

@@ -15,7 +15,7 @@
 </script>
 
 <li
-	{...$option({ value, disabled })}
+	melt={$option({ value, disabled })}
 	use:option
 	class={cn(
 		item(),

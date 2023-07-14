@@ -8,7 +8,8 @@
   export { className as class };
 </script>
 
-<div {...$separator}
+<div 
+  melt={$separator}
   data-orientation='horizontal'
   class={cn(
     seperatorStyles(),

@@ -22,8 +22,7 @@
 			content(),
 			className
 		)}
-		{...$menu}
-		use:menu
+		melt={$menu}
 	>
 		<slot {Item} {Submenu} {Label} {Separator} {RadioGroup}/>
 	</div>

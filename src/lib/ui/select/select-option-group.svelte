@@ -11,6 +11,6 @@
 	export { className as class };
 </script>
 
-<div {...$group(key)} class={className}>
+<div melt={$group(key)} class={className}>
 	<slot {Label} {Option} />
 </div>

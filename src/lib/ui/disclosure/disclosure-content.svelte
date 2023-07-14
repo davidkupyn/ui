@@ -12,7 +12,7 @@
 {#if $open}
 	<div
 		class={cn(!unstyled && 'px-4 mt-2 text-sm text-muted-foreground overflow-hidden', className)}
-		{...$content}
+		melt={$content}
 		transition:slide={{ duration: 150, easing: cubicInOut }}
 	>
 		<slot />

@@ -52,7 +52,7 @@ function css(
 	{#if $open}
 		<div class='z-50 flex justify-center sm:items-center items-end fixed inset-0'>
 			<div
-				{...$overlay}
+				melt={$overlay}
 				transition:fade={{ duration: 150 }}
 				class="fixed z-50 inset-0 bg-[radial-gradient(ellipse_at_bottom,_var(--tw-gradient-stops))] sm:bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-base-600/50 to-base-600/95 dark:from-base-950/70 dark:to-base-950/95"
 			/>
@@ -63,12 +63,11 @@ function css(
 					scale: '--modal-scale'
 				}}
 				class={cn(modal().base(), className)}
-				{...$content}
-				use:content
+				melt={$content}
 				>
 				<slot {Header} {Footer} close={$close} />
 				{#if crossButton && !alert}
-					<Button variant="ghost" size="icon" use={[close]} {...$close} class="absolute right-4 top-4">
+					<Button variant="ghost" size="icon" _melt={$close} class="absolute right-4 top-4">
 						<X size=16 />
 					</Button>
 				{/if}

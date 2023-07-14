@@ -10,6 +10,6 @@
 	export { className as class };
 </script>
 
-<span {...$groupLabel(key)} class={cn(menuStyles().itemLabel(), className)}>
+<span melt={$groupLabel(key)} class={cn(menuStyles().itemLabel(), className)}>
 	<slot />
 </span>

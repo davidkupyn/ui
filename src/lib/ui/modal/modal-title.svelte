@@ -5,7 +5,7 @@
 	const { title, type } = getModalContext();
 </script>
 
-<h2 class={modal({ hasIcon: !!type || $$slots.icon }).title()} {...$title}>
+<h2 class={modal({ hasIcon: !!type || $$slots.icon }).title()} melt={$title}>
 	<span>
 		{#if type === 'error'}
 		<div class="bg-error-500/10 rounded-full p-1.5 text-error">

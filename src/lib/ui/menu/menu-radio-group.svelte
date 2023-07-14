@@ -17,6 +17,6 @@
   })
 
 </script>
-<div {...$root}>
+<div melt={$root}>
 	<slot {Radio} />
 </div>

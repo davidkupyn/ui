@@ -17,8 +17,7 @@
 			content(),
 			className
 		)}
-		{...$subMenu}
-		use:subMenu
+		melt={$subMenu}
 	>
 			<slot {Separator} {RadioGroup} {Label}/>
 	</div>

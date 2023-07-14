@@ -23,6 +23,6 @@
 	 $: valueStore.set(value)
 </script>
 
-<div {...$root} class={cn('flex flex-col data-[orientation=vertical]:flex-row', className)}>
+<div melt={$root} class={cn('flex flex-col data-[orientation=vertical]:flex-row', className)}>
 	<slot {List} {Content} />
 </div>

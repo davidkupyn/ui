@@ -4,6 +4,6 @@
 	const { description } = getModalContext();
 </script>
 
-<p class={modal().description()} {...$description}>
+<p class={modal().description()} melt={$description}>
 	<slot />
 </p>

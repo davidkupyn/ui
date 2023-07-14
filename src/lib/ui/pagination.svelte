@@ -41,7 +41,6 @@
 	pageStore.subscribe((value) => {
 		page = value;
 		if (mode === 'navigate') {
-			console.log('change')
 			currentPage.set(value);
 		}
 
@@ -56,24 +55,22 @@
 <nav
 	class="mx-auto flex gap-4 max-sm:flex-col items-center max-sm:gap-8"
 	aria-label="pagination"
-	{...$root}
+	melt={$root}
 >
 	<div class="flex gap-1 items-center">
 		<Button 
 			variant="ghost" 
 			size="icon"
-			{...$prevButton}
-			use={[prevButton]}
+			_melt={$prevButton}
 			disabled={!$pageStore || $pageStore === 1 || totalPages <= 1}
 		>
 			<ArrowLeft size=20 />
 		</Button>
-		{#each $pages as page, index (page.key)}
+		{#each $pages as page (page.key)}
 			{#if page.type === 'page'}
 				{@const isCurrentPage = $pageStore === page.value}
 				<Button
-					{...$pageTrigger(page)}
-					use={[pageTrigger]}
+					_melt={$nextButton}
 					size="icon"
 					variant="text"
 					class="relative"
@@ -102,7 +99,6 @@
 			variant="ghost" 
 			size="icon"
 			{...$nextButton}
-			use={[nextButton]}
 			disabled={($pageStore && $pageStore >= totalPages) || totalPages <= 1}
 		>
 			<ArrowRight size=20 />

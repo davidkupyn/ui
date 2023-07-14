@@ -17,9 +17,8 @@
    		danger && 'focus:bg-error-400/20 text-error dark:focus:text-error-200 dark:focus:bg-error-600/20 focus:text-error',
 			className
 		)}
-		use:subTrigger
 		on:click|stopPropagation
-		{...$subTrigger}
+		melt={$subTrigger}
 	>
 		<slot />
 		<ChevronRight class="ml-auto" size=16 />

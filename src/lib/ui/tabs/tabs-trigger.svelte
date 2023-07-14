@@ -12,8 +12,7 @@
 </script>
 
 <button
-	{...$trigger({value, disabled})}
-	use:trigger
+	melt={$trigger({value, disabled})} 
 	class={cn(
 		'group relative capitalize btn btn-text active:scale-100 w-full h-full data-[orientation=vertical]:h-9 data-[orientation=vertical]:rounded-xl p-0 rounded-lg',
 		className

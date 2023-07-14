@@ -43,7 +43,7 @@
 
 <div class="relative">
 	<label class="input-group">
-		<input {...$input} placeholder="Best book ever" use:input value={$inputValue} />
+		<input melt={$input} placeholder="Best book ever" use:input value={$inputValue} />
 		<span class="icon-right">
 			{#if $open}
 				<ChevronUp />
@@ -55,14 +55,12 @@
 </div>
 
 <ul
-	{...$menu}
-	use:menu
+	melt={$menu}
 	class="z-10 mt-1.5 p-1 flex flex-col gap-1 origin-top rounded-2xl border border-popover-border bg-popover drop-shadow-lg focus:outline-none overflow-y-auto"
 >
 	<slot {Item}>
 		{#each $filteredItems as itemObj, idx (itemObj.value)}
 			<Item
-				{...$item}
 				index={idx}
 				value={itemObj.value}
 			>

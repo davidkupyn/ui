@@ -409,8 +409,7 @@ let buttonLoading = false;
 				</label>
 				<Footer class="mt-6">
 					<Button 
-						{...close}
-						use={[close.action]}
+						
 						type="button"
 						variant='outline'
 						>
@@ -530,8 +529,7 @@ let buttonLoading = false;
 								</Header>
 								<Footer>
 									<Button 
-										{...close}
-										use={[close.action]}
+										
 										type="button"
 										variant='outline'
 										>
@@ -548,7 +546,7 @@ let buttonLoading = false;
 							</Content>
 						</Modal>
 
-						<Button variant="ghost" use={[tippy, { content: 'Discard selection'}]} size="icon" aria-label="Discard selection" class="h-8 w-8"
+						<Button variant="ghost" size="icon" aria-label="Discard selection" class="h-8 w-8"
 							on:click={() => (selected = [])}
 						>
 							<X size=16 />

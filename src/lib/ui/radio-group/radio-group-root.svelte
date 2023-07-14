@@ -29,7 +29,7 @@
 </script>
  
 <div
-  {...$root}
+  melt={$root}
   class={cn("flex flex-col gap-3 data-[orientation=horizontal]:flex-row", className)}
   aria-label="View density"
 >

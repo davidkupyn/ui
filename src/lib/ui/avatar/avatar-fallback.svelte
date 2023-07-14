@@ -7,4 +7,4 @@
 	export { className as class };
 </script>
 
-<span {...$fallback} class={cn('font-medium', className)}><slot /></span>
+<span melt={$fallback} class={cn('font-medium', className)}><slot /></span>

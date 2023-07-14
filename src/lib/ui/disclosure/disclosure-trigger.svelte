@@ -11,8 +11,7 @@
 </script>
 
 <button
-	{...$trigger}
-	use:trigger
+	melt={$trigger}
 	class={cn(
 		!unstyled && buttonStyles({ variant: 'ghost', className: 'active:scale-100 w-full group data-[state=open]:text-foreground' }),
 		className

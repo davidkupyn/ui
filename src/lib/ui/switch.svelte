@@ -25,8 +25,7 @@
 </script>
 
 <button
-	{...$root}
-	use:root
+	melt={$root}
 	on:click={() => {
 		if (group.includes(value)) {
 			group = group.filter((v) => v !== value);
@@ -44,7 +43,7 @@
 		className
 	)}
 >
-	<input {...$input} {id} />
+	<input melt={$input} {id} />
 
 	<span
 		data-state={$isChecked ? 'checked' : 'unchecked'}

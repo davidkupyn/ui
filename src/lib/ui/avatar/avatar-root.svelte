@@ -18,7 +18,7 @@
 </script>
 
 <div class={cn('grid w-9 aspect-square place-content-center rounded-full bg-muted', squared ? 'rounded-xl' : 'rounded-full', className)}>
-	<img {...$image} {alt} class="h-full w-full rounded-[inherit]" />
+	<img melt={$image} {alt} class="h-full w-full rounded-[inherit]" />
 	<slot {Fallback}>
 		<Fallback>
 			<slot name="fallback">{fallback}</slot>
