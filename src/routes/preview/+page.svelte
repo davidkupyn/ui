@@ -409,7 +409,7 @@ let buttonLoading = false;
 				</label>
 				<Footer class="mt-6">
 					<Button 
-						
+						melted={close}
 						type="button"
 						variant='outline'
 						>
