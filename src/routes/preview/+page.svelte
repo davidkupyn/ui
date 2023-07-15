@@ -524,8 +524,8 @@ let buttonLoading = false;
 							</Trigger>
 							<Content let:Header let:Footer let:close class="sm:w-96">
 								<Header let:Title let:Description>
-									<Title>Edit Profile</Title>
-									<Description>Make changes to your profile here. Click save when you're done.</Description>
+									<Title>Delete {selected.length === 1 ? "this item" : "these items"}?</Title>
+									<Description>You cannot undo this action.</Description>
 								</Header>
 								<Footer>
 									<Button 
