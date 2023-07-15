@@ -50,7 +50,7 @@ function css(
 </script>
 <div use:portal>
 	{#if $open}
-		<div class='z-50 flex justify-center sm:items-center items-end fixed inset-0'>
+		<div class='z-50 flex justify-center sm:items-center items-end fixed inset-0 p-2 max-sm:pb-8'>
 			<div
 				melt={$overlay}
 				transition:fade={{ duration: 150 }}

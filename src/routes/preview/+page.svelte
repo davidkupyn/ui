@@ -86,7 +86,7 @@ let buttonLoading = false;
 		let dialogOpen = false;
 </script>
 
-<main in:fade={{ duration: 100 }} class="py-8 w-full space-y-6 container mx-auto px-6">
+<main in:fade={{ duration: 100 }} class="py-8 w-full space-y-6 container mx-auto px-4 sm:px-6">
 	<div class="w-full max-w-[40rem] flex flex-col gap-6">
 		<label class="input-group group">
 			<Search size=16 class="icon-left" />
