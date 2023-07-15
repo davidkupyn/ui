@@ -70,7 +70,7 @@
 			{#if page.type === 'page'}
 				{@const isCurrentPage = $pageStore === page.value}
 				<Button
-					melted={$nextButton}
+					melted={$pageTrigger(page)}
 					size="icon"
 					variant="text"
 					class="relative"

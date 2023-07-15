@@ -133,7 +133,7 @@ let buttonLoading = false;
 		<label class="input-label w-full">
 			Text Area
 			<fieldset class="input-group h-64 flex flex-col">
-				<input class="!text-xl font-semibold my-3" placeholder="Title" />
+				<input class="!text-xl font-semibold mt-1" placeholder="Title" />
 				<textarea class="h-full sm:text-sm" placeholder="Description" />
 			</fieldset>
 		</label>
@@ -247,7 +247,7 @@ let buttonLoading = false;
 			<Button variant="success"> Success </Button>
 			<Button variant="warning"> Warning </Button>
 			<Button variant="info"> Info </Button>
-			<Button variant="ghost" use={[tippy, { content: 'Smth'}]}> Ghost </Button>
+			<Button variant="ghost"> Ghost </Button>
 			<Button variant="link">Link</Button>
 			<Button size='icon' variant="ghost">
 				<Save size=20 />
@@ -529,7 +529,7 @@ let buttonLoading = false;
 								</Header>
 								<Footer>
 									<Button 
-										
+										melted={close}
 										type="button"
 										variant='outline'
 										>

@@ -17,7 +17,7 @@
           <div transition:scale={{start: 0.5}} class="h-1.5 w-1.5 rounded-full bg-background" />
         {/if}
       </button>
-      <!-- <input melt={$itemInput({value, disabled})} {id} /> -->
+      <input melt={$itemInput({value, disabled})} {id} />
       <label
         class="capitalize leading-none"
         for={id}

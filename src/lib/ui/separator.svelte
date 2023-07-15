@@ -11,4 +11,4 @@
   export { className as class };
 </script>
 
-<div melt={$root} class={cn("h-px w-full data-[orientation=vertical]:h-full data-[orientation=vertical]:w-px bg-border", className)} />
+<div melt={$root} class={cn("h-px w-full bg-border", orientation === 'vertical' && 'h-full w-px', className)} />

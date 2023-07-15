@@ -7,6 +7,7 @@
 	import ThemeProvider from '$lib/theme-switcher/theme-provider.svelte';
 	import { themeStore } from '$lib/theme-switcher';
 	import Button from '$lib/ui/button.svelte';
+	import Separator from '$lib/ui/separator.svelte';
 </script>
 
 <svelte:head>
@@ -41,7 +42,7 @@
 				<li>
 					<Button
 						aria-label="Github Link"
-						variant="text"
+						variant="ghost"
 						size="icon"
 						href="https://github.com/davidkupyn/ui"
 						target="_blank"
@@ -73,7 +74,7 @@
 							</Content>
 						</Menu>
 				</li>
-				<span class="bg-base-300 dark:bg-base-800 w-px h-6" />
+				<Separator orientation="vertical" class='h-6'/>
 				<li>
 					<Button
 						href="/preview"
