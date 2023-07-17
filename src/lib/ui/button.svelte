@@ -5,13 +5,13 @@
     base: 'inline-flex gap-2 items-center justify-center rounded-xl active:scale-95 text-sm font-medium transition ease-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 ring-offset-background disabled:pointer-events-none disabled:opacity-50',
     variants: {
       variant: {
-        default: 'bg-primary hover:bg-primary-focus text-primary-foreground focus-visible:ring-primary [box-shadow:_inset_0_1px_0.5px_0px_hsl(0_0%_100%/0.4)] dark:[box-shadow:_inset_0_-1px_0.5px_0px_hsl(240_6%_10%/0.4)] drop-shadow-md',
+        default: 'bg-primary hover:bg-primary-focus text-primary-foreground focus-visible:ring-primary [box-shadow:_inset_0_1px_0.5px_0px_hsl(0_0%_100%/0.4)] dark:[box-shadow:_inset_0_-1px_0.5px_0px_hsl(240_6%_10%/0.4)]',
         outline: 'shadow dark:shadow-black ring-1 ring-base-950/10 focus-visible:border-border border border-transparent dark:border-border text-foreground hover:bg-border focus-visible:ring-border',
         secondary: 'bg-base-200/90 hover:bg-muted dark:bg-base-900/70 dark:hover:bg-muted focus-visible:ring-border [box-shadow:_inset_0_1px_0.5px_0px_hsl(0_0%_100%/0.06)]',
-        error: 'bg-error hover:bg-error-focus text-error-foreground focus-visible:ring-error [box-shadow:_inset_0_1px_0.5px_0px_hsl(0_0%_100%/0.4)] drop-shadow-md',
-        success: 'bg-success hover:bg-success-focus text-success-foreground focus-visible:ring-success [box-shadow:_inset_0_1px_0.5px_0px_hsl(0_0%_100%/0.4)] drop-shadow-md',
-        warning: 'bg-warning hover:bg-warning-focus text-warning-foreground focus-visible:ring-warning [box-shadow:_inset_0_1px_0.5px_0px_hsl(0_0%_100%/0.4)] drop-shadow-md',
-        info: 'bg-info hover:bg-info-focus text-info-foreground focus-visible:ring-info [box-shadow:_inset_0_1px_0.5px_0px_hsl(0_0%_100%_/_0.4)] drop-shadow-md',
+        error: 'bg-error hover:bg-error-focus text-error-foreground focus-visible:ring-error [box-shadow:_inset_0_1px_0.5px_0px_hsl(0_0%_100%/0.4)]',
+        success: 'bg-success hover:bg-success-focus text-success-foreground focus-visible:ring-success [box-shadow:_inset_0_1px_0.5px_0px_hsl(0_0%_100%/0.4)]',
+        warning: 'bg-warning hover:bg-warning-focus text-warning-foreground focus-visible:ring-warning [box-shadow:_inset_0_1px_0.5px_0px_hsl(0_0%_100%/0.4)]',
+        info: 'bg-info hover:bg-info-focus text-info-foreground focus-visible:ring-info [box-shadow:_inset_0_1px_0.5px_0px_hsl(0_0%_100%_/_0.4)]',
         ghost: 'hover:bg-base-300/50 dark:hover:bg-base-800/50 text-muted-foreground focus-visible:text-foreground dark:focus-visible:text-base-300 hover:text-foreground aria-pressed:text-foreground focus-visible:ring-border hover:[box-shadow:_inset_0_1px_0.5px_0px_hsl(0_0%_100%/0.06)] data-[state=open]:bg-muted data-[state=open]:text-foreground data-[state=open]:[box-shadow:_inset_0_1px_0.5px_0px_hsl(0_0%_100%/0.06)]',
         text: 'text-muted-foreground focus-visible:text-foreground hover:text-foreground aria-pressed:text-foreground data-[selected]:text-foreground data-[state=active]:text-foreground aria-pressed:underline underline-offset-4 data-[state=active]:underline focus-visible:ring-offset-0 focus-visible:ring-border',
         link: 'underline-offset-4 underline text-accent hover:text-accent-focus focus-visible:ring-accent',
@@ -47,7 +47,7 @@
 	export let size: VariantProps<typeof buttonStyles>["size"] = "default";
   export let loading = false;
   export let use: [any, {}?] = [() => {}, {}];
-  export let melted: Record<string, any> & { action: Action<any, any> } | undefined = undefined;
+  export let melt: Record<string, any> & { action: Action<any, any> } | undefined = undefined;
   const [action, actionProps] = use;
 	type Props = {
 		class?: string | null;
@@ -55,7 +55,7 @@
 		size?: VariantProps<typeof buttonStyles>["size"];
     loading?: boolean;
     use?: [Action, {}?];
-    melted?: Record<string, any> & { action: Action<any, any> };
+    melt?: Record<string, any> & { action: Action<any, any> };
 	};
 
 	interface AnchorElement extends Props, HTMLAnchorAttributes {
@@ -70,7 +70,7 @@
 	type $$Props = AnchorElement | ButtonElement;
 </script>
 
-{#if melted?.action}
+{#if melt?.action}
   <svelte:element
     role={href ? 'a' : "button"}
     this={href ? 'a' : "button"}
@@ -85,7 +85,7 @@
     on:mouseenter
     on:mouseleave
     use:action={actionProps}
-    melt={melted}
+    melt={melt}
     >
     <!-- {#if loading}
       <span transition:scale class="absolute inset-0 grid place-content-center">

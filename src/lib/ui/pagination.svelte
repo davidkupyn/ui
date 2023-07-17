@@ -61,7 +61,7 @@
 		<Button 
 			variant="ghost" 
 			size="icon"
-			melted={$prevButton}
+			melt={$prevButton}
 			disabled={!$pageStore || $pageStore === 1 || totalPages <= 1}
 		>
 			<ArrowLeft size=20 />
@@ -70,7 +70,7 @@
 			{#if page.type === 'page'}
 				{@const isCurrentPage = $pageStore === page.value}
 				<Button
-					melted={$pageTrigger(page)}
+					melt={$pageTrigger(page)}
 					size="icon"
 					variant="text"
 					class="relative"
@@ -98,7 +98,7 @@
 		<Button 
 			variant="ghost" 
 			size="icon"
-			melted={$nextButton}
+			melt={$nextButton}
 			disabled={($pageStore && $pageStore >= totalPages) || totalPages <= 1}
 		>
 			<ArrowRight size=20 />

@@ -31,24 +31,22 @@
 		<div class="p-6 flex flex-col justify-center items-center h-full gap-8">
 			<h1
 				in:fadeScale={{ duration: 400 }}
-				class="text-center antialiased text-5xl md:text-7xl bg-clip-text text-transparent bg-gradient-to-t selection:text-base-900 dark:selection:text-base-100 from-base-950 via-base-800 to-base-400 dark:from-base-400 dark:via-base-100 tracking-tight dark:to-base-50"
+				class="text-center antialiased pb-1.5 [text-wrap:balance] text-5xl font-medium md:text-7xl bg-clip-text text-transparent bg-gradient-to-t selection:text-base-900 dark:selection:text-base-100 from-base-950 via-base-800 to-base-400 dark:from-base-400 dark:via-base-100 tracking-tighter dark:to-base-50"
 			>
-				Unleash Your
+				Elegant. Functional.
 				<span
 					class="animate-text bg-clip-text text-transparent bg-gradient-to-r from-accent-400 via-accent-500 to-accent-600 dark:from-accent-300 dark:via-accent-500 dark:to-accent-800 selection:text-accent-500 dark:selection:text-accent-400"
 				>
-					Creativity.
+					Essence.
 				</span>
 			</h1>
 			<p
 				in:fade={{ duration: 400 }}
-				class="text-center bg-clip-text max-w-prose text-transparent bg-gradient-to-t from-base-700 to-base-500 dark:from-base-400 dark:to-base-50 md:text-lg"
+				class="text-center [text-wrap:balance] bg-clip-text max-w-prose text-transparent bg-gradient-to-t from-base-700 to-base-500 dark:from-base-400 dark:to-base-50 md:text-lg"
 			>
-				Crafted with Unparalleled Precision and Timeless Elegance, <span class="font-semibold"
-					>Essence</span
-				> Transcends Expectations
+				Beautifully simple, effortlessly functional – crafting captivating interfaces with ease.
 			</p>
-			<!-- <span in:fadeScale={{ duration: 400 }}> -->
+			<span in:fadeScale={{ duration: 400 }} class="mt-4">
 				<Button
 					size='lg'
 					href="/preview"
@@ -57,7 +55,7 @@
 					Explore Components
 					<ArrowRight class="w-4 h-4 group-hover:ml-1 transition-[margin]" size=16 />
 				</Button>
-			<!-- </span> -->
+			</span>
 		</div>
 	</main>
 {/key}

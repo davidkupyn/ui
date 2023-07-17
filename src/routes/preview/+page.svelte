@@ -406,7 +406,7 @@ let buttonLoading = false;
 				</label>
 				<Footer class="mt-6">
 					<Button 
-						melted={close}
+						melt={close}
 						type="button"
 						variant='outline'
 						>
@@ -527,7 +527,7 @@ let buttonLoading = false;
 								</Header>
 								<Footer>
 									<Button 
-										melted={close}
+										melt={close}
 										type="button"
 										variant='outline'
 										>

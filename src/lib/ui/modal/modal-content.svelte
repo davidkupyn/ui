@@ -67,7 +67,7 @@ function css(
 				>
 				<slot {Header} {Footer} close={$close} />
 				{#if crossButton && !alert}
-					<Button variant="ghost" size="icon" melted={$close} class="absolute right-3 top-3">
+					<Button variant="ghost" size="icon" melt={$close} class="absolute right-3 top-3">
 						<X size=16 />
 					</Button>
 				{/if}
