@@ -3,6 +3,7 @@ import colors from 'tailwindcss/colors';
 import tailwindForms from '@tailwindcss/forms';
 import tailwindAnimate from 'tailwindcss-animate';
 
+/** @type {import('tailwindcss').Config} */
 const config = {
 	future: {
 		hoverOnlyWhenSupported: true
@@ -27,7 +28,7 @@ const config = {
 				base: colors.zinc,
 				background: 'hsl(var(--color-background))',
 				foreground: 'hsl(var(--color-foreground))',
-				border: 'var(--border)',
+				border: 'hsl(var(--border))',
 				muted: {
 					DEFAULT: 'var(--color-muted)',
 					foreground: 'var(--color-muted-foreground)'
@@ -62,27 +63,8 @@ const config = {
 					...colors.blue
 				}
 			},
-			boxShadow: {
-				convex:
-					'0 -4px 4px -4px var(--tw-shadow-color) inset, 0 4px 4px -4px var(--tw-shadow-color) inset'
-			},
 			fontFamily: {
 				sans: ['Figtree', ...defaultTheme.fontFamily.sans]
-			},
-			animation: {
-				text: 'text 8s ease infinite'
-			},
-			keyframes: {
-				text: {
-					'0%, 100%': {
-						'background-size': '200% 200%',
-						'background-position': 'left center'
-					},
-					'50%': {
-						'background-size': '200% 200%',
-						'background-position': 'right center'
-					}
-				}
 			}
 		}
 	},

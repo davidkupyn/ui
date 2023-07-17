@@ -35,8 +35,8 @@
           statusDot: 'bg-warning-500'
         },
         info: {
-          base: 'bg-info-400/20 text-info-800 dark:text-info-200 dark:bg-info-600/20',
-          statusDot: 'bg-info-500'
+          base: 'bg-info-400/20 text-info-600 dark:bg-info-500/20  dark:text-info-200 dark:bg-info-600/20',
+          statusDot: 'bg-info-400'
         },
       },
       subtle: {

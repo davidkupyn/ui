@@ -36,7 +36,7 @@
   {#each { length: $valueStore.length } as _}
     <span
       melt={$thumb()}
-      class="block h-4 w-4 rounded-full focus-visible:outline-none border border-accent-500/50 bg-background shadow transition-colors focus-visible:ring-1 focus-visible:ring-accent group-disabled:pointer-events-none group-disabled:opacity-50 dark:[box-shadow:_inset_0_0.5px_0.5px_0px_hsl(0_0%_100%/0.3)] [box-shadow:_inset_0_-0.5px_0.5px_0px_hsl(240_6%_10%/0.3)]"
+      class="block h-5 w-5 sm:h-4 sm:w-4 rounded-full focus-visible:outline-none border border-accent-500/50 bg-background shadow transition-colors focus-visible:ring-1 focus-visible:ring-accent group-disabled:pointer-events-none group-disabled:opacity-50 dark:[box-shadow:_inset_0_0.5px_0.5px_0px_hsl(0_0%_100%/0.3)] [box-shadow:_inset_0_-0.5px_0.5px_0px_hsl(240_6%_10%/0.3)]"
     />
   {/each}
 </span>

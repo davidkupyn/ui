@@ -31,7 +31,7 @@
 		<div class="p-6 flex flex-col justify-center items-center h-full gap-8">
 			<h1
 				in:fadeScale={{ duration: 400 }}
-				class="text-center antialiased text-5xl md:text-7xl font-semibold bg-clip-text text-transparent bg-gradient-to-t selection:text-base-900 dark:selection:text-base-100 from-base-950 via-base-800 to-base-400 dark:from-base-400 dark:via-base-100 tracking-tight dark:to-base-50"
+				class="text-center antialiased text-5xl md:text-7xl bg-clip-text text-transparent bg-gradient-to-t selection:text-base-900 dark:selection:text-base-100 from-base-950 via-base-800 to-base-400 dark:from-base-400 dark:via-base-100 tracking-tight dark:to-base-50"
 			>
 				Unleash Your
 				<span
@@ -61,3 +61,19 @@
 		</div>
 	</main>
 {/key}
+
+<style>
+	@keyframes text {
+  0%, 100% {
+    background-size: 200% 200%;
+    background-position: left center;
+  }
+  50% {
+    background-size: 200% 200%;
+    background-position: right center;
+  }
+}
+.animate-text {
+  animation: text 6s ease infinite;
+}
+</style>

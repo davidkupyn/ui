@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { tippy } from '$lib/actions/tippy';
 	import {
 		Search,
 		X,
@@ -17,7 +16,6 @@
 		Save,
 		Command,
 		CalendarIcon,
-		Loader2,
 		Bot,
 	} from 'lucide-svelte';
 	import Pagination from '$lib/ui/pagination.svelte';
@@ -82,7 +80,6 @@ let buttonLoading = false;
 		}))
 		.filter((header) => header.key !== 'id');
 
-		let disclosureOpen = true;
 		let dialogOpen = false;
 </script>
 
@@ -91,7 +88,7 @@ let buttonLoading = false;
 		<label class="input-group group">
 			<Search size=16 class="icon-left" />
 			<input spellcheck="false" autocomplete="false" placeholder="Search..."/>
-			<Kbd class="group-focus-within:scale-75 max-sm:hidden transition group-focus-within:opacity-0">
+			<Kbd class="group-focus-within:scale-75 max-sm:hidden transition group-focus-within:opacity-0 dark:bg-background">
 				<Command size="12" />
 				K
 			</Kbd>
@@ -448,6 +445,7 @@ let buttonLoading = false;
 							>
 								<Edit size=16 />
 								Edit
+								<Kbd slot="after">E</Kbd>
 							</Item>
 							<Item
 								danger
@@ -457,8 +455,8 @@ let buttonLoading = false;
 								}}
 							>
 								<Trash2 size=16 />
-
 								Delete
+								<Kbd slot="after">D</Kbd>
 							</Item>
 						</Content>
 					</svelte:fragment>

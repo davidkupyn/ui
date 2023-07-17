@@ -6,7 +6,7 @@
 @layer base {
 	:root {
 		--radius: 0.75rem;
-		--border: theme('colors.base.200');
+		--border: 240 6% 90%;
 
 		--color-primary: 240 6% 10%;
 		--color-primary-focus: theme('colors.primary.800');
@@ -43,7 +43,7 @@
 		--color-popover-border: theme('colors.base.200');
 	}
 	.dark {
-		--border: theme('colors.base.800');
+		--border: 240 4% 16%;
 
 		--color-primary: 0 0% 98%;
 		--color-primary-focus: theme('colors.primary.200');
@@ -107,10 +107,6 @@
 	.text-shadow {
 		text-shadow: 0px 1px 2px rgb(0 0 0 / 0.2);
 	}
-	.convex {
-		@apply shadow-convex shadow-base-50 dark:shadow-base-500;
-	}
-
 	.stack {
 		@apply inline-grid place-items-center items-end gap-3;
 
