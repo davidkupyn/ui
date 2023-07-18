@@ -38,8 +38,8 @@
 		});
 	}}
 	class={cn(
-		'relative group w-10 transition disabled:opacity-50 disabled:pointer-events-none h-6 bg-border focus:outline-none focus-visible:ring-2 focus-visible:ring-muted-foreground focus-visible:ring-offset-2 focus-visible:ring-offset-background rounded-full',
-		$isChecked && 'bg-accent dark:bg-accent',
+		'relative group w-10 transition disabled:opacity-50 disabled:pointer-events-none h-6 bg-border focus:outline-none focus-visible:ring-2 focus-visible:ring-border focus-visible:ring-offset-2 focus-visible:ring-offset-background rounded-full',
+		$isChecked && 'bg-accent dark:bg-accent focus-visible:ring-accent',
 		className
 	)}
 >
