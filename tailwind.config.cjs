@@ -33,7 +33,8 @@ const config = {
 				error: {
 					DEFAULT: 'var(--color-error)',
 					foreground: 'var(--color-error-foreground)',
-					focus: 'var(--color-error-focus)'
+					focus: 'var(--color-error-focus)',
+					...colors.red
 				}
 			},
 			boxShadow: {
