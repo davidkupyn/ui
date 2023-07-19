@@ -56,4 +56,4 @@
 	export { trigger, close }
 </script>
 
-<slot {Trigger} {Content} close={$close}/>
+<slot {Trigger} {Content} close={$close} trigger={$trigger} {open}/>

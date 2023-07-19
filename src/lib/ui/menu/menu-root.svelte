@@ -32,4 +32,4 @@
   export const { trigger } = dropdown
 </script>
 
-<slot {Trigger} {Content}/>
+<slot {Trigger} {Content} trigger={$trigger}/>

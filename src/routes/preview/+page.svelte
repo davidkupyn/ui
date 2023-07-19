@@ -1,5 +1,5 @@
 <script lang="ts">
-	import {
+import {
 		Search,
 		X,
 		Eye,
@@ -26,7 +26,7 @@
 	import { Select } from '$lib/ui/select';
 	import Combobox from '$lib/ui/combobox.svelte';
 	import Calendar from '$lib/ui/calendar.svelte';
-	import { Modal, type ModalTrigger  } from '$lib/ui/modal';
+	import { Modal  } from '$lib/ui/modal';
 	import { Avatar } from '$lib/ui/avatar';
 	import { Accordion } from '$lib/ui/accordion';
 	import { Disclosure } from '$lib/ui/disclosure';
@@ -81,9 +81,6 @@ let buttonLoading = false;
 		.filter((header) => header.key !== 'id');
 
 		let dialogOpen = false;
-		let deleteModalOpen = false;
-		let deleteModalTrigger: ModalTrigger;
-		let toDelete: string[] = [];
 </script>
 
 <main in:fade={{ duration: 100 }} class="py-8 w-full space-y-6 container mx-auto px-4 sm:px-6">
@@ -157,7 +154,7 @@ let buttonLoading = false;
 				]}
 			/>
 		</label>
-		<Card let:Header let:Footer class="max-w-md">
+		<Card let:Header class="max-w-md">
 			<Header let:Title let:Description>
 				<Title>Form example</Title>
 				<Description>Using custom and native select components</Description>
@@ -339,7 +336,7 @@ let buttonLoading = false;
 			</span>
 		</Radio>
 	</RadioGroup>
-	<RadioGroup let:Radio value='1'>
+	<RadioGroup let:Radio value='one'>
 		<Radio value='one' />
 		<Radio value='two' />
 		<Radio value='three' />
@@ -408,11 +405,11 @@ let buttonLoading = false;
 			<Item summary="What about updates?" details="Yes, we will be updating the components regularly. We will also be adding new components."/>
 		</Accordion>
 	</Card>
-	<Modal let:Trigger let:Content bind:open={dialogOpen}>
-		<Trigger>
+	<Modal let:trigger let:Content bind:open={dialogOpen}>
+		<Button melt={trigger}>
 			<AppWindow size=16 />
 			Open Modal
-		</Trigger>
+		</Button>
 		<Content let:Header let:Footer let:close class="sm:max-w-[425px]">
 			<Header let:Title let:Description>
 				<Title>Edit Profile</Title>
@@ -456,10 +453,10 @@ let buttonLoading = false;
 				columnsEditable
 			>
 				<Menu slot="actions" let:row placement="bottom-end">
-					<svelte:fragment let:Trigger let:Content>
-						<Trigger variant="ghost" size="icon" class="">
+					<svelte:fragment let:trigger let:Content>
+						<Button melt={trigger} variant="ghost" size="icon">
 							<MoreHorizontal size=16 />
-						</Trigger>
+						</Button>
 						<Content let:Item class="w-40">
 							<Item
 								on:select={() => {
@@ -472,15 +469,15 @@ let buttonLoading = false;
 							</Item>
 								<Item
 									danger
-									melt={$deleteModalTrigger}
 									on:select={() => {
-										toDelete = [row.id];
+										items = items.filter((item) => item.id !== row.id);
+										selected = selected.filter((id) => id !== row.id);
 									}}
 								>
 									<Trash2 size=16 />
 									Delete
 									<Kbd slot="after">D</Kbd>
-								</Item>							
+								</Item>
 						</Content>
 					</svelte:fragment>
 				</Menu>
@@ -534,14 +531,36 @@ let buttonLoading = false;
 				>
 					<span class="text-sm">
 						Selected
-
 						<b>{selected.length}</b>
 						{selected.length === 1 ? 'item' : 'items'}
 					</span>
 					<div class="flex gap-4">
-						<Button melt={$deleteModalTrigger} variant="ghost" size="icon" aria-label="Delete items" class="h-8 w-8" on:click={() => toDelete = [...selected]}>
-							<Trash2 size=16 />
-						</Button>
+						<Modal let:trigger let:Content class="sm:max-w-[425px]" alert type="error">
+							<Button melt={trigger} variant="ghost" size="icon" aria-label="Delete items" class="h-8 w-8">
+								<Trash2 size=16 />
+							</Button>
+							<Content let:Header let:Footer let:close class="sm:w-96">
+								<Header let:Title let:Description>
+									<Title>Delete {selected.length === 1 ? "this item" : "these items"}?</Title>
+									<Description>You cannot undo this action.</Description>
+								</Header>
+								<Footer>
+									<Button 
+										melt={close}
+										type="button"
+										variant='outline'
+										>
+										Cancel
+									</Button>
+									<Button type="submit" variant='error' 
+										on:click={() => {
+											items = items.filter((item) => !selected.includes(item.id));
+											selected = [];
+										}}
+									>Delete</Button>
+								</Footer>
+							</Content>
+						</Modal>
 						<Button variant="ghost" size="icon" aria-label="Discard selection" class="h-8 w-8"
 							on:click={() => (selected = [])}
 						>
@@ -554,27 +573,3 @@ let buttonLoading = false;
 			<Pagination {totalPages} />
 	</div>
 </main>
-<Modal bind:trigger={deleteModalTrigger} bind:open={deleteModalOpen} let:Content class="sm:max-w-[425px]" alert type="error" on:open={() => console.log('open')}>
-	<Content let:Header let:Footer let:close class="sm:w-96">
-		<Header let:Title let:Description>
-			<Title>Delete {toDelete.length === 1 ? "this item" : "these items"}?</Title>
-			<Description>You cannot undo this action.</Description>
-		</Header>
-		<Footer>
-			<Button 
-				melt={close}
-				type="button"
-				variant='outline'
-				>
-				Cancel
-			</Button>
-			<Button type="submit" variant='error' 
-				on:click={() => {
-					items = items.filter((item) => !toDelete.includes(item.id));
-					toDelete = [];
-					deleteModalOpen = false;
-				}}
-			>Delete</Button>
-		</Footer>
-	</Content>
-</Modal>

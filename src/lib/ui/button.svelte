@@ -5,7 +5,7 @@
     base: 'inline-flex gap-2 items-center justify-center rounded-xl active:scale-95 text-sm font-medium transition ease-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 ring-offset-background disabled:pointer-events-none disabled:opacity-50',
     variants: {
       variant: {
-        default: 'bg-primary hover:bg-primary-focus text-primary-foreground focus-visible:ring-primary [box-shadow:_inset_0_1px_0.5px_0px_hsl(0_0%_100%/0.4),0_4px_6px_-1px_rgb(0_0_0_/_0.1),_0_2px_4px_-2px_rgb(0_0_0_/_0.1)] dark:[box-shadow:_inset_0_-1px_0.5px_0px_hsl(240_6%_10%/0.4)]',
+        default: 'bg-primary hover:bg-primary-focus text-primary-foreground focus-visible:ring-primary [box-shadow:_inset_0_1px_0.5px_0px_hsl(0_0%_100%/0.4),0_4px_6px_-1px_rgb(0_0_0_/_0.1),_0_2px_4px_-2px_rgb(0_0_0_/_0.1)]',
         outline: 'shadow dark:shadow-black ring-1 ring-base-950/10 focus-visible:border-border border border-transparent dark:border-border text-foreground hover:bg-border focus-visible:ring-border',
         secondary: 'bg-base-200/90 hover:bg-muted dark:bg-base-900/70 dark:hover:bg-muted focus-visible:ring-border [box-shadow:_inset_0_1px_0.5px_0px_hsl(0_0%_100%/0.06)]',
         error: 'bg-error hover:bg-error-focus text-error-foreground focus-visible:ring-error [box-shadow:_inset_0_1px_0.5px_0px_hsl(0_0%_100%/0.4),0_4px_6px_-1px_rgb(0_0_0_/_0.1),_0_2px_4px_-2px_rgb(0_0_0_/_0.1)]',
