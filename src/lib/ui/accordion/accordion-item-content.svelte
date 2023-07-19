@@ -14,7 +14,7 @@
 	<div
 		class={cn('px-4 mt-2 text-sm text-muted-foreground overflow-hidden', className)}
 		melt={$content(item)}
-		transition:slide={{ duration: 150, easing: cubicInOut }}
+		transition:slide={{ duration: 200, easing: cubicInOut }}
 	>
 		<slot />
 	</div>
