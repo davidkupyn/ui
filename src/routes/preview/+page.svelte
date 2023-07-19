@@ -317,19 +317,19 @@ let buttonLoading = false;
 	</Disclosure>
 	
 	<RadioGroup let:Radio value='3'>
-		<Radio value="1" class="focus-within:ring-1 transition focus-within:ring-accent rounded-2xl bg-background ring-1 ring-foreground/10 shadow p-4 max-w-sm gap-4">
+		<Radio value="1" class="focus-within:ring-1 transition data-[state=checked]:ring-accent focus-within:ring-accent rounded-2xl bg-background ring-1 ring-foreground/10 shadow p-4 max-w-sm gap-4">
 			<span class="flex flex-col gap-1.5">
 				<span class="font-medium">Startup</span>
 				<span class="text-muted-foreground text-sm">12GB/6 CPUs · 160 GB SSD disk</span>
 			</span>
 		</Radio>
-		<Radio value="2" class="focus-within:ring-1 transition focus-within:ring-accent rounded-2xl bg-background ring-1 ring-foreground/10 shadow p-4 max-w-sm gap-4">
+		<Radio value="2" class="focus-within:ring-1 transition data-[state=checked]:ring-accent focus-within:ring-accent rounded-2xl bg-background ring-1 ring-foreground/10 shadow p-4 max-w-sm gap-4">
 			<span class="flex flex-col gap-1.5">
 				<span class="font-medium">Business</span>
 				<span class="text-muted-foreground text-sm">16GB/8 CPUs · 512 GB SSD disk</span>
 			</span>
 		</Radio>
-		<Radio value="3" class="focus-within:ring-1 transition focus-within:ring-accent rounded-2xl bg-background ring-1 ring-foreground/10 shadow p-4 max-w-sm gap-4">
+		<Radio value="3" class="focus-within:ring-1 transition data-[state=checked]:ring-accent focus-within:ring-accent rounded-2xl bg-background ring-1 ring-foreground/10 shadow p-4 max-w-sm gap-4">
 			<span class="flex flex-col gap-1.5">
 				<span class="font-medium">Enterprise</span>
 				<span class="text-muted-foreground text-sm">32GB/12 CPUs · 1024 GB SSD disk</span>

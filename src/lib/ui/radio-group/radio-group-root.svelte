@@ -6,6 +6,7 @@
   
   export let value: string | undefined = undefined; 
   export let disabled = false;
+  export let name: string | undefined = undefined;
   export let loop = false;
   export let orientation: 'horizontal' | 'vertical' = 'vertical';
   export let required = false;
@@ -17,10 +18,10 @@
     disabled,
     loop,
     orientation,
-    required  
+    required,
   });
 
-  const {root, value: valueStore} = radioGroup;
+  const {root, value: valueStore, itemInput} = radioGroup;
   setContext('radio-group', radioGroup);
  $: valueStore.set(value || null);
   valueStore.subscribe((v) => {
@@ -34,5 +35,6 @@
   aria-label="View density"
 >
   <slot {Radio} />
+  <input type='hidden' {name} {value} {disabled}/>
 </div>
 
