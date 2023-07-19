@@ -1,5 +1,7 @@
 import type { createDialog } from '@melt-ui/svelte';
+import type { Action } from '@sveltejs/kit';
 import { getContext } from 'svelte';
+import type { Writable } from 'svelte/store';
 import { tv } from 'tailwind-variants';
 
 export { default as Modal } from './modal-root.svelte';
@@ -27,3 +29,5 @@ export const getModalContext = () =>
 			crossButton: boolean;
 		}
 	>('dialog');
+
+export type ModalTrigger = Writable<Record<string, any> & { action: Action<any, any> }>;

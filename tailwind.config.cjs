@@ -1,7 +1,8 @@
 import defaultTheme from 'tailwindcss/defaultTheme';
 import colors from 'tailwindcss/colors';
-import tailwindForms from '@tailwindcss/forms';
-import tailwindAnimate from 'tailwindcss-animate';
+import forms from '@tailwindcss/forms';
+import animate from 'tailwindcss-animate';
+import plugin from 'tailwindcss/plugin';
 
 /** @type {import('tailwindcss').Config} */
 const config = {
@@ -69,7 +70,21 @@ const config = {
 		}
 	},
 
-	plugins: [tailwindForms, tailwindAnimate]
+	plugins: [
+		forms,
+		animate,
+		plugin(function ({ matchUtilities, theme }) {
+			matchUtilities(
+				{
+					custom: (value) => ({
+						width: value,
+						height: value
+					})
+				},
+				{ values: theme('colors') }
+			);
+		})
+	]
 };
 
 module.exports = config;

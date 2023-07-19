@@ -106,14 +106,14 @@
     use:action={actionProps}
   >
     {#if loading}
-      <span class="absolute inset-0 grid place-content-center">
+      <span class=" inset-0 grid place-content-center absolute">
         <Loader2 class="animate-spin" size=16 />
       </span>
       <span class={cn('relative transition-[transform,opacity] inline-flex gap-2 items-center justify-center', loading ? 'scale-75 opacity-0' : 'scale-100 opacity-100 pointer-events-none', ['info', 'error'].includes(variant ?? 'default') && 'text-shadow')}>
         <slot />
       </span>
     {:else}
-    <slot />
-      {/if}
+      <slot />
+    {/if}
   </svelte:element>
-{/if}
+{/if} 

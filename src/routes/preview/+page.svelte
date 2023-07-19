@@ -26,7 +26,7 @@
 	import { Select } from '$lib/ui/select';
 	import Combobox from '$lib/ui/combobox.svelte';
 	import Calendar from '$lib/ui/calendar.svelte';
-	import { Modal } from '$lib/ui/modal';
+	import { Modal, type ModalTrigger  } from '$lib/ui/modal';
 	import { Avatar } from '$lib/ui/avatar';
 	import { Accordion } from '$lib/ui/accordion';
 	import { Disclosure } from '$lib/ui/disclosure';
@@ -81,6 +81,9 @@ let buttonLoading = false;
 		.filter((header) => header.key !== 'id');
 
 		let dialogOpen = false;
+		let deleteModalOpen = false;
+		let deleteModalTrigger: ModalTrigger;
+		let toDelete: string[] = [];
 </script>
 
 <main in:fade={{ duration: 100 }} class="py-8 w-full space-y-6 container mx-auto px-4 sm:px-6">
@@ -317,9 +320,29 @@ let buttonLoading = false;
 	</Disclosure>
 	
 	<RadioGroup let:Radio value='3'>
-		<Radio value="1">One</Radio>
-		<Radio value="2">Two</Radio>
-		<Radio value="3">Three</Radio>
+		<Radio value="1" class="focus-within:ring-1 transition focus-within:ring-accent rounded-2xl bg-background ring-1 ring-foreground/10 shadow p-4 max-w-sm gap-4">
+			<span class="flex flex-col gap-1.5">
+				<span class="font-medium">Startup</span>
+				<span class="text-muted-foreground text-sm">12GB/6 CPUs · 160 GB SSD disk</span>
+			</span>
+		</Radio>
+		<Radio value="2" class="focus-within:ring-1 transition focus-within:ring-accent rounded-2xl bg-background ring-1 ring-foreground/10 shadow p-4 max-w-sm gap-4">
+			<span class="flex flex-col gap-1.5">
+				<span class="font-medium">Business</span>
+				<span class="text-muted-foreground text-sm">16GB/8 CPUs · 512 GB SSD disk</span>
+			</span>
+		</Radio>
+		<Radio value="3" class="focus-within:ring-1 transition focus-within:ring-accent rounded-2xl bg-background ring-1 ring-foreground/10 shadow p-4 max-w-sm gap-4">
+			<span class="flex flex-col gap-1.5">
+				<span class="font-medium">Enterprise</span>
+				<span class="text-muted-foreground text-sm">32GB/12 CPUs · 1024 GB SSD disk</span>
+			</span>
+		</Radio>
+	</RadioGroup>
+	<RadioGroup let:Radio value='1'>
+		<Radio value='one' />
+		<Radio value='two' />
+		<Radio value='three' />
 	</RadioGroup>
 	<div class="mt-4 flex gap-4 items-center">
 		<Avatar
@@ -447,17 +470,17 @@ let buttonLoading = false;
 								Edit
 								<Kbd slot="after">E</Kbd>
 							</Item>
-							<Item
-								danger
-								on:select={() => {
-									items = items.filter((item) => item.id !== row.id);
-									selected = selected.filter((item) => item !== row.id);
-								}}
-							>
-								<Trash2 size=16 />
-								Delete
-								<Kbd slot="after">D</Kbd>
-							</Item>
+								<Item
+									danger
+									melt={$deleteModalTrigger}
+									on:select={() => {
+										toDelete = [row.id];
+									}}
+								>
+									<Trash2 size=16 />
+									Delete
+									<Kbd slot="after">D</Kbd>
+								</Item>							
 						</Content>
 					</svelte:fragment>
 				</Menu>
@@ -516,34 +539,9 @@ let buttonLoading = false;
 						{selected.length === 1 ? 'item' : 'items'}
 					</span>
 					<div class="flex gap-4">
-						<Modal let:Trigger let:Content class="sm:max-w-[425px]" alert type="error" on:open={() => console.log('open')}>
-							<Trigger variant="ghost" size="icon" aria-label="Delete items" class="h-8 w-8">
-								<Trash2 size=16 />
-							</Trigger>
-							<Content let:Header let:Footer let:close class="sm:w-96">
-								<Header let:Title let:Description>
-									<Title>Delete {selected.length === 1 ? "this item" : "these items"}?</Title>
-									<Description>You cannot undo this action.</Description>
-								</Header>
-								<Footer>
-									<Button 
-										melt={close}
-										type="button"
-										variant='outline'
-										>
-										Cancel
-									</Button>
-									<Button type="submit" variant='error' 
-										on:click={() => {
-											items = items.filter((item) => !selected.includes(item.id));
-											selected = [];
-											// closeDeleteDialog();
-										}}
-									>Delete</Button>
-								</Footer>
-							</Content>
-						</Modal>
-
+						<Button melt={$deleteModalTrigger} variant="ghost" size="icon" aria-label="Delete items" class="h-8 w-8" on:click={() => toDelete = [...selected]}>
+							<Trash2 size=16 />
+						</Button>
 						<Button variant="ghost" size="icon" aria-label="Discard selection" class="h-8 w-8"
 							on:click={() => (selected = [])}
 						>
@@ -556,3 +554,27 @@ let buttonLoading = false;
 			<Pagination {totalPages} />
 	</div>
 </main>
+<Modal bind:trigger={deleteModalTrigger} bind:open={deleteModalOpen} let:Content class="sm:max-w-[425px]" alert type="error" on:open={() => console.log('open')}>
+	<Content let:Header let:Footer let:close class="sm:w-96">
+		<Header let:Title let:Description>
+			<Title>Delete {toDelete.length === 1 ? "this item" : "these items"}?</Title>
+			<Description>You cannot undo this action.</Description>
+		</Header>
+		<Footer>
+			<Button 
+				melt={close}
+				type="button"
+				variant='outline'
+				>
+				Cancel
+			</Button>
+			<Button type="submit" variant='error' 
+				on:click={() => {
+					items = items.filter((item) => !toDelete.includes(item.id));
+					toDelete = [];
+					deleteModalOpen = false;
+				}}
+			>Delete</Button>
+		</Footer>
+	</Content>
+</Modal>

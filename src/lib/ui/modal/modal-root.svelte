@@ -35,7 +35,7 @@
 	const dialog = createDialog({
 		role: alert ? 'alertdialog' : 'dialog',
 		closeOnOutsideClick: !alert && closeOnOutsideClick,
-		preventScroll,		
+		preventScroll,
 	});
  const { open: openStore, close, trigger} = dialog;
 	setContext('dialog', {

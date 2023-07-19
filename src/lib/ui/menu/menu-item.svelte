@@ -5,13 +5,14 @@
 	import { cn } from '$lib/helpers/style';
 	import { createEventDispatcher } from 'svelte';
 	import type { CheckboxItemProps, ItemProps } from '@melt-ui/svelte/dist/builders/menu';
+	import type { Action } from '@sveltejs/kit';
 
 	export let checkbox = false;
   export let disabled = false;
   export let danger = false;
 	const { item: regularItem, checkboxItem } = getMenuContext();
-
 	const baseItem = checkbox ? checkboxItem : regularItem;
+  export let melt: Record<string, any> & { action: Action<any, any> } | undefined = undefined;
 	const item = {
 		...baseItem,
 		action(node: HTMLElement, options: CheckboxItemProps | ItemProps) {
@@ -42,7 +43,36 @@
     }
     $: checkbox && checkboxStore.set(checked);
 </script>
-
+{#if melt}
+<div
+  aria-disabled={disabled}
+  class={cn(
+    itemStyles(),
+    checkbox && 'relative pl-8',
+    danger && 'focus:bg-error-400/20 text-error dark:focus:text-error-200 dark:focus:bg-error-600/20 focus:text-error',
+    className,
+  )}
+  {...$item}
+  use:item.action={{
+    checked: checkboxStore,
+    onSelect: (e) => {
+      dispatch('select', e);
+    }
+  }}
+  melt={melt}
+  {...$$restProps}
+> 
+  <slot />
+  {#if checked && checkbox}
+    <Check size=16 class="absolute left-2 top-1/2 -translate-y-1/2"/>
+  {/if}
+  {#if $$slots.after}
+    <span class="ml-auto">
+      <slot name="after" />
+    </span>
+  {/if}
+</div>
+{:else}
 <div
   aria-disabled={disabled}
   class={cn(
@@ -70,4 +100,4 @@
     </span>
   {/if}
 </div>
-
+{/if}
