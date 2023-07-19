@@ -44,7 +44,7 @@
 				in:fade={{ duration: 400 }}
 				class="text-center [text-wrap:balance] bg-clip-text max-w-prose text-transparent bg-gradient-to-t from-base-700 to-base-500 dark:from-base-400 dark:to-base-50 md:text-lg"
 			>
-				Easy-to-use UI components for creating modern captivating interfaces.
+				Craft modern, captivating interfaces effortlessly with easy-to-use UI components.
 			</p>
 			<span in:fadeScale={{ duration: 400 }} class="mt-4">
 				<Button
