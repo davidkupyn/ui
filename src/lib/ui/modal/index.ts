@@ -8,7 +8,7 @@ export { default as Modal } from './modal-root.svelte';
 
 export const modal = tv({
 	slots: {
-		base: 'relative z-50 grid w-full max-w-lg shadow-lg focus:outline-none rounded-3xl border border-popover-border bg-popover p-6 gap-6 rounded-t-3xl [--modal-scale:1] sm:[--modal-scale:0.95] [--modal-y:5rem] sm:[--modal-y:0px] [--modal-duration:0] sm:[--modal-duration:200]',
+		base: 'relative z-50 grid w-full max-w-lg shadow-lg focus:outline-none rounded-3xl border border-popover-border bg-popover p-6 gap-6 rounded-t-3xl [--modal-scale:1] sm:[--modal-scale:0.95] [--modal-y:5rem] sm:[--modal-y:0px] [--modal-duration:250] sm:[--modal-duration:200]',
 		title: 'font-semibold text-lg leading-none tracking-tight flex items-center',
 		description: 'text-sm text-muted-foreground'
 	},
