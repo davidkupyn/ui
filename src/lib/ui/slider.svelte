@@ -31,7 +31,7 @@
  
 <span melt={$slider} class={cn("group relative flex w-full touch-none select-none items-center", className)}>
   <span class="relative h-1.5 w-full grow overflow-hidden rounded-full bg-accent-500/20">
-    <span melt={$range} class="absolute h-full bg-accent [box-shadow:_inset_0_1px_0.5px_0px_hsl(0_0%_100%/0.3)] rounded-full" />
+    <span melt={$range} class="absolute h-full bg-accent shadow-[inset_0_1px_#ffffff4d] rounded-full" />
   </span>
   <input type='hidden' {value} {name} {disabled} />
   {#each { length: $valueStore.length } as _}

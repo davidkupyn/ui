@@ -13,7 +13,7 @@
 <svelte:element this={$$slots.default ? 'label' : 'div'} class={cn("flex items-center gap-3", className)} data-state={$isChecked(value) ? 'checked' : 'unchecked'} aria-checked={$isChecked(value)}>
   <button
     melt={$item({value, disabled})}
-    class="h-5 w-5 sm:h-4 sm:w-4 my-1 shrink-0 cursor-pointer data-[state=checked]:bg-accent ring-1 ring-foreground/20 data-[state=checked]:ring-accent shadow rounded-full grid place-content-center focus-visible:ring-2 bg-transparent text-accent outline-0 focus-visible:ring-offset-background focus-visible:ring-offset-2"
+    class="h-5 w-5 sm:h-4 sm:w-4 my-1 focus:outline-none shrink-0 cursor-pointer data-[state=checked]:bg-accent ring-1 ring-foreground/20 data-[state=checked]:ring-accent shadow rounded-full grid place-content-center focus-visible:ring-2 bg-transparent text-accent outline-0 focus-visible:ring-offset-background focus-visible:ring-offset-2"
     aria-labelledby="{id}-label"
     {id}
   >

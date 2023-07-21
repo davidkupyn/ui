@@ -96,7 +96,7 @@
 										duration: 200
 									}}
 									out:send={{ key: 'background', easing: cubicOut, duration: 200 }}
-									class="w-full h-full rounded-xl bg-background dark:bg-muted [box-shadow:_inset_0_1px_0.5px_0px_hsl(0_0%_100%/0.06)]"
+									class="w-full h-full rounded-xl bg-background dark:bg-muted shadow-[inset_0_1px_#ffffff0f]"
 								/>
 							{/if}
 						</Button>

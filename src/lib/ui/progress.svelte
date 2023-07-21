@@ -2,7 +2,7 @@
  const progressStyles = tv({
   slots: {
     base: 'relative h-2 w-full overflow-hidden rounded-full',
-    indicator: 'h-full w-full rounded-full transition-transform duration-500 ease-out ease-in-out [box-shadow:_inset_0_1px_0.5px_0px_hsl(0_0%_100%/0.3)]'
+    indicator: 'h-full w-full rounded-full transition-transform duration-500 ease-in-out shadow-[inset_0_1px_0_#ffffff4d]'
   },
   variants: {
     variant: {

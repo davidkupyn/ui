@@ -83,7 +83,7 @@
 	<table class="w-full caption-bottom overflow-x-scroll text-sm">
 		<thead
 			class={cn(
-				filled && 'bg-base-200/50 dark:bg-base-900/50 [box-shadow:_inset_0_1px_0.5px_0px_hsl(0_0%_100%/0.06)] rounded-2xl',
+				filled && 'bg-base-200/50 dark:bg-base-900/50 shadow-[inset_0_1px_0_#ffffff0f] rounded-2xl',
 				lined && !filled && '[&_tr]:border-b'
 			)}
 		>

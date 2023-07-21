@@ -60,3 +60,8 @@
 
 <h1 style="color: #{$colorDark}">Tweened Color</h1>
 <h1 style="color: #{$colorLight}">Tweened Color</h1>
+
+<button class="relative rounded-xl bg-primary active:scale-95 transition px-3 py-1.5 text-sm/6 font-medium text-primary-foreground shadow-[inset_0_1px_0_#ffffff1e] before:absolute before:inset-0
+before:rounded-xl before:mix-blend-multiply before:shadow-sm before:ring-1
+before:ring-primary-focus after:hover:absolute after:hover:inset-0
+after:hover:rounded-xl after:hover:bg-background/5 after:bg-background/0 after:hover:transition">Submit</button>
