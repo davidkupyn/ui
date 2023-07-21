@@ -23,10 +23,7 @@ export const disableAnimation = () => {
 	document.head.appendChild(css);
 
 	return () => {
-		// Force restyle
 		(() => window.getComputedStyle(document.body))();
-
-		// Wait for next tick before removing
 		setTimeout(() => {
 			document.head.removeChild(css);
 		}, 1);

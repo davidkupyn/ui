@@ -1,4 +1,4 @@
-<script>
+<script lang='ts'>
 	import { page } from '$app/stores';
 	import { Github, Monitor, Moon, Sun } from 'lucide-svelte';
 	import '../app.postcss';
@@ -8,6 +8,28 @@
 	import { themeStore } from '$lib/theme-switcher';
 	import Button from '$lib/ui/button.svelte';
 	import Separator from '$lib/ui/separator.svelte';
+	import { browser } from '$app/environment';
+	import { derived } from 'svelte/store';
+
+	const getCSSVar = (name: string) => {
+		if (!browser) return; 
+		const val = getComputedStyle(document.documentElement).getPropertyValue(name);
+		return val.trim();
+	};
+
+	let hslValue = getCSSVar('--color-background');
+	
+	const backgroundColor = derived(themeStore, (v) => {
+		console.log('change')
+		hslValue = getCSSVar('--color-background');
+		// get hsl value again after 1sec
+		setTimeout(() => {
+			hslValue = getCSSVar('--color-background');
+		}, 1000);
+		console.log(hslValue)
+		return `hsl(${hslValue})`
+	});
+	
 </script>
 
 <svelte:head>
@@ -17,8 +39,10 @@
 		content="Crafted with Unparalleled Precision and Timeless Elegance, Essence Transcends Expectations"
 	/>
 	<meta name="author" content="David Kupyn" />
+	<meta name="theme-color" content="hsl(240 10% 4%)" media="(prefers-color-scheme: dark)"/>
+	<meta name="theme-color" content="hsl(0 0% 98%)" media="(prefers-color-scheme: light)" />
 </svelte:head>
-<ThemeProvider attribute="class" disableTransitionOnChange storageKey="essense-theme" />
+<ThemeProvider attribute="class" disableTransitionOnChange storageKey="essense-theme"/>
 <header
 	class={cn(
 		'w-full z-20',

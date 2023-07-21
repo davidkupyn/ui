@@ -55,5 +55,10 @@
 	})
 	export { trigger, close }
 </script>
+<!-- 
+<svelte:head>
+	<meta name="theme-color" content="hsl(240 10% 4%)" media="(prefers-color-scheme: dark)"/>
+	<meta name="theme-color" content="hsl(0 0% 98%)" media="(prefers-color-scheme: light)" />
+</svelte:head> -->
 
 <slot {Trigger} {Content} close={$close} trigger={$trigger} {open}/>
