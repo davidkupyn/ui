@@ -27,7 +27,7 @@
 	});
 
 	const [send, receive] = crossfade({});
-	
+
 	$: $options.count = totalPages;
 	$: pageStore.set(page);
 
