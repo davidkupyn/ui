@@ -13,10 +13,10 @@ import {
 		Stars,
 		Flower2,
 		BookTemplate,
-		Save,
 		Command,
 		CalendarIcon,
 		Bot,
+		RefreshCw,
 	} from 'lucide-svelte';
 	import Pagination from '$lib/ui/pagination.svelte';
 	import Switch from '$lib/ui/switch.svelte';
@@ -79,7 +79,7 @@ let buttonLoading = false;
 				.replace(/^./, (str) => str.toUpperCase())
 		}))
 		.filter((header) => header.key !== 'id');
-
+let paginationPage = 3;
 		let dialogOpen = false;
 </script>
 
@@ -134,9 +134,9 @@ let buttonLoading = false;
 				<textarea class="h-full sm:text-sm" placeholder="Description" />
 			</fieldset>
 		</label>
-		<label for="switch" class="flex items-center gap-2 text-sm w-fit">
-			Toggle switch
+		<label for="switch" class="flex items-center gap-4 text-sm w-fit">
 			<Switch id="switch" defaultChecked />
+			Toggle switch
 		</label>
 		<label class="input-label w-full" for="autocomplete">
 			<span class="{labelInside ? 'opacity-0' : 'opacity-100'} transition-opacity duration-100">
@@ -247,7 +247,7 @@ let buttonLoading = false;
 			<Button variant="ghost"> Ghost </Button>
 			<Button variant="link">Link</Button>
 			<Button size='icon' variant="ghost">
-				<Save size=20 />
+				<RefreshCw size=16 class="group-active:rotate-45 -rotate-[30deg] transition-transform" />
 			</Button>
 			<Button variant="text">
 				Text
@@ -317,7 +317,7 @@ let buttonLoading = false;
 	</Disclosure>
 	
 	<RadioGroup let:Radio value='3'>
-		<Radio value="1" class="focus-within:ring-1 transition data-[state=checked]:ring-accent focus-within:ring-accent rounded-2xl bg-background ring-1 ring-foreground/10 shadow p-4 max-w-sm gap-4">
+		<Radio value="1" class="bg-background focus-within:ring-1 transition data-[state=checked]:ring-accent focus-within:ring-accent rounded-2xl ring-1 ring-foreground/10 shadow p-4 max-w-sm gap-4">
 			<span class="flex flex-col gap-1.5">
 				<span class="font-medium">Startup</span>
 				<span class="text-muted-foreground text-sm">12GB/6 CPUs · 160 GB SSD disk</span>
@@ -405,7 +405,7 @@ let buttonLoading = false;
 			<Item summary="What about updates?" details="Yes, we will be updating the components regularly. We will also be adding new components."/>
 		</Accordion>
 	</Card>
-	<Modal let:trigger let:Content bind:open={dialogOpen}>
+	<Modal let:trigger let:Content bind:open={dialogOpen} closeOnOutsideClick>
 		<Button melt={trigger}>
 			<AppWindow size=16 />
 			Open Modal
@@ -570,6 +570,6 @@ let buttonLoading = false;
 				</div>
 			{/if}
 		</div>
-			<Pagination {totalPages} />
+			<Pagination {totalPages} bind:page={paginationPage}/>
 	</div>
 </main>

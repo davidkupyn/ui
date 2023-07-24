@@ -7,8 +7,10 @@
 	export let crossButton = true;
 	export let alert = false;
 	export let type: 'error' | 'warning' | 'success' | 'info' | undefined = undefined;
+	export let drawer = false;
+	export let side: 'left' | 'right' | 'top' | 'bottom' | undefined = drawer ? 'right' : undefined;
 	export let open = false;
-	export let closeOnOutsideClick = true;
+	export let closeOnOutsideClick = alert ? false : true;
 	export let preventScroll = true;
 
 	type BaseDialogProps = {
@@ -24,24 +26,33 @@
 		type?: 'error' | 'warning' | 'success' | 'info';
 	};
 
+	type DrawerProps = {
+		drawer: boolean;
+		side?: 'left' | 'right' | 'top' | 'bottom';
+	};
+
 	type DialogProps = {
 		alert?: never;
 		type?: never;
+		drawer?: never;
+		side?: never;
 	};
 
-	type $$Props = BaseDialogProps & (AlertDialogProps | DialogProps);
+	type $$Props = BaseDialogProps & (AlertDialogProps | DrawerProps | DialogProps);
   const dispatch = createEventDispatcher();
 
 	const dialog = createDialog({
 		role: alert ? 'alertdialog' : 'dialog',
-		closeOnOutsideClick: !alert && closeOnOutsideClick,
+		closeOnOutsideClick,
 		preventScroll,
 	});
  const { open: openStore, close, trigger} = dialog;
 	setContext('dialog', {
 		...dialog,
 		alert,
-		type,
+		type: alert ? type : undefined,
+		drawer,
+		side: drawer ? side : undefined,
 		crossButton
 	});
 

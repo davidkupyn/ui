@@ -16,7 +16,7 @@
         },
         accent: {
           base: 'bg-accent-400/20 text-accent-600 dark:bg-accent-500/20  dark:text-accent-200 dark:bg-accent-600/20',
-          statusDot: 'bg-accent-400'
+          statusDot: 'bg-accent'
         },
         outline: {
           base: 'ring-1 ring-base-950/10 shadow dark:border-border border border-transparent focus-visible:border-border text-foreground',

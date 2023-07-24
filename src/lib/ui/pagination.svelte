@@ -29,7 +29,6 @@
 	const [send, receive] = crossfade({});
 
 	$: $options.count = totalPages;
-	$: pageStore.set(page);
 
 	$: {
 		if (innerWidth < 640 && $options.siblingCount !== 0) {
@@ -39,11 +38,7 @@
 		}
 	}
 
-	$: {
-		if (page > totalPages || page < 1) {
-			pageStore.set(totalPages);
-		}
-	}
+	$: pageStore.set(Math.max(1, Math.min(page, totalPages)));
 
 	pageStore.subscribe((value) => {
 		page = value;

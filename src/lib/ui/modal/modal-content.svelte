@@ -8,7 +8,7 @@
 	import { cubicOut } from 'svelte/easing';
 	import Button from '../button.svelte';
 
-	const { portal, open, alert, overlay, content, close, crossButton } = getModalContext();
+	const { portal, open, alert, overlay, content, close, crossButton, drawer, side } = getModalContext();
 	let className: string | undefined | null = undefined;
 	export { className as class };
 
@@ -24,14 +24,16 @@ function css(
 		easing?: (t: number) => number;
 		x?: number | string;
 		y?: number | string;
-		opacity?: number;
+		opacity?: number | string;
 		scale?: number | string;
 	} = {}
 ): TransitionConfig {
 	const style = getComputedStyle(node);
 	const target_opacity = +style.opacity;
 	const transform = style.transform === 'none' ? '' : style.transform;
-	const od = target_opacity * (1 - opacity);
+	const isOpacityVar = typeof opacity === 'string' && opacity.startsWith('--');
+	const [start_opacity] = split_css_unit(isOpacityVar ? style.getPropertyValue(opacity) : opacity);
+	const od = target_opacity * (1 - start_opacity);
 	const sd = typeof scale === 'string' ? 1 - Number(style.getPropertyValue(scale)) : 1 - scale;
 	const isXVar = typeof x === 'string' && x.startsWith('--');
 	const isYVar = typeof y === 'string' && y.startsWith('--');
@@ -50,7 +52,7 @@ function css(
 </script>
 <div use:portal>
 	{#if $open}
-		<div class='z-50 flex justify-center sm:items-center items-end fixed inset-0 p-2'>
+		<div class={modal({ drawer, side }).container()}>
 			<div
 				melt={$overlay}
 				transition:fade={{ duration: 150 }}
@@ -60,9 +62,11 @@ function css(
 				transition:css={{
 					duration: '--modal-duration',
 					y: '--modal-y',
-					scale: '--modal-scale'
+					x: '--modal-x',
+					scale: '--modal-scale',
+					opacity: '--modal-opacity',
 				}}
-				class={cn(modal().base(), className)}
+				class={cn(modal({ drawer, side }).base(), className)}
 				melt={$content}
 				>
 				<slot {Header} {Footer} close={$close} />
