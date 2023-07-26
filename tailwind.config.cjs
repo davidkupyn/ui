@@ -24,7 +24,17 @@ const config = {
 					DEFAULT: 'var(--color-accent)',
 					focus: 'var(--color-accent-focus)',
 					foreground: 'var(--color-accent-foreground)',
-					...colors.blue
+					50: '#fff3ed',
+					100: '#ffe2d4',
+					200: '#ffc1a8',
+					300: '#ff9670',
+					400: '#ff5f37',
+					500: '#ff421e',
+					600: '#f01c06',
+					700: '#c70f07',
+					800: '#9e0e0e',
+					900: '#7f100f',
+					950: '#450507'
 				},
 				base: colors.zinc,
 				background: 'hsl(var(--color-background))',
@@ -61,7 +71,7 @@ const config = {
 					DEFAULT: 'var(--color-info)',
 					foreground: 'var(--color-info-foreground)',
 					focus: 'var(--color-info-focus)',
-					...colors.sky
+					...colors.blue
 				}
 			},
 			fontFamily: {

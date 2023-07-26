@@ -25,17 +25,17 @@
 </script>
 {#key mounted}
 	<main
-		class="h-[100dvh] w-full bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-background dark:to-base-900/50 via-background to-primary/30"  
+		class="h-[100dvh] w-full bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-background dark:to-base-900/60 via-background to-primary/30"  
 	>
 		<div class="noise"/>
 		<div class="p-6 flex flex-col justify-center items-center h-full gap-8">
 			<h1
 				in:fadeScale={{ duration: 400 }}
-				class="text-center antialiased pb-1.5 [text-wrap:balance] text-5xl font-medium md:text-7xl bg-clip-text text-transparent bg-gradient-to-t selection:text-base-900 dark:selection:text-base-100 from-base-950 via-base-800 to-base-400 dark:from-base-400 dark:via-base-100 tracking-tighter dark:to-base-50"
+				class="text-center antialiased pb-1.5 [text-wrap:balance] text-5xl md:text-7xl bg-clip-text text-transparent bg-gradient-to-t selection:text-base-900 dark:selection:text-base-100 from-base-950 via-base-800 to-base-400 dark:from-base-400 dark:via-base-100 tracking-tighter dark:to-base-50"
 			>
 				Elegant. Functional.
 				<span
-					class="animate-text bg-clip-text text-transparent bg-gradient-to-r from-accent-400 to-accent-focus selection:text-accent-500 dark:selection:text-accent-400"
+					class="animate-text bg-clip-text text-transparent bg-gradient-to-r from-accent to-accent-focus selection:text-accent-focus dark:selection:text-accent-focus"
 				>
 					Essence.
 				</span>

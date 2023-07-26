@@ -237,6 +237,7 @@ let drawerSide: "right" | "top" | "bottom" | "left" = 'right'
 				<BookTemplate size=16 />
 				Outline
 			</Button>
+			<Button variant="accent"> Accent </Button>
 			<Button variant="secondary">
 				<Flower2 size=16 />
 				Secondary

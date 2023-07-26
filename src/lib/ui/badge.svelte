@@ -41,7 +41,7 @@
       },
       subtle: {
         true: {
-          base: 'ring-1 ring-base-950/10 shadow dark:bg-transparent dark:border-border border bg-transparent border-transparent focus-visible:border-border text-foreground dark:text-foreground',
+          base: 'ring-1 ring-base-950/10 shadow dark:bg-background dark:border-border border bg-background border-transparent focus-visible:border-border text-foreground dark:text-foreground',
         }
       },
       round: {
