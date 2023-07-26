@@ -26,7 +26,7 @@ export const modal = tv({
 				base: '[--modal-scale:1]'
 			},
 			false:
-				'[--modal-scale:1] sm:[--modal-scale:0.95] [--modal-y:5rem] sm:[--modal-y:0px] max-w-lg w-full'
+				'[--modal-scale:1] sm:[--modal-scale:0.95] [--modal-y:10rem] sm:[--modal-y:0px] max-w-lg w-full'
 		},
 		side: {
 			left: {
