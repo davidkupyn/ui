@@ -18,7 +18,7 @@
     {id}
   >
     {#if $isChecked(value)}
-      <div transition:scale={{start: 0.5}} class="h-1.5 w-1.5 rounded-full bg-background" />
+      <div transition:scale={{start: 0.5}} class="h-2 w-2 sm:h-1.5 sm:w-1.5 rounded-full bg-background shadow" />
     {/if}
   </button>
   <slot>

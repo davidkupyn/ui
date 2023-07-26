@@ -80,6 +80,7 @@ let buttonLoading = false;
 		}))
 		.filter((header) => header.key !== 'id');
 let paginationPage = 3;
+let drawerSide: "right" | "top" | "bottom" | "left" = 'right'
 		let dialogOpen = false;
 </script>
 
@@ -405,7 +406,7 @@ let paginationPage = 3;
 			<Item summary="What about updates?" details="Yes, we will be updating the components regularly. We will also be adding new components."/>
 		</Accordion>
 	</Card>
-	<Modal let:trigger let:Content bind:open={dialogOpen} closeOnOutsideClick>
+	<Modal let:trigger let:Content bind:open={dialogOpen}>
 		<Button melt={trigger}>
 			<AppWindow size=16 />
 			Open Modal
@@ -425,6 +426,52 @@ let paginationPage = 3;
 					<input class="input" type='text' placeholder="dkupyn@gmail.com" />
 				</label>
 				<Footer class="mt-6">
+					<Button 
+						melt={close}
+						type="button"
+						variant='outline'
+						>
+						Cancel
+					</Button>
+					<Button type="submit">Confirm</Button>
+				</Footer>
+			</form>
+		</Content>
+	</Modal>
+
+		<label class="input-label w-full max-w-xs" for='this'>
+						Choose drawer's side
+	<Select let:Option bind:value={drawerSide} placeholder="Select drawer's side">
+		<Option value='left'>Left</Option>
+		<Option value='right'>Right</Option>
+		<Option value='top'>Top</Option>
+		<Option value='bottom'>Bottom</Option>
+	</Select>
+	</label>
+
+	<Modal let:trigger let:Content drawer side={drawerSide}>
+		<Button melt={trigger}>
+			<AppWindow size=16 />
+			Open Drawer
+		</Button>
+		<Content let:Header let:Footer let:close>
+			<Header let:Title let:Description>
+				<Title>Edit Profile</Title>
+				<Description>Make changes to your profile here. Click save when you're done.</Description>
+			</Header>
+			<form class={cn(
+				"flex",
+				(drawerSide === 'left' || drawerSide === 'right') ? 'max-w-md flex-col gap-2 items-end' : 'gap-2 sm:gap-6 h-64 flex-wrap items-start'
+			)}>
+				<label class="input-label w-full max-w-md">
+					Username
+					<input class="input" type='text' placeholder="Dave Kupyn" />
+				</label>
+				<label class="input-label w-full max-w-md">
+					Email
+					<input class="input" type='text' placeholder="dkupyn@gmail.com" />
+				</label>
+				<Footer class="mt-6 max-w-md sm:w-fit">
 					<Button 
 						melt={close}
 						type="button"

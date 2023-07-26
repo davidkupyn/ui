@@ -7,11 +7,11 @@
 	import { getMenuContext, menuStyles } from '.';
 	import { fade } from 'svelte/transition';
 	import Submenu from './menu-submenu.svelte';
+	import { derived } from 'svelte/store';
 
 	const { menu, open } = getMenuContext();
 	let className: string | undefined | null = undefined;
   const { content } = menuStyles();
-
 	export { className as class };
 </script>
 

@@ -20,7 +20,7 @@
 	
 	let className: string | undefined | null = undefined;
 	export { className as class };
-
+	console.log(value)
 	const {
 		value: valueStore,
 		label,

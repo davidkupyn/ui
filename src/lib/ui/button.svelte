@@ -6,7 +6,7 @@
     variants: {
       variant: {
         default: 'bg-primary hover:bg-primary-focus text-primary-foreground focus-visible:ring-primary shadow-[inset_0_1px_0_#ffffff4d,0_4px_6px_-1px_rgb(0_0_0_/_0.1),_0_2px_4px_-2px_rgb(0_0_0_/_0.1)] dark:shadow-[inset_0_-1px_0_#0000004d]',
-        outline: 'shadow dark:shadow-black ring-1 ring-base-950/10 focus-visible:border-border border border-transparent dark:border-border text-foreground hover:bg-border focus-visible:ring-border',
+        outline: 'shadow dark:shadow-black ring-1 ring-base-950/5 focus-visible:border-border border border-transparent dark:border-border text-foreground hover:bg-border focus-visible:ring-border',
         secondary: 'bg-base-200/90 hover:bg-muted dark:bg-base-900/70 dark:hover:bg-muted focus-visible:ring-border shadow-[inset_0_1px_0_#ffffff0f]',
         error: '[text-shadow:_0_1px_0_rgb(0_0_0_/_20%)] bg-error hover:bg-error-focus text-error-foreground focus-visible:ring-error shadow-[inset_0_1px_0_#ffffff4d,0_4px_6px_-1px_rgb(0_0_0_/_0.1),_0_2px_4px_-2px_rgb(0_0_0_/_0.1)]',
         success: 'bg-success hover:bg-success-focus text-success-foreground focus-visible:ring-success shadow-[inset_0_1px_0_#ffffff4d,0_4px_6px_-1px_rgb(0_0_0_/_0.1),_0_2px_4px_-2px_rgb(0_0_0_/_0.1)]',

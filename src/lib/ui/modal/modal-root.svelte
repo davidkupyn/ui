@@ -3,6 +3,7 @@
 	import { createEventDispatcher, setContext } from 'svelte';
 	import Trigger from './modal-trigger.svelte';
 	import Content from './modal-content.svelte';
+	import { writable } from 'svelte/store';
 
 	export let crossButton = true;
 	export let alert = false;
@@ -37,7 +38,10 @@
 		drawer?: never;
 		side?: never;
 	};
-
+	let sideStore = writable<'left' | 'right' | 'top' | 'bottom'>(side);
+	let isDrawerStore = writable<boolean>(drawer);
+	$: sideStore.set(side || 'right');
+	$: isDrawerStore.set(drawer)
 	type $$Props = BaseDialogProps & (AlertDialogProps | DrawerProps | DialogProps);
   const dispatch = createEventDispatcher();
 
@@ -51,13 +55,12 @@
 		...dialog,
 		alert,
 		type: alert ? type : undefined,
-		drawer,
-		side: drawer ? side : undefined,
+		drawer: isDrawerStore,
+		side: drawer ? sideStore : undefined,
 		crossButton
 	});
 
 	$: openStore.set(open)
-
   openStore.subscribe((v) => {
     open = v;
 		dispatch('change', v);
@@ -66,10 +69,5 @@
 	})
 	export { trigger, close }
 </script>
-<!-- 
-<svelte:head>
-	<meta name="theme-color" content="hsl(240 10% 4%)" media="(prefers-color-scheme: dark)"/>
-	<meta name="theme-color" content="hsl(0 0% 98%)" media="(prefers-color-scheme: light)" />
-</svelte:head> -->
 
 <slot {Trigger} {Content} close={$close} trigger={$trigger} {open}/>
