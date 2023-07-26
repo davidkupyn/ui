@@ -88,7 +88,7 @@
 			<div
 				melt={$overlay}
 				transition:fade={{ duration: 150 }}
-				class="fixed z-50 inset-0 bg-[radial-gradient(ellipse_at_bottom,_var(--tw-gradient-stops))] sm:bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-base-600/50 to-base-600/95 dark:from-base-950/70 dark:to-base-950/95"
+				class="fixed z-50 backdrop-blur-sm inset-0 bg-base-950/30 dark:bg-base-950/75"
 			/>
 				<div
 					transition:css={{

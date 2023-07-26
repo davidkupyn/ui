@@ -24,7 +24,7 @@ const config = {
 					DEFAULT: 'var(--color-accent)',
 					focus: 'var(--color-accent-focus)',
 					foreground: 'var(--color-accent-foreground)',
-					...colors.indigo
+					...colors.blue
 				},
 				base: colors.zinc,
 				background: 'hsl(var(--color-background))',
@@ -61,7 +61,7 @@ const config = {
 					DEFAULT: 'var(--color-info)',
 					foreground: 'var(--color-info-foreground)',
 					focus: 'var(--color-info-focus)',
-					...colors.blue
+					...colors.sky
 				}
 			},
 			fontFamily: {
