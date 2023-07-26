@@ -35,7 +35,7 @@
 			>
 				Elegant. Functional.
 				<span
-					class="animate-text bg-clip-text text-transparent bg-gradient-to-r from-accent-400 via-accent-500 to-accent-600 dark:from-accent-300 dark:via-accent-500 dark:to-accent-800 selection:text-accent-500 dark:selection:text-accent-400"
+					class="animate-text bg-clip-text text-transparent bg-gradient-to-r from-accent-400 to-accent-focus selection:text-accent-500 dark:selection:text-accent-400"
 				>
 					Essence.
 				</span>
