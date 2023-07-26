@@ -30,7 +30,7 @@
 			in:receive={{ key: 'tab', duration: 200 }}
 			out:send={{ key: 'tab', duration: 200 }}
 			class={cn(
-				'w-full h-full group-data-[orientation=vertical]:rounded-xl rounded-lg overflow-hidden bg-background shadow'
+				'w-full h-full group-data-[orientation=vertical]:rounded-xl rounded-lg overflow-hidden bg-background shadow dark:shadow-[inset_0_1px_0_#ffffff0f]'
 				// transparent && 'bg-background shadow'
 			)}
 		/>
