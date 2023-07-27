@@ -17,6 +17,7 @@ import {
 		CalendarIcon,
 		Bot,
 		RefreshCw,
+		UserCog2,
 	} from 'lucide-svelte';
 	import Pagination from '$lib/ui/pagination.svelte';
 	import Switch from '$lib/ui/switch.svelte';
@@ -414,7 +415,9 @@ let drawerSide: "right" | "top" | "bottom" | "left" = 'right'
 		</Button>
 		<Content let:Header let:Footer let:close class="sm:max-w-[425px]">
 			<Header let:Title let:Description>
-				<Title>Edit Profile</Title>
+				<Title>
+					<UserCog2 slot='icon' size=20/>
+					Edit Profile</Title>
 				<Description>Make changes to your profile here. Click save when you're done.</Description>
 			</Header>
 			<form class="grid gap-2">

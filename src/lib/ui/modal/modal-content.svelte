@@ -5,11 +5,9 @@
 	import { fade } from 'svelte/transition';
 	import { modal, getModalContext, css } from '.';
 	import { cn } from '$lib/helpers/style';
-	import { X } from 'lucide-svelte';
-	import Button from '../button.svelte';
 	import { spring } from 'svelte/motion';
 
-	const { portal, open, alert, overlay, content, close, crossButton, drawer, side } = getModalContext();
+	const { portal, open, overlay, content, close, drawer, side } = getModalContext();
 	let className: string | undefined | null = undefined;
 	export { className as class };
 
@@ -102,11 +100,11 @@
 					melt={$content}
 					>
 					<slot {Header} {Footer} close={$close} />
-					{#if crossButton && !alert}
-						<Button variant="ghost" size="icon" melt={$close} class="absolute right-3 top-3">
+					<!-- {#if crossButton && !alert}
+						<Button variant="ghost" size="icon" melt={$close} class="absolute right-3 top-3 h-8 w-8">
 							<X size=16 />
 						</Button>
-					{/if}
+					{/if} -->
 				</div>
 
 			</div>

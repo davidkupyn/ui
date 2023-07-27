@@ -20,10 +20,9 @@
 	
 	let className: string | undefined | null = undefined;
 	export { className as class };
-	console.log(value)
 	const {
 		value: valueStore,
-		label,
+		valueLabel,
 		trigger,
 		menu,
 		option,
@@ -48,7 +47,6 @@
 	});
 	setContext('select', { option, isSelected, group, groupLabel });
 </script>
-
 <button
 	melt={$trigger}
 	{disabled}
@@ -56,8 +54,8 @@
 	class={cn('input-group w-full justify-between data-[state=open]:ring-accent', className)}
 	aria-label={placeholder}
 >
-	{#if $label}
-		{$label}
+	{#if $valueLabel}
+		{$valueLabel}
 	{:else}
 		<span class="text-muted-foreground">{placeholder}</span>
 	{/if}
