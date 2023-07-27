@@ -86,7 +86,7 @@
   <span class={cn("relative h-8 sm:h-5 w-full grow overflow-hidden rounded-xl bg-primary/20", orientation === 'vertical' && 'h-full w-8')}>
     <span melt={$range} class={cn("absolute h-full bg-primary shadow-[inset_0_-1px_#0000004d]", orientation === 'vertical' ? 'w-full' : 'rounded-xl')} />
   </span>
-  <span class={cn("absolute mix-blend-exclusion pointer-events-none", orientation === 'vertical' ? 'bottom-2 ' : 'left-4')}><slot>{label ?? ''}</slot></span>
+  <span class={cn("absolute mix-blend-exclusion pointer-events-none text-background dark:text-inherit", orientation === 'vertical' ? 'bottom-2 ' : 'left-4')}><slot>{label ?? ''}</slot></span>
   <input type='hidden' {value} {name} {disabled} />
   {#each { length: $valueStore.length } as _, idx}
     <span
