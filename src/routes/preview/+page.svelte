@@ -18,6 +18,9 @@ import {
 		Bot,
 		RefreshCw,
 		UserCog2,
+		Volume2,
+		Volume1,
+		VolumeX,
 	} from 'lucide-svelte';
 	import Pagination from '$lib/ui/pagination.svelte';
 	import Switch from '$lib/ui/switch.svelte';
@@ -47,6 +50,7 @@ import {
 	import { page } from '$app/stores';
 
 	let showPassword = false;
+	let sliderOrientation: 'vertical' | 'horizontal' = 'horizontal'
 	const tabs = ['witalina', 'david', 'wiktor', 'gustaw'];
 	const PAGE_SIZE = 10;
 	$: currentPage = Number($page.url.searchParams.get('page') || '1');
@@ -135,10 +139,6 @@ let drawerSide: "right" | "top" | "bottom" | "left" = 'right'
 				<input class="!text-xl font-semibold mt-1" placeholder="Title" />
 				<textarea class="h-full sm:text-sm" placeholder="Description" />
 			</fieldset>
-		</label>
-		<label for="switch" class="flex items-center gap-4 text-sm w-fit">
-			<Switch id="switch" defaultChecked />
-			Toggle switch
 		</label>
 		<label class="input-label w-full" for="autocomplete">
 			<span class="{labelInside ? 'opacity-0' : 'opacity-100'} transition-opacity duration-100">
@@ -301,9 +301,22 @@ let drawerSide: "right" | "top" | "bottom" | "left" = 'right'
 			<Badge subtle variant="info">Info</Badge>
 		</div>
 	</div>
-	<Slider bind:value={sliderValue} class="max-w-md" />
+	<RadioGroup let:Radio bind:value={sliderOrientation}>
+		<Radio value='horizontal' />
+		<Radio value='vertical' />
+	</RadioGroup>
+	<Slider bind:value={sliderValue} class={sliderOrientation === 'horizontal' ? 'max-w-md' : "h-32"} orientation={sliderOrientation}>
+		{#if sliderValue > 50}
+		 <Volume2 class="h-5 w-5 sm:h-4 sm:w-4" />
+		{:else if sliderValue < 50 && sliderValue > 0}
+			<Volume1 class="h-5 w-5 sm:h-4 sm:w-4" />
+		{:else}
+			<VolumeX class="h-5 w-5 sm:h-4 sm:w-4" />
+		{/if}
+	</Slider>
 	<Disclosure let:Trigger let:Content class="max-w-md" unstyled let:open>
-		<Progress bind:value={sliderValue} />
+			<Progress bind:value={sliderValue} variant="accent"/>
+
 		<Trigger class={cn(buttonStyles({variant: 'text'}),"flex gap-2 mx-auto mt-4")}>
 			{#if open}
 				<span class="w-32" in:scale={{start: 0.95}}>Hide extra variants</span>
@@ -312,6 +325,7 @@ let drawerSide: "right" | "top" | "bottom" | "left" = 'right'
 			{/if}
 		</Trigger>
 		<Content class="space-y-6 mt-4">
+			<Progress bind:value={sliderValue} />
 			<Progress bind:value={sliderValue} variant="success"/>
 			<Progress bind:value={sliderValue} variant="error"/>
 			<Progress bind:value={sliderValue} variant="warning"/>
@@ -338,11 +352,6 @@ let drawerSide: "right" | "top" | "bottom" | "left" = 'right'
 				<span class="text-muted-foreground text-sm">32GB/12 CPUs · 1024 GB SSD disk</span>
 			</span>
 		</Radio>
-	</RadioGroup>
-	<RadioGroup let:Radio value='one'>
-		<Radio value='one' />
-		<Radio value='two' />
-		<Radio value='three' />
 	</RadioGroup>
 	<div class="mt-4 flex gap-4 items-center">
 		<Avatar
