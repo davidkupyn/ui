@@ -90,7 +90,7 @@ let drawerSide: "right" | "top" | "bottom" | "left" = 'right'
 		<label class="input-group group">
 			<Search size=16 class="icon-left" />
 			<input spellcheck="false" autocomplete="false" placeholder="Search..."/>
-			<Kbd class="group-focus-within:scale-75 max-sm:hidden transition group-focus-within:opacity-0 dark:bg-background">
+			<Kbd class="group-focus-within:scale-75 max-sm:hidden transition group-focus-within:opacity-0 dark:bg-background dark:shadow-[0_1px_0_#ffffff1a]">
 				<Command size="12" />
 				K
 			</Kbd>
