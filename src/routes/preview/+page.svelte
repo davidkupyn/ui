@@ -306,7 +306,7 @@ let drawerSide: "right" | "top" | "bottom" | "left" = 'right'
 		<Radio value='vertical' />
 	</RadioGroup>
 	<Slider bind:value={sliderValue} class={sliderOrientation === 'horizontal' ? 'max-w-md' : "h-32"} orientation={sliderOrientation}>
-		{#if sliderValue > 50}
+		{#if sliderValue >= 50}
 		 <Volume2 class="h-5 w-5 sm:h-4 sm:w-4" />
 		{:else if sliderValue < 50 && sliderValue > 0}
 			<Volume1 class="h-5 w-5 sm:h-4 sm:w-4" />
