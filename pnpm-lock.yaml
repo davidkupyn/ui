@@ -6,8 +6,8 @@ settings:
 
 dependencies:
   '@melt-ui/svelte':
-    specifier: ^0.27.0
-    version: 0.27.0(svelte@4.1.1)
+    specifier: ^0.27.1
+    version: 0.27.1(svelte@4.1.1)
   '@neodrag/svelte':
     specifier: ^2.0.3
     version: 2.0.3
@@ -39,7 +39,7 @@ dependencies:
 devDependencies:
   '@melt-ui/pp':
     specifier: ^0.0.7
-    version: 0.0.7(@melt-ui/svelte@0.27.0)(svelte@4.1.1)
+    version: 0.0.7(@melt-ui/svelte@0.27.1)(svelte@4.1.1)
   '@sveltejs/adapter-auto':
     specifier: ^2.1.0
     version: 2.1.0(@sveltejs/kit@1.22.3)
@@ -62,8 +62,8 @@ devDependencies:
     specifier: ^8.45.0
     version: 8.45.0
   eslint-config-prettier:
-    specifier: ^8.8.0
-    version: 8.8.0(eslint@8.45.0)
+    specifier: ^8.9.0
+    version: 8.9.0(eslint@8.45.0)
   eslint-plugin-svelte:
     specifier: ^2.32.4
     version: 2.32.4(eslint@8.45.0)(svelte@4.1.1)
@@ -80,8 +80,8 @@ devDependencies:
     specifier: ^3.0.0
     version: 3.0.0
   prettier-plugin-svelte:
-    specifier: ^3.0.1
-    version: 3.0.1(prettier@3.0.0)(svelte@4.1.1)
+    specifier: ^3.0.3
+    version: 3.0.3(prettier@3.0.0)(svelte@4.1.1)
   svelte:
     specifier: ^4.1.1
     version: 4.1.1
@@ -400,18 +400,18 @@ packages:
       '@jridgewell/resolve-uri': 3.1.0
       '@jridgewell/sourcemap-codec': 1.4.14
 
-  /@melt-ui/pp@0.0.7(@melt-ui/svelte@0.27.0)(svelte@4.1.1):
+  /@melt-ui/pp@0.0.7(@melt-ui/svelte@0.27.1)(svelte@4.1.1):
     resolution: {integrity: sha512-O7gRJ1OXmLjZBR7jB1SV2O4WORn1jk+k06gxej3EXPYAJGcPg+EfKNw54G0/VhhMup1ZrwMsleUgoCOzus/JUw==}
     peerDependencies:
       '@melt-ui/svelte': '>= 0.22.0'
       svelte: ^3.55.0 || ^4.0.0
     dependencies:
-      '@melt-ui/svelte': 0.27.0(svelte@4.1.1)
+      '@melt-ui/svelte': 0.27.1(svelte@4.1.1)
       svelte: 4.1.1
     dev: true
 
-  /@melt-ui/svelte@0.27.0(svelte@4.1.1):
-    resolution: {integrity: sha512-zRIYI719hIo1fWZOzRfyHC6FwPnx6r78fJodlGoNhn2lDIBFXPuf/z1Ee/8y8Hdu3vSfWCvr9e0BQHvtP011hQ==}
+  /@melt-ui/svelte@0.27.1(svelte@4.1.1):
+    resolution: {integrity: sha512-4irfD/HmpYQpWzneBXPBBSjcF85mVrZjQBRbXby/YkjZyY1GSC/W0koiNUTSKAg3FjBImwUexfbHO9rZUrB4kw==}
     peerDependencies:
       svelte: '>=3 <5'
     dependencies:
@@ -474,7 +474,7 @@ packages:
       devalue: 4.3.2
       esm-env: 1.0.0
       kleur: 4.1.5
-      magic-string: 0.30.1
+      magic-string: 0.30.2
       mime: 3.0.0
       sade: 1.8.1
       set-cookie-parser: 2.6.0
@@ -511,7 +511,7 @@ packages:
       debug: 4.3.4
       deepmerge: 4.3.1
       kleur: 4.1.5
-      magic-string: 0.30.1
+      magic-string: 0.30.2
       svelte: 4.1.1
       svelte-hmr: 0.15.2(svelte@4.1.1)
       vite: 4.4.7
@@ -785,7 +785,7 @@ packages:
     hasBin: true
     dependencies:
       caniuse-lite: 1.0.30001517
-      electron-to-chromium: 1.4.473
+      electron-to-chromium: 1.4.475
       node-releases: 2.0.13
       update-browserslist-db: 1.0.11(browserslist@4.21.9)
     dev: true
@@ -943,8 +943,8 @@ packages:
       esutils: 2.0.3
     dev: true
 
-  /electron-to-chromium@1.4.473:
-    resolution: {integrity: sha512-aVfC8+440vGfl06l8HKKn8/PD5jRfSnLkTTD65EFvU46igbpQRri1gxSzW9/+TeUlwYzrXk1sw867T96zlyECA==}
+  /electron-to-chromium@1.4.475:
+    resolution: {integrity: sha512-mTye5u5P98kSJO2n7zYALhpJDmoSQejIGya0iR01GpoRady8eK3bw7YHHnjA1Rfi4ZSLdpuzlAC7Zw+1Zu7Z6A==}
     dev: true
 
   /es6-promise@3.3.1:
@@ -990,8 +990,8 @@ packages:
     engines: {node: '>=10'}
     dev: true
 
-  /eslint-config-prettier@8.8.0(eslint@8.45.0):
-    resolution: {integrity: sha512-wLbQiFre3tdGgpDv67NQKnJuTlcUVYHas3k+DZCc2U2BadthoEY4B7hLPvAxaqdyOGCzuLfii2fqGph10va7oA==}
+  /eslint-config-prettier@8.9.0(eslint@8.45.0):
+    resolution: {integrity: sha512-+sbni7NfVXnOpnRadUA8S28AUlsZt9GjgFvABIRL9Hkn8KqNzOp+7Lw4QWtrwn20KzU3wqu1QoOj2m+7rKRqkA==}
     hasBin: true
     peerDependencies:
       eslint: '>=7.0.0'
@@ -1428,8 +1428,8 @@ packages:
       '@jridgewell/sourcemap-codec': 1.4.15
     dev: true
 
-  /magic-string@0.30.1:
-    resolution: {integrity: sha512-mbVKXPmS0z0G4XqFDCTllmDQ6coZzn94aMlb0o/A4HEHJCKcanlDZwYJgwnkmgD3jyWhUgj9VsPrfd972yPffA==}
+  /magic-string@0.30.2:
+    resolution: {integrity: sha512-lNZdu7pewtq/ZvWUp9Wpf/x7WzMTsR26TWV03BRZrXFsv+BI6dy8RAiKgm1uM/kyR0rCfUcqvOlXKG66KhIGug==}
     engines: {node: '>=12'}
     dependencies:
       '@jridgewell/sourcemap-codec': 1.4.15
@@ -1721,8 +1721,8 @@ packages:
     engines: {node: '>= 0.8.0'}
     dev: true
 
-  /prettier-plugin-svelte@3.0.1(prettier@3.0.0)(svelte@4.1.1):
-    resolution: {integrity: sha512-dSmu5AOQsUFMAj3XrCezQZHp8+6e8bjYu3VKPqY5vVmSU+S/6tXW04es6opnMwRMDH6Vm5r8l4+q8stTI/wuFQ==}
+  /prettier-plugin-svelte@3.0.3(prettier@3.0.0)(svelte@4.1.1):
+    resolution: {integrity: sha512-dLhieh4obJEK1hnZ6koxF+tMUrZbV5YGvRpf2+OADyanjya5j0z1Llo8iGwiHmFWZVG/hLEw/AJD5chXd9r3XA==}
     peerDependencies:
       prettier: ^3.0.0
       svelte: ^3.2.0 || ^4.0.0-next.0
@@ -2057,7 +2057,7 @@ packages:
       estree-walker: 3.0.3
       is-reference: 3.0.1
       locate-character: 3.0.0
-      magic-string: 0.30.1
+      magic-string: 0.30.2
       periscopic: 3.1.0
 
   /sveltekit-search-params@1.0.13(@sveltejs/kit@1.22.3)(svelte@4.1.1):
