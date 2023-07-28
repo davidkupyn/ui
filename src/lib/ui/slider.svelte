@@ -83,8 +83,8 @@
 </script>
  
 <span melt={$slider} class={cn("group relative flex touch-none select-none items-center overflow-hidden data-[orientation=vertical]:flex-col", orientation === 'vertical' ? 'h-full min-h-[4rem] w-fit' : 'w-full', className)}>
-  <span class={cn("relative h-8 sm:h-5 w-full grow overflow-hidden rounded-xl bg-primary/20", orientation === 'vertical' && 'h-full w-8')}>
-    <span melt={$range} class={cn("absolute h-full bg-primary shadow-[inset_0_-1px_#0000004d]", orientation === 'vertical' ? 'w-full' : 'rounded-xl')} />
+  <span class={cn("relative h-8 sm:h-5 w-full shadow-inner grow overflow-hidden rounded-xl backdrop-blur-sm bg-primary/20", orientation === 'vertical' && 'h-full w-8')}>
+    <span melt={$range} class={cn("absolute h-full bg-primary dark:shadow-[inset_0_-1px_#0000004d] shadow-[inset_0_1px_0_#ffffff4d]", orientation === 'vertical' ? 'w-full' : 'rounded-xl')} />
   </span>
   <span class={cn("absolute mix-blend-exclusion pointer-events-none text-background dark:text-inherit", orientation === 'vertical' ? 'bottom-2 ' : 'left-4')}><slot>{label ?? ''}</slot></span>
   <input type='hidden' {value} {name} {disabled} />

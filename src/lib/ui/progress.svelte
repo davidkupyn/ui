@@ -8,7 +8,7 @@
     variant: {
       default: {
         base: 'bg-primary-500/20',
-        indicator: 'bg-primary dark:[box-shadow:_inset_0_-1px_0.5px_0px_hsl(240_6%_10%/0.4)]'
+        indicator: 'bg-primary dark:dark:shadow-[inset_0_-1px_0_#0000004d]'
       },
       accent: {
         base: 'bg-accent-500/20',
