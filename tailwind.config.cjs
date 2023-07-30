@@ -75,7 +75,7 @@ const config = {
 				}
 			},
 			fontFamily: {
-				sans: ['Inter', ...defaultTheme.fontFamily.sans],
+				sans: ['Figtree', ...defaultTheme.fontFamily.sans],
 				serif: ['Gilda Display', ...defaultTheme.fontFamily.serif]
 			}
 		}
