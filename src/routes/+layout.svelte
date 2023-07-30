@@ -32,7 +32,7 @@
 			<a
 				href="/"
 				aria-label="Go to home page"
-				class="font-bold -ml-2 p-2 focus-visible:ring-2 focus-visible:outline-none rounded-xl transition ring-offset-base-50 dark:ring-offset-base-950 focus-visible:ring-primary-600"
+				class="font-bold -ml-2 p-2 focus-visible:ring-2 font-serif focus-visible:outline-none rounded-xl transition ring-offset-base-50 dark:ring-offset-base-950 focus-visible:ring-primary-600"
 			>
 				Essence
 			</a>
