@@ -75,8 +75,8 @@ const config = {
 				}
 			},
 			fontFamily: {
-				sans: ['Plus Jakarta Sans', ...defaultTheme.fontFamily.sans]
-				// display: ['Figtree', ...defaultTheme.fontFamily.sans]
+				sans: ['Manrope', ...defaultTheme.fontFamily.sans]
+				// Plus Jakarta Sans or display: ['Figtree', ...defaultTheme.fontFamily.sans]
 			}
 		}
 	},
