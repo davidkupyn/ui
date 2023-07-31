@@ -11,7 +11,7 @@
 	export { className as class };
 
 	const { option, isSelected } = getSelectContext();
-	const { item } = menuStyles()
+	const { item } = menuStyles();
 </script>
 
 <li
@@ -25,6 +25,6 @@
 >
 	<slot />
 	{#if $isSelected(value)}
-	    <Check size=16 class="absolute left-2 top-1/2 -translate-y-1/2 text-accent"/>
+		<Check size="16" class="absolute left-2 top-1/2 -translate-y-1/2 text-accent" />
 	{/if}
 </li>

@@ -11,11 +11,13 @@
 	// export let required = false;
 	// export let placeholder = '';
 	// export let disabled = false;
-	export let value: {
-		label: string;
-		value: string;
-	} | undefined = undefined;
-	const items = writable([])
+	export let value:
+		| {
+				label: string;
+				value: string;
+		  }
+		| undefined = undefined;
+	const items = writable([]);
 	let className: string | undefined | null = undefined;
 	export { className as class };
 
@@ -30,7 +32,7 @@
 			},
 			filterFunction(item, input) {
 				return item.value.toLowerCase().includes(input.toLowerCase());
-			},
+			}
 		});
 
 	$: selectedItem.set(value);
@@ -38,7 +40,7 @@
 		value = v;
 		dispatch('change', v);
 	});
-	setContext('auto-complete', { open, input, menu, item, inputValue, isSelected, filteredItems,  });
+	setContext('auto-complete', { open, input, menu, item, inputValue, isSelected, filteredItems });
 </script>
 
 <div class="relative">
@@ -60,10 +62,7 @@
 >
 	<slot {Item}>
 		{#each $filteredItems as itemObj, idx (itemObj.value)}
-			<Item
-				index={idx}
-				value={itemObj.value}
-			>
+			<Item index={idx} value={itemObj.value}>
 				{itemObj.label}
 			</Item>
 		{/each}

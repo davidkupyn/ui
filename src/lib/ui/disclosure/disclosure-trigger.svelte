@@ -13,14 +13,18 @@
 <button
 	melt={$trigger}
 	class={cn(
-		!unstyled && buttonStyles({ variant: 'ghost', className: 'active:scale-100 w-full group data-[state=open]:text-foreground' }),
+		!unstyled &&
+			buttonStyles({
+				variant: 'ghost',
+				className: 'active:scale-100 w-full group data-[state=open]:text-foreground'
+			}),
 		className
 	)}
 >
 	<slot />
 	{#if arrow}
 		<ChevronRight
-			size=16
+			size="16"
 			class="h-4 w-4 ml-auto text-accent-fo transition-[transform] group-data-[state=open]:rotate-90 group-data-[state=open]:transform"
 		/>
 	{/if}

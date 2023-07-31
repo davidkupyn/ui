@@ -22,18 +22,20 @@
 	/** HTML attribute modified based on the active theme. Accepts `class` and `data-*` (meaning any data attribute, `data-mode`, `data-color`, etc.) */
 	export let attribute: string | 'class' = 'data-theme';
 	/** Mapping of theme name to HTML attribute value. Object where key is the theme name and value is the attribute value */
-	export let value: {
-		[themeName: string]: string;
-	} | undefined = undefined;
+	export let value:
+		| {
+				[themeName: string]: string;
+		  }
+		| undefined = undefined;
 
 	const initialTheme = getTheme(storageKey, defaultTheme);
-    themeStore.set({
-      theme: initialTheme,
-      forcedTheme,
-      resolvedTheme: initialTheme === 'system' ? getTheme(storageKey) : initialTheme,
-      themes: enableSystem ? [...themes, 'system'] : themes,
-      systemTheme: (enableSystem ? getTheme(storageKey) : undefined) as 'light' | 'dark' | undefined
-    });
+	themeStore.set({
+		theme: initialTheme,
+		forcedTheme,
+		resolvedTheme: initialTheme === 'system' ? getTheme(storageKey) : initialTheme,
+		themes: enableSystem ? [...themes, 'system'] : themes,
+		systemTheme: (enableSystem ? getTheme(storageKey) : undefined) as 'light' | 'dark' | undefined
+	});
 
 	$: theme = $themeStore.theme;
 	$: resolvedTheme = $themeStore.resolvedTheme;

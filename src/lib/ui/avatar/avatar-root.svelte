@@ -17,7 +17,13 @@
 	setContext('avatar', avatar);
 </script>
 
-<div class={cn('grid w-9 aspect-square place-content-center rounded-full bg-muted', squared ? 'rounded-xl' : 'rounded-full', className)}>
+<div
+	class={cn(
+		'grid w-9 aspect-square place-content-center rounded-full bg-muted',
+		squared ? 'rounded-xl' : 'rounded-full',
+		className
+	)}
+>
 	<img melt={$image} {alt} class="h-full w-full rounded-[inherit]" />
 	<slot {Fallback}>
 		<Fallback>

@@ -30,7 +30,7 @@
 						slot="card"
 						let:card
 						class={cn(
-							'[box-shadow:_inset_0_1px_2px_0px_hsl(0_0%_100%/0.2)] grid bg-background place-content-center transition ease-out rounded-2xl w-72 h-96',
+							'[box-shadow:_inset_0_1px_2px_0px_hsl(0_0%_100%/0.2)] grid bg-background place-content-center transition ease-out rounded-2xl w-72 h-96'
 						)}
 					>
 						{card.name}
@@ -41,10 +41,10 @@
 	</div>
 	<div class="mt-12 mb-4 flex gap-4 mx-auto">
 		<Button variant="secondary" size="icon" on:click={() => swipeNextCard('left')}>
-			<ArrowLeft size=20 />
+			<ArrowLeft size="20" />
 		</Button>
 		<Button variant="secondary" size="icon" on:click={() => swipeNextCard('right')}>
-			<ArrowRight size=20 />
+			<ArrowRight size="20" />
 		</Button>
 	</div>
 	<Button
@@ -62,12 +62,12 @@
 		{#each actions as action}
 			<span in:scale>
 				<Badge subtle variant={action.type === 'left' ? 'error' : 'success'}>
-				Card {action.id}
+					Card {action.id}
 				</Badge>
 			</span>
 		{:else}
 			<span in:scale class="mx-auto">
-				<Badge subtle variant='info'>No actions</Badge>
+				<Badge subtle variant="info">No actions</Badge>
 			</span>
 		{/each}
 	</div>

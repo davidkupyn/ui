@@ -23,15 +23,15 @@
 		};
 	}
 </script>
+
 {#key mounted}
 	<main
-		class="h-[100dvh] w-full bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-background dark:to-base-900/60 via-background to-primary/30"  
+		class="h-[100dvh] w-full bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-background dark:to-base-900/60 via-background to-primary/30"
 	>
-		<div class="noise"/>
 		<div class="p-6 flex flex-col justify-center items-center h-full gap-8">
 			<h1
 				in:fadeScale={{ duration: 400 }}
-				class="text-center font-serif antialiased pb-1.5 [text-wrap:balance] text-5xl md:text-7xl bg-clip-text text-transparent bg-gradient-to-t selection:text-base-900 dark:selection:text-base-100 from-base-950 via-base-800 to-base-400 dark:from-base-400 dark:via-base-100 tracking-tighter dark:to-base-50"
+				class="text-center font-display antialiased pb-1.5 [text-wrap:balance] text-5xl md:text-7xl bg-clip-text text-transparent bg-gradient-to-t selection:text-base-900 dark:selection:text-base-100 from-base-950 via-base-800 to-base-400 dark:from-base-400 dark:via-base-100 tracking-tighter dark:to-base-50"
 			>
 				Elegant. Functional.
 				<span
@@ -47,13 +47,9 @@
 				Craft modern, captivating interfaces effortlessly with easy-to-use UI components.
 			</p>
 			<span in:fadeScale={{ duration: 400 }} class="mt-4">
-				<Button
-					size='lg'
-					href="/preview"
-					class="hover:pr-7 group transition-all"
-				>
+				<Button size="lg" href="/preview" class="hover:pr-7 group transition-all">
 					Explore Components
-					<ArrowRight class="w-4 h-4 group-hover:ml-1 transition-[margin]" size=16 />
+					<ArrowRight class="w-4 h-4 group-hover:ml-1 transition-[margin]" size="16" />
 				</Button>
 			</span>
 		</div>
@@ -62,16 +58,17 @@
 
 <style>
 	@keyframes text {
-  0%, 100% {
-    background-size: 200% 200%;
-    background-position: left center;
-  }
-  50% {
-    background-size: 200% 200%;
-    background-position: right center;
-  }
-}
-.animate-text {
-  animation: text 6s ease infinite;
-}
+		0%,
+		100% {
+			background-size: 200% 200%;
+			background-position: left center;
+		}
+		50% {
+			background-size: 200% 200%;
+			background-position: right center;
+		}
+	}
+	.animate-text {
+		animation: text 6s ease infinite;
+	}
 </style>

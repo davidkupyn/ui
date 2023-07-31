@@ -1,5 +1,5 @@
 <script lang="ts">
-import {
+	import {
 		Search,
 		X,
 		Eye,
@@ -20,7 +20,7 @@ import {
 		UserCog2,
 		Volume2,
 		Volume1,
-		VolumeX,
+		VolumeX
 	} from 'lucide-svelte';
 	import Pagination from '$lib/ui/pagination.svelte';
 	import Switch from '$lib/ui/switch.svelte';
@@ -30,7 +30,7 @@ import {
 	import { Select } from '$lib/ui/select';
 	import Combobox from '$lib/ui/combobox.svelte';
 	import Calendar from '$lib/ui/calendar.svelte';
-	import { Modal  } from '$lib/ui/modal';
+	import { Modal } from '$lib/ui/modal';
 	import { Avatar } from '$lib/ui/avatar';
 	import { Accordion } from '$lib/ui/accordion';
 	import { Disclosure } from '$lib/ui/disclosure';
@@ -50,11 +50,11 @@ import {
 	import { page } from '$app/stores';
 
 	let showPassword = false;
-	let sliderOrientation: 'vertical' | 'horizontal' = 'horizontal'
+	let sliderOrientation: 'vertical' | 'horizontal' = 'horizontal';
 	const tabs = ['witalina', 'david', 'wiktor', 'gustaw'];
 	const PAGE_SIZE = 10;
 	$: currentPage = Number($page.url.searchParams.get('page') || '1');
-let buttonLoading = false;
+	let buttonLoading = false;
 	let items = Array.from({ length: 100 }, (_, i) => ({
 		id: crypto.randomUUID().slice(0, 16),
 		name: `Item ${i + 1}`,
@@ -84,17 +84,19 @@ let buttonLoading = false;
 				.replace(/^./, (str) => str.toUpperCase())
 		}))
 		.filter((header) => header.key !== 'id');
-let paginationPage = 3;
-let drawerSide: "right" | "top" | "bottom" | "left" = 'right'
-		let dialogOpen = false;
+	let paginationPage = 3;
+	let drawerSide: 'right' | 'top' | 'bottom' | 'left' = 'right';
+	let dialogOpen = false;
 </script>
 
 <main in:fade={{ duration: 200 }} class="py-8 w-full space-y-6 container mx-auto px-4 sm:px-6">
 	<div class="w-full max-w-[40rem] flex flex-col gap-6">
 		<label class="input-group group">
-			<Search size=16 class="icon-left" />
-			<input spellcheck="false" autocomplete="false" placeholder="Search..."/>
-			<Kbd class="group-focus-within:scale-75 max-sm:hidden transition group-focus-within:opacity-0 dark:bg-background dark:shadow-[0_1px_0_#ffffff1a]">
+			<Search size="16" class="icon-left" />
+			<input spellcheck="false" autocomplete="false" placeholder="Search..." />
+			<Kbd
+				class="group-focus-within:scale-75 max-sm:hidden transition group-focus-within:opacity-0 dark:bg-background dark:shadow-[0_1px_0_#ffffff1a]"
+			>
 				<Command size="12" />
 				K
 			</Kbd>
@@ -103,12 +105,10 @@ let drawerSide: "right" | "top" | "bottom" | "left" = 'right'
 			<span>
 				Normal Input <span class="text-muted-foreground text-xs">(optional)</span>
 			</span>
-			<input spellcheck="false" type='text' class="input" />
+			<input spellcheck="false" type="text" class="input" />
 		</label>
 		<label class="input-label w-full">
-			<span>
-				Password
-			</span>
+			<span> Password </span>
 			<fieldset class="input-group" disabled={false}>
 				<input spellcheck="false" type="password" placeholder="Password" />
 				<Button
@@ -122,14 +122,14 @@ let drawerSide: "right" | "top" | "bottom" | "left" = 'right'
 				>
 					{#if showPassword}
 						<span>
-							<Eye size=20 />
+							<Eye size="20" />
 						</span>
 					{:else}
 						<span>
-							<EyeOff size=20 />
+							<EyeOff size="20" />
 						</span>
 					{/if}
-					</Button>
+				</Button>
 			</fieldset>
 		</label>
 
@@ -161,50 +161,48 @@ let drawerSide: "right" | "top" | "bottom" | "left" = 'right'
 				<Title>Form example</Title>
 				<Description>Using custom and native select components</Description>
 			</Header>
-				<form
-					class="grid gap-4"
-				>
-					<label class="input-label w-full" for="select1">
-						Custom Select
-						<Select
-							let:Group
-							placeholder="Select an option"
-							id="select1"
-							name="custom"
-							bind:value={customSelectValue}
-							on:change={(e) => console.log(e.detail)}
-						>
-							<Group let:Option let:Label>
-								<Label>Class 3</Label>
-								<Option value="witalina">Witalina</Option>
-								<Option value="david">David</Option>
-								<Option value="wiktor">Wiktor</Option>
-								<Option value="gustaw">Gustaw</Option>
-							</Group>
-							<Group let:Option let:Label>
-								<Label>Class 1</Label>
-								<Option value="szymon">Szymon</Option>
-								<Option value="aleks">Aleks</Option>
-							</Group>
-						</Select>
-					</label>
-					<label class="input-label w-full" for="select2">
-						Native Select
-						<select class="input" id="select2" name="native" value="david">
-							<optgroup label="Class 3">
-								<option value="witalina">Witalina</option>
-								<option value="david">David</option>
-								<option value="wiktor">Wiktor</option>
-								<option value="gustaw">Gustaw</option>
-							</optgroup>
-							<optgroup label="Class 1">
-								<option value="szymon">Szymon</option>
-								<option value="aleks">Aleks</option>
-							</optgroup>
-						</select>
-					</label>
-					<Button class="mt-4">Submit</Button>
-				</form>
+			<form class="grid gap-4">
+				<label class="input-label w-full" for="select1">
+					Custom Select
+					<Select
+						let:Group
+						placeholder="Select an option"
+						id="select1"
+						name="custom"
+						bind:value={customSelectValue}
+						on:change={(e) => console.log(e.detail)}
+					>
+						<Group let:Option let:Label>
+							<Label>Class 3</Label>
+							<Option value="witalina">Witalina</Option>
+							<Option value="david">David</Option>
+							<Option value="wiktor">Wiktor</Option>
+							<Option value="gustaw">Gustaw</Option>
+						</Group>
+						<Group let:Option let:Label>
+							<Label>Class 1</Label>
+							<Option value="szymon">Szymon</Option>
+							<Option value="aleks">Aleks</Option>
+						</Group>
+					</Select>
+				</label>
+				<label class="input-label w-full" for="select2">
+					Native Select
+					<select class="input" id="select2" name="native" value="david">
+						<optgroup label="Class 3">
+							<option value="witalina">Witalina</option>
+							<option value="david">David</option>
+							<option value="wiktor">Wiktor</option>
+							<option value="gustaw">Gustaw</option>
+						</optgroup>
+						<optgroup label="Class 1">
+							<option value="szymon">Szymon</option>
+							<option value="aleks">Aleks</option>
+						</optgroup>
+					</select>
+				</label>
+				<Button class="mt-4">Submit</Button>
+			</form>
 		</Card>
 
 		<label class="input-label w-full">
@@ -213,7 +211,7 @@ let drawerSide: "right" | "top" | "bottom" | "left" = 'right'
 		</label>
 		<Popover let:Trigger let:Content>
 			<Trigger class="input-group w-full">
-				<CalendarIcon size=16 class="icon-left" />
+				<CalendarIcon size="16" class="icon-left" />
 				{#if calendarValue}
 					{new Date(calendarValue).toLocaleDateString('en', {
 						year: 'numeric',
@@ -231,49 +229,45 @@ let drawerSide: "right" | "top" | "bottom" | "left" = 'right'
 
 		<div class="flex flex-wrap gap-2 w-full">
 			<Button>
-				<Stars size=16 />
+				<Stars size="16" />
 				Primary
 			</Button>
 			<Button variant="outline">
-				<BookTemplate size=16 />
+				<BookTemplate size="16" />
 				Outline
 			</Button>
-			<Button variant="accent"> Accent </Button>
+			<Button variant="accent">Accent</Button>
 			<Button variant="secondary">
-				<Flower2 size=16 />
+				<Flower2 size="16" />
 				Secondary
 			</Button>
-			<Button variant="error"> Error </Button>
-			<Button variant="success"> Success </Button>
-			<Button variant="warning"> Warning </Button>
-			<Button variant="info"> Info </Button>
-			<Button variant="ghost"> Ghost </Button>
+			<Button variant="error">Error</Button>
+			<Button variant="success">Success</Button>
+			<Button variant="warning">Warning</Button>
+			<Button variant="info">Info</Button>
+			<Button variant="ghost">Ghost</Button>
 			<Button variant="link">Link</Button>
-			<Button size='icon' variant="ghost">
-				<RefreshCw size=16 class="group-active:rotate-45 -rotate-[30deg] transition-transform" />
+			<Button size="icon" variant="ghost">
+				<RefreshCw size="16" class="group-active:rotate-45 -rotate-[30deg] transition-transform" />
 			</Button>
-			<Button variant="text">
-				Text
-			</Button>
+			<Button variant="text">Text</Button>
 
-			<Button disabled={buttonLoading} loading={buttonLoading} on:click={
-				() => {
+			<Button
+				disabled={buttonLoading}
+				loading={buttonLoading}
+				on:click={() => {
 					buttonLoading = true;
 					setTimeout(() => {
 						buttonLoading = false;
 					}, 2500);
-				}
-			}>
+				}}
+			>
 				Submit
 			</Button>
-
 		</div>
 
 		<Tabs let:List let:Content value={tabs[1]} on:change={(e) => console.log(e.detail)}>
-			<List
-			disabled={[tabs[3]]}
-				{tabs}
-			/>
+			<List disabled={[tabs[3]]} {tabs} />
 			{#each tabs as tab (tab)}
 				<Content value={tab} class="capitalize">
 					{tab} content
@@ -281,7 +275,7 @@ let drawerSide: "right" | "top" | "bottom" | "left" = 'right'
 			{/each}
 		</Tabs>
 		<Separator />
-	
+
 		<div class="flex flex-wrap gap-4">
 			<Badge>Default</Badge>
 			<Badge variant="outline">Outline</Badge>
@@ -302,12 +296,16 @@ let drawerSide: "right" | "top" | "bottom" | "left" = 'right'
 		</div>
 	</div>
 	<RadioGroup let:Radio bind:value={sliderOrientation}>
-		<Radio value='horizontal' />
-		<Radio value='vertical' />
+		<Radio value="horizontal" />
+		<Radio value="vertical" />
 	</RadioGroup>
-	<Slider bind:value={sliderValue} class={sliderOrientation === 'horizontal' ? 'max-w-md' : "h-32"} orientation={sliderOrientation}>
+	<Slider
+		bind:value={sliderValue}
+		class={sliderOrientation === 'horizontal' ? 'max-w-md' : 'h-32'}
+		orientation={sliderOrientation}
+	>
 		{#if sliderValue >= 50}
-		 <Volume2 class="h-5 w-5 sm:h-4 sm:w-4" />
+			<Volume2 class="h-5 w-5 sm:h-4 sm:w-4" />
 		{:else if sliderValue < 50 && sliderValue > 0}
 			<Volume1 class="h-5 w-5 sm:h-4 sm:w-4" />
 		{:else}
@@ -315,38 +313,47 @@ let drawerSide: "right" | "top" | "bottom" | "left" = 'right'
 		{/if}
 	</Slider>
 	<Disclosure let:Trigger let:Content class="max-w-md" unstyled let:open>
-			<Progress bind:value={sliderValue} variant="accent"/>
+		<Progress bind:value={sliderValue} variant="accent" />
 
-		<Trigger class={cn(buttonStyles({variant: 'text'}),"flex gap-2 mx-auto mt-4")}>
+		<Trigger class={cn(buttonStyles({ variant: 'text' }), 'flex gap-2 mx-auto mt-4')}>
 			{#if open}
-				<span class="w-32" in:scale={{start: 0.95}}>Hide extra variants</span>
+				<span class="w-32" in:scale={{ start: 0.95 }}>Hide extra variants</span>
 			{:else}
-				<span class="w-32" in:scale={{start: 0.95}}>Show more variants</span>
+				<span class="w-32" in:scale={{ start: 0.95 }}>Show more variants</span>
 			{/if}
 		</Trigger>
 		<Content class="space-y-6 mt-4">
 			<Progress bind:value={sliderValue} />
-			<Progress bind:value={sliderValue} variant="success"/>
-			<Progress bind:value={sliderValue} variant="error"/>
-			<Progress bind:value={sliderValue} variant="warning"/>
-			<Progress bind:value={sliderValue} variant="info"/>
+			<Progress bind:value={sliderValue} variant="success" />
+			<Progress bind:value={sliderValue} variant="error" />
+			<Progress bind:value={sliderValue} variant="warning" />
+			<Progress bind:value={sliderValue} variant="info" />
 		</Content>
 	</Disclosure>
-	
-	<RadioGroup let:Radio value='3'>
-		<Radio value="1" class="bg-background focus-within:ring-1 transition data-[state=checked]:ring-accent focus-within:ring-accent rounded-2xl ring-1 ring-foreground/10 shadow p-4 max-w-sm gap-4">
+
+	<RadioGroup let:Radio value="3">
+		<Radio
+			value="1"
+			class="bg-background focus-within:ring-1 transition data-[state=checked]:ring-accent focus-within:ring-accent rounded-2xl ring-1 ring-foreground/10 shadow p-4 max-w-sm gap-4"
+		>
 			<span class="flex flex-col gap-1.5">
 				<span class="font-medium">Startup</span>
 				<span class="text-muted-foreground text-sm">12GB/6 CPUs · 160 GB SSD disk</span>
 			</span>
 		</Radio>
-		<Radio value="2" class="focus-within:ring-1 transition data-[state=checked]:ring-accent focus-within:ring-accent rounded-2xl bg-background ring-1 ring-foreground/10 shadow p-4 max-w-sm gap-4">
+		<Radio
+			value="2"
+			class="focus-within:ring-1 transition data-[state=checked]:ring-accent focus-within:ring-accent rounded-2xl bg-background ring-1 ring-foreground/10 shadow p-4 max-w-sm gap-4"
+		>
 			<span class="flex flex-col gap-1.5">
 				<span class="font-medium">Business</span>
 				<span class="text-muted-foreground text-sm">16GB/8 CPUs · 512 GB SSD disk</span>
 			</span>
 		</Radio>
-		<Radio value="3" class="focus-within:ring-1 transition data-[state=checked]:ring-accent focus-within:ring-accent rounded-2xl bg-background ring-1 ring-foreground/10 shadow p-4 max-w-sm gap-4">
+		<Radio
+			value="3"
+			class="focus-within:ring-1 transition data-[state=checked]:ring-accent focus-within:ring-accent rounded-2xl bg-background ring-1 ring-foreground/10 shadow p-4 max-w-sm gap-4"
+		>
 			<span class="flex flex-col gap-1.5">
 				<span class="font-medium">Enterprise</span>
 				<span class="text-muted-foreground text-sm">32GB/12 CPUs · 1024 GB SSD disk</span>
@@ -369,7 +376,7 @@ let drawerSide: "right" | "top" | "bottom" | "left" = 'right'
 					let:Fallback
 				>
 					<Fallback>
-						<Bot size=16 />
+						<Bot size="16" />
 					</Fallback>
 				</Avatar>
 			</Trigger>
@@ -377,11 +384,8 @@ let drawerSide: "right" | "top" | "bottom" | "left" = 'right'
 		</HoverCard>
 	</div>
 	<Card class="max-w-md p-4">
-		<Accordion
-			let:Item
-			value="smth"
-		>
-			<Item value='smth2' let:Trigger let:Content>
+		<Accordion let:Item value="smth">
+			<Item value="smth2" let:Trigger let:Content>
 				<Trigger>Why copy/paste and not a package?</Trigger>
 				<Content>
 					<p>
@@ -397,16 +401,17 @@ let drawerSide: "right" | "top" | "bottom" | "left" = 'right'
 					</p>
 				</Content>
 			</Item>
-			<Item value='smth' let:Trigger let:Content>
+			<Item value="smth" let:Trigger let:Content>
 				<Trigger>
-					<Stars size=16 />
+					<Stars size="16" />
 					Why Essence?
 				</Trigger>
 				<Content>
 					<p>
-						We wanted to create a set of components that are easy to use, customizable and accessible.
+						We wanted to create a set of components that are easy to use, customizable and
+						accessible.
 						<br />
-	
+
 						<br />
 						The word "essence" suggests something fundamental or core. Our library aims to provide essential
 						or foundational UI elements, so you can focus on other parts of your app, where you can express
@@ -414,57 +419,55 @@ let drawerSide: "right" | "top" | "bottom" | "left" = 'right'
 					</p>
 				</Content>
 			</Item>
-			<Item summary="What about updates?" details="Yes, we will be updating the components regularly. We will also be adding new components."/>
+			<Item
+				summary="What about updates?"
+				details="Yes, we will be updating the components regularly. We will also be adding new components."
+			/>
 		</Accordion>
 	</Card>
 	<Modal let:trigger let:Content bind:open={dialogOpen}>
 		<Button melt={trigger}>
-			<AppWindow size=16 />
+			<AppWindow size="16" />
 			Open Modal
 		</Button>
 		<Content let:Header let:Footer let:close class="sm:max-w-[425px]">
 			<Header let:Title let:Description>
 				<Title>
-					<UserCog2 slot='icon' size=20/>
-					Edit Profile</Title>
+					<UserCog2 slot="icon" size="20" />
+					Edit Profile</Title
+				>
 				<Description>Make changes to your profile here. Click save when you're done.</Description>
 			</Header>
 			<form class="grid gap-2">
 				<label class="input-label w-full">
 					Username
-					<input class="input" type='text' placeholder="Dave Kupyn" />
+					<input class="input" type="text" placeholder="Dave Kupyn" />
 				</label>
 				<label class="input-label w-full">
 					Email
-					<input class="input" type='text' placeholder="dkupyn@gmail.com" />
+					<input class="input" type="text" placeholder="dkupyn@gmail.com" />
 				</label>
 				<Footer class="mt-6">
-					<Button 
-						melt={close}
-						type="button"
-						variant='outline'
-						>
-						Cancel
-					</Button>
+					<Button melt={close} type="button" variant="outline">Cancel</Button>
 					<Button type="submit">Confirm</Button>
 				</Footer>
 			</form>
 		</Content>
 	</Modal>
 
-		<label class="input-label w-full max-w-xs" for='this'>
-						Choose drawer's side
-	<Select let:Option bind:value={drawerSide} placeholder="Select drawer's side">
-		<Option value='left'>Left</Option>
-		<Option value='right'>Right</Option>
-		<Option value='top'>Top</Option>
-		<Option value='bottom'>Bottom</Option>
-	</Select>
+	<label class="input-label w-full max-w-xs" for="this">
+		Choose drawer's side
+		<Select let:Option bind:value={drawerSide} placeholder="Select drawer's side">
+			<Option value="left">Left</Option>
+			<Option value="right">Right</Option>
+			<Option value="top">Top</Option>
+			<Option value="bottom">Bottom</Option>
+		</Select>
 	</label>
 
 	<Modal let:trigger let:Content drawer side={drawerSide}>
 		<Button melt={trigger}>
-			<AppWindow size=16 />
+			<AppWindow size="16" />
 			Open Drawer
 		</Button>
 		<Content let:Header let:Footer let:close>
@@ -472,26 +475,24 @@ let drawerSide: "right" | "top" | "bottom" | "left" = 'right'
 				<Title>Edit Profile</Title>
 				<Description>Make changes to your profile here. Click save when you're done.</Description>
 			</Header>
-			<form class={cn(
-				"flex",
-				(drawerSide === 'left' || drawerSide === 'right') ? 'max-w-md flex-col gap-2 items-end' : 'gap-2 sm:gap-6 h-64 flex-wrap items-start'
-			)}>
+			<form
+				class={cn(
+					'flex',
+					drawerSide === 'left' || drawerSide === 'right'
+						? 'max-w-md flex-col gap-2 items-end'
+						: 'gap-2 sm:gap-6 h-64 flex-wrap items-start'
+				)}
+			>
 				<label class="input-label w-full max-w-md">
 					Username
-					<input class="input" type='text' placeholder="Dave Kupyn" />
+					<input class="input" type="text" placeholder="Dave Kupyn" />
 				</label>
 				<label class="input-label w-full max-w-md">
 					Email
-					<input class="input" type='text' placeholder="dkupyn@gmail.com" />
+					<input class="input" type="text" placeholder="dkupyn@gmail.com" />
 				</label>
 				<Footer class="mt-6 max-w-md sm:w-fit">
-					<Button 
-						melt={close}
-						type="button"
-						variant='outline'
-						>
-						Cancel
-					</Button>
+					<Button melt={close} type="button" variant="outline">Cancel</Button>
 					<Button type="submit">Confirm</Button>
 				</Footer>
 			</form>
@@ -515,7 +516,7 @@ let drawerSide: "right" | "top" | "bottom" | "left" = 'right'
 				<Menu slot="actions" let:row placement="bottom-end">
 					<svelte:fragment let:trigger let:Content>
 						<Button melt={trigger} variant="ghost" size="icon">
-							<MoreHorizontal size=16 />
+							<MoreHorizontal size="16" />
 						</Button>
 						<Content let:Item class="w-40">
 							<Item
@@ -523,28 +524,28 @@ let drawerSide: "right" | "top" | "bottom" | "left" = 'right'
 									console.log('edit');
 								}}
 							>
-								<Edit size=16 />
+								<Edit size="16" />
 								Edit
 								<Kbd slot="after">E</Kbd>
 							</Item>
-								<Item
-									danger
-									on:select={() => {
-										items = items.filter((item) => item.id !== row.id);
-										selected = selected.filter((id) => id !== row.id);
-									}}
-								>
-									<Trash2 size=16 />
-									Delete
-									<Kbd slot="after">D</Kbd>
-								</Item>
+							<Item
+								danger
+								on:select={() => {
+									items = items.filter((item) => item.id !== row.id);
+									selected = selected.filter((id) => id !== row.id);
+								}}
+							>
+								<Trash2 size="16" />
+								Delete
+								<Kbd slot="after">D</Kbd>
+							</Item>
 						</Content>
 					</svelte:fragment>
 				</Menu>
 				<svelte:fragment slot="row-header" let:header>
 					{#if header.key === 'createdAt'}
 						<span class="flex items-center gap-2 w-28">
-							<CalendarIcon size=16 />
+							<CalendarIcon size="16" />
 							{header.value}
 						</span>
 					{:else}
@@ -555,7 +556,7 @@ let drawerSide: "right" | "top" | "bottom" | "left" = 'right'
 					{#if cell.key === 'description'}
 						<Disclosure let:Trigger let:Content>
 							<Trigger class="group-data-[selected=true]/row:hover:bg-accent-500/20 -my-1">
-								<Hash size=16 />
+								<Hash size="16" />
 								<span class="max-w-sm truncate max-sm:text-base">
 									{cell.value}
 								</span>
@@ -568,11 +569,15 @@ let drawerSide: "right" | "top" | "bottom" | "left" = 'right'
 						</Disclosure>
 					{:else if cell.key === 'price'}
 						<span class="flex justify-end items-center w-16">
-							<DollarSign class="text-muted-foreground" size=16 />
+							<DollarSign class="text-muted-foreground" size="16" />
 							{cell.value}
 						</span>
 					{:else if cell.key === 'status'}
-						<Badge subtle variant={cell.value === 'inactive' ? 'error' : 'success'} class="capitalize">
+						<Badge
+							subtle
+							variant={cell.value === 'inactive' ? 'error' : 'success'}
+							class="capitalize"
+						>
 							{cell.value}
 						</Badge>
 					{:else if cell.key === 'createdAt'}
@@ -596,40 +601,46 @@ let drawerSide: "right" | "top" | "bottom" | "left" = 'right'
 					</span>
 					<div class="flex gap-4">
 						<Modal let:trigger let:Content class="sm:max-w-[425px]" alert type="error">
-							<Button melt={trigger} variant="ghost" size="icon" aria-label="Delete items" class="h-8 w-8">
-								<Trash2 size=16 />
+							<Button
+								melt={trigger}
+								variant="ghost"
+								size="icon"
+								aria-label="Delete items"
+								class="h-8 w-8"
+							>
+								<Trash2 size="16" />
 							</Button>
 							<Content let:Header let:Footer let:close class="sm:w-96">
 								<Header let:Title let:Description>
-									<Title>Delete {selected.length === 1 ? "this item" : "these items"}?</Title>
+									<Title>Delete {selected.length === 1 ? 'this item' : 'these items'}?</Title>
 									<Description>You cannot undo this action.</Description>
 								</Header>
 								<Footer>
-									<Button 
-										melt={close}
-										type="button"
-										variant='outline'
-										>
-										Cancel
-									</Button>
-									<Button type="submit" variant='error' 
+									<Button melt={close} type="button" variant="outline">Cancel</Button>
+									<Button
+										type="submit"
+										variant="error"
 										on:click={() => {
 											items = items.filter((item) => !selected.includes(item.id));
 											selected = [];
-										}}
-									>Delete</Button>
+										}}>Delete</Button
+									>
 								</Footer>
 							</Content>
 						</Modal>
-						<Button variant="ghost" size="icon" aria-label="Discard selection" class="h-8 w-8"
+						<Button
+							variant="ghost"
+							size="icon"
+							aria-label="Discard selection"
+							class="h-8 w-8"
 							on:click={() => (selected = [])}
 						>
-							<X size=16 />
+							<X size="16" />
 						</Button>
 					</div>
 				</div>
 			{/if}
 		</div>
-			<Pagination {totalPages} bind:page={paginationPage}/>
+		<Pagination {totalPages} bind:page={paginationPage} />
 	</div>
 </main>

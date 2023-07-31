@@ -7,17 +7,11 @@
 
 	const { subMenu } = getSubMenuContext();
 	let className: string | undefined | null = undefined;
-  const { content } = menuStyles();
+	const { content } = menuStyles();
 
 	export { className as class };
 </script>
 
-	<div
-		class={cn(
-			content(),
-			className
-		)}
-		melt={$subMenu}
-	>
-			<slot {Separator} {RadioGroup} {Label}/>
-	</div>
+<div class={cn(content(), className)} melt={$subMenu}>
+	<slot {Separator} {RadioGroup} {Label} />
+</div>

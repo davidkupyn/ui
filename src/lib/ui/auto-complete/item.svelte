@@ -12,11 +12,14 @@
 
 	const { item: autoCompleteItem, isSelected, items } = getAutoCompleteContext();
 	onMount(() => {
-		$items = [...$items, {
-			value,
-			label: document?.getElementById(value)?.textContent || value,
-		}]
-	})
+		$items = [
+			...$items,
+			{
+				value,
+				label: document?.getElementById(value)?.textContent || value
+			}
+		];
+	});
 </script>
 
 <li

@@ -3,7 +3,7 @@
 	import { menuStyles } from '.';
 
 	let className: string | undefined | null = undefined;
-  const { itemLabel } = menuStyles();
+	const { itemLabel } = menuStyles();
 
 	export { className as class };
 </script>

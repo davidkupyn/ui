@@ -46,11 +46,11 @@
 			<Button size="icon" variant="ghost" on:click={() => (expanded = !expanded)} class="ml-auto">
 				{#if expanded}
 					<span in:scale>
-						<SidebarClose size=20 />
+						<SidebarClose size="20" />
 					</span>
 				{:else}
 					<span in:scale>
-						<SidebarOpen size=20 />
+						<SidebarOpen size="20" />
 					</span>
 				{/if}
 			</Button>
@@ -66,12 +66,7 @@
 							on:click={() => (current = item.label)}
 							aria-pressed={currentLink}
 							aria-label={item.label}
-							class={cn(
-								"relative transition", 
-								expanded
-								? 'w-44 transition-[width]'
-								: 'w-9'
-							)}
+							class={cn('relative transition', expanded ? 'w-44 transition-[width]' : 'w-9')}
 						>
 							<span
 								class="absolute text-sm inset-0 flex {expanded

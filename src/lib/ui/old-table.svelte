@@ -127,7 +127,7 @@
 								use:tippy={{ content: `Sort by ${column.key.toString()}`, delay: 300 }}
 							>
 								<ChevronUp
-									size=16
+									size="16"
 									class={cn(
 										'ease-out group-focus-visible/button:opacity-100 transition-all group-hover:opacity-100 -m-0.5',
 										sortingByCurrentColumn && $sortDir === 'desc'
@@ -136,7 +136,7 @@
 									)}
 								/>
 								<ChevronDown
-									size=16
+									size="16"
 									class={cn(
 										'ease-out group-focus-visible/button:opacity-100 transition-all group-hover:opacity-100 -m-0.5',
 										sortingByCurrentColumn && $sortDir === 'asc'
@@ -152,20 +152,20 @@
 					{#if columnsEditable}
 						<Menu let:Trigger let:Content placement="bottom-end">
 							<Trigger variant="ghost" size="icon">
-								<Settings2 size=16 />
+								<Settings2 size="16" />
 							</Trigger>
 							<Content let:Separator let:Item class="w-48" let:Label>
 								<Label>Columns</Label>
 								<Separator />
 								{#each tablesColumns as column (column.key)}
 									<Item
-									checkbox
+										checkbox
 										class="justify-between capitalize"
 										on:select={(e) => {
 											e.detail.preventDefault();
 										}}
 									>
-											{column.value}
+										{column.value}
 										<!-- <Switch
 											id={column.key.toString()}
 											bind:group={currentTableColumns}
@@ -175,7 +175,6 @@
 												currentTableColumns.length === 1}
 										/> -->
 									</Item>
-									
 								{/each}
 							</Content>
 						</Menu>

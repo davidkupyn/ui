@@ -17,7 +17,7 @@
 	export let value: unknown = undefined;
 	export let loop = false;
 	export let preventScroll = true;
-	
+
 	let className: string | undefined | null = undefined;
 	export { className as class };
 	const {
@@ -37,7 +37,7 @@
 		disabled,
 		required,
 		loop,
-		preventScroll,
+		preventScroll
 	});
 
 	$: valueStore.set(value);
@@ -47,6 +47,7 @@
 	});
 	setContext('select', { option, isSelected, group, groupLabel });
 </script>
+
 <button
 	melt={$trigger}
 	{disabled}
@@ -60,16 +61,12 @@
 		<span class="text-muted-foreground">{placeholder}</span>
 	{/if}
 	<span class="icon-right" aria-pressed={$open}>
-		<ChevronsUpDown size=16 />
+		<ChevronsUpDown size="16" />
 	</span>
 </button>
 <input melt={$input} {id} />
 {#if $open}
-	<ul
-		transition:fly={{ duration: 150, y: -10 }}
-		melt={$menu}
-		class={menuStyles().content()}
-	>
+	<ul transition:fly={{ duration: 150, y: -10 }} melt={$menu} class={menuStyles().content()}>
 		<slot {Option} {Group} />
 	</ul>
 {/if}

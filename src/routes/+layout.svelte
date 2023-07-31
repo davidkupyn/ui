@@ -18,12 +18,11 @@
 	/>
 	<meta name="author" content="David Kupyn" />
 </svelte:head>
-<ThemeProvider attribute="class" disableTransitionOnChange storageKey="essense-theme"/>
+<ThemeProvider attribute="class" disableTransitionOnChange storageKey="essense-theme" />
 <header
 	class={cn(
 		'w-full z-20',
-		$page.url.pathname === '/'
-			&& 'fixed',
+		$page.url.pathname === '/' && 'fixed',
 		$page.url.pathname === '/sidebar' && 'hidden'
 	)}
 >
@@ -32,7 +31,7 @@
 			<a
 				href="/"
 				aria-label="Go to home page"
-				class="font-bold -ml-2 p-2 focus-visible:ring-2 font-serif focus-visible:outline-none rounded-xl transition ring-offset-base-50 dark:ring-offset-base-950 focus-visible:ring-primary-600"
+				class="font-bold -ml-2 p-2 focus-visible:ring-2 font-display focus-visible:outline-none rounded-xl transition ring-offset-base-50 dark:ring-offset-base-950 focus-visible:ring-primary-600"
 			>
 				Essence
 			</a>
@@ -47,34 +46,30 @@
 						href="https://github.com/davidkupyn/ui"
 						target="_blank"
 					>
-						<Github size=16 />
+						<Github size="16" />
 					</Button>
 				</li>
-					<li>
-						<Menu let:Trigger let:Content>
-							<Trigger 
-								aria-label="Theme picker"
-								variant="ghost"
-								size="icon"
-							>
-									{#if $themeStore.theme === 'dark'}
-										<Moon size=16 />
-									{:else if $themeStore.theme === 'light'}
-										<Sun size=16 />
-									{:else}
-										<Monitor size=16 />
-									{/if}
-							</Trigger>
-							<Content let:RadioGroup>
-								<RadioGroup let:Radio bind:value={$themeStore.theme}>
-									<Radio value='dark'>Dark</Radio>
-									<Radio value='light'>Light</Radio>
-									<Radio value='system'>System</Radio>
-								</RadioGroup>
-							</Content>
-						</Menu>
+				<li>
+					<Menu let:Trigger let:Content>
+						<Trigger aria-label="Theme picker" variant="ghost" size="icon">
+							{#if $themeStore.theme === 'dark'}
+								<Moon size="16" />
+							{:else if $themeStore.theme === 'light'}
+								<Sun size="16" />
+							{:else}
+								<Monitor size="16" />
+							{/if}
+						</Trigger>
+						<Content let:RadioGroup>
+							<RadioGroup let:Radio bind:value={$themeStore.theme}>
+								<Radio value="dark">Dark</Radio>
+								<Radio value="light">Light</Radio>
+								<Radio value="system">System</Radio>
+							</RadioGroup>
+						</Content>
+					</Menu>
 				</li>
-				<Separator orientation="vertical" class='h-6'/>
+				<Separator orientation="vertical" class="h-6" />
 				<li>
 					<Button
 						href="/preview"
@@ -105,25 +100,21 @@
 			>
 		</span>
 		{#if $page.url.pathname !== '/'}
-			<Menu let:Trigger let:Content placement='bottom-end'>
-				<Trigger 
-					aria-label="Theme picker"
-					variant="ghost"
-					size="icon"
-				>
-						{#if $themeStore.theme === 'dark'}
-							<Moon size=16 />
-						{:else if $themeStore.theme === 'light'}
-							<Sun size=16 />
-						{:else}
-							<Monitor size=16 />
-						{/if}
+			<Menu let:Trigger let:Content placement="bottom-end">
+				<Trigger aria-label="Theme picker" variant="ghost" size="icon">
+					{#if $themeStore.theme === 'dark'}
+						<Moon size="16" />
+					{:else if $themeStore.theme === 'light'}
+						<Sun size="16" />
+					{:else}
+						<Monitor size="16" />
+					{/if}
 				</Trigger>
 				<Content let:RadioGroup>
 					<RadioGroup let:Radio bind:value={$themeStore.theme}>
-						<Radio value='dark'>Dark</Radio>
-						<Radio value='light'>Light</Radio>
-						<Radio value='system'>System</Radio>
+						<Radio value="dark">Dark</Radio>
+						<Radio value="light">Light</Radio>
+						<Radio value="system">System</Radio>
 					</RadioGroup>
 				</Content>
 			</Menu>

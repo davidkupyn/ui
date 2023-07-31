@@ -9,7 +9,7 @@
 	export let disabled = false;
 	export let details: string | undefined = undefined;
 	export let summary: string | undefined = undefined;
-	
+
 	const itemOptions = {
 		value,
 		disabled
@@ -28,7 +28,7 @@
 			<slot name="summary">{summary}</slot>
 		</Trigger>
 		<Content>
-			<slot name="details">{details}</slot>	
+			<slot name="details">{details}</slot>
 		</Content>
 	</slot>
 </div>

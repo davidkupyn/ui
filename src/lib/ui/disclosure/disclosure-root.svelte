@@ -17,14 +17,14 @@
 	export let details: string | undefined = undefined;
 	export let summary: string | undefined = undefined;
 	export { className as class };
-	setContext('disclosure', {unstyled, ...disclosure});
+	setContext('disclosure', { unstyled, ...disclosure });
 	const dispatch = createEventDispatcher();
 
-	 $: openStore.set(open)
-  openStore.subscribe((v) => {
+	$: openStore.set(open);
+	openStore.subscribe((v) => {
 		open = v;
 		dispatch('change', v);
-	})
+	});
 </script>
 
 <div class={cn('group', className)} melt={$root}>
@@ -33,7 +33,7 @@
 			<slot name="summary">{summary}</slot>
 		</Trigger>
 		<Content>
-			<slot name="details">{details}</slot>	
+			<slot name="details">{details}</slot>
 		</Content>
 	</slot>
 </div>

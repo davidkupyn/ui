@@ -11,19 +11,12 @@
 
 	const { menu, open } = getMenuContext();
 	let className: string | undefined | null = undefined;
-  const { content } = menuStyles();
+	const { content } = menuStyles();
 	export { className as class };
 </script>
 
 {#if $open}
-	<div
-		out:fade={{ duration: 150 }}
-		class={cn(
-			content(),
-			className
-		)}
-		melt={$menu}
-	>
-		<slot {Item} {Submenu} {Label} {Separator} {RadioGroup}/>
+	<div out:fade={{ duration: 150 }} class={cn(content(), className)} melt={$menu}>
+		<slot {Item} {Submenu} {Label} {Separator} {RadioGroup} />
 	</div>
 {/if}

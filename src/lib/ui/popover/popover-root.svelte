@@ -30,15 +30,15 @@
 	setContext('popover', popover);
 	const dispatch = createEventDispatcher();
 
-	$: openStore.set(open)
+	$: openStore.set(open);
 
-  openStore.subscribe((v) => {
-    open = v;
+	openStore.subscribe((v) => {
+		open = v;
 		dispatch('change', v);
 		if (v) dispatch('open');
 		else dispatch('close');
-	})
-	export { trigger }
+	});
+	export { trigger };
 </script>
 
 <slot {Trigger} {Content} close={$close} trigger={$trigger} {open}>

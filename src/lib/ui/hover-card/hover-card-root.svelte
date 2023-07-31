@@ -27,7 +27,7 @@
 		defaultOpen: open,
 		closeOnOutsideClick,
 		positioning: {
-			placement: placement,
+			placement: placement
 		},
 		openDelay: delayIn,
 		closeDelay: delayOut
@@ -36,14 +36,14 @@
 	const { trigger, open: openStore } = hoverCard;
 	$: openStore.set(open);
 	openStore.subscribe((v) => {
-    open = v;
+		open = v;
 		dispatch('change', v);
 		if (v) dispatch('open');
 		else dispatch('close');
-	})
+	});
 	setContext('hover-card', hoverCard);
-	
-	export { trigger }
+
+	export { trigger };
 </script>
 
 <slot {Trigger} {Content} trigger={$trigger}>

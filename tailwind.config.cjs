@@ -76,7 +76,7 @@ const config = {
 			},
 			fontFamily: {
 				sans: ['Figtree', ...defaultTheme.fontFamily.sans],
-				serif: ['Gilda Display', ...defaultTheme.fontFamily.serif]
+				display: ['Louize', ...defaultTheme.fontFamily.serif]
 			}
 		}
 	},

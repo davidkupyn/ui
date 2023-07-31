@@ -5,10 +5,13 @@
 	export let orientation: CreateSeparatorProps['orientation'] = 'horizontal';
 
 	const { root } = createSeparator({
-		orientation,
+		orientation
 	});
-  let className: string | undefined | null = undefined;
-  export { className as class };
+	let className: string | undefined | null = undefined;
+	export { className as class };
 </script>
 
-<div melt={$root} class={cn("h-px w-full bg-border", orientation === 'vertical' && 'h-full w-px', className)} />
+<div
+	melt={$root}
+	class={cn('h-px w-full bg-border', orientation === 'vertical' && 'h-full w-px', className)}
+/>

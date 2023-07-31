@@ -22,17 +22,11 @@
 			{...$prevButtonAttrs}
 			aria-label="Previous month"
 		>
-			<ChevronLeft size=20 />
+			<ChevronLeft size="20" />
 		</Button>
 		<div class="flex-grow text-center font-semibold">{$title}</div>
-		<Button
-			variant="ghost"
-			size="icon"
-			type="button"
-			{...$nextButtonAttrs}
-			aria-label="Next month"
-		>
-			<ChevronRight size=20 />
+		<Button variant="ghost" size="icon" type="button" {...$nextButtonAttrs} aria-label="Next month">
+			<ChevronRight size="20" />
 		</Button>
 	</div>
 	<div>

@@ -17,28 +17,28 @@
 	// if (!value) {
 	// 	openGuard = true;
 	// 	$position = { x: 0, y: 500 };
- 	// 								setTimeout(() => {
+	// 								setTimeout(() => {
 	// 									openGuard = false;
- 	// 									$position = { x: 0, y: 0 };
- 	// 								}, 100);
+	// 									$position = { x: 0, y: 0 };
+	// 								}, 100);
 	// }
 	// openGuard = value;
 	// });
 	// let axis: 'x' |'y' | 'none' = 'none'
 	// $: axis = $drawer ? ($side === 'left' || $side === 'right' ? 'x' : 'y') : 'none';
 	//  use:draggable={{
- 	// 					position: $position,
- 	// 					bounds: {
- 	// 						top: 400,
- 	// 						bottom: $side === 'bottom' ? -2000 : 400,
+	// 					position: $position,
+	// 					bounds: {
+	// 						top: 400,
+	// 						bottom: $side === 'bottom' ? -2000 : 400,
 	// 						left: $side === 'left' ? 400 : -2000,
 	// 						right: $side === 'right' ? -2000 : 400,
- 	// 					},
- 	// 					axis: axis,
- 	// 					onDrag: (data) => {
- 	// 						$position = { x: data.offsetX, y: data.offsetY };
- 	// 					},
- 	// 					onDragEnd: () => {
+	// 					},
+	// 					axis: axis,
+	// 					onDrag: (data) => {
+	// 						$position = { x: data.offsetX, y: data.offsetY };
+	// 					},
+	// 					onDragEnd: () => {
 	// 						let isOutOfBounds = false;
 	// 						if ($side === 'bottom') {
 	// 							if ($position.y > 10000) {
@@ -59,27 +59,28 @@
 	// 							}
 	// 						}
 
- 	// 						if (isOutOfBounds) {
- 	// 								if ($side === 'bottom') {
- 	// 									$position = { x: 0, y: -800 };
- 	// 								} else if ($side === 'left') {
- 	// 									$position = { x: -800, y: 0 };
- 	// 								} else if ($side === 'right') {
- 	// 									$position = { x: 800, y: 0 };
- 	// 								} else {
- 	// 									$position = { x: 0, y: 800 };
- 	// 								}
- 	// 								setTimeout(() => {
+	// 						if (isOutOfBounds) {
+	// 								if ($side === 'bottom') {
+	// 									$position = { x: 0, y: -800 };
+	// 								} else if ($side === 'left') {
+	// 									$position = { x: -800, y: 0 };
+	// 								} else if ($side === 'right') {
+	// 									$position = { x: 800, y: 0 };
+	// 								} else {
+	// 									$position = { x: 0, y: 800 };
+	// 								}
+	// 								setTimeout(() => {
 	// 									console.log('hgrer')
- 	// 									openGuard = false;
- 	// 									$position = { x: 0, y: 0 };
- 	// 								}, 100);
- 	// 						} else {
- 	// 							$position = { x: 0, y: 0 };
- 	// 						}
- 	// 					},
- 	// 				}}
+	// 									openGuard = false;
+	// 									$position = { x: 0, y: 0 };
+	// 								}, 100);
+	// 						} else {
+	// 							$position = { x: 0, y: 0 };
+	// 						}
+	// 					},
+	// 				}}
 </script>
+
 <div use:portal>
 	{#if $open}
 		<div class={modal({ drawer: $drawer, side: $side }).container()}>
@@ -88,25 +89,24 @@
 				transition:fade={{ duration: 150 }}
 				class="fixed z-50 backdrop-blur-sm inset-0 bg-base-950/30 dark:bg-base-950/75"
 			/>
-				<div
-					transition:css={{
-						duration: '--modal-duration',
-						y: '--modal-y',
-						x: '--modal-x',
-						scale: '--modal-scale',
-						opacity: '--modal-opacity',
-					}}
-					class={cn(modal({ drawer: $drawer, side: $side }).base(), className)}
-					melt={$content}
-					>
-					<slot {Header} {Footer} close={$close} />
-					<!-- {#if crossButton && !alert}
+			<div
+				transition:css={{
+					duration: '--modal-duration',
+					y: '--modal-y',
+					x: '--modal-x',
+					scale: '--modal-scale',
+					opacity: '--modal-opacity'
+				}}
+				class={cn(modal({ drawer: $drawer, side: $side }).base(), className)}
+				melt={$content}
+			>
+				<slot {Header} {Footer} close={$close} />
+				<!-- {#if crossButton && !alert}
 						<Button variant="ghost" size="icon" melt={$close} class="absolute right-3 top-3 h-8 w-8">
 							<X size=16 />
 						</Button>
 					{/if} -->
-				</div>
-
 			</div>
+		</div>
 	{/if}
 </div>

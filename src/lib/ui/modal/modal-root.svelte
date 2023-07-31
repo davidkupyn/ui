@@ -41,16 +41,16 @@
 	let sideStore = writable<'left' | 'right' | 'top' | 'bottom'>(side);
 	let isDrawerStore = writable<boolean>(drawer);
 	$: sideStore.set(side || 'right');
-	$: isDrawerStore.set(drawer)
+	$: isDrawerStore.set(drawer);
 	type $$Props = BaseDialogProps & (AlertDialogProps | DrawerProps | DialogProps);
-  const dispatch = createEventDispatcher();
+	const dispatch = createEventDispatcher();
 
 	const dialog = createDialog({
 		role: alert ? 'alertdialog' : 'dialog',
 		closeOnOutsideClick,
-		preventScroll,
+		preventScroll
 	});
- const { open: openStore, close, trigger} = dialog;
+	const { open: openStore, close, trigger } = dialog;
 	setContext('dialog', {
 		...dialog,
 		alert,
@@ -60,14 +60,14 @@
 		crossButton
 	});
 
-	$: openStore.set(open)
-  openStore.subscribe((v) => {
-    open = v;
+	$: openStore.set(open);
+	openStore.subscribe((v) => {
+		open = v;
 		dispatch('change', v);
 		if (v) dispatch('open');
 		else dispatch('close');
-	})
-	export { trigger, close }
+	});
+	export { trigger, close };
 </script>
 
-<slot {Trigger} {Content} close={$close} trigger={$trigger} {open}/>
+<slot {Trigger} {Content} close={$close} trigger={$trigger} {open} />
