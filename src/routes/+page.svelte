@@ -25,9 +25,9 @@
 </script>
 
 <div class="h-[100dvh] overflow-auto w-screen flex max-sm:items-end">
-	<Illustration class="md:scale-150 scale-110 max-sm:ml-24" />
+	<Illustration class="md:scale-150 scale-110 max-sm:ml-24 blur-[48px]" />
 	{#key mounted}
-		<main class="absolute inset-0 z-10 bg-background/50 backdrop-blur-3xl">
+		<main class="absolute inset-0 z-10 bg-background/50">
 			<div class="p-6 flex flex-col justify-center items-center h-full gap-8">
 				<h1
 					in:fadeScale={{ duration: 400 }}
@@ -35,7 +35,7 @@
 				>
 					Elegant. Functional.
 					<span
-						class="font-display animate-text bg-clip-text text-transparent bg-gradient-to-r from-accent-400 to-accent selection:text-accent-focus dark:selection:text-accent-focus"
+						class="animate-text bg-clip-text text-transparent bg-gradient-to-r from-accent-400 to-accent selection:text-accent-focus dark:selection:text-accent-focus"
 					>
 						Essence.
 					</span>
