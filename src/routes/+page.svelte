@@ -25,9 +25,9 @@
 </script>
 
 <div class="h-[100dvh] overflow-auto w-screen flex max-sm:items-end">
-	<Illustration class="md:scale-150 scale-110 max-sm:ml-24 blur-[48px]" />
+	<Illustration class="scale-[1.75] sm:scale-150 ml-24 sm:-mt-24 sm:-ml-20 w-fit h-fit" />
 	{#key mounted}
-		<main class="absolute inset-0 z-10 bg-background/50">
+		<main class="absolute inset-0 z-10 bg-background/50 backdrop-blur-xl">
 			<div class="p-6 flex flex-col justify-center items-center h-full gap-8">
 				<h1
 					in:fadeScale={{ duration: 400 }}
