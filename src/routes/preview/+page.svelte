@@ -333,7 +333,7 @@
 	<RadioGroup let:Radio value="3">
 		<Radio
 			value="1"
-			class="bg-background focus-within:ring-1 transition data-[state=checked]:ring-accent focus-within:ring-accent rounded-2xl ring-1 ring-foreground/10 shadow p-4 max-w-sm gap-4"
+			class="bg-background focus-within:ring-1 transition data-[state=checked]:ring-accent focus-within:ring-accent rounded-2xl ring-1 ring-foreground/5 shadow p-4 max-w-sm gap-4"
 		>
 			<span class="flex flex-col gap-1.5">
 				<span class="font-medium">Startup</span>
@@ -342,7 +342,7 @@
 		</Radio>
 		<Radio
 			value="2"
-			class="focus-within:ring-1 transition data-[state=checked]:ring-accent focus-within:ring-accent rounded-2xl bg-background ring-1 ring-foreground/10 shadow p-4 max-w-sm gap-4"
+			class="focus-within:ring-1 transition data-[state=checked]:ring-accent focus-within:ring-accent rounded-2xl bg-background ring-1 ring-foreground/5 shadow p-4 max-w-sm gap-4"
 		>
 			<span class="flex flex-col gap-1.5">
 				<span class="font-medium">Business</span>
@@ -351,7 +351,7 @@
 		</Radio>
 		<Radio
 			value="3"
-			class="focus-within:ring-1 transition data-[state=checked]:ring-accent focus-within:ring-accent rounded-2xl bg-background ring-1 ring-foreground/10 shadow p-4 max-w-sm gap-4"
+			class="focus-within:ring-1 transition data-[state=checked]:ring-accent focus-within:ring-accent rounded-2xl bg-background ring-1 ring-foreground/5 shadow p-4 max-w-sm gap-4"
 		>
 			<span class="flex flex-col gap-1.5">
 				<span class="font-medium">Enterprise</span>
