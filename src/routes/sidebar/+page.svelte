@@ -26,9 +26,9 @@
 	let current = 'Home';
 </script>
 
-<div class="flex bg-muted dark:bg-background">
+<div class="flex bg-base-950 max-sm:flex-col">
 	<div
-		class="h-screen transition-all px-[1.375rem] w-20 flex flex-col gap-8 py-12 data-[expanded=true]:w-56"
+		class="h-screen transition-all px-[1.375rem] w-20 flex flex-col gap-8 py-12 data-[expanded=true]:w-56 dark"
 		data-expanded={expanded}
 	>
 		<div class="flex items-center gap-4">
@@ -38,7 +38,7 @@
 					href="/"
 					on:click|stopPropagation
 					aria-label="Go to home page"
-					class="text-center w-fit font-bold whitespace-nowrap p-2 h-9 focus-visible:ring-2 focus-visible:outline-none rounded-xl transition ring-offset-background focus-visible:ring-muted-foreground"
+					class="text-center w-fit font-bold text-foreground whitespace-nowrap p-2 h-9 focus-visible:ring-2 focus-visible:outline-none rounded-xl transition ring-offset-background focus-visible:ring-muted-foreground"
 				>
 					Essence</a
 				>
@@ -100,5 +100,7 @@
 			</ul>
 		</nav>
 	</div>
-	<main class="h-[calc(100vh-1rem)] w-full m-2 ml-0 bg-background dark:bg-muted rounded-xl" />
+	<main
+		class="h-[calc(100vh-1rem)] w-full m-2 ml-0 p-4 bg-background dark:bg-muted rounded-3xl dark:shadow-[0_-1px_0_#ffffff2a]"
+	/>
 </div>
