@@ -31,7 +31,7 @@
 			<div class="p-6 flex flex-col justify-center items-center h-full gap-8">
 				<h1
 					in:fadeScale={{ duration: 400 }}
-					class="text-center font-display antialiasded pb-1.5 [text-wrap:balance] text-5xl md:text-7xl bg-clip-text text-transparent bg-gradient-to-t selection:text-base-900 dark:selection:text-base-100 from-base-950 via-base-800 to-base-400 dark:from-base-400 dark:via-base-100 tracking-tighter dark:to-base-50"
+					class="text-center font-display antialiased pb-1.5 [text-wrap:balance] text-5xl md:text-7xl bg-clip-text text-transparent bg-gradient-to-t selection:text-base-900 dark:selection:text-base-100 from-base-950 via-base-800 to-base-400 dark:from-base-400 dark:via-base-100 tracking-tighter dark:to-base-50"
 				>
 					Elegant. Functional.
 					<span
