@@ -5,6 +5,7 @@
 	import Home from '$lib/icons/home.svelte';
 	import Button from '$lib/ui/button.svelte';
 	import { cn } from '$lib/helpers/style';
+	import Logo from '../logo.svelte';
 
 	let expanded = false;
 
@@ -38,10 +39,11 @@
 					href="/"
 					on:click|stopPropagation
 					aria-label="Go to home page"
-					class="text-center w-fit font-bold text-foreground whitespace-nowrap p-2 h-9 focus-visible:ring-2 focus-visible:outline-none rounded-xl transition ring-offset-background focus-visible:ring-muted-foreground"
+					class="text-center flex items-center gap-2 w-fit font-bold text-foreground whitespace-nowrap -ml-1 p-2 h-9 focus-visible:ring-2 focus-visible:outline-none rounded-xl transition ring-offset-background focus-visible:ring-muted-foreground"
 				>
-					Essence</a
-				>
+					<Logo class="text-accent" size="32" />
+					Essence
+				</a>
 			{/if}
 			<Button size="icon" variant="ghost" on:click={() => (expanded = !expanded)} class="ml-auto">
 				{#if expanded}
