@@ -122,8 +122,8 @@
 				class="w-16 input"
 				bind:value={desirablePage}
 			/>
-			<Button variant="ghost" class="group hover:pr-3.5 transition-all">
-				Go <ChevronRight class="group-hover:ml-0.5 transition-[margin] h-4 w-4" size="16" />
+			<Button variant="ghost">
+				Go <ChevronRight class="group-hover:translate-x-1 transition h-4 w-4" size="16" />
 			</Button>
 		</form>
 	{/if}

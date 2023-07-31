@@ -4,7 +4,7 @@
 	import { fade } from 'svelte/transition';
 	import { onMount } from 'svelte';
 	import Button from '$lib/ui/button.svelte';
-
+	import Illustration from './illustration.svelte';
 	let mounted = false;
 	onMount(() => (mounted = true));
 	function fadeScale(node: Element, { delay = 0, duration = 200, baseScale = 0.9 }) {
@@ -24,37 +24,38 @@
 	}
 </script>
 
-{#key mounted}
-	<main
-		class="h-[100dvh] w-full bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-background dark:to-base-900/60 via-background to-primary/30"
-	>
-		<div class="p-6 flex flex-col justify-center items-center h-full gap-8">
-			<h1
-				in:fadeScale={{ duration: 400 }}
-				class="text-center font-display antialiased pb-1.5 [text-wrap:balance] text-5xl md:text-7xl bg-clip-text text-transparent bg-gradient-to-t selection:text-base-900 dark:selection:text-base-100 from-base-950 via-base-800 to-base-400 dark:from-base-400 dark:via-base-100 tracking-tighter dark:to-base-50"
-			>
-				Elegant. Functional.
-				<span
-					class="animate-text bg-clip-text text-transparent bg-gradient-to-r from-accent-400 to-accent selection:text-accent-focus dark:selection:text-accent-focus"
+<div class="h-[100dvh] overflow-auto w-screen flex max-sm:items-end">
+	<Illustration class="md:scale-150 scale-110 max-sm:ml-24" />
+	{#key mounted}
+		<main class="absolute inset-0 z-10 bg-background/50 backdrop-blur-3xl">
+			<div class="p-6 flex flex-col justify-center items-center h-full gap-8">
+				<h1
+					in:fadeScale={{ duration: 400 }}
+					class="text-center font-display antialiasded pb-1.5 [text-wrap:balance] text-5xl md:text-7xl bg-clip-text text-transparent bg-gradient-to-t selection:text-base-900 dark:selection:text-base-100 from-base-950 via-base-800 to-base-400 dark:from-base-400 dark:via-base-100 tracking-tighter dark:to-base-50"
 				>
-					Essence.
+					Elegant. Functional.
+					<span
+						class="font-display animate-text bg-clip-text text-transparent bg-gradient-to-r from-accent-400 to-accent selection:text-accent-focus dark:selection:text-accent-focus"
+					>
+						Essence.
+					</span>
+				</h1>
+				<p
+					in:fade={{ duration: 400 }}
+					class="text-center [text-wrap:balance] bg-clip-text max-w-prose text-transparent bg-gradient-to-t from-base-700 to-base-500 dark:from-base-400 dark:to-base-50 md:text-lg"
+				>
+					Craft modern, captivating interfaces effortlessly with easy-to-use UI components.
+				</p>
+				<span in:fadeScale={{ duration: 400 }} class="mt-4">
+					<Button size="lg" href="/preview">
+						Explore Components
+						<ArrowRight class="w-4 h-4 group-hover:translate-x-1 transition" size="16" />
+					</Button>
 				</span>
-			</h1>
-			<p
-				in:fade={{ duration: 400 }}
-				class="text-center [text-wrap:balance] bg-clip-text max-w-prose text-transparent bg-gradient-to-t from-base-700 to-base-500 dark:from-base-400 dark:to-base-50 md:text-lg"
-			>
-				Craft modern, captivating interfaces effortlessly with easy-to-use UI components.
-			</p>
-			<span in:fadeScale={{ duration: 400 }} class="mt-4">
-				<Button size="lg" href="/preview" class="hover:pr-7 group transition-all">
-					Explore Components
-					<ArrowRight class="w-4 h-4 group-hover:ml-1 transition-[margin]" size="16" />
-				</Button>
-			</span>
-		</div>
-	</main>
-{/key}
+			</div>
+		</main>
+	{/key}
+</div>
 
 <style>
 	@keyframes text {

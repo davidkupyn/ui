@@ -113,7 +113,7 @@
 		use:action={actionProps}
 	>
 		{#if loading}
-			<span class=" inset-0 grid place-content-center absolute">
+			<span class="inset-0 grid place-content-center absolute">
 				<Loader2 class="animate-spin" size="16" />
 			</span>
 			<span
