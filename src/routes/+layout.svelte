@@ -86,10 +86,11 @@
 <slot />
 
 <footer
-	class="bottom-0 border-muted w-full z-20"
-	class:border-t={$page.url.pathname !== '/'}
-	class:hidden={$page.url.pathname === '/sidebar'}
-	class:fixed={$page.url.pathname === '/'}
+	class={cn(
+		'bottom-0 border-muted w-full z-20',
+		$page.url.pathname === '/' && 'fixed border-none',
+		$page.url.pathname === '/sidebar' ? 'hidden' : 'border-t'
+	)}
 >
 	<div class="container mx-auto flex justify-between items-center px-6 py-6">
 		<span class="mx-auto">
