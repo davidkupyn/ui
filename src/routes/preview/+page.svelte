@@ -23,7 +23,6 @@
 		VolumeX
 	} from 'lucide-svelte';
 	import Pagination from '$lib/ui/pagination.svelte';
-	import Switch from '$lib/ui/switch.svelte';
 	import Table from '$lib/ui/old-table.svelte';
 	import { fade, fly, scale } from 'svelte/transition';
 	import { cubicOut } from 'svelte/easing';
@@ -592,7 +591,7 @@
 			{#if selected.length > 0}
 				<div
 					transition:fly={{ y: 150, duration: 200, easing: cubicOut }}
-					class="drop-shadow-sm z-20 flex h-full w-full items-center justify-between rounded-xl bg-base-50/80 border dark:bg-base-950/80 border-muted backdrop-blur-md shadow-xl dark:shadow-base-950 p-2 px-4"
+					class="z-20 flex h-full w-full items-center justify-between rounded-xl bg-base-50/80 border dark:bg-base-950/80 border-muted backdrop-blur-md shadow-xl p-2 px-4"
 				>
 					<span class="text-sm">
 						Selected

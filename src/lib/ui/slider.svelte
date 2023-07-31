@@ -91,7 +91,7 @@
 <span
 	melt={$slider}
 	class={cn(
-		'group relative flex touch-none select-none items-center overflow-hidden data-[orientation=vertical]:flex-col',
+		'group relative flex touch-none [&:has(:focus-visible)]:ring-2 [&:has(:focus-visible)]:ring-offset-2 rounded-xl transition ring-offset-background [&:has(:focus-visible)]:ring-primary select-none items-center overflow-hidden data-[orientation=vertical]:flex-col',
 		orientation === 'vertical' ? 'h-full min-h-[4rem] w-fit' : 'w-full',
 		className
 	)}
@@ -112,10 +112,14 @@
 	</span>
 	<span
 		class={cn(
-			'absolute mix-blend-exclusion pointer-events-none text-background dark:text-inherit',
+			'absolute pointer-events-none text-background',
 			orientation === 'vertical' ? 'bottom-2 ' : 'left-4'
-		)}><slot>{label ?? ''}</slot></span
+		)}
 	>
+		<slot>
+			{label ?? ''}
+		</slot>
+	</span>
 	<input type="hidden" {value} {name} {disabled} />
 	{#each { length: $valueStore.length } as _, idx}
 		<span

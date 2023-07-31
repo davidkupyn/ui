@@ -75,8 +75,8 @@ const config = {
 				}
 			},
 			fontFamily: {
-				sans: ['Figtree', ...defaultTheme.fontFamily.sans],
-				display: ['Louize', ...defaultTheme.fontFamily.serif]
+				sans: ['Figtree', ...defaultTheme.fontFamily.sans]
+				// display: ['Figtree', ...defaultTheme.fontFamily.sans]
 			}
 		}
 	},

@@ -5,39 +5,39 @@
 </script>
 
 <svg
-	width="530"
-	height="576"
-	viewBox="0 0 530 576"
+	width="879"
+	height="960"
+	viewBox="0 0 879 960"
 	fill="none"
 	xmlns="http://www.w3.org/2000/svg"
 	xmlns:xlink="http://www.w3.org/1999/xlink"
 	class={className}
 >
 	<g filter="url(#filter0_f_424_68)">
-		<rect x="96" y="96" width="337.472" height="384" fill="url(#pattern0)" />
+		<rect x="144" y="144" width="590.575" height="672" fill="url(#pattern0)" />
 		<mask
 			id="mask0_424_68"
 			style="mask-type:alpha"
 			maskUnits="userSpaceOnUse"
-			x="96"
-			y="96"
-			width="338"
-			height="384"
+			x="144"
+			y="144"
+			width="591"
+			height="672"
 		>
-			<rect x="96" y="96" width="337.472" height="384" fill="url(#pattern1)" />
+			<rect x="144" y="144" width="590.575" height="672" fill="url(#pattern1)" />
 		</mask>
 		<g mask="url(#mask0_424_68)">
 			<rect
-				x="29.4376"
-				y="38.3125"
-				width="470.596"
-				height="470.596"
-				rx="235.298"
+				x="27.5157"
+				y="43.0469"
+				width="823.544"
+				height="823.544"
+				rx="411.772"
 				fill="url(#paint0_linear_424_68)"
 			/>
 		</g>
 		<g style="mix-blend-mode:screen">
-			<rect x="96" y="96" width="337.472" height="384" fill="url(#pattern2)" />
+			<rect x="144" y="144" width="590.575" height="672" fill="url(#pattern2)" />
 		</g>
 	</g>
 	<defs>
@@ -45,14 +45,14 @@
 			id="filter0_f_424_68"
 			x="0"
 			y="0"
-			width="529.472"
-			height="576"
+			width="878.575"
+			height="960"
 			filterUnits="userSpaceOnUse"
 			color-interpolation-filters="sRGB"
 		>
 			<feFlood flood-opacity="0" result="BackgroundImageFix" />
 			<feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape" />
-			<feGaussianBlur stdDeviation="48" result="effect1_foregroundBlur_424_68" />
+			<feGaussianBlur stdDeviation="72" result="effect1_foregroundBlur_424_68" />
 		</filter>
 		<pattern id="pattern0" patternContentUnits="objectBoundingBox" width="1" height="1">
 			<use xlink:href="#image0_424_68" transform="scale(0.00166113 0.00145985)" />
@@ -65,14 +65,14 @@
 		</pattern>
 		<linearGradient
 			id="paint0_linear_424_68"
-			x1="66.3523"
-			y1="109.486"
-			x2="479.452"
-			y2="392.388"
+			x1="92.1165"
+			y1="167.601"
+			x2="815.041"
+			y2="662.68"
 			gradientUnits="userSpaceOnUse"
 		>
-			<stop stop-color="var(--color-accent-focus)" />
-			<stop offset="1" stop-color="var(--color-accent)" />
+			<stop stop-color="var(--color-accent-focus" />
+			<stop offset="1" stop-color="var(--color-accent" />
 		</linearGradient>
 		<image
 			id="image0_424_68"

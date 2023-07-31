@@ -25,13 +25,13 @@
 </script>
 
 <div class="h-[100dvh] overflow-auto w-screen flex max-sm:items-end">
-	<Illustration class="scale-[1.75] sm:scale-150 ml-24 sm:-mt-24 sm:-ml-20 w-fit h-fit" />
+	<!-- <Illustration class="ml-24 sm:-mt-64 sm:-ml-64 w-fit h-fit" /> -->
 	{#key mounted}
-		<main class="absolute inset-0 z-10 bg-background/50 backdrop-blur-xl">
-			<div class="p-6 flex flex-col justify-center items-center h-full gap-8">
+		<main class="absolute inset-0 z-10 bg-background/50 grid place-content-center">
+			<div class="p-6 flex flex-col justify-center items-center gap-8">
 				<h1
 					in:fadeScale={{ duration: 400 }}
-					class="text-center font-display antialiased pb-1.5 [text-wrap:balance] text-5xl md:text-7xl bg-clip-text text-transparent bg-gradient-to-t selection:text-base-900 dark:selection:text-base-100 from-base-950 via-base-800 to-base-600 md:to-base-500 dark:from-base-400 dark:via-base-100 tracking-tighter dark:to-base-50"
+					class="text-center font-display antialiased pb-1.5 [text-wrap:balance] text-5xl md:text-7xl bg-clip-text transition-all duration-1000 text-transparent bg-gradient-to-t selection:text-base-900 dark:selection:text-base-100 from-base-950 via-base-800 to-base-600 md:to-base-500 dark:from-base-400 dark:via-base-100 tracking-tighter dark:to-base-50"
 				>
 					Elegant. Functional.
 					<span
@@ -42,7 +42,7 @@
 				</h1>
 				<p
 					in:fade={{ duration: 400 }}
-					class="text-center [text-wrap:balance] bg-clip-text max-w-prose text-transparent bg-gradient-to-t from-base-700 to-base-500 dark:from-base-400 dark:to-base-50 md:text-lg"
+					class="text-center [text-wrap:balance] bg-clip-text max-w-prose text-transparent transition-all delay-500 duration-1000 bg-gradient-to-t from-base-700 to-base-500 dark:from-base-400 dark:to-base-50 md:text-lg"
 				>
 					Craft modern, captivating interfaces effortlessly with easy-to-use UI components.
 				</p>

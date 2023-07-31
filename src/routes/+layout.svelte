@@ -8,6 +8,7 @@
 	import { themeStore } from '$lib/theme-switcher';
 	import Button from '$lib/ui/button.svelte';
 	import Separator from '$lib/ui/separator.svelte';
+	import Logo from './logo.svelte';
 </script>
 
 <svelte:head>
@@ -27,15 +28,14 @@
 	)}
 >
 	<div class="container mx-auto flex justify-between items-center px-6 h-12">
-		<h2 class="flex items-center gap-2">
-			<a
-				href="/"
-				aria-label="Go to home page"
-				class="font-bold -ml-2 p-2 focus-visible:ring-2 focus-visible:outline-none rounded-xl transition ring-offset-base-50 dark:ring-offset-base-950 focus-visible:ring-primary-600"
-			>
-				Essence
-			</a>
-		</h2>
+		<a
+			href="/"
+			aria-label="Go to home page"
+			class="font-bold flex items-center gap-2 -ml-2 p-1 focus-visible:ring-2 focus-visible:outline-none rounded-xl transition ring-offset-base-50 dark:ring-offset-base-950 focus-visible:ring-primary-600"
+		>
+			<Logo class="text-accent" size="32" />
+			Essence
+		</a>
 		<nav>
 			<ul class="inline-flex gap-3 sm:gap-5 items-center -mr-4">
 				<li>
