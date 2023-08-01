@@ -47,6 +47,7 @@
 	import { Card } from '$lib/ui/card';
 	import { cn } from '$lib/helpers/style';
 	import { page } from '$app/stores';
+	import Switch from '$lib/ui/switch.svelte';
 
 	let showPassword = false;
 	let sliderOrientation: 'vertical' | 'horizontal' = 'horizontal';
@@ -294,6 +295,10 @@
 			<Badge subtle variant="info">Info</Badge>
 		</div>
 	</div>
+	<label class="input-label flex-row items-center" for="switch">
+		<Switch id="switch" />
+		Toggle Switch
+	</label>
 	<RadioGroup let:Radio bind:value={sliderOrientation}>
 		<Radio value="horizontal" />
 		<Radio value="vertical" />
