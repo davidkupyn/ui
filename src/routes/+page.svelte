@@ -49,7 +49,7 @@
 				<span in:fadeScale={{ duration: 400 }} class="mt-4">
 					<Button size="lg" href="/preview">
 						Explore Components
-						<ArrowRight class="w-4 h-4 group-hover:translate-x-1 transition" size="16" />
+						<ArrowRight class="group-hover:translate-x-1 transition" size="16" />
 					</Button>
 				</span>
 			</div>

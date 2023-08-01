@@ -123,7 +123,7 @@
 				bind:value={desirablePage}
 			/>
 			<Button variant="ghost">
-				Go <ChevronRight class="group-hover:translate-x-1 transition h-4 w-4" size="16" />
+				Go <ChevronRight class="group-hover:translate-x-1 transition" size="16" />
 			</Button>
 		</form>
 	{/if}
