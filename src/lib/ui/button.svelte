@@ -6,20 +6,20 @@
 		variants: {
 			variant: {
 				default:
-					'bg-primary hover:bg-primary-focus text-primary-foreground focus-visible:ring-primary-focus shadow-[inset_0_1px_0_#ffffff4d,0_4px_6px_-1px_rgb(0_0_0_/_0.1),_0_2px_4px_-2px_rgb(0_0_0_/_0.1)] dark:shadow-[inset_0_-1px_0_#0000004d]',
+					'bg-gradient-to-b from-primary-focus to-primary dark:from-primary dark:to-primary-focus hover:brightness-125 dark:hover:brightness-90 text-primary-foreground focus-visible:ring-primary-focus shadow-[inset_0_1px_0_#ffffff4d,0_4px_6px_-1px_rgb(0_0_0_/_0.1),_0_2px_4px_-2px_rgb(0_0_0_/_0.1)] dark:shadow-[inset_0_-1px_0_#0000004d]',
 				outline:
 					'shadow dark:shadow-black ring-1 ring-base-950/5 focus-visible:border-border border border-transparent dark:border-border text-foreground hover:bg-border focus-visible:ring-border',
 				secondary:
 					'bg-base-200/90 hover:bg-muted dark:bg-base-900/70 dark:hover:bg-muted focus-visible:ring-border shadow-[inset_0_1px_0_#ffffff0f]',
 				error:
-					'[text-shadow:_0_1px_0_rgb(0_0_0_/_20%)] bg-error hover:bg-error-focus text-error-foreground focus-visible:ring-error-focus shadow-[inset_0_1px_0_#ffffff4d,0_4px_6px_-1px_rgb(0_0_0_/_0.1),_0_2px_4px_-2px_rgb(0_0_0_/_0.1)]',
+					'[text-shadow:_0_1px_0_rgb(0_0_0_/_20%)] hover:brightness-95 dark:hover:brightness-90 bg-gradient-to-b from-error to-error-focus text-error-foreground focus-visible:ring-error-focus shadow-[inset_0_1px_0_#ffffff4d,0_4px_6px_-1px_rgb(0_0_0_/_0.1),_0_2px_4px_-2px_rgb(0_0_0_/_0.1)]',
 				accent:
-					'[text-shadow:_0_1px_0_rgb(0_0_0_/_20%)] bg-accent hover:bg-accent-focus text-accent-foreground focus-visible:ring-accent-focus shadow-[inset_0_1px_0_#ffffff4d,0_4px_6px_-1px_rgb(0_0_0_/_0.1),_0_2px_4px_-2px_rgb(0_0_0_/_0.1)]',
+					'[text-shadow:_0_1px_0_rgb(0_0_0_/_20%)] hover:brightness-95 dark:hover:brightness-90 bg-gradient-to-b from-accent to-accent-focus text-accent-foreground focus-visible:ring-accent-focus shadow-[inset_0_1px_0_#ffffff4d,0_4px_6px_-1px_rgb(0_0_0_/_0.1),_0_2px_4px_-2px_rgb(0_0_0_/_0.1)]',
 				success:
-					'bg-success hover:bg-success-focus text-success-foreground focus-visible:ring-success-focus shadow-[inset_0_1px_0_#ffffff4d,0_4px_6px_-1px_rgb(0_0_0_/_0.1),_0_2px_4px_-2px_rgb(0_0_0_/_0.1)]',
+					'hover:brightness-95 dark:hover:brightness-90 bg-gradient-to-b from-success-focus to-success text-success-foreground focus-visible:ring-success-focus shadow-[inset_0_1px_0_#ffffff4d,0_4px_6px_-1px_rgb(0_0_0_/_0.1),_0_2px_4px_-2px_rgb(0_0_0_/_0.1)]',
 				warning:
-					'bg-warning hover:bg-warning-focus text-warning-foreground focus-visible:ring-warning-focus shadow-[inset_0_1px_0_#ffffff4d,0_4px_6px_-1px_rgb(0_0_0_/_0.1),_0_2px_4px_-2px_rgb(0_0_0_/_0.1)]',
-				info: '[text-shadow:_0_1px_0_rgb(0_0_0_/_20%)] bg-info hover:bg-info-focus text-info-foreground focus-visible:ring-info-focus shadow-[inset_0_1px_0_#ffffff4d,0_4px_6px_-1px_rgb(0_0_0_/_0.1),_0_2px_4px_-2px_rgb(0_0_0_/_0.1)]',
+					'hover:brightness-95 dark:hover:brightness-90 bg-gradient-to-b from-warning-focus to-warning text-warning-foreground focus-visible:ring-warning-focus shadow-[inset_0_1px_0_#ffffff4d,0_4px_6px_-1px_rgb(0_0_0_/_0.1),_0_2px_4px_-2px_rgb(0_0_0_/_0.1)]',
+				info: '[text-shadow:_0_1px_0_rgb(0_0_0_/_20%)] hover:brightness-95 dark:hover:brightness-90 bg-gradient-to-b from-info to-info-focus text-info-foreground focus-visible:ring-info-focus shadow-[inset_0_1px_0_#ffffff4d,0_4px_6px_-1px_rgb(0_0_0_/_0.1),_0_2px_4px_-2px_rgb(0_0_0_/_0.1)]',
 				ghost:
 					'hover:bg-base-300/50 dark:hover:bg-base-800/50 text-muted-foreground focus-visible:text-foreground dark:focus-visible:text-base-300 hover:text-foreground aria-pressed:text-foreground focus-visible:ring-border hover:shadow-[inset_0_1px_0_#ffffff0f] data-[state=open]:bg-muted data-[state=open]:text-foreground data-[state=open]:shadow-[inset_0_1px_0_#ffffff0f]',
 				text: 'text-muted-foreground focus-visible:text-foreground hover:text-foreground aria-pressed:text-foreground data-[selected]:text-foreground data-[state=active]:text-foreground aria-pressed:underline underline-offset-4 data-[state=active]:underline focus-visible:ring-offset-0 focus-visible:ring-border',
