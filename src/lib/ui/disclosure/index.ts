@@ -1,11 +1,19 @@
-import type { createCollapsible } from '@melt-ui/svelte';
-import { getContext } from 'svelte';
-
 export { default as Disclosure } from './disclosure-root.svelte';
 
-export const getDisclosureContext = () =>
-	getContext<
-		ReturnType<typeof createCollapsible> & {
-			unstyled: boolean;
-		}
-	>('disclosure');
+import { createCollapsible, type Collapsible, type CreateCollapsibleProps } from '@melt-ui/svelte';
+import { getContext, setContext } from 'svelte';
+
+const NAME = 'disclosure';
+
+type AdditionalProps = {
+	unstyled?: boolean;
+};
+
+export const ctx = {
+	set: (props: CreateCollapsibleProps & AdditionalProps) => {
+		const disclosure = createCollapsible(props);
+		setContext(NAME, disclosure);
+		return disclosure;
+	},
+	get: () => getContext<Collapsible & AdditionalProps>(NAME)
+};

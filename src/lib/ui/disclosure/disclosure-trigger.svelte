@@ -1,17 +1,21 @@
 <script lang="ts">
 	import { cn } from '$lib/helpers/style';
 	import { ChevronRight } from 'lucide-svelte';
-	import { getDisclosureContext } from '.';
 	import { buttonStyles } from '../button.svelte';
+	import { ctx } from '.';
 
-	const { trigger, unstyled } = getDisclosureContext();
+	const {
+		elements: { trigger },
+		unstyled
+	} = ctx.get();
 	export let arrow = true;
 	let className: string | undefined | null = undefined;
 	export { className as class };
 </script>
 
 <button
-	melt={$trigger}
+	use:trigger
+	{...$trigger}
 	class={cn(
 		!unstyled &&
 			buttonStyles({

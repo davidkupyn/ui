@@ -1,10 +1,11 @@
-import type { createDialog } from '@melt-ui/svelte';
-import type { Action } from '@sveltejs/kit';
-import { getContext } from 'svelte';
+import { createDialog, type Dialog, type CreateDialogProps } from '@melt-ui/svelte';
+import { getContext, setContext } from 'svelte';
 import { cubicOut } from 'svelte/easing';
 import type { Writable } from 'svelte/store';
 import type { TransitionConfig } from 'svelte/transition';
 import { tv } from 'tailwind-variants';
+
+const NAME = 'modal';
 
 export { default as Modal } from './modal-root.svelte';
 
@@ -60,12 +61,21 @@ export const getModalContext = () =>
 		}
 	>('dialog');
 
-export type ModalTrigger = Writable<Record<string, any> & { action: Action<any, any> }>;
+
+export const ctx = {
+	set: (props: CreateDialogProps) => {
+		const modal = createDialog(props);
+		setContext(NAME, modal);
+		return modal;
+	},
+	get: () => getContext<Dialog>(NAME)
+}
 
 function split_css_unit(value: number | string): [number, string] {
 	const split = typeof value === 'string' && value.match(/^\s*(-?[\d.]+)([^\s]*)\s*$/);
 	return split ? [parseFloat(split[1]), split[2] || 'px'] : [value as number, 'px'];
 }
+
 export function css(
 	node: Element,
 	{
