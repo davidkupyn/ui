@@ -4,6 +4,7 @@
 	import Content from './disclosure-content.svelte';
 	import Trigger from './disclosure-trigger.svelte';
 	import { createEventDispatcher } from 'svelte';
+
 	export let disabled = false;
 	export let defaultOpen = false;
 	export let unstyled = false;
