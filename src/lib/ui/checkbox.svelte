@@ -19,7 +19,8 @@
 	const {
 		elements: { root },
 		helpers: { isChecked, isIndeterminate },
-		states: { checked: checkedStore }
+		states: { checked: checkedStore },
+		options
 	} = createCheckbox({
 		defaultChecked: checked,
 		onCheckedChange: ({ next }) => {
@@ -36,29 +37,28 @@
 		value
 	});
 	// $: checked = group?.includes(value);
+	$: options.disabled.set(disabled ?? false);
 	$: checkedStore.set(checked);
 </script>
 
 <button
+	{disabled}
 	use:root
 	{...$root}
 	class={cn(
-		'my-1 h-5 w-5 shrink-0 cursor-pointer transition rounded-md border-0 ring-1 ring-foreground/20 data-[state=unchecked]:hover:bg-muted bg-background data-[state=checked]:bg-accent shadow outline-0 data-[state=checked]:ring-accent focus-visible:ring-border focus-visible:ring-offset-2 focus:ring-1 focus:ring-offset-0 focus:data-[state=checked]:ring-accent focus-visible:ring-2 focus-visible:border focus-visible:border-border focus-visible:ring-offset-background data-[state=checked]:focus-visible:ring-accent sm:h-4 sm:w-4 sm:rounded',
+		'my-1 h-5 w-5 shrink-0 cursor-pointer transition disabled:opacity-50 disabled:pointer-events-none rounded-md border-0 ring-1 ring-foreground/20 data-[state=unchecked]:hover:bg-muted bg-background data-[state=checked]:bg-accent shadow outline-0 data-[state=checked]:ring-accent focus-visible:ring-border focus-visible:ring-offset-2 focus:ring-1 focus:ring-offset-0 focus:data-[state=checked]:ring-accent focus-visible:ring-2 focus-visible:border data-[state=checked]:focus-visible:border-accent focus-visible:border-foreground/20 focus-visible:ring-offset-background data-[state=checked]:focus-visible:ring-accent sm:h-4 sm:w-4 sm:rounded',
 		className
 	)}
 	{...$$restProps}
 >
-	<div
-		transition:fly={{ y: -10, duration: 150 }}
-		class={cn('flex items-center justify-center text-base-50 overflow-hidden')}
-	>
+	<div class={cn('flex items-center justify-center text-base-50 overflow-hidden')}>
 		{#if $isChecked}
-			<span in:scale={{ start: 0.9, duration: 200 }}>
-				<Check class="drop-shadow-sm" size="14" />
+			<span in:scale={{ start: 0.5, duration: 150 }}>
+				<Check class="drop-shadow-sm w-4 h-4 sm:w-3.5 sm:h-3.5" />
 			</span>
 		{:else if $isIndeterminate}
-			<span in:scale={{ start: 0.9, duration: 200 }}>
-				<Minus class="drop-shadow-sm" size="14" />
+			<span in:scale={{ start: 0.5, duration: 150 }}>
+				<Minus class="drop-shadow-sm w-4 h-4 sm:w-3.5 sm:h-3.5" />
 			</span>
 		{/if}
 	</div>
