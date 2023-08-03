@@ -4,19 +4,23 @@
 	import Label from './menu-item-label.svelte';
 	import Item from './menu-item.svelte';
 	import { cn } from '$lib/helpers/style';
-	import { getMenuContext, menuStyles } from '.';
+	import { ctx, menuStyles } from '.';
 	import { fade } from 'svelte/transition';
 	import Submenu from './menu-submenu.svelte';
-	import { derived } from 'svelte/store';
 
-	const { menu, open } = getMenuContext();
-	let className: string | undefined | null = undefined;
+	const {
+		states: { open },
+		elements: { menu }
+	} = ctx.get();
+
 	const { content } = menuStyles();
+
+	let className: string | undefined | null = undefined;
 	export { className as class };
 </script>
 
 {#if $open}
-	<div out:fade={{ duration: 150 }} class={cn(content(), className)} melt={$menu}>
+	<div out:fade={{ duration: 100 }} class={cn(content(), className)} use:menu {...$menu}>
 		<slot {Item} {Submenu} {Label} {Separator} {RadioGroup} />
 	</div>
 {/if}

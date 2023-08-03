@@ -2,14 +2,13 @@
 	import Trigger from './menu-submenu-trigger.svelte';
 	import Content from './menu-submenu-content.svelte';
 
-	import { getMenuContext } from '.';
+	import { ctx } from '.';
 	import { setContext } from 'svelte';
 
 	export let loop = false;
 	export let disabled = false;
 	export let preventScroll = true;
-	const { createSubMenu } = getMenuContext();
-	const subMenu = createSubMenu({
+	const subMenu = ctx.submenu.set({
 		loop,
 		disabled,
 		preventScroll,
@@ -21,7 +20,9 @@
 			placement: 'right-start'
 		}
 	});
-	export const { subTrigger: trigger } = subMenu;
+	export const {
+		elements: { subTrigger: trigger }
+	} = subMenu;
 	setContext('sub-dropdown', subMenu);
 </script>
 

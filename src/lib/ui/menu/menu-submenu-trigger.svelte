@@ -1,8 +1,10 @@
 <script lang="ts">
 	import { cn } from '$lib/helpers/style';
 	import { ChevronRight } from 'lucide-svelte';
-	import { getSubMenuContext, menuStyles } from '.';
-	const { subTrigger } = getSubMenuContext();
+	import { ctx, menuStyles } from '.';
+	const {
+		elements: { subTrigger }
+	} = ctx.submenu.get();
 	const { item } = menuStyles();
 
 	let className: string | undefined | null = undefined;
@@ -19,7 +21,8 @@
 		className
 	)}
 	on:click|stopPropagation
-	melt={$subTrigger}
+	use:subTrigger
+	{...$subTrigger}
 >
 	<slot />
 	<ChevronRight class="ml-auto" size="16" />

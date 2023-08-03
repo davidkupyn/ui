@@ -1,8 +1,7 @@
 <script lang="ts">
-	import { createHoverCard } from '@melt-ui/svelte';
-	import { createEventDispatcher, setContext } from 'svelte';
-	import Trigger from './hover-card-trigger.svelte';
+	import { createEventDispatcher } from 'svelte';
 	import Content from './hover-card-content.svelte';
+	import { ctx } from '.';
 
 	export let open = false;
 	export let closeOnOutsideClick = true;
@@ -23,30 +22,34 @@
 	export let delay = 0;
 	export let delayIn = delay || 700;
 	export let delayOut = delay || 300;
-	const hoverCard = createHoverCard({
+
+	const dispatch = createEventDispatcher();
+
+	const hoverCard = ctx.set({
 		defaultOpen: open,
 		closeOnOutsideClick,
 		positioning: {
 			placement: placement
 		},
 		openDelay: delayIn,
-		closeDelay: delayOut
+		closeDelay: delayOut,
+		onOpenChange: ({ next }) => {
+			open = next;
+			dispatch('change', next);
+			if (next) dispatch('open');
+			else dispatch('close');
+			return next;
+		}
 	});
-	const dispatch = createEventDispatcher();
-	const { trigger, open: openStore } = hoverCard;
-	$: openStore.set(open);
-	openStore.subscribe((v) => {
-		open = v;
-		dispatch('change', v);
-		if (v) dispatch('open');
-		else dispatch('close');
-	});
-	setContext('hover-card', hoverCard);
+
+	const {
+		elements: { trigger }
+	} = hoverCard;
 
 	export { trigger };
 </script>
 
-<slot {Trigger} {Content} trigger={$trigger}>
+<slot {Content} trigger={$trigger}>
 	<slot name="trigger" trigger={$trigger} />
 	<Content>
 		<slot name="content" />

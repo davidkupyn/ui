@@ -1,49 +1,62 @@
 <script lang="ts">
 	import { Check } from 'lucide-svelte';
-	import { writable, type Writable } from 'svelte/store';
-	import { getMenuContext, menuStyles } from '.';
+	import type { Writable } from 'svelte/store';
+	import { ctx, menuStyles } from '.';
 	import { cn } from '$lib/helpers/style';
 	import { createEventDispatcher } from 'svelte';
-	import type { CheckboxItemProps, ItemProps } from '@melt-ui/svelte/dist/builders/menu';
 	import type { Action } from '@sveltejs/kit';
+	import type { _CheckboxItemProps } from '@melt-ui/svelte/dist/builders/menu';
+
+	const dispatch = createEventDispatcher();
 
 	export let checkbox = false;
 	export let disabled = false;
 	export let danger = false;
-	const { item: regularItem, checkboxItem } = getMenuContext();
-	const baseItem = checkbox ? checkboxItem : regularItem;
-	export let melt: (Record<string, any> & { action: Action<any, any> }) | undefined = undefined;
-	const item = {
-		...baseItem,
-		action(node: HTMLElement, options: CheckboxItemProps | ItemProps) {
-			if (checkbox) {
-				const checkboxOptions = options as CheckboxItemProps;
-				checkboxItem(node, checkboxOptions);
-			} else {
-				regularItem(node, options);
-			}
+	export let checked: boolean | 'indeterminate' = false;
+	const options = {
+		disabled,
+		defaultChecked: checked,
+		onCheckedChange: ({ next }) => {
+			console.log(next);
+			checked = next;
+			dispatch('change', next);
+			return next;
 		}
-	};
+	} satisfies _CheckboxItemProps;
+	const itemBase = ctx.getItem(
+		checkbox
+			? {
+					type: 'checkbox',
+					options
+			  }
+			: undefined
+	);
+	let item: typeof itemBase.item | typeof itemBase.checkbox.elements.checkboxItem;
+	let checkedStore: Writable<boolean | 'indeterminate'>;
+	let disabledStore: Writable<boolean>;
+	$: disabledStore?.set(disabled);
+	if (itemBase.type === 'checkbox') {
+		const checkboxBuilder = itemBase.checkbox;
+		const {
+			elements: { checkboxItem },
+			options: { disabled: disabled2 },
+			states: { checked: checked2 }
+		} = checkboxBuilder;
+		item = checkboxItem;
+		checkedStore = checked2;
+		disabledStore = disabled2;
+	} else {
+		item = itemBase.item;
+	}
+	$: checkedStore?.set(checked);
+	export let melt: (Record<string, any> & { action: Action<any, any> }) | undefined = undefined;
 
 	let className: string | undefined | null = undefined;
 	const { item: itemStyles } = menuStyles();
-	export let checked = false;
 	export { className as class };
-
-	const dispatch = createEventDispatcher();
-
-	let checkboxStore: Writable<boolean | 'indeterminate'>;
-	if (checkbox) {
-		checkboxStore = writable(false);
-		checkboxStore.subscribe((v) => {
-			checked = !!v;
-			dispatch('change', v);
-		});
-	}
-	$: checkbox && checkboxStore.set(checked);
 </script>
 
-{#if melt}
+{#if melt && item}
 	<div
 		aria-disabled={disabled}
 		class={cn(
@@ -54,13 +67,10 @@
 			className
 		)}
 		{...$item}
-		use:item.action={{
-			checked: checkboxStore,
-			onSelect: (e) => {
-				dispatch('select', e);
-			}
-		}}
-		{melt}
+		use:item
+		on:m-click={(e) => dispatch('select', e.detail)}
+		{...melt}
+		use:melt.action
 		{...$$restProps}
 	>
 		<slot />
@@ -84,12 +94,8 @@
 			className
 		)}
 		{...$item}
-		use:item.action={{
-			checked: checkboxStore,
-			onSelect: (e) => {
-				dispatch('select', e);
-			}
-		}}
+		use:item
+		on:m-click={(e) => dispatch('select', e.detail)}
 		{...$$restProps}
 	>
 		<slot />

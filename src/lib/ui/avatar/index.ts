@@ -1,7 +1,15 @@
-import type { createAvatar } from '@melt-ui/svelte';
-import { getContext } from 'svelte';
-
 export { default as Avatar } from './avatar-root.svelte';
 
-export const getAvatarContext = () =>
-	getContext<Pick<ReturnType<typeof createAvatar>, 'fallback'>>('avatar');
+import { type Avatar, createAvatar, type CreateAvatarProps } from '@melt-ui/svelte';
+import { getContext, setContext } from 'svelte';
+
+const NAME = 'avatar';
+
+export const ctx = {
+	set: (props: CreateAvatarProps) => {
+		const avatar = createAvatar(props);
+		setContext(NAME, avatar);
+		return avatar;
+	},
+	get: () => getContext<Avatar>(NAME)
+};

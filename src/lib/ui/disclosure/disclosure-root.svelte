@@ -6,9 +6,8 @@
 	import { createEventDispatcher } from 'svelte';
 
 	export let disabled = false;
-	export let defaultOpen = false;
 	export let unstyled = false;
-	export let open = defaultOpen;
+	export let open = false;
 	let className: string | undefined | null = undefined;
 	export let details: string | undefined = undefined;
 	export let summary: string | undefined = undefined;
@@ -25,11 +24,12 @@
 			return next;
 		}
 	});
-
 	const {
 		elements: { root },
 		states: { open: openStore }
 	} = disclosure;
+
+	$: openStore.set(open);
 </script>
 
 <div class={cn('group', className)} use:root {...$root}>

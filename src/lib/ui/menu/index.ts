@@ -1,8 +1,17 @@
-import type { createDropdownMenu } from '@melt-ui/svelte';
-import { getContext } from 'svelte';
+export { default as Menu } from './menu-root.svelte';
+
+import {
+	createContextMenu,
+	createDropdownMenu,
+	type CreateDropdownMenuProps,
+	type CreateMenuRadioGroupProps,
+	type DropdownMenu
+} from '@melt-ui/svelte';
+import type { CheckboxItemProps, CreateSubmenuProps } from '@melt-ui/svelte/dist/builders/menu';
+import { getContext, setContext } from 'svelte';
 import { tv } from 'tailwind-variants';
 
-export { default as Menu } from './menu-root.svelte';
+const NAME = 'menu';
 
 export const menuStyles = tv({
 	slots: {
@@ -14,12 +23,61 @@ export const menuStyles = tv({
 	}
 });
 
-export const getMenuContext = () => getContext<ReturnType<typeof createDropdownMenu>>('dropdown');
+function set(props: CreateDropdownMenuProps, type: 'context-menu' | 'dropdown-menu') {
+	const menu = type === 'dropdown-menu' ? createDropdownMenu(props) : createContextMenu(props);
+	setContext(NAME, menu);
+	return menu;
+}
 
-type CreateSubMenuReturnType = ReturnType<ReturnType<typeof createDropdownMenu>['createSubMenu']>;
-export const getSubMenuContext = () => getContext<CreateSubMenuReturnType>('sub-dropdown');
+function get() {
+	return getContext<DropdownMenu>(NAME);
+}
+export const ctx = {
+	set,
+	get,
+	getItem: (itemProps?: { type: 'checkbox'; options: CheckboxItemProps } | { type: 'item' }) => {
+		let type, options;
+		if (itemProps && itemProps.type === 'checkbox') {
+			type = itemProps.type;
+			options = itemProps.options;
+		} else {
+			type = 'item';
+		}
 
-type CreateRadioGroupReturnType = ReturnType<
-	ReturnType<typeof createDropdownMenu>['createMenuRadioGroup']
->;
-export const getRadioGroupContext = () => getContext<CreateRadioGroupReturnType>('radio-group');
+		const {
+			elements: { item },
+			builders: { createCheckboxItem }
+		} = get();
+		return type === 'checkbox'
+			? {
+					type: 'checkbox' as const,
+					checkbox: createCheckboxItem(options)
+			  }
+			: {
+					type: 'item' as const,
+					item
+			  };
+	},
+	submenu: {
+		set: (props: CreateSubmenuProps) => {
+			const {
+				builders: { createSubmenu }
+			} = get();
+			const submenu = createSubmenu(props);
+			setContext('submenu', submenu);
+			return submenu;
+		},
+		get: () => getContext<ReturnType<typeof ctx.submenu.set>>('submenu')
+	},
+	radioGroup: {
+		set: (props: CreateMenuRadioGroupProps) => {
+			const {
+				builders: { createMenuRadioGroup }
+			} = get();
+			const radioGroup = createMenuRadioGroup(props);
+			setContext('radio-group', radioGroup);
+			return radioGroup;
+		},
+		get: () => getContext<ReturnType<typeof ctx.radioGroup.set>>('radio-group')
+	}
+};

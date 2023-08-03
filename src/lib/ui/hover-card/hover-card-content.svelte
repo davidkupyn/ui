@@ -1,11 +1,14 @@
 <script lang="ts">
 	import { fly } from 'svelte/transition';
-	import { getHoverCardContext } from '.';
 	import { cn } from '$lib/helpers/style';
+	import { ctx } from '.';
 
 	let className: string | undefined | null = undefined;
 	export { className as class };
-	const { open, content } = getHoverCardContext();
+	const {
+		states: { open },
+		elements: { content }
+	} = ctx.get();
 </script>
 
 {#if $open}
@@ -15,7 +18,7 @@
 			'rounded-2xl p-4 w-72 border border-popover-border bg-popover shadow-lg z-50 focus:outline-none',
 			className
 		)}
-		melt={$content}
+		{...$content}
 		use:content
 	>
 		<slot />

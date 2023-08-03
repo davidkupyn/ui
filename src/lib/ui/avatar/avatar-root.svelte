@@ -1,20 +1,25 @@
 <script lang="ts">
 	import Fallback from './avatar-fallback.svelte';
 	import { cn } from '$lib/helpers/style';
-	import { createAvatar } from '@melt-ui/svelte';
-	import { setContext } from 'svelte';
+	import { ctx } from '.';
 
 	export let fallback = '';
 	export let alt: string;
 	export let squared = false;
 	export let src: string;
+	export let delay: number | undefined = undefined;
+
 	let className: string | undefined | null = undefined;
 	export { className as class };
-	const avatar = createAvatar({
-		src
+
+	const avatar = ctx.set({
+		src,
+		delayMs: delay
 	});
-	const { image } = avatar;
-	setContext('avatar', avatar);
+
+	const {
+		elements: { image }
+	} = avatar;
 </script>
 
 <div
@@ -24,7 +29,7 @@
 		className
 	)}
 >
-	<img melt={$image} {alt} class="h-full w-full rounded-[inherit]" />
+	<img use:image {...$image} {alt} class="h-full w-full rounded-[inherit]" />
 	<slot {Fallback}>
 		<Fallback>
 			<slot name="fallback">{fallback}</slot>

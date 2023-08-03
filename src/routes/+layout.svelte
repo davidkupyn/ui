@@ -9,6 +9,9 @@
 	import Button from '$lib/ui/button.svelte';
 	import Separator from '$lib/ui/separator.svelte';
 	import Logo from './logo.svelte';
+	import Label from '$lib/ui/label.svelte';
+
+	let disabled = false;
 </script>
 
 <svelte:head>
@@ -50,8 +53,8 @@
 					</Button>
 				</li>
 				<li>
-					<Menu let:Trigger let:Content>
-						<Trigger aria-label="Theme picker" variant="ghost" size="icon">
+					<Menu let:trigger let:Content>
+						<Button melt={trigger} aria-label="Theme picker" variant="ghost" size="icon">
 							{#if $themeStore.theme === 'dark'}
 								<Moon size="16" />
 							{:else if $themeStore.theme === 'light'}
@@ -59,8 +62,23 @@
 							{:else}
 								<Monitor size="16" />
 							{/if}
-						</Trigger>
-						<Content let:RadioGroup>
+						</Button>
+						<Content let:RadioGroup let:Item let:Label let:Separator={MenuSeparator} let:Submenu>
+							<Label>Regular Item</Label>
+							<Item>Item</Item>
+							<MenuSeparator />
+							<Label>Checkbox Item</Label>
+							<Item checkbox>Checkbox</Item>
+							<MenuSeparator />
+							<Submenu let:Content let:Trigger>
+								<Trigger>Submenu</Trigger>
+								<Content>
+									<Item>Item</Item>
+									<Item>Item 2</Item>
+								</Content>
+							</Submenu>
+							<MenuSeparator />
+							<Label>Radio Group</Label>
 							<RadioGroup let:Radio bind:value={$themeStore.theme}>
 								<Radio value="dark">Dark</Radio>
 								<Radio value="light">Light</Radio>
@@ -71,12 +89,7 @@
 				</li>
 				<Separator orientation="vertical" class="h-6" />
 				<li>
-					<Button
-						href="/preview"
-						variant="text"
-						data-state={$page.url.pathname.startsWith('/preview') ? 'active' : undefined}
-						>Components
-					</Button>
+					<Button href="/preview" variant="text">Components</Button>
 				</li>
 			</ul>
 		</nav>
@@ -102,8 +115,8 @@
 			>
 		</span>
 		{#if $page.url.pathname !== '/'}
-			<Menu let:Trigger let:Content placement="bottom-end">
-				<Trigger aria-label="Theme picker" variant="ghost" size="icon">
+			<Menu let:trigger let:Content placement="bottom-end">
+				<Button melt={trigger} aria-label="Theme picker" variant="ghost" size="icon">
 					{#if $themeStore.theme === 'dark'}
 						<Moon size="16" />
 					{:else if $themeStore.theme === 'light'}
@@ -111,7 +124,7 @@
 					{:else}
 						<Monitor size="16" />
 					{/if}
-				</Trigger>
+				</Button>
 				<Content let:RadioGroup>
 					<RadioGroup let:Radio bind:value={$themeStore.theme}>
 						<Radio value="dark">Dark</Radio>

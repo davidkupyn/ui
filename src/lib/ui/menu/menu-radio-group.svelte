@@ -1,22 +1,26 @@
 <script lang="ts">
+	import { ctx } from '.';
 	import Radio from './menu-radio-item.svelte';
-	import { getMenuContext } from '.';
-	import { createEventDispatcher, setContext } from 'svelte';
+	import { createEventDispatcher } from 'svelte';
 
-	const { createMenuRadioGroup } = getMenuContext();
 	export let value: string | undefined = undefined;
-	const radioGroup = createMenuRadioGroup({
-		value
-	});
-	const { radioGroup: root, value: valueStore } = radioGroup;
-	setContext('radio-group', radioGroup);
 	const dispatch = createEventDispatcher();
-	valueStore.subscribe((v) => {
-		value = v || undefined;
-		dispatch('change', v);
+
+	const radioGroup = ctx.radioGroup.set({
+		defaultValue: value,
+		onValueChange: ({ next }) => {
+			value = next || undefined;
+			dispatch('change', next);
+			return next;
+		}
 	});
+	const {
+		elements: { radioGroup: root },
+		states: { value: valueStore }
+	} = radioGroup;
+	$: valueStore.set(value || null);
 </script>
 
-<div melt={$root}>
+<div use:root {...$root}>
 	<slot {Radio} />
 </div>

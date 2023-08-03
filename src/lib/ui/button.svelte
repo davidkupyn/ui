@@ -77,7 +77,7 @@
 	type $$Props = AnchorElement | ButtonElement;
 </script>
 
-{#if melt?.action}
+{#if melt}
 	<svelte:element
 		this={href ? 'a' : 'button'}
 		role={href ? 'a' : 'button'}
@@ -92,7 +92,8 @@
 		on:mouseenter
 		on:mouseleave
 		use:action={actionProps}
-		{melt}
+		{...melt}
+		use:melt.action
 	>
 		<slot />
 	</svelte:element>

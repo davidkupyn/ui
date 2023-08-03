@@ -1,7 +1,15 @@
-import type { createHoverCard } from '@melt-ui/svelte';
-import { getContext } from 'svelte';
-
 export { default as HoverCard } from './hover-card-root.svelte';
 
-export const getHoverCardContext = () =>
-	getContext<ReturnType<typeof createHoverCard>>('hover-card');
+import { createHoverCard, type CreateHoverCardProps, type HoverCard } from '@melt-ui/svelte';
+import { getContext, setContext } from 'svelte';
+
+const NAME = 'hover-card';
+
+export const ctx = {
+	set: (props: CreateHoverCardProps) => {
+		const hoverCard = createHoverCard(props);
+		setContext(NAME, hoverCard);
+		return hoverCard;
+	},
+	get: () => getContext<HoverCard>(NAME)
+};

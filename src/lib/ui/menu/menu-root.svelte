@@ -1,8 +1,7 @@
 <script lang="ts">
-	import Trigger from './menu-trigger.svelte';
 	import Content from './menu-content.svelte';
-	import { createContextMenu, createDropdownMenu } from '@melt-ui/svelte';
-	import { setContext } from 'svelte';
+	import { ctx } from '.';
+	import type { CreateDropdownMenuProps } from '@melt-ui/svelte';
 	export let loop = false;
 	export let preventScroll = true;
 	export let placement:
@@ -25,11 +24,13 @@
 		preventScroll,
 		positioning: {
 			placement
-		}
-	};
-	const dropdown = context ? createContextMenu(options) : createDropdownMenu(options);
-	setContext('dropdown', dropdown);
-	export const { trigger } = dropdown;
+		},
+		forceVisible: true
+	} satisfies CreateDropdownMenuProps;
+	const dropdown = ctx.set(options, context ? 'context-menu' : 'dropdown-menu');
+	export const {
+		elements: { trigger }
+	} = dropdown;
 </script>
 
-<slot {Trigger} {Content} trigger={$trigger} />
+<slot {Content} trigger={$trigger} />
