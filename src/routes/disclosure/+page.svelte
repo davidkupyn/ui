@@ -1,17 +1,36 @@
-<script>
+<script lang="ts">
+	import Checkbox from '$lib/ui/checkbox.svelte';
 	import Button from '$lib/ui/button.svelte';
 	import { Disclosure } from '$lib/ui/disclosure';
+	import { Popover } from '$lib/ui/popover';
 	let open = false;
+	let group: string[] = [];
 </script>
 
 <main class="flex items-center justify-center h-[calc(100vh-15rem)]">
-	<Disclosure let:Content let:Trigger class="max-w-md w-full h-96" bind:open>
-		<Trigger class="w-full">Disclosure</Trigger>
-		<Content>
+	<div class="flex gap-6">
+		<Checkbox value="checkbox 1" bind:group />
+		<Checkbox value="checkbox 2" bind:group />
+		<Checkbox value="checkbox 3" bind:group />
+	</div>
+	<div class="text-foreground">
+		{group}
+	</div>
+	<Disclosure class="max-w-md w-full h-96" bind:open>
+		<Disclosure.Trigger class="w-full">Disclosure</Disclosure.Trigger>
+		<Disclosure.Content>
 			Lorem ipsum dolor sit amet consectetur adipisicing elit. Sequi ut officiis fugiat dicta itaque
 			distinctio odit veniam qui, molestias, reprehenderit minus voluptas consequuntur aliquid
 			pariatur, sunt error molestiae dolore eaque?
-		</Content>
+		</Disclosure.Content>
 	</Disclosure>
+	<Popover let:trigger>
+		<Button melt={trigger}>Open Popover</Button>
+		<Popover.Content>
+			Lorem ipsum dolor sit amet consectetur adipisicing elit. Sequi ut officiis fugiat dicta itaque
+			distinctio odit veniam qui, molestias, reprehenderit minus voluptas consequuntur aliquid
+			pariatur, sunt error molestiae dolore eaque?
+		</Popover.Content>
+	</Popover>
 	<Button on:click={() => (open = !open)}>Toggle</Button>
 </main>

@@ -1,7 +1,6 @@
 <script lang="ts">
-	import { createPopover } from '@melt-ui/svelte';
-	import { createEventDispatcher, setContext } from 'svelte';
-	import Trigger from './popover-trigger.svelte';
+	import { ctx } from '.';
+	import { createEventDispatcher } from 'svelte';
 	import Content from './popover-content.svelte';
 
 	export let open = false;
@@ -19,29 +18,39 @@
 		| 'left-start'
 		| 'left-end'
 		| undefined = undefined;
+	export let closeOnEscape = true;
+	export let closeOnOutsideClick = true;
 
-	const popover = createPopover({
+	const dispatch = createEventDispatcher();
+
+	const popover = ctx.set({
 		positioning: {
 			placement: placement
 		},
-		defaultOpen: open
+		closeOnEscape,
+		closeOnOutsideClick,
+		forceVisible: true,
+		defaultOpen: open,
+		onOpenChange: ({ next }) => {
+			open = next;
+			if (next) dispatch('open');
+			else dispatch('close');
+			return next;
+		}
 	});
-	const { close, open: openStore, trigger } = popover;
-	setContext('popover', popover);
-	const dispatch = createEventDispatcher();
+	const {
+		elements: { close, trigger },
+		states: { open: openStore },
+		options
+	} = popover;
 
+	$: options.positioning.set({ placement });
 	$: openStore.set(open);
 
-	openStore.subscribe((v) => {
-		open = v;
-		dispatch('change', v);
-		if (v) dispatch('open');
-		else dispatch('close');
-	});
 	export { trigger };
 </script>
 
-<slot {Trigger} {Content} close={$close} trigger={$trigger} {open}>
+<slot {Content} close={$close} trigger={$trigger} {open}>
 	<slot name="trigger" trigger={$trigger} />
 	<Content>
 		<slot name="content" />

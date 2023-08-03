@@ -1,7 +1,8 @@
-export { default as Disclosure } from './disclosure-root.svelte';
-
 import { createCollapsible, type Collapsible, type CreateCollapsibleProps } from '@melt-ui/svelte';
 import { getContext, setContext } from 'svelte';
+import Root from './disclosure-root.svelte';
+import Trigger from './disclosure-trigger.svelte';
+import Content from './disclosure-content.svelte';
 
 const NAME = 'disclosure';
 
@@ -17,3 +18,8 @@ export const ctx = {
 	},
 	get: () => getContext<Collapsible & AdditionalProps>(NAME)
 };
+
+export const Disclosure = Object.assign(Root, {
+	Trigger,
+	Content
+});

@@ -7,12 +7,13 @@ import {
 	type CreateMenuRadioGroupProps,
 	type DropdownMenu
 } from '@melt-ui/svelte';
-import type { CheckboxItemProps, CreateSubmenuProps } from '@melt-ui/svelte/dist/builders/menu';
+import type { _CheckboxItemProps, _CreateSubmenuProps } from '@melt-ui/svelte/dist/builders/menu';
 import { getContext, setContext } from 'svelte';
 import { tv } from 'tailwind-variants';
 
 const NAME = 'menu';
-
+const SUBMENU_NAME = 'submenu';
+const RADIO_GROUP_NAME = 'radio-group';
 export const menuStyles = tv({
 	slots: {
 		content:
@@ -35,7 +36,7 @@ function get() {
 export const ctx = {
 	set,
 	get,
-	getItem: (itemProps?: { type: 'checkbox'; options: CheckboxItemProps } | { type: 'item' }) => {
+	getItem: (itemProps?: { type: 'checkbox'; options: _CheckboxItemProps } | { type: 'item' }) => {
 		let type, options;
 		if (itemProps && itemProps.type === 'checkbox') {
 			type = itemProps.type;
@@ -59,15 +60,15 @@ export const ctx = {
 			  };
 	},
 	submenu: {
-		set: (props: CreateSubmenuProps) => {
+		set: (props: _CreateSubmenuProps) => {
 			const {
 				builders: { createSubmenu }
 			} = get();
 			const submenu = createSubmenu(props);
-			setContext('submenu', submenu);
+			setContext(SUBMENU_NAME, submenu);
 			return submenu;
 		},
-		get: () => getContext<ReturnType<typeof ctx.submenu.set>>('submenu')
+		get: () => getContext<ReturnType<typeof ctx.submenu.set>>(SUBMENU_NAME)
 	},
 	radioGroup: {
 		set: (props: CreateMenuRadioGroupProps) => {
@@ -75,9 +76,9 @@ export const ctx = {
 				builders: { createMenuRadioGroup }
 			} = get();
 			const radioGroup = createMenuRadioGroup(props);
-			setContext('radio-group', radioGroup);
+			setContext(RADIO_GROUP_NAME, radioGroup);
 			return radioGroup;
 		},
-		get: () => getContext<ReturnType<typeof ctx.radioGroup.set>>('radio-group')
+		get: () => getContext<ReturnType<typeof ctx.radioGroup.set>>(RADIO_GROUP_NAME)
 	}
 };
