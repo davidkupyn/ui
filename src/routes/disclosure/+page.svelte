@@ -7,6 +7,8 @@
 	let group: string[] = [];
 </script>
 
+<div class="w-full bg-accent-500/20 h-36"></div>
+
 <main class="flex items-center justify-center h-[calc(100vh-15rem)]">
 	<div class="flex gap-6">
 		<Checkbox value="checkbox 1" bind:group />
@@ -34,3 +36,4 @@
 	</Popover>
 	<Button on:click={() => (open = !open)}>Toggle</Button>
 </main>
+<div class="w-full bg-accent-500/20 h-36"></div>
