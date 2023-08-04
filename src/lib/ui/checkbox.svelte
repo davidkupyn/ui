@@ -3,7 +3,7 @@
 	import { createCheckbox, type CreateCheckboxProps } from '@melt-ui/svelte';
 	import { Check, Minus } from 'lucide-svelte';
 	import { createEventDispatcher } from 'svelte';
-	import { fly, scale } from 'svelte/transition';
+	import { scale } from 'svelte/transition';
 
 	let className: string | undefined | null = undefined;
 	export { className as class };

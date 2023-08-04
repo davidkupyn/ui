@@ -1,17 +1,18 @@
 <script lang="ts">
-	import { cn } from '$lib/helpers/style';
 	import { ctx } from '.';
+	import { cn } from '$lib/helpers/style';
+	import { createEventDispatcher } from 'svelte';
 	import Content from './disclosure-content.svelte';
 	import Trigger from './disclosure-trigger.svelte';
-	import { createEventDispatcher } from 'svelte';
 
 	export let disabled = false;
 	export let unstyled = false;
 	export let open = false;
-	let className: string | undefined | null = undefined;
 	export let details: string | undefined = undefined;
 	export let summary: string | undefined = undefined;
+	let className: string | undefined | null = undefined;
 	export { className as class };
+
 	const dispatch = createEventDispatcher();
 
 	const disclosure = ctx.set({

@@ -1,16 +1,17 @@
 <script lang="ts">
+	import { ctx } from '.';
 	import { cn } from '$lib/helpers/style';
 	import { ChevronRight } from 'lucide-svelte';
 	import { buttonStyles } from '../button.svelte';
-	import { ctx } from '.';
+
+	export let arrow = true;
+	let className: string | undefined | null = undefined;
+	export { className as class };
 
 	const {
 		elements: { trigger },
 		unstyled
 	} = ctx.get();
-	export let arrow = true;
-	let className: string | undefined | null = undefined;
-	export { className as class };
 </script>
 
 <button

@@ -1,8 +1,8 @@
 <script lang="ts">
-	import Radio from './radio-item.svelte';
+	import { ctx } from '.';
 	import { cn } from '$lib/helpers/style';
-	import { createRadioGroup } from '@melt-ui/svelte';
-	import { setContext } from 'svelte';
+	import { createEventDispatcher } from 'svelte';
+	import Radio from './radio-item.svelte';
 
 	export let value: string | undefined = undefined;
 	export let disabled = false;
@@ -13,24 +13,32 @@
 	let className: string | undefined | null = undefined;
 	export { className as class };
 
-	const radioGroup = createRadioGroup({
-		value,
+	const dispatch = createEventDispatcher();
+
+	const radioGroup = ctx.set({
+		defaultValue: value,
+		onValueChange: ({ next }) => {
+			value = next;
+			dispatch('change', next);
+			return next;
+		},
 		disabled,
 		loop,
 		orientation,
 		required
 	});
 
-	const { root, value: valueStore, itemInput } = radioGroup;
-	setContext('radio-group', radioGroup);
-	$: valueStore.set(value || null);
-	valueStore.subscribe((v) => {
-		value = v || undefined;
-	});
+	const {
+		elements: { root },
+		states: { value: valueStore }
+	} = radioGroup;
+
+	$: valueStore.set(value || '');
 </script>
 
 <div
-	melt={$root}
+	use:root
+	{...$root}
 	class={cn('flex flex-col gap-3 data-[orientation=horizontal]:flex-row', className)}
 	aria-label="View density"
 >

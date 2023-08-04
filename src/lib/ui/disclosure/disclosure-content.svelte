@@ -1,17 +1,17 @@
 <script lang="ts">
-	import { slide } from 'svelte/transition';
-	import { cn } from '$lib/helpers/style';
-	import { cubicInOut } from 'svelte/easing';
 	import { ctx } from '.';
+	import { cn } from '$lib/helpers/style';
+	import { slide } from 'svelte/transition';
+	import { cubicInOut } from 'svelte/easing';
+
+	let className: string | undefined | null = undefined;
+	export { className as class };
 
 	const {
 		unstyled,
 		states: { open },
 		elements: { content }
 	} = ctx.get();
-
-	let className: string | undefined | null = undefined;
-	export { className as class };
 </script>
 
 {#if $open}

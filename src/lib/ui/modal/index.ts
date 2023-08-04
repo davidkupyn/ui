@@ -61,7 +61,6 @@ export const getModalContext = () =>
 		}
 	>('dialog');
 
-
 export const ctx = {
 	set: (props: CreateDialogProps) => {
 		const modal = createDialog(props);
@@ -69,7 +68,7 @@ export const ctx = {
 		return modal;
 	},
 	get: () => getContext<Dialog>(NAME)
-}
+};
 
 function split_css_unit(value: number | string): [number, string] {
 	const split = typeof value === 'string' && value.match(/^\s*(-?[\d.]+)([^\s]*)\s*$/);
@@ -86,7 +85,7 @@ export function css(
 		x = 0,
 		y = 0,
 		opacity = 0,
-		scale = 0.95
+		scale = 1
 	}: {
 		delay?: number;
 		enabled?: string | boolean | (() => boolean);
