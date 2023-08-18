@@ -5,16 +5,17 @@
 	import { Popover } from '$lib/ui/popover';
 	import Switch from '$lib/ui/switch.svelte';
 	import { RadioGroup } from '$lib/ui/radio-group';
+	import { Accordion } from '$lib/ui/accordion';
+	import { Card } from '$lib/ui/card';
 	let open = false;
 	let group: string[] = [];
 	$: disabled = open;
 	let checked = false;
-	let radioValue = '1';
+	let radioValue = 'Startup';
+	let accordionValue: string[] = [];
 </script>
 
-<div class="w-full bg-accent-500/10 h-36"></div>
-
-<main class="h-[calc(100vh-15rem)] px-4 md:p-12 space-x-8 space-y-8">
+<main class="min-h-[calc(100vh-15rem)] px-4 md:p-12 space-x-8 space-y-8">
 	<div class="flex gap-6">
 		<Checkbox value="checkbox 1" bind:checked bind:group />
 		<Checkbox {disabled} value="checkbox 2" bind:group />
@@ -24,7 +25,7 @@
 	<!-- <div class="text-foreground">
 		{group}
 	</div> -->
-	<Disclosure class="max-w-md w-full h-64" bind:open>
+	<Disclosure class="max-w-sm" bind:open>
 		<Disclosure.Trigger class="w-full">Disclosure</Disclosure.Trigger>
 		<Disclosure.Content>
 			Lorem ipsum dolor sit amet consectetur adipisicing elit. Sequi ut officiis fugiat dicta itaque
@@ -77,7 +78,27 @@
 			</span>
 		</Radio>
 	</RadioGroup>
+	<Card class="p-4 max-w-sm">
+		<Accordion let:Item bind:value={accordionValue} multiple>
+			<Item let:Trigger let:Content>
+				<Trigger>Accordion</Trigger>
+				<Content>
+					Lorem ipsum dolor sit amet consectetur adipisicing elit. Sequi ut officiis fugiat dicta
+					itaque distinctio odit veniam qui, molestias, reprehenderit minus voluptas consequuntur
+					aliquid pariatur, sunt error molestiae dolore eaque?
+				</Content>
+			</Item>
+			<Accordion.Item>
+				<Accordion.Trigger>Accordion</Accordion.Trigger>
+				<Accordion.Content>
+					Lorem ipsum dolor sit amet consectetur adipisicing elit. Sequi ut officiis fugiat dicta
+					itaque distinctio odit veniam qui, molestias, reprehenderit minus voluptas consequuntur
+					aliquid pariatur, sunt error molestiae dolore eaque?
+				</Accordion.Content>
+			</Accordion.Item>
+			<Item summary="Current Accordion (Controlled usage)" details={accordionValue.join(', ')} />
+		</Accordion>
+	</Card>
 </main>
-<div class="w-full bg-accent-500/10 h-36"></div>
-Popover 100%, Disclosure 100%, RadioGroup 100%, Menu (fix checkbox), Switch (look into it), Button (fix
-it, better styling), Checkbox ( fix it)
+Popover 100%, Disclosure 100%, RadioGroup 100%, Menu (fix checkbox), Switch (look into it, group), Button
+(fix it, better styling), Checkbox ( fix it, group), later add asChild

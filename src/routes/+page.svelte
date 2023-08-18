@@ -31,18 +31,18 @@
 			<div class="p-6 flex flex-col justify-center items-center gap-8">
 				<h1
 					in:fadeScale={{ duration: 400 }}
-					class="text-center font-display antialiased pb-2.5 [text-wrap:balance] text-5xl md:text-7xl bg-clip-text transition-all duration-1000 text-transparent bg-gradient-to-t selection:text-base-900 dark:selection:text-base-100 from-base-950 via-base-800 to-base-600 md:to-base-500 dark:from-base-400 dark:via-base-100 tracking-tighter dark:to-base-50"
+					class="text-center font-display italic font-light antialiased py-1 [text-wrap:balance] text-6xl md:text-7xl bg-clip-text transition-all duration-1000 text-transparent bg-gradient-to-t selection:text-base-950 dark:selection:text-base-50 from-base-950 via-base-900 to-base-700 md:to-base-500 dark:from-base-400 dark:via-base-100 tracking-tight dark:to-base-50"
 				>
 					Elegant. Functional.
 					<span
-						class="animate-text bg-clip-text text-transparent bg-gradient-to-r from-accent-400 to-accent selection:text-accent-focus dark:selection:text-accent-focus"
+						class="animate-text bg-clip-text text-transparent pl-1 -ml-1 bg-gradient-to-r from-accent-focus to-accent selection:text-accent-700 dark:selection:text-accent-400"
 					>
 						Essence.
 					</span>
 				</h1>
 				<p
 					in:fade={{ duration: 400 }}
-					class="text-center [text-wrap:balance] bg-clip-text max-w-prose text-transparent transition-all delay-500 duration-1000 bg-gradient-to-t from-base-700 to-base-500 dark:from-base-400 dark:to-base-50 md:text-lg"
+					class="text-center [text-wrap:balance] bg-clip-text max-w-md text-transparent transition-all delay-500 duration-1000 bg-gradient-to-t from-base-700 to-base-500 dark:from-base-400 dark:to-base-50 md:text-lg selection:text-foreground"
 				>
 					Craft modern, captivating interfaces effortlessly with easy-to-use UI components.
 				</p>

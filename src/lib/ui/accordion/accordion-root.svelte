@@ -1,28 +1,36 @@
 <script lang="ts">
+	import { ctx } from '.';
 	import { cn } from '$lib/helpers/style';
-	import { createAccordion } from '@melt-ui/svelte';
 	import Item from './accordion-item.svelte';
-	import { createEventDispatcher, setContext } from 'svelte';
-	import { generateAccordionOptions } from '.';
+	import { createEventDispatcher } from 'svelte';
+
 	export let multiple = false;
 	export let value: string | string[] | undefined = multiple ? [] : '';
-
-	const accordion = createAccordion(generateAccordionOptions(multiple, value));
-	const { root, value: valueStore } = accordion;
 	let className: string | undefined | null = undefined;
 	export { className as class };
 
-	setContext('accordion', accordion);
 	const dispatch = createEventDispatcher();
 
-	$: valueStore.set(value);
-
-	valueStore.subscribe((v) => {
-		value = v;
-		dispatch('change', v);
+	const accordion = ctx.set({
+		multiple,
+		onValueChange: ({ next }) => {
+			value = next;
+			dispatch('change', next);
+			return next;
+		},
+		defaultValue: multiple ? (value as string[] | undefined) : (value as string | undefined)
 	});
+	const {
+		elements: { root },
+		states: { value: valueStore },
+		options
+	} = accordion;
+
+	$: options.multiple.set(multiple);
+
+	$: valueStore.set(multiple ? (value as string[] | undefined) : (value as string | undefined));
 </script>
 
-<div class={cn('grid gap-4', className)} melt={$root}>
+<div class={cn('grid gap-4', className)} use:root {...$root}>
 	<slot {Item} />
 </div>

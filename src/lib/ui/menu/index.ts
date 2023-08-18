@@ -82,3 +82,7 @@ export const ctx = {
 		get: () => getContext<ReturnType<typeof ctx.radioGroup.set>>(RADIO_GROUP_NAME)
 	}
 };
+
+// const ctx = {
+// 	...createNamedContext<Ctx>(name: string)
+// }

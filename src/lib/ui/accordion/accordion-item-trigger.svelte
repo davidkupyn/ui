@@ -1,14 +1,16 @@
 <script lang="ts">
+	import { ctx } from '.';
 	import { cn } from '$lib/helpers/style';
 	import { ChevronRight } from 'lucide-svelte';
-	import { getAccordionContext, getAccordionItemContext } from '.';
 	import Button from '../button.svelte';
-
-	const { trigger } = getAccordionContext();
-	const item = getAccordionItemContext();
 
 	let className: string | undefined | null = undefined;
 	export { className as class };
+
+	const {
+		elements: { trigger }
+	} = ctx.get();
+	const item = ctx.item.get();
 </script>
 
 <Button

@@ -1,11 +1,12 @@
 <script lang="ts">
 	import { ctx } from '.';
 	import { cn } from '$lib/helpers/style';
+	import { uuid } from '$lib/helpers/uuid';
 	import { scale } from 'svelte/transition';
 
 	export let value: string;
 	export let disabled = false;
-	export let id = crypto.randomUUID();
+	export let id = uuid();
 	let className: string | undefined | null = undefined;
 	export { className as class };
 

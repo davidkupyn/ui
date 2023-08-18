@@ -53,6 +53,7 @@
 	export let size: VariantProps<typeof buttonStyles>['size'] = 'default';
 	export let loading = false;
 	export let use: [any, {}?] = [() => {}, {}];
+	export let external = false;
 	export let melt: (Record<string, any> & { action: Action<any, any> }) | undefined = undefined;
 	const [action, actionProps] = use;
 
@@ -63,6 +64,7 @@
 		loading?: boolean;
 		use?: [Action, {}?];
 		melt?: Record<string, any> & { action: Action<any, any> };
+		external?: boolean;
 	};
 
 	interface AnchorElement extends Props, HTMLAnchorAttributes {
@@ -82,6 +84,8 @@
 		this={href ? 'a' : 'button'}
 		role={href ? 'a' : 'button'}
 		type={href ? undefined : type}
+		target={external ? '_blank' : undefined}
+		rel={external ? 'noopener noreferrer' : undefined}
 		{href}
 		class={cn(buttonStyles({ variant, size }), loading && 'relative', className)}
 		{...$$restProps}

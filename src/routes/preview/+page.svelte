@@ -48,6 +48,7 @@
 	import { cn } from '$lib/helpers/style';
 	import { page } from '$app/stores';
 	import Switch from '$lib/ui/switch.svelte';
+	import { uuid } from '$lib/helpers/uuid';
 
 	let showPassword = false;
 	let sliderOrientation: 'vertical' | 'horizontal' = 'horizontal';
@@ -56,7 +57,7 @@
 	$: currentPage = Number($page.url.searchParams.get('page') || '1');
 	let buttonLoading = false;
 	let items = Array.from({ length: 100 }, (_, i) => ({
-		id: crypto.randomUUID().slice(0, 16),
+		id: uuid(),
 		name: `Item ${i + 1}`,
 		description: `“Well, and so we breakfasted at ten as usual; I thought it would never be over; for, by the bye, you are to understand, that my uncle and aunt were horrid unpleasant all the time I was with them. If you’ll believe me, I did not once put my foot out of doors, though I was there a fortnight. Not one party, or scheme, or anything. ”`,
 		price: Math.floor(Math.random() * 1000),

@@ -1,28 +1,28 @@
 <script lang="ts">
+	import { ctx } from '.';
+	import { cn } from '$lib/helpers/style';
+	import { uuid } from '$lib/helpers/uuid';
 	import Trigger from './accordion-item-trigger.svelte';
 	import Content from './accordion-item-content.svelte';
-	import { cn } from '$lib/helpers/style';
-	import { setContext } from 'svelte';
-	import { getAccordionContext } from '.';
 
-	export let value: string = crypto.randomUUID();
+	export let value: string = uuid();
 	export let disabled = false;
 	export let details: string | undefined = undefined;
 	export let summary: string | undefined = undefined;
 
-	const itemOptions = {
-		value,
-		disabled
-	};
-
-	const { item } = getAccordionContext();
+	const {
+		elements: { item }
+	} = ctx.get();
 	let className: string | undefined | null = undefined;
 	export { className as class };
 
-	setContext('accordion-item', itemOptions);
+	ctx.item.set({
+		value,
+		disabled
+	});
 </script>
 
-<div melt={$item(value)} class={cn(className)}>
+<div use:item {...$item(value)} class={cn(className)}>
 	<slot {Content} {Trigger}>
 		<Trigger>
 			<slot name="summary">{summary}</slot>
