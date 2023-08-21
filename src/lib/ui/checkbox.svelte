@@ -51,7 +51,7 @@
 	)}
 	{...$$restProps}
 >
-	<div class={cn('flex items-center justify-center text-accent-foreground overflow-hidden')}>
+	<div class={cn('flex items-center justify-center text-background overflow-hidden')}>
 		{#if $isChecked}
 			<span in:scale={{ start: 0.5, duration: 150 }}>
 				<Check class="drop-shadow-sm w-4 h-4 sm:w-3.5 sm:h-3.5" />
