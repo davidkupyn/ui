@@ -77,7 +77,9 @@ const config = {
 			},
 			fontFamily: {
 				sans: ['Manrope', ...defaultTheme.fontFamily.sans],
-				display: ['PP Editorial New', ...defaultTheme.fontFamily.serif]
+				display: ['Manrope', ...defaultTheme.fontFamily.sans]
+
+				// display: ['PP Editorial New', ...defaultTheme.fontFamily.serif]
 				// Plus Jakarta Sans or display: ['Figtree', ...defaultTheme.fontFamily.sans]
 			}
 		}

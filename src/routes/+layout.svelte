@@ -40,7 +40,7 @@
 			Essence
 		</a>
 		<nav>
-			<ul class="inline-flex gap-3 sm:gap-5 items-center -mr-4">
+			<ul class="inline-flex gap-2 items-center -mr-4">
 				<li>
 					<Button
 						aria-label="Github Link"
@@ -63,22 +63,7 @@
 								<Monitor size="16" />
 							{/if}
 						</Button>
-						<Content let:RadioGroup let:Item let:Label let:Separator={MenuSeparator} let:Submenu>
-							<Label>Regular Item</Label>
-							<Item>Item</Item>
-							<MenuSeparator />
-							<Label>Checkbox Item</Label>
-							<Item checkbox>Checkbox</Item>
-							<MenuSeparator />
-							<Submenu let:Content let:Trigger>
-								<Trigger>Submenu</Trigger>
-								<Content>
-									<Item>Item</Item>
-									<Item>Item 2</Item>
-								</Content>
-							</Submenu>
-							<MenuSeparator />
-							<Label>Radio Group</Label>
+						<Content let:RadioGroup>
 							<RadioGroup let:Radio bind:value={$themeStore.theme}>
 								<Radio value="dark">Dark</Radio>
 								<Radio value="light">Light</Radio>
@@ -87,7 +72,7 @@
 						</Content>
 					</Menu>
 				</li>
-				<Separator orientation="vertical" class="h-6" />
+				<Separator orientation="vertical" class="h-6 mx-2" />
 				<li>
 					<Button href="/preview" variant="text">Components</Button>
 				</li>
@@ -106,11 +91,11 @@
 	)}
 >
 	<div class="container mx-auto flex justify-between items-center px-6 py-6">
-		<span class="mx-auto">
-			<span class="text-base-600 dark:text-base-400 mr-1.5">&copy</span><a
+		<span class="mx-auto text-sm text-muted-foreground">
+			<span class="mr-1.5">&copy</span><a
 				href="https://github.com/davidkupyn"
 				target="_blank"
-				class="font-medium border-b border-opacity-0 dark:border-opacity-0 border-base-950 dark:border-base-50 hover:border-opacity-100 dark:hover:border-opacity-100 transition"
+				class="font-medium border-b border-opacity-0 dark:border-opacity-0 border-base-500 dark:border-base-400 hover:border-opacity-100 dark:hover:border-opacity-100 transition"
 				>David Kupyn, Essence UI</a
 			>
 		</span>
