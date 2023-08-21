@@ -24,18 +24,18 @@ const config = {
 					DEFAULT: 'var(--color-accent)',
 					focus: 'var(--color-accent-focus)',
 					foreground: 'var(--color-accent-foreground)',
-					// 50: 'hsl(20 100% 96%)',
-					// 100: 'hsl(20 100% 92%)',
-					// 200: 'hsl(17 100% 83%)',
-					// 300: 'hsl(16 100% 72%)',
-					// 400: 'hsl(12 100% 61%)',
-					// 500: 'hsl(10 100% 56%)',
-					// 600: 'hsl(6 95% 48%)',
-					// 700: 'hsl(3 93% 40%)',
-					// 800: 'hsl(0 84% 34%)',
-					// 900: 'hsl(1 79% 28%)',
-					// 950: 'hsl(358 86% 15%)'
-					...colors.emerald
+					50: 'hsl(20, 100%, 96%)',
+					100: 'hsl(21, 100%, 92%)',
+					200: 'hsl(18, 100%, 83%)',
+					300: 'hsl(17, 100%, 72%)',
+					400: 'hsl(13, 99%, 58%)',
+					500: 'hsl(11, 98%, 53%)',
+					600: 'hsl(7, 93%, 48%)',
+					700: 'hsl(4, 91%, 40%)',
+					800: 'hsl(1, 81%, 34%)',
+					900: 'hsl(2, 77%, 28%)',
+					950: 'hsl(359, 84%, 15%)'
+					// ...colors.emerald
 				},
 				base: colors.zinc,
 				background: 'hsl(var(--color-background))',
@@ -78,9 +78,7 @@ const config = {
 			fontFamily: {
 				sans: ['Manrope', ...defaultTheme.fontFamily.sans],
 				display: ['Manrope', ...defaultTheme.fontFamily.sans]
-
 				// display: ['PP Editorial New', ...defaultTheme.fontFamily.serif]
-				// Plus Jakarta Sans or display: ['Figtree', ...defaultTheme.fontFamily.sans]
 			}
 		}
 	},
