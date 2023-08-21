@@ -34,9 +34,9 @@
 		<a
 			href="/"
 			aria-label="Go to home page"
-			class="font-bold flex items-center gap-2 -ml-2 p-1 focus-visible:ring-2 focus-visible:outline-none rounded-xl transition ring-offset-base-50 dark:ring-offset-base-950 focus-visible:ring-primary-600"
+			class="font-bold flex items-center gap-3 -ml-2 p-1 focus-visible:ring-2 focus-visible:outline-none rounded-xl transition ring-offset-base-50 dark:ring-offset-base-950 focus-visible:ring-primary-600"
 		>
-			<Logo class="text-accent" size="32" />
+			<Logo class="text-accent" size="24" />
 			Essence
 		</a>
 		<nav>
