@@ -7,6 +7,7 @@
 	import { RadioGroup } from '$lib/ui/radio-group';
 	import { Accordion } from '$lib/ui/accordion';
 	import { Card } from '$lib/ui/card';
+	import { ToggleRight } from 'lucide-svelte';
 	let open = false;
 	let group: string[] = [];
 	$: disabled = open;
@@ -42,7 +43,10 @@
 				aliquid pariatur, sunt error molestiae dolore eaque?
 			</Popover.Content>
 		</Popover>
-		<Button on:click={() => (open = !open)}>Toggle</Button>
+		<Button on:click={() => (open = !open)}>
+			<ToggleRight size="16" />
+			Toggle</Button
+		>
 	</div>
 	<RadioGroup let:Radio class="ml-8" bind:value={radioValue}>
 		<Radio value="Startup" />
