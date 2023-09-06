@@ -1,13 +1,13 @@
 <script lang="ts">
-	import Fallback from './avatar-fallback.svelte';
 	import { cn } from '$lib/helpers/style';
 	import { ctx } from '.';
+	import Fallback from './avatar-fallback.svelte';
 
 	export let fallback = '';
 	export let alt: string;
 	export let squared = false;
 	export let src: string;
-	export let delay: number | undefined = undefined;
+	export let delay = 0;
 
 	let className: string | undefined | null = undefined;
 	export { className as class };
@@ -18,13 +18,17 @@
 	});
 
 	const {
-		elements: { image }
+		elements: { image },
+		options
 	} = avatar;
+
+	$: options.delayMs.set(delay);
+	$: options.src.set(src);
 </script>
 
 <div
 	class={cn(
-		'grid w-9 aspect-square place-content-center rounded-full bg-muted',
+		'grid h-9 aspect-square place-content-center rounded-full bg-muted',
 		squared ? 'rounded-xl' : 'rounded-full',
 		className
 	)}
