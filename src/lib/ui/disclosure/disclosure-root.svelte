@@ -1,16 +1,25 @@
 <script lang="ts">
+	import type { HTMLAttributes } from 'svelte/elements';
 	import { ctx } from '.';
 	import { cn } from '$lib/helpers';
 	import { createEventDispatcher } from 'svelte';
 	import Content from './disclosure-content.svelte';
 	import Trigger from './disclosure-trigger.svelte';
 
-	export let disabled = false;
-	export let unstyled = false;
-	export let open = false;
-	export let details: string | undefined = undefined;
-	export let summary: string | undefined = undefined;
-	let className: string | undefined | null = undefined;
+	type $$Props = HTMLAttributes<HTMLDivElement> & {
+		disabled?: boolean;
+		unstyled?: boolean;
+		open?: boolean;
+		details?: string;
+		summary?: string;
+	};
+	export let disabled: $$Props['disabled'] = false;
+	export let unstyled: $$Props['unstyled'] = false;
+	export let open: $$Props['open'] = false;
+	export let details: $$Props['details'] = undefined;
+	export let summary: $$Props['summary'] = undefined;
+
+	let className: $$Props['class'] = undefined;
 	export { className as class };
 
 	const dispatch = createEventDispatcher();
@@ -34,9 +43,9 @@
 		options
 	} = disclosure;
 
-	$: options.disabled.set(disabled);
-	$: options.unstyled.set(unstyled);
-	$: openStore.set(open);
+	$: options.disabled.set(disabled ?? false);
+	$: options?.unstyled?.set(unstyled);
+	$: openStore.set(open ?? false);
 </script>
 
 <div class={cn('group', className)} use:root {...$root}>

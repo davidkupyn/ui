@@ -11,7 +11,7 @@ const NAME = 'disclosure';
 export const ctx = {
 	set: (props: CreateCollapsibleProps & {
 		props: {
-			unstyled: boolean;
+			unstyled?: boolean;
 		}
 	}) => {
 		const disclosure = createCollapsible(props);

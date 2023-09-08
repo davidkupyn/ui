@@ -2,8 +2,11 @@
 	import { cn } from '$lib/helpers/style';
 	import Header from './card-header.svelte';
 	import Footer from './card-footer.svelte';
+	import type { HTMLAttributes } from 'svelte/elements';
 
-	let className: string | undefined | null = undefined;
+	type $$Props = HTMLAttributes<HTMLDivElement>;
+
+	let className: $$Props['class'] = undefined;
 	export { className as class };
 </script>
 
