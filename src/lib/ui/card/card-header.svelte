@@ -1,7 +1,7 @@
 <script lang="ts">
+	import { cn } from '$lib/helpers/style';
 	import Title from './card-title.svelte';
 	import Description from './card-description.svelte';
-	import { cn } from '$lib/helpers/style';
 
 	let className: string | undefined | null = undefined;
 	export { className as class };

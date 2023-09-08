@@ -14,7 +14,7 @@ const NAME = 'accordion';
 const ITEM_NAME = 'accordion-item';
 
 export const ctx = {
-	set: (props: CreateAccordionProps) => {
+	set: (props: CreateAccordionProps<boolean>) => {
 		const accordion = createAccordion(props);
 		setContext(NAME, accordion);
 		return accordion;

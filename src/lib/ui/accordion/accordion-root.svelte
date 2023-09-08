@@ -18,7 +18,7 @@
 			dispatch('change', next);
 			return next;
 		},
-		defaultValue: multiple ? (value as string[] | undefined) : (value as string | undefined)
+		defaultValue: value
 	});
 	const {
 		elements: { root },
@@ -27,7 +27,7 @@
 	} = accordion;
 
 	$: options.multiple.set(multiple);
-	$: valueStore.set(multiple ? (value as string[] | undefined) : (value as string | undefined));
+	$: valueStore.set(value);
 </script>
 
 <div class={cn('grid gap-4', className)} use:root {...$root}>
