@@ -1,7 +1,7 @@
 <script lang="ts">
-	import { cn } from '$lib/helpers/style';
-	import { createEventDispatcher } from 'svelte';
 	import { ctx } from '.';
+	import { cn } from '$lib/helpers';
+	import { createEventDispatcher } from 'svelte';
 	import Item from './accordion-item.svelte';
 
 	export let multiple = false;
@@ -27,7 +27,6 @@
 	} = accordion;
 
 	$: options.multiple.set(multiple);
-
 	$: valueStore.set(multiple ? (value as string[] | undefined) : (value as string | undefined));
 </script>
 

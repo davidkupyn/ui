@@ -20,6 +20,10 @@
 		value,
 		disabled
 	});
+
+	const itemContext = ctx.item.get();
+
+	$: itemContext.set({ value, disabled });
 </script>
 
 <div use:item {...$item(value)} class={cn(className)}>

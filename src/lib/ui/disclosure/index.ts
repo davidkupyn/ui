@@ -4,7 +4,7 @@ import Content from './disclosure-content.svelte';
 import { getContext, setContext } from 'svelte';
 import type { Writable } from 'svelte/store';
 import { createCollapsible, type Collapsible, type CreateCollapsibleProps } from '@melt-ui/svelte';
-import { createReactiveObject, getOptionUpdater } from '$lib/helpers';
+import { toWritableStores } from '$lib/helpers';
 
 const NAME = 'disclosure';
 
@@ -15,14 +15,14 @@ export const ctx = {
 		}
 	}) => {
 		const disclosure = createCollapsible(props);
-		const extraOptions = createReactiveObject(props.props)
+		const extraOptions = toWritableStores(props.props)
 		const combined = {
 			...disclosure,
 			extraOptions,
-			updateOption: getOptionUpdater({
+			options: {
 				...disclosure.options,
 				...extraOptions
-			} )
+			} 
 		};
 		setContext(NAME, combined);
 		return combined;

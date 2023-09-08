@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { ctx } from '.';
-	import { cn } from '$lib/helpers/style';
+	import { cn } from '$lib/helpers';
 	import { createEventDispatcher } from 'svelte';
 	import Content from './disclosure-content.svelte';
 	import Trigger from './disclosure-trigger.svelte';
@@ -31,11 +31,11 @@
 	const {
 		elements: { root },
 		states: { open: openStore },
-		updateOption
+		options
 	} = disclosure;
 
-	$: updateOption('unstyled', unstyled);
-	$: updateOption('disabled', disabled);
+	$: options.disabled.set(disabled);
+	$: options.unstyled.set(unstyled);
 	$: openStore.set(open);
 </script>
 

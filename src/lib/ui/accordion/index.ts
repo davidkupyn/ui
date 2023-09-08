@@ -8,23 +8,7 @@ import Root from './accordion-root.svelte';
 import Item from './accordion-item.svelte';
 import Trigger from './accordion-item-trigger.svelte';
 import Content from './accordion-item-content.svelte';
-
-// export const generateAccordionOptions = (
-// 	multiple: boolean,
-// 	value: string | string[] | undefined
-// ): CreateAccordionProps => {
-// 	if (multiple && Array.isArray(value)) {
-// 		return {
-// 			type: 'multiple' as const,
-// 			value: value as string[]
-// 		};
-// 	} else {
-// 		return {
-// 			type: 'single' as const,
-// 			value: value as string
-// 		};
-// 	}
-// };
+import { writable, type Writable } from 'svelte/store';
 
 const NAME = 'accordion';
 const ITEM_NAME = 'accordion-item';
@@ -38,9 +22,9 @@ export const ctx = {
 	get: () => getContext<AccordionReturn>(NAME),
 	item: {
 		set: (props: { value: string; disabled: boolean }) => {
-			setContext(ITEM_NAME, props);
+			setContext(ITEM_NAME, writable(props));
 		},
-		get: () => getContext<{ value: string; disabled: boolean }>(ITEM_NAME)
+		get: () => getContext<Writable<{ value: string; disabled: boolean }>>(ITEM_NAME)
 	}
 };
 

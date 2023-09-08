@@ -14,11 +14,11 @@
 	const item = ctx.item.get();
 </script>
 
-{#if $isSelected(item.value)}
+{#if $isSelected($item.value)}
 	<div
 		class={cn('px-4 mt-2 text-sm text-muted-foreground overflow-hidden', className)}
 		use:content
-		{...$content(item)}
+		{...$content($item)}
 		transition:slide={{ duration: 200, easing: cubicInOut }}
 	>
 		<slot />
