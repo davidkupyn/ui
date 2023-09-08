@@ -1,22 +1,37 @@
-import { createCollapsible, type Collapsible, type CreateCollapsibleProps } from '@melt-ui/svelte';
-import { getContext, setContext } from 'svelte';
 import Root from './disclosure-root.svelte';
 import Trigger from './disclosure-trigger.svelte';
 import Content from './disclosure-content.svelte';
+import { getContext, setContext } from 'svelte';
+import type { Writable } from 'svelte/store';
+import { createCollapsible, type Collapsible, type CreateCollapsibleProps } from '@melt-ui/svelte';
+import { createReactiveObject, getOptionUpdater } from '$lib/helpers';
 
 const NAME = 'disclosure';
 
-type AdditionalProps = {
-	unstyled?: boolean;
-};
-
 export const ctx = {
-	set: (props: CreateCollapsibleProps & AdditionalProps) => {
+	set: (props: CreateCollapsibleProps & {
+		props: {
+			unstyled: boolean;
+		}
+	}) => {
 		const disclosure = createCollapsible(props);
-		setContext(NAME, disclosure);
-		return disclosure;
+		const extraOptions = createReactiveObject(props.props)
+		const combined = {
+			...disclosure,
+			extraOptions,
+			updateOption: getOptionUpdater({
+				...disclosure.options,
+				...extraOptions
+			} )
+		};
+		setContext(NAME, combined);
+		return combined;
 	},
-	get: () => getContext<Collapsible & AdditionalProps>(NAME)
+	get: () => getContext<Collapsible & {
+		extraOptions: {
+			unstyled: Writable<boolean>;
+		}
+	}>(NAME)
 };
 
 export const Disclosure = Object.assign(Root, {

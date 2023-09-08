@@ -17,19 +17,25 @@
 
 	const disclosure = ctx.set({
 		disabled,
-		unstyled,
 		defaultOpen: open,
 		onOpenChange: ({ next }) => {
 			open = next;
 			dispatch('change', next);
 			return next;
+		},
+		props: {
+			unstyled
 		}
 	});
+
 	const {
 		elements: { root },
-		states: { open: openStore }
+		states: { open: openStore },
+		updateOption
 	} = disclosure;
 
+	$: updateOption('unstyled', unstyled);
+	$: updateOption('disabled', disabled);
 	$: openStore.set(open);
 </script>
 

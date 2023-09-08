@@ -8,15 +8,15 @@
 	export { className as class };
 
 	const {
-		unstyled,
 		states: { open },
-		elements: { content }
+		elements: { content },
+		extraOptions: { unstyled }
 	} = ctx.get();
 </script>
 
 {#if $open}
 	<div
-		class={cn(!unstyled && 'px-4 mt-2 text-sm text-muted-foreground overflow-hidden', className)}
+		class={cn(!$unstyled && 'px-4 mt-2 text-sm text-muted-foreground overflow-hidden', className)}
 		use:content
 		{...$content}
 		transition:slide={{ duration: 200, easing: cubicInOut }}

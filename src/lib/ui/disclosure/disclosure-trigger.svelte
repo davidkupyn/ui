@@ -10,7 +10,7 @@
 
 	const {
 		elements: { trigger },
-		unstyled
+		extraOptions: { unstyled }
 	} = ctx.get();
 </script>
 
@@ -18,7 +18,7 @@
 	use:trigger
 	{...$trigger}
 	class={cn(
-		!unstyled &&
+		!$unstyled &&
 			buttonStyles({
 				variant: 'ghost',
 				className: 'active:scale-100 w-full group data-[state=open]:text-foreground'

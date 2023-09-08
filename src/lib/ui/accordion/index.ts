@@ -28,6 +28,7 @@ import Content from './accordion-item-content.svelte';
 
 const NAME = 'accordion';
 const ITEM_NAME = 'accordion-item';
+
 export const ctx = {
 	set: (props: CreateAccordionProps) => {
 		const accordion = createAccordion(props);

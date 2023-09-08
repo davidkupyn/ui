@@ -1,7 +1,7 @@
 <script lang="ts">
-	import { createEventDispatcher } from 'svelte';
-	import Content from './hover-card-content.svelte';
 	import { ctx } from '.';
+	import { createEventDispatcher } from 'svelte';
+	import Content from './link-preview-content.svelte';
 
 	export let open = false;
 	export let closeOnOutsideClick = true;

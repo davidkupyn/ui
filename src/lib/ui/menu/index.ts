@@ -83,6 +83,3 @@ export const ctx = {
 	}
 };
 
-// const ctx = {
-// 	...createNamedContext<Ctx>(name: string)
-// }

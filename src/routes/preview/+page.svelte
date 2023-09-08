@@ -36,7 +36,7 @@
 	import { Popover } from '$lib/ui/popover';
 	import { Tabs } from '$lib/ui/tabs';
 	import { Menu } from '$lib/ui/menu';
-	import { HoverCard } from '$lib/ui/hover-card';
+	import { HoverCard } from '$lib/ui/link-preview';
 	import Separator from '$lib/ui/separator.svelte';
 	import Kbd from '$lib/ui/kbd.svelte';
 	import Badge from '$lib/ui/badge.svelte';

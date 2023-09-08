@@ -1,8 +1,8 @@
 <script lang="ts">
-	import { ctx } from '.';
 	import { cn } from '$lib/helpers/style';
-	import Item from './accordion-item.svelte';
 	import { createEventDispatcher } from 'svelte';
+	import { ctx } from '.';
+	import Item from './accordion-item.svelte';
 
 	export let multiple = false;
 	export let value: string | string[] | undefined = multiple ? [] : '';
