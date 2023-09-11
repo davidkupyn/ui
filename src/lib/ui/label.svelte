@@ -1,20 +1,43 @@
 <script lang="ts">
 	import { cn } from '$lib/helpers/style';
 	import { createLabel } from '@melt-ui/svelte';
-	export let required = false;
-	const label = createLabel();
+	import type { HTMLLabelAttributes } from 'svelte/elements';
+	import Wrapper from './utils/wrapper.svelte';
+
+	type $$Props = HTMLLabelAttributes & {
+		required?: boolean | null;
+		optional?: boolean;
+	};
+	type $$Events<T extends Element = HTMLLabelElement> = {
+		mouseDownWIthoutCustomEvent: {
+			originalEvent: MouseEvent;
+			currentTarget: T;
+		};
+	};
+
+	export let required: $$Props['required'] = false;
+	export let optional: $$Props['optional'] = !required;
+
+	const {
+		elements: { root }
+	} = createLabel();
 	let className: string | undefined | null = undefined;
 	export { className as class };
 </script>
 
 <label
 	{...$$restProps}
-	use:label
-	class={cn('text-muted-foreground flex items-center w-fit mb-1.5 text-sm', className)}
+	use:root
+	{...$root}
+	class={cn('flex w-full gap-1.5 text-sm', className)}
 	data-melt-part="root"
 >
-	<slot />
-	{#if required}
-		<span class="text-error ml-1">*</span>
-	{/if}
+	<Wrapper class="flex items-center gap-1" this="span" show={optional ?? false}>
+		<slot />
+		{#if optional}
+			<span class="text-muted-foreground text-xs">(optional)</span>
+		{/if}
+	</Wrapper>
+
+	<slot name="input" />
 </label>

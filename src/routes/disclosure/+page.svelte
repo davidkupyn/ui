@@ -1,21 +1,36 @@
 <script lang="ts">
+	import CardDescription from './../../lib/ui/card/card-description.svelte';
+	import { tippy } from '$lib/actions/tippy';
 	import { Accordion } from '$lib/ui/accordion';
 	import Button from '$lib/ui/button.svelte';
 	import { Card } from '$lib/ui/card';
 	import Checkbox from '$lib/ui/checkbox.svelte';
 	import { Disclosure } from '$lib/ui/disclosure';
+	import { Input } from '$lib/ui/input-for-later';
 	import Kbd from '$lib/ui/kbd.svelte';
+	import Label from '$lib/ui/label.svelte';
 	import { Popover } from '$lib/ui/popover';
 	import { RadioGroup } from '$lib/ui/radio-group';
 	// import { Select } from '$lib/ui/select';
 	import Switch from '$lib/ui/switch.svelte';
-	import { Command, Search, ToggleRight } from 'lucide-svelte';
+	import { Command, DollarSign, Search, ToggleRight } from 'lucide-svelte';
 	let open = false;
 	let group: string[] = [];
 	$: disabled = open;
 	let checked = false;
 	let radioValue = 'Startup';
 	let accordionValue: string[] = [];
+	let normalInputValue = '';
+	// make a regex, up to 0-16 characters, no special characters
+	const normalInputRegex = /^[a-zA-Z0-9]{0,16}$/;
+
+	let normalInputError = '';
+	$: {
+		const normalInputValid = normalInputRegex.test(normalInputValue);
+		normalInputError = normalInputValid
+			? ''
+			: 'Input must be up to 16 characters, no special characters';
+	}
 </script>
 
 <main class="min-h-[calc(100vh-15rem)] px-4 md:p-12 space-x-8 space-y-8">
@@ -29,22 +44,24 @@
 		{group}
 	</div> -->
 	<div class="w-full max-w-[40rem] flex flex-col gap-6">
-		<label class="input-group group">
-			<Search size="16" class="icon-left" />
-			<input spellcheck="false" autocomplete="false" placeholder="Search..." />
+		<Input pattern="[0-9]{2}" spellcheck="false" autocomplete="false" placeholder="Search...">
+			<Search size="16" slot="prefix" />
 			<Kbd
-				class="group-focus-within:scale-75 max-sm:hidden transition group-focus-within:opacity-0 dark:bg-background dark:shadow-[0_1px_0_#ffffff1a]"
+				slot="suffix"
+				class="group-focus-within:scale-75 max-sm:hidden transition-[transform,opacity,scale] group-focus-within:opacity-0 dark:bg-background dark:shadow-[0_1px_0_#ffffff1a]"
 			>
 				<Command size="12" />
 				K
 			</Kbd>
-		</label>
-		<label class="input-label w-full">
-			<span>
-				Normal Input <span class="text-muted-foreground text-xs">(optional)</span>
-			</span>
-			<input spellcheck="false" type="text" class="input" />
-		</label>
+		</Input>
+		<Input
+			label="Normal Input"
+			description="Up to 16 characters, no special characters"
+			spellcheck="false"
+			type="text"
+			bind:value={normalInputValue}
+			error={normalInputError}
+		/>
 
 		<label class="input-label w-full">
 			Text Area
@@ -60,9 +77,9 @@
 				<Description>Using custom and native select components</Description>
 			</Header>
 			<form class="grid gap-4">
-				<label class="input-label w-full" for="select1">
+				<!-- <label class="input-label w-full" for="select1">
 					Custom Select
-					<!-- <Select
+					<Select
 						let:Group
 						placeholder="Select an option"
 						id="select1"
@@ -81,11 +98,19 @@
 							<Option value="szymon">Szymon</Option>
 							<Option value="aleks">Aleks</Option>
 						</Group>
-					</Select> -->
-				</label>
-				<label class="input-label w-full" for="select2">
+					</Select>
+				</label> -->
+
+				<Label class="w-full flex-col" required>
+					Custom Input
+					<Input slot="input">
+						<DollarSign size="16" slot="prefix" />
+						<span slot="suffix">USD</span>
+					</Input>
+				</Label>
+				<Label class="flex-col" for="select2" required>
 					Native Select
-					<select class="input" id="select2" name="native" value="david">
+					<select slot="input" class="input" id="select2" name="native" value="david">
 						<optgroup label="Class 3">
 							<option value="witalina">Witalina</option>
 							<option value="david">David</option>
@@ -97,7 +122,7 @@
 							<option value="aleks">Aleks</option>
 						</optgroup>
 					</select>
-				</label>
+				</Label>
 				<Button class="mt-4">Submit</Button>
 			</form>
 		</Card>
@@ -132,7 +157,7 @@
 		<RadioGroup let:Radio bind:value={radioValue}>
 			<Radio
 				value="Startup"
-				class="bg-background items-start flex-row-reverse focus-within:ring-1 transition data-[state=checked]:ring-accent focus-within:ring-accent rounded-2xl ring-1 ring-foreground/5 shadow p-4 max-w-sm gap-4"
+				class="bg-background items-start flex-row-reverse focus-within:ring-1 data-[state=checked]:ring-accent focus-within:ring-accent rounded-2xl ring-1 ring-foreground/5 shadow p-4 max-w-sm gap-4"
 			>
 				<span class="flex flex-col gap-1.5 w-full">
 					<span class="font-medium">Startup</span>
@@ -141,7 +166,7 @@
 			</Radio>
 			<Radio
 				value="Business"
-				class="items-start flex-row-reverse focus-within:ring-1 transition data-[state=checked]:ring-accent focus-within:ring-accent rounded-2xl bg-background ring-1 ring-foreground/5 shadow p-4 max-w-sm gap-4"
+				class="items-start flex-row-reverse focus-within:ring-1 data-[state=checked]:ring-accent focus-within:ring-accent rounded-2xl bg-background ring-1 ring-foreground/5 shadow p-4 max-w-sm gap-4"
 			>
 				<span class="flex flex-col gap-1.5 w-full">
 					<span class="font-medium">Business</span>
@@ -150,7 +175,7 @@
 			</Radio>
 			<Radio
 				value="Enterprise"
-				class="items-start flex-row-reverse focus-within:ring-1 transition data-[state=checked]:ring-accent focus-within:ring-accent rounded-2xl bg-background ring-1 ring-foreground/5 shadow p-4 max-w-sm gap-4"
+				class="items-start flex-row-reverse focus-within:ring-1 data-[state=checked]:ring-accent focus-within:ring-accent rounded-2xl bg-background ring-1 ring-foreground/5 shadow p-4 max-w-sm gap-4"
 			>
 				<span class="flex flex-col gap-1.5 w-full">
 					<span class="font-medium">Enterprise</span>
@@ -159,7 +184,7 @@
 			</Radio>
 		</RadioGroup>
 		<Card class="p-4 max-w-sm">
-			<Accordion let:Item bind:value={accordionValue} multiple>
+			<Accordion let:Item bind:value={accordionValue}>
 				<Item let:Trigger let:Content>
 					<Trigger>Accordion</Trigger>
 					<Content>
