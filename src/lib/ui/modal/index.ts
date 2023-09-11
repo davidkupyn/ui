@@ -1,3 +1,4 @@
+import { toWritableStores } from '$lib/helpers';
 import { createDialog, type Dialog, type CreateDialogProps } from '@melt-ui/svelte';
 import { getContext, setContext } from 'svelte';
 import { cubicOut } from 'svelte/easing';
@@ -61,13 +62,51 @@ export const getModalContext = () =>
 		}
 	>('dialog');
 
-export const ctx = {
+export const ctx2 = {
 	set: (props: CreateDialogProps) => {
 		const modal = createDialog(props);
 		setContext(NAME, modal);
 		return modal;
 	},
 	get: () => getContext<Dialog>(NAME)
+};
+
+export const ctx = {
+	set: (
+		props: CreateDialogProps & {
+			props: {
+				alert?: boolean;
+				type?: 'info' | 'success' | 'warning' | 'error';
+				drawer?: boolean;
+				side?: 'left' | 'right' | 'top' | 'bottom';
+				crossButton?: boolean;
+			};
+		}
+	) => {
+		const dialog = createDialog(props);
+		const extraOptions = toWritableStores(props.props);
+		const combined = {
+			...dialog,
+			options: {
+				...dialog.options,
+				...extraOptions
+			}
+		};
+		setContext(NAME, combined);
+		return combined;
+	},
+	get: () =>
+		getContext<
+			Dialog & {
+				options: {
+					alert: Writable<boolean>;
+					type: Writable<'info' | 'success' | 'warning' | 'error'>;
+					drawer: Writable<boolean>;
+					side: Writable<'left' | 'right' | 'top' | 'bottom'>;
+					crossButton: Writable<boolean>;
+				};
+			}
+		>(NAME)
 };
 
 function split_css_unit(value: number | string): [number, string] {

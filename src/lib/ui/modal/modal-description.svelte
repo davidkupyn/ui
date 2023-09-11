@@ -1,9 +1,11 @@
 <script lang="ts">
-	import { modal, getModalContext } from '.';
+	import { modal, ctx } from '.';
 
-	const { description } = getModalContext();
+	const {
+		elements: { description }
+	} = ctx.get();
 </script>
 
-<p class={modal().description()} melt={$description}>
+<p class={modal().description()} use:description {...$description}>
 	<slot />
 </p>

@@ -1,29 +1,33 @@
 <script lang="ts">
 	import { AlertCircle, AlertTriangle, CheckCircle2, Info, X } from 'lucide-svelte';
-	import { modal, getModalContext } from '.';
+	import { modal, ctx } from '.';
 	import Button from '../button.svelte';
 	import { cn } from '$lib/helpers/style';
 
 	export let icon = false;
-	const { title, type, close, crossButton, alert } = getModalContext();
-	$: hasIcon = !!type || $$slots.icon || icon;
+
+	const {
+		elements: { title, close },
+		options: { alert, crossButton, type }
+	} = ctx.get();
+	$: hasIcon = !!$type || $$slots.icon || icon;
 </script>
 
-<h2 class={modal({ hasIcon }).title()} melt={$title}>
+<h2 class={modal({ hasIcon }).title()} use:title {...$title}>
 	<span aria-hidden>
-		{#if type === 'error'}
+		{#if $type === 'error'}
 			<div class="bg-error-500/10 rounded-xl p-1.5 text-error text-shadow">
 				<AlertCircle size="20" />
 			</div>
-		{:else if type === 'warning'}
+		{:else if $type === 'warning'}
 			<div class="bg-warning-500/10 rounded-xl p-1.5 text-warning">
 				<AlertTriangle size="20" />
 			</div>
-		{:else if type === 'success'}
+		{:else if $type === 'success'}
 			<div class="bg-success-500/10 rounded-xl p-1.5 text-success">
 				<CheckCircle2 size="20" />
 			</div>
-		{:else if type === 'info'}
+		{:else if $type === 'info'}
 			<div class="bg-info-500/10 rounded-xl p-1.5 text-info">
 				<Info size="20" />
 			</div>
@@ -38,7 +42,7 @@
 	<slot />
 </h2>
 
-{#if crossButton && !alert}
+{#if $crossButton && !$alert}
 	<Button
 		variant="text"
 		size="icon"

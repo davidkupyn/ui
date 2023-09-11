@@ -1,7 +1,9 @@
 <script lang="ts">
-	import { getModalContext } from '.';
+	import { ctx } from '.';
 	import Button from '../button.svelte';
-	const { trigger } = getModalContext();
+	const {
+		elements: { trigger }
+	} = ctx.get();
 
 	let className: string | undefined | null = undefined;
 	export { className as class };

@@ -1,9 +1,7 @@
 <script lang="ts">
-	import { createDialog } from '@melt-ui/svelte';
-	import { createEventDispatcher, setContext } from 'svelte';
-	import Trigger from './modal-trigger.svelte';
+	import { createEventDispatcher } from 'svelte';
 	import Content from './modal-content.svelte';
-	import { writable } from 'svelte/store';
+	import { ctx } from '.';
 
 	export let crossButton = true;
 	export let alert = false;
@@ -38,36 +36,46 @@
 		drawer?: never;
 		side?: never;
 	};
-	let sideStore = writable<'left' | 'right' | 'top' | 'bottom'>(side);
-	let isDrawerStore = writable<boolean>(drawer);
-	$: sideStore.set(side || 'right');
-	$: isDrawerStore.set(drawer);
+
 	type $$Props = BaseDialogProps & (AlertDialogProps | DrawerProps | DialogProps);
 	const dispatch = createEventDispatcher();
 
-	const dialog = createDialog({
+	const dialog = ctx.set({
 		role: alert ? 'alertdialog' : 'dialog',
 		closeOnOutsideClick,
-		preventScroll
+		onOpenChange: ({ next }) => {
+			open = next;
+			dispatch('change', next);
+			if (next) dispatch('open');
+			else dispatch('close');
+
+			return next;
+		},
+		preventScroll,
+		props: {
+			crossButton,
+			alert,
+			type,
+			drawer,
+			side: drawer ? side : undefined
+		}
 	});
-	const { open: openStore, close, trigger } = dialog;
-	setContext('dialog', {
-		...dialog,
-		alert,
-		type: alert ? type : undefined,
-		drawer: isDrawerStore,
-		side: drawer ? sideStore : undefined,
-		crossButton
-	});
+	const {
+		states: { open: openStore },
+		elements: { trigger, close },
+		options
+	} = dialog;
 
 	$: openStore.set(open);
-	openStore.subscribe((v) => {
-		open = v;
-		dispatch('change', v);
-		if (v) dispatch('open');
-		else dispatch('close');
-	});
+	$: options.closeOnOutsideClick.set(closeOnOutsideClick);
+	$: options.preventScroll.set(preventScroll);
+	$: options.role.set(alert ? 'alertdialog' : 'dialog');
+	$: options?.drawer?.set(drawer);
+	$: options?.side?.set(drawer ? side : undefined);
+	$: options?.alert?.set(alert);
+	$: options?.type?.set(alert ? type : undefined);
+	$: options?.crossButton?.set(crossButton);
 	export { trigger, close };
 </script>
 
-<slot {Trigger} {Content} close={$close} trigger={$trigger} {open} />
+<slot {Content} close={$close} trigger={$trigger} {open} />

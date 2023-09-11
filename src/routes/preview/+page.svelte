@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { fade } from 'svelte/transition';
 	import CardDescription from '../../lib/ui/card/card-description.svelte';
 	import { tippy } from '$lib/actions/tippy';
 	import { Accordion } from '$lib/ui/accordion';
@@ -13,7 +14,19 @@
 	import { RadioGroup } from '$lib/ui/radio-group';
 	// import { Select } from '$lib/ui/select';
 	import Switch from '$lib/ui/switch.svelte';
-	import { Command, DollarSign, Search, ToggleRight } from 'lucide-svelte';
+	import {
+		AppWindow,
+		BookTemplate,
+		Command,
+		DollarSign,
+		Flower2,
+		RefreshCw,
+		Search,
+		Stars,
+		ToggleRight,
+		UserCog2
+	} from 'lucide-svelte';
+	import { Modal } from '$lib/ui/modal';
 	let open = false;
 	let group: string[] = [];
 	$: disabled = open;
@@ -21,7 +34,7 @@
 	let radioValue = 'Startup';
 	let accordionValue: string[] = [];
 	let normalInputValue = '';
-	// make a regex, up to 0-16 characters, no special characters
+	let dialogOpen = false;
 	const normalInputRegex = /^[a-zA-Z0-9]{0,16}$/;
 
 	let normalInputError = '';
@@ -31,9 +44,10 @@
 			? ''
 			: 'Input must be up to 16 characters, no special characters';
 	}
+	let buttonLoading = false;
 </script>
 
-<main class="min-h-[calc(100vh-15rem)] px-4 md:p-12 space-x-8 space-y-8">
+<main in:fade={{ duration: 200 }} class="py-8 w-full space-y-6 container mx-auto px-4 sm:px-6">
 	<div class="flex gap-6">
 		<Checkbox value="checkbox 1" bind:checked bind:group />
 		<Checkbox {disabled} value="checkbox 2" bind:group />
@@ -126,6 +140,44 @@
 				<Button class="mt-4">Submit</Button>
 			</form>
 		</Card>
+		<Card class="flex flex-wrap gap-2 w-full">
+			<Button>
+				<Stars size="16" />
+				Primary
+			</Button>
+			<Button variant="outline">
+				<BookTemplate size="16" />
+				Outline
+			</Button>
+			<Button variant="accent">Accent</Button>
+			<Button variant="secondary">
+				<Flower2 size="16" />
+				Secondary
+			</Button>
+			<Button variant="error">Error</Button>
+			<Button variant="success">Success</Button>
+			<Button variant="warning">Warning</Button>
+			<Button variant="info">Info</Button>
+			<Button variant="ghost">Ghost</Button>
+			<Button variant="link">Link</Button>
+			<Button size="icon" variant="ghost">
+				<RefreshCw size="16" class="group-active:rotate-45 -rotate-[30deg] transition-transform" />
+			</Button>
+			<Button variant="text">Text</Button>
+
+			<Button
+				disabled={buttonLoading}
+				loading={buttonLoading}
+				on:click={() => {
+					buttonLoading = true;
+					setTimeout(() => {
+						buttonLoading = false;
+					}, 2500);
+				}}
+			>
+				Submit
+			</Button>
+		</Card>
 		<Disclosure let:Summary let:Details class="max-w-sm" bind:unstyled={open}>
 			<Summary class="w-full">Disclosure</Summary>
 			<Details>
@@ -205,6 +257,35 @@
 			</Accordion>
 		</Card>
 	</div>
+	<Modal let:trigger let:Content bind:open={dialogOpen}>
+		<Button melt={trigger}>
+			<AppWindow size="16" />
+			Open Modal
+		</Button>
+		<Content let:Header let:Footer let:close class="sm:max-w-[425px]">
+			<Header let:Title let:Description>
+				<Title>
+					<UserCog2 slot="icon" size="20" />
+					Edit Profile</Title
+				>
+				<Description>Make changes to your profile here. Click save when you're done.</Description>
+			</Header>
+			<form class="grid gap-2">
+				<label class="input-label w-full">
+					Username
+					<input class="input" type="text" placeholder="Dave Kupyn" />
+				</label>
+				<label class="input-label w-full">
+					Email
+					<input class="input" type="text" placeholder="dkupyn@gmail.com" />
+				</label>
+				<Footer class="mt-6">
+					<Button melt={close} type="button" variant="outline">Cancel</Button>
+					<Button type="submit">Confirm</Button>
+				</Footer>
+			</form>
+		</Content>
+	</Modal>
 </main>
 Popover 100%, Disclosure 100%, RadioGroup 100%, Menu (fix checkbox), Switch (look into it, group), Button
 (fix it, better styling), Checkbox ( fix it, group), later add asChild
