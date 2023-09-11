@@ -10,7 +10,7 @@
 	const {
 		states: { open },
 		elements: { content },
-		extraOptions: { unstyled }
+		options: { unstyled }
 	} = ctx.get();
 </script>
 

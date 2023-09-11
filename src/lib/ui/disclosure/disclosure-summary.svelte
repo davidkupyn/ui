@@ -10,7 +10,7 @@
 
 	const {
 		elements: { trigger },
-		extraOptions: { unstyled }
+		options: { unstyled }
 	} = ctx.get();
 </script>
 

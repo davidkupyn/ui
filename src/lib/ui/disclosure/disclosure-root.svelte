@@ -3,8 +3,8 @@
 	import { ctx } from '.';
 	import { cn } from '$lib/helpers';
 	import { createEventDispatcher } from 'svelte';
-	import Content from './disclosure-content.svelte';
-	import Trigger from './disclosure-trigger.svelte';
+	import Details from './disclosure-details.svelte';
+	import Summary from './disclosure-summary.svelte';
 
 	type $$Props = HTMLAttributes<HTMLDivElement> & {
 		disabled?: boolean;
@@ -49,12 +49,12 @@
 </script>
 
 <div class={cn('group', className)} use:root {...$root}>
-	<slot {Trigger} {Content} open={$openStore}>
-		<Trigger>
+	<slot {Summary} {Details} open={$openStore}>
+		<Summary>
 			<slot name="summary">{summary}</slot>
-		</Trigger>
-		<Content>
+		</Summary>
+		<Details>
 			<slot name="details">{details}</slot>
-		</Content>
+		</Details>
 	</slot>
 </div>
