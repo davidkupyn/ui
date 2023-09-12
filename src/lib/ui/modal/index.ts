@@ -1,8 +1,7 @@
-import { toWritableStores } from '$lib/helpers';
+import { toWritableStores, type ToWritableProps } from '$lib/helpers';
 import { createDialog, type Dialog, type CreateDialogProps } from '@melt-ui/svelte';
 import { getContext, setContext } from 'svelte';
 import { cubicOut } from 'svelte/easing';
-import type { Writable } from 'svelte/store';
 import type { TransitionConfig } from 'svelte/transition';
 import { tv } from 'tailwind-variants';
 
@@ -51,36 +50,18 @@ export const modal = tv({
 	}
 });
 
-export const getModalContext = () =>
-	getContext<
-		ReturnType<typeof createDialog> & {
-			alert: boolean;
-			type: 'info' | 'success' | 'warning' | 'error';
-			crossButton: boolean;
-			drawer: Writable<boolean>;
-			side: Writable<'left' | 'right' | 'top' | 'bottom'>;
-		}
-	>('dialog');
-
-export const ctx2 = {
-	set: (props: CreateDialogProps) => {
-		const modal = createDialog(props);
-		setContext(NAME, modal);
-		return modal;
-	},
-	get: () => getContext<Dialog>(NAME)
+type ExtraDialogProps = {
+	alert?: boolean;
+	type?: 'info' | 'success' | 'warning' | 'error';
+	drawer?: boolean;
+	side?: 'left' | 'right' | 'top' | 'bottom';
+	crossButton?: boolean;
 };
 
 export const ctx = {
 	set: (
 		props: CreateDialogProps & {
-			props: {
-				alert?: boolean;
-				type?: 'info' | 'success' | 'warning' | 'error';
-				drawer?: boolean;
-				side?: 'left' | 'right' | 'top' | 'bottom';
-				crossButton?: boolean;
-			};
+			props: ExtraDialogProps;
 		}
 	) => {
 		const dialog = createDialog(props);
@@ -98,13 +79,7 @@ export const ctx = {
 	get: () =>
 		getContext<
 			Dialog & {
-				options: {
-					alert: Writable<boolean>;
-					type: Writable<'info' | 'success' | 'warning' | 'error'>;
-					drawer: Writable<boolean>;
-					side: Writable<'left' | 'right' | 'top' | 'bottom'>;
-					crossButton: Writable<boolean>;
-				};
+				options: ToWritableProps<ExtraDialogProps>;
 			}
 		>(NAME)
 };

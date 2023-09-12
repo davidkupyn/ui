@@ -60,6 +60,7 @@
 			side: drawer ? side : undefined
 		}
 	});
+
 	const {
 		states: { open: openStore },
 		elements: { trigger, close },

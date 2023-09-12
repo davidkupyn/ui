@@ -12,10 +12,6 @@
 	} = ctx.get();
 	let className: string | undefined | null = undefined;
 	export { className as class };
-	$: console.log({
-		drawer: $drawer,
-		side: $side
-	});
 </script>
 
 <div use:portalled>

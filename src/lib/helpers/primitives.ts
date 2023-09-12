@@ -9,9 +9,13 @@ export function toWritableStores<T extends Record<string, unknown>>(
 ): { [K in keyof T]: Writable<T[K]> } {
 	const result = {} as { [K in keyof T]: Writable<T[K]> };
 
-  for (const key in properties) {
+	for (const key in properties) {
 		result[key] = writable(properties[key]);
 	}
 
 	return result;
 }
+
+export type ToWritableProps<T extends Record<string, unknown>> = {
+	[K in keyof T]: Writable<T[K]>;
+};
