@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { ctx } from '.';
 	import { fly } from 'svelte/transition';
 	import { ChevronsUpDown } from 'lucide-svelte';
 	import { createSelect } from '@melt-ui/svelte';
@@ -20,19 +21,14 @@
 
 	let className: string | undefined | null = undefined;
 	export { className as class };
-	const {
-		value: valueStore,
-		valueLabel,
-		trigger,
-		menu,
-		option,
-		isSelected,
-		open,
-		input,
-		group,
-		groupLabel
-	} = createSelect({
-		value,
+
+	const select = ctx.set({
+		onValueChange: ({ next }) => {
+			value = next;
+			dispatch('change', next);
+			return next;
+		},
+		defaultValue: value,
 		name,
 		disabled,
 		required,
