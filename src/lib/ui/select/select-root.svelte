@@ -11,7 +11,6 @@
 	import Group from './select-option-group.svelte';
 	import Option from './select-option.svelte';
 
-	const dispatch = createEventDispatcher();
 	export let id = '';
 	export let name = '';
 	export let required = false;
@@ -21,9 +20,10 @@
 	export let loop = false;
 	export let preventScroll = true;
 	export let multiple = false;
-
 	let className: string | undefined | null = undefined;
 	export { className as class };
+
+	const dispatch = createEventDispatcher();
 
 	const select = ctx.set({
 		onSelectedChange: ({ next }) => {
@@ -37,6 +37,7 @@
 		required,
 		loop,
 		preventScroll,
+		//@ts-ignore
 		multiple
 	});
 
