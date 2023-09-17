@@ -40,10 +40,10 @@
 </script>
 
 <script lang="ts">
-	import type { HTMLAnchorAttributes, HTMLButtonAttributes } from 'svelte/elements';
-	import { Loader2 } from 'lucide-svelte';
 	import { cn } from '$lib/helpers/style';
+	import { Loader2 } from 'lucide-svelte';
 	import type { Action } from 'svelte/action';
+	import type { HTMLAnchorAttributes, HTMLButtonAttributes } from 'svelte/elements';
 
 	let className: string | undefined | null = undefined;
 	export { className as class };

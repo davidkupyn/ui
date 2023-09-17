@@ -1,10 +1,14 @@
 <script lang="ts">
 	import Trigger from './tabs-trigger.svelte';
-	import { getTabsContext } from '.';
+	import { ctx } from '.';
 	import { cn } from '$lib/helpers/style';
 
-	const { list } = getTabsContext();
+	const {
+		elements: { list }
+	} = ctx.get();
+
 	let className: string | undefined | null = undefined;
+
 	type Tab =
 		| string
 		| {
@@ -17,7 +21,8 @@
 </script>
 
 <div
-	melt={$list}
+	use:list
+	{...$list}
 	class={cn(
 		'flex shrink-0 items-center w-full h-9 p-1 gap-2 data-[orientation=vertical]:flex-col data-[orientation=vertical]:w-fit data-[orientation=vertical]:min-w-[6rem] shadow-inner data-[orientation=vertical]:h-auto overflow-x-auto bg-muted dark:shadow-[inset_0_1px_#ffffff0f] data-[orientation=vertical]:rounded-2xl rounded-xl',
 		className
@@ -25,12 +30,10 @@
 >
 	<slot {Trigger}>
 		{#each tabs as tab (typeof tab === 'string' ? tab : tab.value)}
-			<Trigger disabled={disabled.includes(tab)} value={typeof tab === 'string' ? tab : tab.value}>
-				{#if typeof tab === 'string'}
-					{tab}
-				{:else}
-					{tab.label}
-				{/if}
+			{@const value = typeof tab === 'string' ? tab : tab.value}
+			{@const label = typeof tab === 'string' ? tab : tab.label}
+			<Trigger disabled={disabled.includes(tab)} {value}>
+				{label}
 			</Trigger>
 		{/each}
 	</slot>

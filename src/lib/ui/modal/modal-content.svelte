@@ -1,9 +1,9 @@
 <script lang="ts">
-	import Header from './modal-header.svelte';
-	import Footer from './modal-footer.svelte';
-	import { fade } from 'svelte/transition';
-	import { modal, ctx, css } from '.';
 	import { cn } from '$lib/helpers/style';
+	import { fade } from 'svelte/transition';
+	import { css, ctx, modal } from '.';
+	import Footer from './modal-footer.svelte';
+	import Header from './modal-header.svelte';
 
 	const {
 		elements: { portalled, overlay, content, close },

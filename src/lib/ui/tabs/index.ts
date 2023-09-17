@@ -1,6 +1,14 @@
-import type { createTabs } from '@melt-ui/svelte';
-import { getContext } from 'svelte';
-
 export { default as Tabs } from './tabs-root.svelte';
+import { createTabs, type CreateTabsProps, type Tabs } from '@melt-ui/svelte';
+import { getContext, setContext } from 'svelte';
 
-export const getTabsContext = () => getContext<ReturnType<typeof createTabs>>('tabs');
+const NAME = 'tabs';
+
+export const ctx = {
+	set: (props: CreateTabsProps) => {
+		const tabs = createTabs(props);
+		setContext(NAME, tabs);
+		return tabs;
+	},
+	get: () => getContext<Tabs>(NAME)
+};
