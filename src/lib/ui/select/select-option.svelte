@@ -1,7 +1,7 @@
 <script lang="ts">
-	import { ctx } from '.';
 	import { cn } from '$lib/helpers/style';
 	import { Check } from 'lucide-svelte';
+	import { ctx } from '.';
 	import { menuStyles } from '../menu';
 
 	export let value = '';

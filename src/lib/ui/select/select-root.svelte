@@ -20,6 +20,7 @@
 	export let value: SelectOption<unknown> | undefined = undefined;
 	export let loop = false;
 	export let preventScroll = true;
+	export let multiple = false;
 
 	let className: string | undefined | null = undefined;
 	export { className as class };
@@ -35,7 +36,8 @@
 		disabled,
 		required,
 		loop,
-		preventScroll
+		preventScroll,
+		multiple
 	});
 
 	const {

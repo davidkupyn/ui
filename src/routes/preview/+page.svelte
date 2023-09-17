@@ -97,6 +97,7 @@
 						id="select1"
 						name="custom"
 						on:change={(e) => console.log(e.detail)}
+						multiple
 					>
 						<Group let:Option let:Label={SelectLabel}>
 							<SelectLabel>Class 3</SelectLabel>
