@@ -1,15 +1,18 @@
 <script lang="ts">
 	import { cn } from '$lib/helpers/style';
-	import { getOptionGroupContext, getSelectContext } from '.';
+	import { ctx } from '.';
 	import { menuStyles } from '../menu';
 
-	const key = getOptionGroupContext();
-	const { groupLabel } = getSelectContext();
+	const key = ctx.group.get();
+
+	const {
+		elements: { groupLabel: groupLabel }
+	} = ctx.get();
 
 	let className: string | undefined | null = undefined;
 	export { className as class };
 </script>
 
-<span melt={$groupLabel(key)} class={cn(menuStyles().itemLabel(), className)}>
+<span {...$groupLabel(key)} class={cn(menuStyles().itemLabel(), className)}>
 	<slot />
 </span>

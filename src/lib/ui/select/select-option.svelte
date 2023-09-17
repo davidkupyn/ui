@@ -1,7 +1,7 @@
 <script lang="ts">
+	import { ctx } from '.';
 	import { cn } from '$lib/helpers/style';
 	import { Check } from 'lucide-svelte';
-	import { getSelectContext } from '.';
 	import { menuStyles } from '../menu';
 
 	export let value = '';
@@ -10,12 +10,15 @@
 	let className: string | undefined | null = undefined;
 	export { className as class };
 
-	const { option, isSelected } = getSelectContext();
+	const {
+		elements: { option },
+		helpers: { isSelected }
+	} = ctx.get();
 	const { item } = menuStyles();
 </script>
 
 <li
-	melt={$option({ value, disabled })}
+	{...$option({ value, disabled })}
 	use:option
 	class={cn(
 		item(),
