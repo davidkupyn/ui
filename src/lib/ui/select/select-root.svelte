@@ -1,13 +1,15 @@
 <script lang="ts">
-	import { ctx } from '.';
-	import { fly } from 'svelte/transition';
-	import { ChevronsUpDown } from 'lucide-svelte';
-	import type { SelectOption } from '@melt-ui/svelte';
-	import { createEventDispatcher, setContext } from 'svelte';
 	import { cn } from '$lib/helpers/style';
-	import Option from './select-option.svelte';
-	import Group from './select-option-group.svelte';
+	import type { SelectOption } from '@melt-ui/svelte';
+	import { ChevronsUpDown } from 'lucide-svelte';
+	import { createEventDispatcher } from 'svelte';
+	import { fly } from 'svelte/transition';
+	import { ctx } from '.';
+	import { inputStyles } from '../input';
+	import Suffix from '../input/input-suffix.svelte';
 	import { menuStyles } from '../menu';
+	import Group from './select-option-group.svelte';
+	import Option from './select-option.svelte';
 
 	const dispatch = createEventDispatcher();
 	export let id = '';
@@ -54,7 +56,11 @@
 	{...$trigger}
 	{disabled}
 	type="button"
-	class={cn('input-group w-full justify-between data-[state=open]:ring-accent', className)}
+	class={cn(
+		inputStyles(),
+		'w-full relative flex items-center justify-between data-[state=open]:ring-accent',
+		className
+	)}
 	aria-label={placeholder}
 >
 	{#if $valueLabel}
@@ -62,9 +68,9 @@
 	{:else}
 		<span class="text-muted-foreground">{placeholder}</span>
 	{/if}
-	<span class="icon-right" aria-pressed={$openStore}>
+	<Suffix class="aria-pressed:text-foreground" aria-pressed={$openStore}>
 		<ChevronsUpDown size="16" />
-	</span>
+	</Suffix>
 </button>
 <input use:input {...$input} {id} />
 {#if $openStore}

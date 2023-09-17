@@ -1,10 +1,8 @@
 <script lang="ts">
-	import { setContext } from 'svelte';
+	import { uuid } from '$lib/helpers/uuid';
 	import { ctx } from '.';
 	import Label from './select-option-group-label.svelte';
 	import Option from './select-option.svelte';
-	import { uuid } from '$lib/helpers/uuid';
-	import { get } from 'svelte/store';
 
 	const {
 		elements: { group }
