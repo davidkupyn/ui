@@ -2,7 +2,7 @@
 	import { ctx } from '.';
 	import { fly } from 'svelte/transition';
 	import { ChevronsUpDown } from 'lucide-svelte';
-	import { createSelect } from '@melt-ui/svelte';
+	import type { SelectOption } from '@melt-ui/svelte';
 	import { createEventDispatcher, setContext } from 'svelte';
 	import { cn } from '$lib/helpers/style';
 	import Option from './select-option.svelte';
@@ -15,7 +15,7 @@
 	export let required = false;
 	export let placeholder = '';
 	export let disabled = false;
-	export let value: unknown = undefined;
+	export let value: SelectOption<unknown> | undefined = undefined;
 	export let loop = false;
 	export let preventScroll = true;
 
@@ -23,12 +23,12 @@
 	export { className as class };
 
 	const select = ctx.set({
-		onValueChange: ({ next }) => {
+		onSelectedChange: ({ next }) => {
 			value = next;
 			dispatch('change', next);
 			return next;
 		},
-		defaultValue: value,
+		defaultSelected: value,
 		name,
 		disabled,
 		required,
@@ -36,16 +36,22 @@
 		preventScroll
 	});
 
+	const {
+		states: { open: openStore, selected: valueStore, selectedLabel: valueLabel },
+		elements: { trigger, input, menu },
+		options
+	} = select;
+
 	$: valueStore.set(value);
 	valueStore.subscribe((v) => {
 		value = v;
 		dispatch('change', v);
 	});
-	setContext('select', { option, isSelected, group, groupLabel });
 </script>
 
 <button
-	melt={$trigger}
+	use:trigger
+	{...$trigger}
 	{disabled}
 	type="button"
 	class={cn('input-group w-full justify-between data-[state=open]:ring-accent', className)}
@@ -56,13 +62,13 @@
 	{:else}
 		<span class="text-muted-foreground">{placeholder}</span>
 	{/if}
-	<span class="icon-right" aria-pressed={$open}>
+	<span class="icon-right" aria-pressed={$openStore}>
 		<ChevronsUpDown size="16" />
 	</span>
 </button>
-<input melt={$input} {id} />
-{#if $open}
-	<ul transition:fly={{ duration: 150, y: -10 }} melt={$menu} class={menuStyles().content()}>
+<input use:input {...$input} {id} />
+{#if $openStore}
+	<ul transition:fly={{ duration: 150, y: -10 }} use:menu {...$menu} class={menuStyles().content()}>
 		<slot {Option} {Group} />
 	</ul>
 {/if}
