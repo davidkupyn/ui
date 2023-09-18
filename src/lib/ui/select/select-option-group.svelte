@@ -1,17 +1,20 @@
 <script lang="ts">
-	import { setContext } from 'svelte';
-	import { getSelectContext } from '.';
+	import { uuid } from '$lib/helpers/uuid';
+	import { ctx } from '.';
 	import Label from './select-option-group-label.svelte';
 	import Option from './select-option.svelte';
-	import { uuid } from '$lib/helpers/uuid';
 
-	const { group } = getSelectContext();
-	const key: string = uuid();
-	setContext('option-group', key);
 	let className: string | undefined | null = undefined;
 	export { className as class };
+
+	const {
+		elements: { group }
+	} = ctx.get();
+
+	const key: string = uuid();
+	ctx.group.set(key);
 </script>
 
-<div melt={$group(key)} class={className}>
+<div use:group {...$group(key)} class={className}>
 	<slot {Label} {Option} />
 </div>

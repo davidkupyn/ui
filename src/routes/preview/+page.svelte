@@ -1,7 +1,4 @@
 <script lang="ts">
-	import { fade } from 'svelte/transition';
-	import CardDescription from '../../lib/ui/card/card-description.svelte';
-	import { tippy } from '$lib/actions/tippy';
 	import { Accordion } from '$lib/ui/accordion';
 	import Button from '$lib/ui/button.svelte';
 	import { Card } from '$lib/ui/card';
@@ -10,9 +7,10 @@
 	import { Input } from '$lib/ui/input';
 	import Kbd from '$lib/ui/kbd.svelte';
 	import Label from '$lib/ui/label.svelte';
+	import { Modal } from '$lib/ui/modal';
 	import { Popover } from '$lib/ui/popover';
 	import { RadioGroup } from '$lib/ui/radio-group';
-	// import { Select } from '$lib/ui/select';
+	import { Select } from '$lib/ui/select';
 	import Switch from '$lib/ui/switch.svelte';
 	import {
 		AppWindow,
@@ -26,6 +24,7 @@
 		ToggleRight,
 		UserCog2
 	} from 'lucide-svelte';
+	import { fade } from 'svelte/transition';
 	import { Modal } from '$lib/ui/modal';
 	import { Tabs } from '$lib/ui/tabs';
 	let open = false;
@@ -92,7 +91,7 @@
 				<Description>Using custom and native select components</Description>
 			</Header>
 			<form class="grid gap-4">
-				<!-- <label class="input-label w-full" for="select1">
+				<label class="input-label w-full" for="select1">
 					Custom Select
 					<Select
 						let:Group
@@ -100,21 +99,22 @@
 						id="select1"
 						name="custom"
 						on:change={(e) => console.log(e.detail)}
+						multiple
 					>
-						<Group let:Option let:Label>
-							<Label>Class 3</Label>
+						<Group let:Option let:Label={SelectLabel}>
+							<SelectLabel>Class 3</SelectLabel>
 							<Option value="witalina">Witalina</Option>
 							<Option value="david">David</Option>
 							<Option value="wiktor">Wiktor</Option>
 							<Option value="gustaw">Gustaw</Option>
 						</Group>
-						<Group let:Option let:Label>
-							<Label>Class 1</Label>
+						<Group let:Option let:Label={SelectLabel}>
+							<SelectLabel>Class 1</SelectLabel>
 							<Option value="szymon">Szymon</Option>
 							<Option value="aleks">Aleks</Option>
 						</Group>
 					</Select>
-				</label> -->
+				</label>
 
 				<Label class="w-full flex-col" required>
 					Custom Input

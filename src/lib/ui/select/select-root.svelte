@@ -1,58 +1,69 @@
 <script lang="ts">
-	import { fly } from 'svelte/transition';
-	import { ChevronsUpDown } from 'lucide-svelte';
-	import { createSelect } from '@melt-ui/svelte';
-	import { createEventDispatcher, setContext } from 'svelte';
 	import { cn } from '$lib/helpers/style';
-	import Option from './select-option.svelte';
-	import Group from './select-option-group.svelte';
+	import type { SelectOption } from '@melt-ui/svelte';
+	import { ChevronsUpDown } from 'lucide-svelte';
+	import { createEventDispatcher } from 'svelte';
+	import { fly } from 'svelte/transition';
+	import { ctx } from '.';
+	import { inputStyles } from '../input';
+	import Suffix from '../input/input-suffix.svelte';
 	import { menuStyles } from '../menu';
+	import Group from './select-option-group.svelte';
+	import Option from './select-option.svelte';
 
-	const dispatch = createEventDispatcher();
 	export let id = '';
 	export let name = '';
 	export let required = false;
 	export let placeholder = '';
 	export let disabled = false;
-	export let value: unknown = undefined;
+	export let value: SelectOption<unknown> | undefined = undefined;
 	export let loop = false;
 	export let preventScroll = true;
-
+	export let multiple = false;
 	let className: string | undefined | null = undefined;
 	export { className as class };
-	const {
-		value: valueStore,
-		valueLabel,
-		trigger,
-		menu,
-		option,
-		isSelected,
-		open,
-		input,
-		group,
-		groupLabel
-	} = createSelect({
-		value,
+
+	const dispatch = createEventDispatcher();
+
+	const select = ctx.set({
+		onSelectedChange: ({ next }) => {
+			value = next;
+			dispatch('change', next);
+			return next;
+		},
+		defaultSelected: value,
 		name,
 		disabled,
 		required,
 		loop,
-		preventScroll
+		preventScroll,
+		//@ts-ignore
+		multiple
 	});
+
+	const {
+		states: { open: openStore, selected: valueStore, selectedLabel: valueLabel },
+		elements: { trigger, input, menu },
+		options
+	} = select;
 
 	$: valueStore.set(value);
 	valueStore.subscribe((v) => {
 		value = v;
 		dispatch('change', v);
 	});
-	setContext('select', { option, isSelected, group, groupLabel });
 </script>
 
 <button
-	melt={$trigger}
+	use:trigger
+	{...$trigger}
 	{disabled}
 	type="button"
-	class={cn('input-group w-full justify-between data-[state=open]:ring-accent', className)}
+	class={cn(
+		inputStyles(),
+		'w-full relative flex items-center justify-between data-[state=open]:ring-accent',
+		className
+	)}
 	aria-label={placeholder}
 >
 	{#if $valueLabel}
@@ -60,13 +71,13 @@
 	{:else}
 		<span class="text-muted-foreground">{placeholder}</span>
 	{/if}
-	<span class="icon-right" aria-pressed={$open}>
+	<Suffix class="aria-pressed:text-foreground" aria-pressed={$openStore}>
 		<ChevronsUpDown size="16" />
-	</span>
+	</Suffix>
 </button>
-<input melt={$input} {id} />
-{#if $open}
-	<ul transition:fly={{ duration: 150, y: -10 }} melt={$menu} class={menuStyles().content()}>
+<input use:input {...$input} {id} />
+{#if $openStore}
+	<ul transition:fly={{ duration: 150, y: -10 }} use:menu {...$menu} class={menuStyles().content()}>
 		<slot {Option} {Group} />
 	</ul>
 {/if}
