@@ -4,14 +4,14 @@ import {
 	type Combobox as ComboboxReturn
 } from '@melt-ui/svelte';
 import { getContext, setContext } from 'svelte';
-export { default as AutoComplete } from './auto-complete-root.svelte';
-const NAME = 'auto-complete';
+export { default as CommandMenu } from './command-menu-root.svelte';
+const NAME = 'command-menu';
 
 export const ctx = {
 	set: <T>(props: CreateComboboxProps<T>) => {
-		const autoComplete = createCombobox(props);
-		setContext(NAME, autoComplete);
-		return autoComplete;
+		const commandMenu = createCombobox(props);
+		setContext(NAME, commandMenu);
+		return commandMenu;
 	},
 	get: () => getContext<ComboboxReturn>(NAME)
 };

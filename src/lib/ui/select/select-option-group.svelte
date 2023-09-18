@@ -10,8 +10,8 @@
 	const {
 		elements: { group }
 	} = ctx.get();
-
 	const key: string = uuid();
+
 	ctx.group.set(key);
 </script>
 

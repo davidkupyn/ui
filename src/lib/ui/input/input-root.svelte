@@ -10,13 +10,14 @@
 	import Prefix from './input-prefix.svelte';
 	import Suffix from './input-suffix.svelte';
 	import { inputStyles } from '.';
+	import type { ExplicitBuilderReturn } from '@melt-ui/svelte/internal/helpers';
 
 	type FormInputEvent<T extends Event = Event> = T & {
 		currentTarget: EventTarget & HTMLInputElement;
 	};
 
 	type $$Props = HTMLInputAttributes & {
-		use?: Action<HTMLElement, any>;
+		use?: Action<HTMLElement, any> | ExplicitBuilderReturn<any, any, any, any>;
 		description?: string;
 		label?: string;
 		error?: string;
@@ -43,7 +44,7 @@
 	export let error: $$Props['error'] = undefined;
 	export let required: $$Props['required'] = undefined;
 	export let id: $$Props['id'] = uuid();
-	export let use: Action<HTMLElement, any> = () => {};
+	export let use: Action<HTMLElement, any> | ExplicitBuilderReturn<any, any, any, any> = () => {};
 	export { className as class };
 </script>
 

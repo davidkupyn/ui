@@ -66,7 +66,6 @@
 		elements: { trigger, close },
 		options
 	} = dialog;
-
 	$: openStore.set(open);
 	$: options.closeOnOutsideClick.set(closeOnOutsideClick);
 	$: options.preventScroll.set(preventScroll);

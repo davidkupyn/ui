@@ -3,14 +3,13 @@
 	import { ctx } from '.';
 	import { menuStyles } from '../menu';
 
-	const key = ctx.group.get();
+	let className: string | undefined | null = undefined;
+	export { className as class };
 
 	const {
 		elements: { groupLabel: groupLabel }
 	} = ctx.get();
-
-	let className: string | undefined | null = undefined;
-	export { className as class };
+	const key = ctx.group.get();
 </script>
 
 <span use:groupLabel {...$groupLabel(key)} class={cn(menuStyles().itemLabel(), className)}>

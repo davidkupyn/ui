@@ -7,12 +7,12 @@
 	import { Input } from '$lib/ui/input';
 	import Kbd from '$lib/ui/kbd.svelte';
 	import Label from '$lib/ui/label.svelte';
-	import { Modal } from '$lib/ui/modal';
 	import { Popover } from '$lib/ui/popover';
 	import { RadioGroup } from '$lib/ui/radio-group';
 	import { Select } from '$lib/ui/select';
 	import Switch from '$lib/ui/switch.svelte';
 	import {
+		AlertTriangle,
 		AppWindow,
 		BookTemplate,
 		Command,
@@ -27,6 +27,16 @@
 	import { fade } from 'svelte/transition';
 	import { Modal } from '$lib/ui/modal';
 	import { Tabs } from '$lib/ui/tabs';
+	import { AutoComplete } from '$lib/ui/auto-complete';
+	import { Alert } from '$lib/ui/alert';
+	import { CommandMenu } from '$lib/ui/command-menu';
+	let alertType: {
+		label: string;
+		value: 'success' | 'warning' | 'info' | 'error';
+	} = {
+		label: 'Warning',
+		value: 'warning'
+	};
 	let open = false;
 	let group: string[] = [];
 	$: disabled = open;
@@ -45,6 +55,7 @@
 			: 'Input must be up to 16 characters, no special characters';
 	}
 	let buttonLoading = false;
+	$: console.log(alertType);
 </script>
 
 <main in:fade={{ duration: 200 }} class="py-8 w-full space-y-6 container mx-auto px-4 sm:px-6">
@@ -93,14 +104,7 @@
 			<form class="grid gap-4">
 				<label class="input-label w-full" for="select1">
 					Custom Select
-					<Select
-						let:Group
-						placeholder="Select an option"
-						id="select1"
-						name="custom"
-						on:change={(e) => console.log(e.detail)}
-						multiple
-					>
+					<Select let:Group placeholder="Select an option" id="select1" name="custom">
 						<Group let:Option let:Label={SelectLabel}>
 							<SelectLabel>Class 3</SelectLabel>
 							<Option value="witalina">Witalina</Option>
@@ -116,13 +120,25 @@
 					</Select>
 				</label>
 
-				<Label class="w-full flex-col" required>
-					Custom Input
-					<Input slot="input">
-						<DollarSign size="16" slot="prefix" />
-						<span slot="suffix">USD</span>
-					</Input>
-				</Label>
+				<AutoComplete
+					label="Auto Complete"
+					let:Option
+					placeholder="Start typing..."
+					id="auto-complete"
+					name="auto-complete"
+				>
+					<Option value="witalina">Witalina</Option>
+					<Option value="david">David</Option>
+					<Option value="wiktor">Wiktor</Option>
+					<Option value="gustaw">Gustaw</Option>
+					<Option value="szymon">Szymon</Option>
+					<Option value="aleks">Aleks</Option>
+				</AutoComplete>
+
+				<Input slot="input" label="Custom Input" name="custom-input">
+					<DollarSign size="16" slot="prefix" />
+					<span slot="suffix">USD</span>
+				</Input>
 				<Label class="flex-col" for="select2" required>
 					Native Select
 					<select slot="input" class="input" id="select2" name="native" value="david">
@@ -179,6 +195,11 @@
 				Submit
 			</Button>
 		</Card>
+		<Alert let:Title let:Description>
+			<Stars size="16" />
+			<Title>Alert</Title>
+			<Description>Lorem ipsum dolor sit amet consectetur adipisicing elit.</Description>
+		</Alert>
 		<Disclosure let:Summary let:Details class="max-w-sm" bind:unstyled={open}>
 			<Summary class="w-full">Disclosure</Summary>
 			<Details>
@@ -201,7 +222,7 @@
 				Toggle</Button
 			>
 		</div>
-		<Tabs let:List let:Content>
+		<Tabs let:List>
 			<List let:Trigger>
 				<Trigger value="rand1">Tab 1</Trigger>
 				<Trigger value="rand2">Tab 2</Trigger>
@@ -278,14 +299,9 @@
 				<Description>Make changes to your profile here. Click save when you're done.</Description>
 			</Header>
 			<form class="grid gap-2">
-				<label class="input-label w-full">
-					Username
-					<input class="input" type="text" placeholder="Dave Kupyn" />
-				</label>
-				<label class="input-label w-full">
-					Email
-					<input class="input" type="text" placeholder="dkupyn@gmail.com" />
-				</label>
+				<Input placeholder="Dave Kupyn" label="Username" required />
+				<Input placeholder="dkupyn@gmail.com" label="Email" required />
+
 				<Footer class="mt-6">
 					<Button melt={close} type="button" variant="outline">Cancel</Button>
 					<Button type="submit">Confirm</Button>
@@ -293,6 +309,40 @@
 			</form>
 		</Content>
 	</Modal>
+	<div class="max-w-md space-y-4">
+		<AutoComplete let:Option bind:value={alertType}>
+			<Option value="error">Error</Option>
+			<Option value="warning">Warning</Option>
+			<Option value="success">Success</Option>
+			<Option value="info">Info</Option>
+		</AutoComplete>
+		<Modal let:trigger let:Content alert type={alertType.value}>
+			<Button melt={trigger} variant={alertType.value}>
+				<AlertTriangle size="16" />
+				Alert modal
+			</Button>
+			<Content let:Header let:Footer let:close class="sm:max-w-[425px]">
+				<Header let:Title let:Description>
+					<Title>Attention!</Title>
+					<Description>
+						You are about to delete your account. This action is irreversible. Are you sure you want
+						to continue?
+					</Description>
+				</Header>
+
+				<Footer>
+					<Button melt={close} type="button" variant="outline">Cancel</Button>
+					<Button melt={close} variant={alertType.value}>Continue</Button>
+				</Footer>
+			</Content>
+		</Modal>
+	</div>
+	<!-- <CommandMenu let:Item>
+		<Item value="1">Item 1</Item>
+		<Item value="2">Item 1</Item>
+		<Item value="3">Item 1</Item>
+	</CommandMenu> -->
 </main>
-Popover 100%, Disclosure 100%, RadioGroup 100%, Menu (fix checkbox), Switch (look into it, group), Button
-(fix it, better styling), Checkbox ( fix it, group), later add asChild
+
+<!-- Popover 100%, Disclosure 100%, RadioGroup 100%, Menu (fix checkbox), Switch (look into it, group), Button -->
+<!-- (fix it, better styling), Checkbox ( fix it, group), later add asChild -->

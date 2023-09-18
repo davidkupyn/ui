@@ -1,26 +1,28 @@
 <script lang="ts">
-	import { cn } from '$lib/helpers/style';
-	import type { SelectOption } from '@melt-ui/svelte';
+	import type { ComboboxOption } from '@melt-ui/svelte';
 	import { ChevronsUpDown } from 'lucide-svelte';
 	import { createEventDispatcher } from 'svelte';
 	import { fly } from 'svelte/transition';
 	import { ctx } from '.';
-	import { inputStyles } from '../input';
-	import Suffix from '../input/input-suffix.svelte';
+	import { Input } from '../input';
 	import { menuStyles } from '../menu';
-	import Group from './select-option-group.svelte';
-	import Option from './select-option.svelte';
+	import Empty from './auto-complete-empty.svelte';
+	import Option from './auto-complete-option.svelte';
 
 	export let id = '';
 	export let name = '';
 	export let required = false;
 	export let placeholder = '';
 	export let disabled = false;
-	export let value: SelectOption<unknown> | undefined = undefined;
+	export let value: ComboboxOption<unknown> | undefined = undefined;
 	export let loop = false;
 	export let preventScroll = true;
 	export let multiple = false;
-
+	export let debounce = 0;
+	export let label = '';
+	export let description = '';
+	export let error = '';
+	export let emptyText = 'No results found';
 	let className: string | undefined | null = undefined;
 	export { className as class };
 
@@ -33,19 +35,17 @@
 			return next;
 		},
 		defaultSelected: value,
-		name,
-		disabled,
-		required,
 		loop,
 		preventScroll,
 		//@ts-ignore
 		multiple,
+		debounce,
 		forceVisible: true
 	});
 
 	const {
-		states: { open: openStore, selected: valueStore, selectedLabel: valueLabel },
-		elements: { trigger, input, menu },
+		states: { open: openStore, selected: valueStore },
+		elements: { input, menu },
 		options
 	} = select;
 
@@ -56,30 +56,31 @@
 	$: options.multiple.set(multiple);
 </script>
 
-<button
-	use:trigger
-	{...$trigger}
+<Input
+	use={input}
+	{...$input}
+	{id}
 	{disabled}
-	type="button"
-	class={cn(
-		inputStyles(),
-		'w-full relative flex items-center justify-between data-[state=open]:ring-accent',
-		className
-	)}
-	aria-label={placeholder}
+	{required}
+	class={className}
+	{placeholder}
+	{label}
+	{description}
+	{error}
 >
-	{#if $valueLabel}
-		{$valueLabel}
-	{:else}
-		<span class="text-muted-foreground">{placeholder}</span>
-	{/if}
-	<Suffix class="aria-pressed:text-foreground" aria-pressed={$openStore}>
-		<ChevronsUpDown size="16" />
-	</Suffix>
-</button>
-<input use:input {...$input} {id} />
+	<ChevronsUpDown
+		slot="suffix"
+		size="16"
+		class="aria-pressed:text-foreground"
+		aria-pressed={$openStore}
+	/>
+</Input>
+<input {name} type="hidden" value={$valueStore?.value} />
 {#if $openStore}
 	<ul transition:fly={{ duration: 150, y: -10 }} use:menu {...$menu} class={menuStyles().content()}>
-		<slot {Option} {Group} />
+		<slot {Option} {Empty} />
+		<slot name="empty">
+			<Empty>{emptyText}</Empty>
+		</slot>
 	</ul>
 {/if}

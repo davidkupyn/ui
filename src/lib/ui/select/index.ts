@@ -1,9 +1,6 @@
 import { createSelect, type CreateSelectProps, type Select as SelectReturn } from '@melt-ui/svelte';
 import { getContext, setContext } from 'svelte';
-import OptionGroupLabel from './select-option-group-label.svelte';
-import OptionGroup from './select-option-group.svelte';
-import Option from './select-option.svelte';
-import Root from './select-root.svelte';
+export { default as Select } from './select-root.svelte';
 
 const NAME = 'select';
 const GROUP_NAME = NAME + '-option-group';
@@ -22,9 +19,3 @@ export const ctx = {
 		}
 	}
 };
-
-export const Select = Object.assign(Root, {
-	Option,
-	OptionGroup,
-	OptionGroupLabel
-});
