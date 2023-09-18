@@ -1,10 +1,14 @@
 <script lang="ts">
 	import { cn } from '$lib/helpers/style';
 	import { crossfade } from 'svelte/transition';
-	import { getTabsContext } from '.';
+	import { ctx } from '.';
 	import Button from '../button.svelte';
+	import { uuid } from '$lib/helpers';
 
-	const { trigger, value: valueStore } = getTabsContext();
+	const {
+		elements: { trigger },
+		states: { value: valueStore }
+	} = ctx.get();
 	let className: string | undefined | null = undefined;
 	export let disabled = false;
 	export { className as class };

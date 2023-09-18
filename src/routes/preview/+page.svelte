@@ -25,6 +25,8 @@
 		UserCog2
 	} from 'lucide-svelte';
 	import { fade } from 'svelte/transition';
+	import { Modal } from '$lib/ui/modal';
+	import { Tabs } from '$lib/ui/tabs';
 	let open = false;
 	let group: string[] = [];
 	$: disabled = open;
@@ -199,7 +201,13 @@
 				Toggle</Button
 			>
 		</div>
-
+		<Tabs let:List let:Content>
+			<List let:Trigger>
+				<Trigger value="rand1">Tab 1</Trigger>
+				<Trigger value="rand2">Tab 2</Trigger>
+				<Trigger value="rand3">Tab 3</Trigger>
+			</List>
+		</Tabs>
 		<RadioGroup let:Radio class="ml-8" bind:value={radioValue}>
 			<Radio value="Startup" />
 			<Radio value="Business" />

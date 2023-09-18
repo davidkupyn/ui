@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { scale } from 'svelte/transition';
 	import type { HTMLInputAttributes } from 'svelte/elements';
 	import { cn, uuid } from '$lib/helpers';
 	import type { Action } from 'svelte/action';
@@ -14,7 +15,13 @@
 		currentTarget: EventTarget & HTMLInputElement;
 	};
 
-	type InputEvents = {
+	type $$Props = HTMLInputAttributes & {
+		use?: Action<HTMLElement, any>;
+		description?: string;
+		label?: string;
+		error?: string;
+	};
+	type $$Events = {
 		blur: FormInputEvent<FocusEvent>;
 		change: FormInputEvent<Event>;
 		click: FormInputEvent<MouseEvent>;
@@ -28,14 +35,6 @@
 		paste: FormInputEvent<ClipboardEvent>;
 		input: FormInputEvent<InputEvent>;
 	};
-
-	type $$Props = HTMLInputAttributes & {
-		use?: Action<HTMLElement, any>;
-		description?: string;
-		label?: string;
-		error?: string;
-	};
-	type $$Events = InputEvents;
 
 	let className: $$Props['class'] = undefined;
 	export let value: $$Props['value'] = undefined;
@@ -93,7 +92,9 @@
 			</Suffix>
 		{:else if error}
 			<Suffix>
-				<AlertCircle class="text-error" size="16" />
+				<span transition:scale={{ start: 0.5, duration: 200 }}>
+					<AlertCircle class="text-error" size="16" />
+				</span>
 			</Suffix>
 		{/if}
 	</div>

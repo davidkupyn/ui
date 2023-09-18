@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { slide } from 'svelte/transition';
 	import { cn } from '$lib/helpers';
 	import type { HTMLAttributes } from 'svelte/elements';
 
@@ -8,6 +9,10 @@
 	export { className as class };
 </script>
 
-<div class={cn('mt-1 space-y-4 text-sm/6 text-error', className)} {...$$restProps}>
+<div
+	transition:slide={{ duration: 200 }}
+	class={cn('mt-1 space-y-4 text-sm/6 text-error', className)}
+	{...$$restProps}
+>
 	<slot />
 </div>
