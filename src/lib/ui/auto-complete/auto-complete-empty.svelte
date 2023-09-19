@@ -6,11 +6,12 @@
 	export { className as class };
 
 	const {
-		states: { inputValue },
+		states: { inputValue, touchedInput },
 		options: { items }
 	} = ctx.get();
 
-	$: isEmpty = !$items.some((item) => item.toLowerCase().includes($inputValue.toLowerCase()));
+	$: isEmpty =
+		$touchedInput && !$items.some((item) => item.toLowerCase().includes($inputValue.toLowerCase()));
 </script>
 
 {#if isEmpty}

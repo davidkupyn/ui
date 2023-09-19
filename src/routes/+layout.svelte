@@ -26,8 +26,8 @@
 <header
 	class={cn(
 		'w-full z-20',
-		$page.url.pathname === '/' && 'fixed',
-		$page.url.pathname === '/sidebar' && 'hidden'
+		$page.url.pathname === '/sidebar' && 'hidden',
+		$page.url.pathname === '/' && 'absoluet'
 	)}
 >
 	<div class="container mx-auto flex justify-between items-center px-6 h-12">
@@ -84,11 +84,7 @@
 <slot />
 
 <footer
-	class={cn(
-		'bottom-0 border-muted w-full z-20',
-		$page.url.pathname === '/' && 'fixed border-none',
-		$page.url.pathname === '/sidebar' ? 'hidden' : 'border-t'
-	)}
+	class={cn('border-muted w-full', $page.url.pathname === '/sidebar' ? 'hidden' : 'border-t')}
 >
 	<div class="container mx-auto flex justify-between items-center px-6 py-6">
 		<span class="mx-auto text-sm text-muted-foreground">
