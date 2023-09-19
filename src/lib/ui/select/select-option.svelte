@@ -11,8 +11,7 @@
 	export { className as class };
 
 	const {
-		elements: { option },
-		helpers: { isSelected }
+		elements: { option }
 	} = ctx.get();
 	const { item } = menuStyles();
 </script>
@@ -22,12 +21,13 @@
 	use:option
 	class={cn(
 		item(),
-		'relative data-[disabled]:opacity-50 data-[disabled]:cursor-not-allowed data-[selected]:font-medium pl-8 data-[selected]:text-foreground',
+		'relative group data-[disabled]:opacity-50 data-[disabled]:cursor-not-allowed data-[selected]:font-medium pl-8 data-[selected]:text-foreground',
 		className
 	)}
 >
 	<slot />
-	{#if $isSelected(value)}
-		<Check size="16" class="absolute left-2 top-1/2 -translate-y-1/2 text-accent" />
-	{/if}
+	<Check
+		size="16"
+		class="group-aria-selected:block hidden absolute left-2 top-1/2 -translate-y-1/2 text-accent"
+	/>
 </li>

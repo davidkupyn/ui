@@ -12,12 +12,15 @@
 	import { Select } from '$lib/ui/select';
 	import Switch from '$lib/ui/switch.svelte';
 	import {
+		AlertCircle,
 		AlertTriangle,
 		AppWindow,
 		BookTemplate,
+		CheckCircle2,
 		Command,
 		DollarSign,
 		Flower2,
+		Info,
 		RefreshCw,
 		Search,
 		Stars,
@@ -30,6 +33,7 @@
 	import { AutoComplete } from '$lib/ui/auto-complete';
 	import { Alert } from '$lib/ui/alert';
 	import { CommandMenu } from '$lib/ui/command-menu';
+	import Badge from '$lib/ui/badge.svelte';
 	let alertType: {
 		label: string;
 		value: 'success' | 'warning' | 'info' | 'error';
@@ -157,7 +161,7 @@
 				<Button class="mt-4">Submit</Button>
 			</form>
 		</Card>
-		<Card class="flex flex-wrap gap-2 w-full">
+		<Card class="flex flex-wrap gap-2 w-full p-4">
 			<Button>
 				<Stars size="16" />
 				Primary
@@ -194,6 +198,26 @@
 			>
 				Submit
 			</Button>
+		</Card>
+		<Card class="p-4">
+			<div class="flex flex-wrap gap-4">
+				<Badge>Default</Badge>
+				<Badge variant="outline">Outline</Badge>
+				<Badge variant="accent">Accent</Badge>
+				<Badge variant="success">Success</Badge>
+				<Badge variant="error">Error</Badge>
+				<Badge variant="warning">Warning</Badge>
+				<Badge variant="info">Info</Badge>
+			</div>
+			<div class="flex flex-wrap gap-4">
+				<Badge subtle>Default</Badge>
+				<Badge subtle variant="outline">Outline</Badge>
+				<Badge subtle variant="accent">Accent</Badge>
+				<Badge subtle variant="success">Success</Badge>
+				<Badge subtle variant="error">Error</Badge>
+				<Badge subtle variant="warning">Warning</Badge>
+				<Badge subtle variant="info">Info</Badge>
+			</div>
 		</Card>
 		<Alert let:Title let:Description>
 			<Stars size="16" />
@@ -318,7 +342,15 @@
 		</AutoComplete>
 		<Modal let:trigger let:Content alert type={alertType.value}>
 			<Button melt={trigger} variant={alertType.value}>
-				<AlertTriangle size="16" />
+				{#if alertType.value === 'error'}
+					<AlertCircle size="16" />
+				{:else if alertType.value === 'warning'}
+					<AlertTriangle size="16" />
+				{:else if alertType.value === 'success'}
+					<CheckCircle2 size="16" />
+				{:else if alertType.value === 'info'}
+					<Info size="16" />
+				{/if}
 				Alert modal
 			</Button>
 			<Content let:Header let:Footer let:close class="sm:max-w-[425px]">

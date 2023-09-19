@@ -6,11 +6,14 @@
 	export { className as class };
 
 	const {
-		states: {}
+		states: { inputValue },
+		options: { items }
 	} = ctx.get();
+
+	$: isEmpty = !$items.some((item) => item.toLowerCase().includes($inputValue.toLowerCase()));
 </script>
 
-{#if false}
+{#if isEmpty}
 	<li
 		class={cn(
 			'flex cursor-default gap-2 select-none text-foreground items-center rounded-xl px-4 py-1.5 h-9 sm:text-sm',

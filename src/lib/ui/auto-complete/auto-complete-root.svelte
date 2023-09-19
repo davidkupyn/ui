@@ -25,7 +25,7 @@
 	export let emptyText = 'No results found';
 	let className: string | undefined | null = undefined;
 	export { className as class };
-
+	let items: string[] = [];
 	const dispatch = createEventDispatcher();
 
 	const select = ctx.set({
@@ -37,10 +37,13 @@
 		defaultSelected: value,
 		loop,
 		preventScroll,
-		//@ts-ignore
-		multiple,
 		debounce,
-		forceVisible: true
+		forceVisible: true,
+		props: {
+			items
+		},
+		//@ts-ignore
+		multiple
 	});
 
 	const {

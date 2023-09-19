@@ -73,6 +73,7 @@
 			aria-pressed={$openStore}
 		/>
 	</Input>
+
 	<ul use:menu {...$menu} class={menuStyles().content()}>
 		<slot {Item} {Empty} />
 		<slot name="empty">
