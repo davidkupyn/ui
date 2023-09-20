@@ -1,7 +1,8 @@
 <script lang="ts">
-	import { ArrowRight, DollarSign } from 'lucide-svelte';
+	import Slider from '$lib/ui/slider.svelte';
+	import { ArrowRight, Brush, DollarSign, Palette, Volume1, Volume2, VolumeX } from 'lucide-svelte';
 	import { cubicOut } from 'svelte/easing';
-	import { fade } from 'svelte/transition';
+	import { fade, slide } from 'svelte/transition';
 	import { onMount } from 'svelte';
 	import Button from '$lib/ui/button.svelte';
 	import Illustration from './illustration.svelte';
@@ -13,6 +14,9 @@
 	import Separator from '$lib/ui/separator.svelte';
 	import Switch from '$lib/ui/switch.svelte';
 	import { RadioGroup } from '$lib/ui/radio-group';
+	import Progress from '$lib/ui/progress.svelte';
+	import { Modal } from '$lib/ui/modal';
+	import { themeStore } from '$lib/theme-switcher';
 	let mounted = false;
 	onMount(() => (mounted = true));
 	function fadeScale(node: Element, { delay = 0, duration = 200, baseScale = 0.9 }) {
@@ -30,10 +34,16 @@
 			}
 		};
 	}
+	let sliderValue = 30;
+	let isWarningModalTrigger: any;
+	$: defaultTheme = $themeStore.theme;
+	$: themeSwitcherValue = defaultTheme;
 </script>
 
 {#key mounted}
-	<main class="z-10 bg-background/50 flex justify-start items-center flex-col pt-48 gap-12">
+	<main
+		class="z-10 bg-background/50 flex justify-start items-center flex-col pt-16 md:pt-32 gap-12 pb-9"
+	>
 		<div class="p-6 flex flex-col justify-center items-center gap-8">
 			<h1
 				in:fadeScale={{ duration: 400 }}
@@ -60,32 +70,105 @@
 			</span>
 		</div>
 		<div class="flex w-full p-6 md:p-12 gap-8 justify-center max-sm:flex-col">
-			<Card class="w-full h-fit max-w-sm p-3">
-				<Accordion let:Item>
-					<Item let:Content let:Trigger>
-						<Trigger>Why copy/paste and as a package?</Trigger>
-						<Content>
-							<p>
-								The idea behind this is to give you ownership and control over the code, allowing
-								you to decide how the components are built and styled.
-							</p>
-							<br />
-							<p>Start with some sensible defaults, then customize the components to your needs.</p>
-							<br />
-							<p>
-								One of the drawback of packaging the components in an npm package is that the style
-								is coupled with the implementation. The design of your components should be separate
-								from their implementation.
-							</p>
-						</Content>
-					</Item>
-					<Item
-						summary="Can I use this in my project?"
-						details="Yes. Free to use for personal and commercial projects. No attribution required."
-					/>
-					<Item summary="Which frameworks are supported?" details="Svelte." />
-				</Accordion>
-			</Card>
+			<div class="gap-y-8 items-end flex flex-col w-full h-fit max-w-sm">
+				<Card class="w-full p-3">
+					<Accordion let:Item>
+						<Item let:Content let:Trigger>
+							<Trigger>Why copy/paste and as a package?</Trigger>
+							<Content>
+								<p>
+									The idea behind this is to give you ownership and control over the code, allowing
+									you to decide how the components are built and styled.
+								</p>
+								<br />
+								<p>
+									Start with some sensible defaults, then customize the components to your needs.
+								</p>
+								<br />
+								<p>
+									One of the drawback of packaging the components in an npm package is that the
+									style is coupled with the implementation. The design of your components should be
+									separate from their implementation.
+								</p>
+							</Content>
+						</Item>
+						<Item
+							summary="Can I use this in my project?"
+							details="Yes. Free to use for personal and commercial projects. No attribution required."
+						/>
+						<Item summary="Which frameworks are supported?" details="Svelte." />
+					</Accordion>
+				</Card>
+				<Slider bind:value={sliderValue}>
+					{#if sliderValue >= 50}
+						<Volume2 class="h-5 w-5 sm:h-4 sm:w-4" />
+					{:else if sliderValue < 50 && sliderValue > 0}
+						<Volume1 class="h-5 w-5 sm:h-4 sm:w-4" />
+					{:else}
+						<VolumeX class="h-5 w-5 sm:h-4 sm:w-4" />
+					{/if}
+				</Slider>
+
+				<Modal let:trigger let:Content>
+					<Button melt={trigger} variant="outline" class="max-sm:w-full">
+						<Brush size="16" />
+						Change appearance
+					</Button>
+					<Content let:Header let:Footer let:close class="">
+						<Header let:Title let:Description>
+							<Title>
+								<Palette slot="icon" size="16" />
+								Appearance
+							</Title>
+							<Description>Change the theme, so the page looks and feels better to you.</Description
+							>
+						</Header>
+						<RadioGroup let:Radio bind:value={themeSwitcherValue} class="w-full">
+							<Radio
+								value="system"
+								class="bg-background w-full items-start flex-row-reverse focus-within:ring-1 data-[state=checked]:ring-accent focus-within:ring-accent rounded-2xl ring-1 ring-foreground/5 shadow p-4 gap-4"
+							>
+								<span class="flex flex-col gap-1.5 w-full">
+									<span class="font-medium">System</span>
+									<span class="text-muted-foreground text-sm"
+										>Adapts to your device's system-wide settings, providing a seamless and
+										comfortable browsing experience.</span
+									>
+								</span>
+							</Radio>
+							<Radio
+								value="light"
+								class="items-start w-full flex-row-reverse focus-within:ring-1 data-[state=checked]:ring-accent focus-within:ring-accent rounded-2xl bg-background ring-1 ring-foreground/5 shadow p-4 gap-4"
+							>
+								<span class="flex flex-col gap-1.5 w-full">
+									<span class="font-medium">Light</span>
+									<span class="text-muted-foreground text-sm"
+										>Designed to keep your browsing experience bright and vibrant.
+									</span>
+								</span>
+							</Radio>
+							<Radio
+								value="dark"
+								class="items-start w-full flex-row-reverse focus-within:ring-1 data-[state=checked]:ring-accent focus-within:ring-accent rounded-2xl bg-background ring-1 ring-foreground/5 shadow p-4 gap-4"
+							>
+								<span class="flex flex-col gap-1.5 w-full">
+									<span class="font-medium">Dark</span>
+									<span class="text-muted-foreground text-sm"
+										>Perfect for those who prefer a subdued, night-friendly interface.
+									</span>
+								</span>
+							</Radio>
+						</RadioGroup>
+						<Footer>
+							<Button melt={close} type="button" variant="outline">Cancel</Button>
+							<Button melt={close} on:click={() => ($themeStore.theme = themeSwitcherValue)}>
+								Save changes
+							</Button>
+						</Footer>
+					</Content>
+				</Modal>
+			</div>
+
 			<Card let:Header class="w-full max-w-md h-fit">
 				<Header let:Title let:Description>
 					<Title>Account</Title>
@@ -106,40 +189,55 @@
 					</Label>
 					<Separator />
 					<div class="mt-4 text-right space-x-4">
-						<Button variant="outline">Cancel</Button>
-						<Button>Update</Button>
+						<Modal alert type="error" let:trigger let:Content>
+							<Button variant="outline" melt={trigger}>Discard</Button>
+							<Content let:Header let:Footer let:close class="sm:w-96">
+								<Header let:Title let:Description>
+									<Title>Are you sure?</Title>
+									<Description>You cannot undo this action.</Description>
+								</Header>
+								<Footer>
+									<Button melt={close} variant="outline">Cancel</Button>
+									<Button melt={close} variant="error">Continue</Button>
+								</Footer>
+							</Content>
+						</Modal>
+						<Button>Save</Button>
 					</div>
 				</form>
 			</Card>
-			<RadioGroup let:Radio value="Startup" class="w-full max-w-md">
-				<Radio
-					value="Startup"
-					class="bg-background items-start flex-row-reverse focus-within:ring-1 data-[state=checked]:ring-accent focus-within:ring-accent rounded-2xl ring-1 ring-foreground/5 shadow p-4 max-w-sm gap-4"
-				>
-					<span class="flex flex-col gap-1.5 w-full">
-						<span class="font-medium">Startup</span>
-						<span class="text-muted-foreground text-sm">12GB/6 CPUs · 160 GB SSD disk</span>
-					</span>
-				</Radio>
-				<Radio
-					value="Business"
-					class="items-start flex-row-reverse focus-within:ring-1 data-[state=checked]:ring-accent focus-within:ring-accent rounded-2xl bg-background ring-1 ring-foreground/5 shadow p-4 max-w-sm gap-4"
-				>
-					<span class="flex flex-col gap-1.5 w-full">
-						<span class="font-medium">Business</span>
-						<span class="text-muted-foreground text-sm">16GB/8 CPUs · 512 GB SSD disk</span>
-					</span>
-				</Radio>
-				<Radio
-					value="Enterprise"
-					class="items-start flex-row-reverse focus-within:ring-1 data-[state=checked]:ring-accent focus-within:ring-accent rounded-2xl bg-background ring-1 ring-foreground/5 shadow p-4 max-w-sm gap-4"
-				>
-					<span class="flex flex-col gap-1.5 w-full">
-						<span class="font-medium">Enterprise</span>
-						<span class="text-muted-foreground text-sm">32GB/12 CPUs · 1024 GB SSD disk</span>
-					</span>
-				</Radio>
-			</RadioGroup>
+			<div class="w-full max-w-sm h-fit space-y-8">
+				<RadioGroup let:Radio value="Startup" class="w-full">
+					<Radio
+						value="Startup"
+						class="bg-background items-start flex-row-reverse focus-within:ring-1 data-[state=checked]:ring-accent focus-within:ring-accent rounded-2xl ring-1 ring-foreground/5 shadow p-4 max-w-sm gap-4"
+					>
+						<span class="flex flex-col gap-1.5 w-full">
+							<span class="font-medium">Startup</span>
+							<span class="text-muted-foreground text-sm">12GB/6 CPUs · 160 GB SSD disk</span>
+						</span>
+					</Radio>
+					<Radio
+						value="Business"
+						class="items-start flex-row-reverse focus-within:ring-1 data-[state=checked]:ring-accent focus-within:ring-accent rounded-2xl bg-background ring-1 ring-foreground/5 shadow p-4 max-w-sm gap-4"
+					>
+						<span class="flex flex-col gap-1.5 w-full">
+							<span class="font-medium">Business</span>
+							<span class="text-muted-foreground text-sm">16GB/8 CPUs · 512 GB SSD disk</span>
+						</span>
+					</Radio>
+					<Radio
+						value="Enterprise"
+						class="items-start flex-row-reverse focus-within:ring-1 data-[state=checked]:ring-accent focus-within:ring-accent rounded-2xl bg-background ring-1 ring-foreground/5 shadow p-4 max-w-sm gap-4"
+					>
+						<span class="flex flex-col gap-1.5 w-full">
+							<span class="font-medium">Enterprise</span>
+							<span class="text-muted-foreground text-sm">32GB/12 CPUs · 1024 GB SSD disk</span>
+						</span>
+					</Radio>
+				</RadioGroup>
+				<Progress value={sliderValue} variant="accent" />
+			</div>
 		</div>
 	</main>
 {/key}

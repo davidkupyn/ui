@@ -1,5 +1,4 @@
 <script lang="ts" context="module">
-	import type { HTMLAnchorAttributes } from 'svelte/elements';
 	import { tv, type VariantProps } from 'tailwind-variants';
 
 	export const badgeStyles = tv({
@@ -63,36 +62,38 @@
 	export let className: string | undefined | null = undefined;
 	export { className as class };
 	export let orientation: 'horizontal' | 'vertical' = 'horizontal';
+	const dispatch = createEventDispatcher();
+
 	const {
-		slider,
-		range,
-		thumb,
-		value: valueStore,
+		elements: { root, range, thumb },
+		states: { value: valueStore },
 		options
 	} = createSlider({
-		value: Array.isArray(value) ? value : [value],
+		defaultValue: Array.isArray(value) ? value : [value],
 		min,
+		onValueChange: ({ next }) => {
+			const newValue = Array.isArray(next) ? next : [next];
+			value = newValue;
+			dispatch('change', newValue);
+			return next;
+		},
 		max,
 		orientation,
 		step,
 		disabled
 	});
-	$: $options.orientation = orientation;
 
-	const dispatch = createEventDispatcher();
+	$: options.orientation.set(orientation);
+
 	$: valueStore.set(Array.isArray(value) ? value : [value]);
-	valueStore.subscribe((v) => {
-		const newValue = Array.isArray(v) ? v : [v];
-		value = newValue;
-		dispatch('change', newValue);
-	});
 </script>
 
-<span
-	melt={$slider}
+<div
+	use:root
+	{...$root}
 	class={cn(
 		'group relative flex touch-none [&:has(:focus-visible)]:ring-2 [&:has(:focus-visible)]:ring-offset-2 rounded-xl transition ring-offset-background [&:has(:focus-visible)]:ring-primary select-none items-center overflow-hidden data-[orientation=vertical]:flex-col',
-		orientation === 'vertical' ? 'h-full min-h-[4rem] w-fit' : 'w-full',
+		orientation === 'vertical' ? 'h-full min-h-[4rem] w-fit' : 'w-full h-fit',
 		className
 	)}
 >
@@ -103,7 +104,8 @@
 		)}
 	>
 		<span
-			melt={$range}
+			use:range
+			{...$range}
 			class={cn(
 				'absolute h-full bg-primary dark:shadow-[inset_0_-1px_#0000004d] shadow-[inset_0_1px_0_#ffffff4d]',
 				orientation === 'vertical' ? 'w-full' : 'rounded-xl'
@@ -116,18 +118,19 @@
 			orientation === 'vertical' ? 'bottom-2 ' : 'left-4'
 		)}
 	>
-		<slot>
+		<slot {value}>
 			{label ?? ''}
 		</slot>
 	</span>
 	<input type="hidden" {value} {name} {disabled} />
-	{#each { length: $valueStore.length } as _, idx}
+	{#each { length: $valueStore.length } as _, idx (idx)}
 		<span
-			melt={$thumb()}
+			use:thumb
+			{...$thumb()}
 			class={cn(
 				'block rounded-full focus-visible:outline-none bg-primary shadow group-disabled:pointer-events-none group-disabled:opacity-50 dark:shadow-[inset_0_1px_0_#ffffff2f] transition',
 				orientation === 'vertical' ? 'w-5 h-1 mb-1' : 'h-5 sm:h-3 w-1 ml-2'
 			)}
 		/>
 	{/each}
-</span>
+</div>

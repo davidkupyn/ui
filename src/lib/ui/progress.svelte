@@ -47,23 +47,26 @@
 	let className: string | undefined | null = undefined;
 	export { className as class };
 	const {
-		progress,
-		value: valueStore,
-		max: maxStore
+		elements: { root },
+		states: { value: valueStore },
+		options: { max: maxStore }
 	} = createProgress({
-		value,
+		defaultValue: value,
+		onValueChange: ({ next }) => {
+			value = next;
+			dispatch('change', next);
+			return next;
+		},
 		max
 	});
 	const dispatch = createEventDispatcher();
 	$: valueStore.set(value);
-	valueStore.subscribe((value) => {
-		value = value;
-		dispatch('change', value);
-	});
+	$: maxStore.set(max);
+
 	const { base, indicator } = progressStyles({ variant });
 </script>
 
-<div melt={$progress} class={cn(base(), className)}>
+<div use:root {...$root} class={cn(base(), className)}>
 	<div
 		class={indicator()}
 		style={`transform: translateX(-${100 - (100 * ($valueStore ?? 0)) / ($maxStore ?? 1)}%)`}
