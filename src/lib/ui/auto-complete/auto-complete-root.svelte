@@ -8,13 +8,12 @@
 	import { menuStyles } from '../menu';
 	import Empty from './auto-complete-empty.svelte';
 	import Option from './auto-complete-option.svelte';
-
 	export let id = '';
 	export let name = '';
 	export let required = false;
 	export let placeholder = '';
 	export let disabled = false;
-	export let value: ComboboxOption<unknown> | undefined = undefined;
+	export let value: ComboboxOption<string> | undefined = undefined;
 	export let loop = false;
 	export let preventScroll = true;
 	export let multiple = false;
@@ -23,12 +22,16 @@
 	export let description = '';
 	export let error = '';
 	export let emptyText = 'No results found';
+	export let items: {
+		label: string;
+		value: string;
+	}[] = [];
+
 	let className: string | undefined | null = undefined;
 	export { className as class };
-	let items: string[] = [];
 	const dispatch = createEventDispatcher();
 
-	const select = ctx.set({
+	const select = ctx.set<string>({
 		onSelectedChange: ({ next }) => {
 			value = next;
 			dispatch('change', next);
@@ -39,9 +42,6 @@
 		preventScroll,
 		debounce,
 		forceVisible: true,
-		props: {
-			items
-		},
 		//@ts-ignore
 		multiple
 	});
@@ -82,6 +82,7 @@
 {#if $openStore}
 	<ul transition:fly={{ duration: 150, y: -10 }} use:menu {...$menu} class={menuStyles().content()}>
 		<slot {Option} {Empty} />
+
 		<slot name="empty">
 			<Empty>{emptyText}</Empty>
 		</slot>

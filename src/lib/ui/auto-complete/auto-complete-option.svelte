@@ -4,7 +4,9 @@
 	import { ctx } from '.';
 	import { menuStyles } from '../menu';
 
-	export let value = '';
+	export let value: string;
+	export let label: string | undefined = undefined;
+
 	export let disabled = false;
 
 	let className: string | undefined | null = undefined;
@@ -12,18 +14,27 @@
 
 	const {
 		elements: { option },
-		states: { inputValue, touchedInput },
-		options: { items }
+		states: { inputValue, touchedInput }
 	} = ctx.get();
 	const { item } = menuStyles();
 
-	$: $items.push(value);
-	$: show = $touchedInput ? value.toLowerCase().includes($inputValue.toLowerCase()) : true;
+	function isShown(touchedInput: boolean, value: string, inputValue: string, label?: string) {
+		if (!touchedInput) return true;
+		if (label) {
+			return (
+				label.toLowerCase().includes(inputValue.toLowerCase()) ||
+				value.toLowerCase().includes(inputValue.toLowerCase())
+			);
+		}
+		return value.toLowerCase().includes(inputValue.toLowerCase());
+	}
+
+	$: show = isShown($touchedInput, value, $inputValue, label);
 </script>
 
 {#if show}
 	<li
-		{...$option({ value, disabled })}
+		{...$option({ value, disabled, label })}
 		use:option
 		class={cn(
 			item(),
@@ -31,7 +42,9 @@
 			className
 		)}
 	>
-		<slot />
+		<slot>
+			{label}
+		</slot>
 		<Check
 			size="16"
 			class="group-aria-selected:block hidden absolute left-2 top-1/2 -translate-y-1/2 text-accent"

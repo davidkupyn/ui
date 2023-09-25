@@ -1,4 +1,3 @@
-import { toWritableStores, type ToWritableProps } from '$lib/helpers';
 import {
 	createCombobox,
 	type CreateComboboxProps,
@@ -8,28 +7,12 @@ import { getContext, setContext } from 'svelte';
 export { default as AutoComplete } from './auto-complete-root.svelte';
 const NAME = 'auto-complete';
 
-type ExtraComboboxProps = {
-	items: string[];
-};
-
 export const ctx = {
-	set: <T>(props: CreateComboboxProps<T> & { props: ExtraComboboxProps }) => {
+	set: <T>(props: CreateComboboxProps<T>) => {
 		const autoComplete = createCombobox(props);
-		const extraOptions = toWritableStores(props.props);
-		const combined = {
-			...autoComplete,
-			options: {
-				...autoComplete.options,
-				...extraOptions
-			}
-		};
-		setContext(NAME, combined);
-		return combined;
+
+		setContext(NAME, autoComplete);
+		return autoComplete;
 	},
-	get: () =>
-		getContext<
-			ComboboxReturn & {
-				options: ToWritableProps<ExtraComboboxProps>;
-			}
-		>(NAME)
+	get: () => getContext<ComboboxReturn>(NAME)
 };

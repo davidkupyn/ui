@@ -27,7 +27,7 @@
 		ToggleRight,
 		UserCog2
 	} from 'lucide-svelte';
-	import { fade } from 'svelte/transition';
+	import { fade, fly } from 'svelte/transition';
 	import { Modal } from '$lib/ui/modal';
 	import { Tabs } from '$lib/ui/tabs';
 	import { AutoComplete } from '$lib/ui/auto-complete';
@@ -46,7 +46,7 @@
 	$: disabled = open;
 	let checked = false;
 	let radioValue = 'Startup';
-	let accordionValue: string[] = [];
+	let accordionValue: string = '';
 	let normalInputValue = '';
 	let dialogOpen = false;
 	const normalInputRegex = /^[a-zA-Z0-9]{0,16}$/;
@@ -77,7 +77,7 @@
 			<Search size="16" slot="prefix" />
 			<Kbd
 				slot="suffix"
-				class="group-focus-within:scale-75 max-sm:hidden transition-[transform,opacity,scale] group-focus-within:opacity-0 dark:bg-background dark:shadow-[0_1px_0_#ffffff1a]"
+				class="group-focus-within:scale-75 max-sm:hidden transition-[transform,opacity,scale] group-focus-within:opacity-0 dark:bg-background dark:shadow-[0_1px_0_#ffffff3a]"
 			>
 				<Command size="12" />
 				K
@@ -246,7 +246,7 @@
 				Toggle</Button
 			>
 		</div>
-		<Tabs let:List>
+		<Tabs let:List value="rand2">
 			<List let:Trigger>
 				<Trigger value="rand1">Tab 1</Trigger>
 				<Trigger value="rand2">Tab 2</Trigger>
@@ -261,7 +261,7 @@
 		<RadioGroup let:Radio bind:value={radioValue}>
 			<Radio
 				value="Startup"
-				class="bg-background items-start flex-row-reverse focus-within:ring-1 data-[state=checked]:ring-accent focus-within:ring-accent rounded-2xl ring-1 ring-foreground/5 shadow p-4 max-w-sm gap-4"
+				class="bg-background items-start flex-row-reverse focus-within:ring-1 data-[state=checked]:ring-accent focus-within:ring-accent rounded-2xl ring-1 ring-foreground/10 shadow p-4 max-w-sm gap-4"
 			>
 				<span class="flex flex-col gap-1.5 w-full">
 					<span class="font-medium">Startup</span>
@@ -270,7 +270,7 @@
 			</Radio>
 			<Radio
 				value="Business"
-				class="items-start flex-row-reverse focus-within:ring-1 data-[state=checked]:ring-accent focus-within:ring-accent rounded-2xl bg-background ring-1 ring-foreground/5 shadow p-4 max-w-sm gap-4"
+				class="items-start flex-row-reverse focus-within:ring-1 data-[state=checked]:ring-accent focus-within:ring-accent rounded-2xl bg-background ring-1 ring-foreground/10 shadow p-4 max-w-sm gap-4"
 			>
 				<span class="flex flex-col gap-1.5 w-full">
 					<span class="font-medium">Business</span>
@@ -279,7 +279,7 @@
 			</Radio>
 			<Radio
 				value="Enterprise"
-				class="items-start flex-row-reverse focus-within:ring-1 data-[state=checked]:ring-accent focus-within:ring-accent rounded-2xl bg-background ring-1 ring-foreground/5 shadow p-4 max-w-sm gap-4"
+				class="items-start flex-row-reverse focus-within:ring-1 data-[state=checked]:ring-accent focus-within:ring-accent rounded-2xl bg-background ring-1 ring-foreground/10 shadow p-4 max-w-sm gap-4"
 			>
 				<span class="flex flex-col gap-1.5 w-full">
 					<span class="font-medium">Enterprise</span>
@@ -305,7 +305,7 @@
 						aliquid pariatur, sunt error molestiae dolore eaque?
 					</Accordion.Content>
 				</Accordion.Item>
-				<Item summary="Current Accordion (Controlled usage)" details={accordionValue.join(', ')} />
+				<Item summary="Current Accordion (Controlled usage)" details={accordionValue} />
 			</Accordion>
 		</Card>
 	</div>

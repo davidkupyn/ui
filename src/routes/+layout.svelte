@@ -10,6 +10,7 @@
 	import Separator from '$lib/ui/separator.svelte';
 	import Logo from './logo.svelte';
 	import Label from '$lib/ui/label.svelte';
+	import { Toaster } from 'svelte-sonner';
 
 	let disabled = false;
 </script>
@@ -23,11 +24,12 @@
 	<meta name="author" content="David Kupyn" />
 </svelte:head>
 <ThemeProvider attribute="class" disableTransitionOnChange storageKey="essense-theme" />
+<Toaster />
 <header
 	class={cn(
 		'w-full z-20',
 		$page.url.pathname === '/sidebar' && 'hidden',
-		$page.url.pathname === '/' && 'absoluet'
+		$page.url.pathname === '/' && 'absolute'
 	)}
 >
 	<div class="container mx-auto flex justify-between items-center px-6 h-12">

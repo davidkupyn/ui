@@ -38,6 +38,7 @@
 	};
 
 	type $$Props = BaseDialogProps & (AlertDialogProps | DrawerProps | DialogProps);
+
 	const dispatch = createEventDispatcher();
 
 	const dialog = ctx.set({

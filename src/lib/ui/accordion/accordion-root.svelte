@@ -12,7 +12,7 @@
 	const dispatch = createEventDispatcher();
 
 	const accordion = ctx.set({
-		multiple,
+		multiple: undefined,
 		onValueChange: ({ next }) => {
 			value = next;
 			dispatch('change', next);

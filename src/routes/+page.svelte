@@ -17,6 +17,7 @@
 	import Progress from '$lib/ui/progress.svelte';
 	import { Modal } from '$lib/ui/modal';
 	import { themeStore } from '$lib/theme-switcher';
+	import { toast } from '$lib/ui/toast';
 	let mounted = false;
 	onMount(() => (mounted = true));
 	function fadeScale(node: Element, { delay = 0, duration = 200, baseScale = 0.9 }) {
@@ -41,9 +42,7 @@
 </script>
 
 {#key mounted}
-	<main
-		class="z-10 bg-background/50 flex justify-start items-center flex-col pt-16 md:pt-32 gap-12 pb-9"
-	>
+	<main class="z-10 flex justify-start items-center flex-col pt-28 md:pt-48 gap-12 pb-9">
 		<div class="p-6 flex flex-col justify-center items-center gap-8">
 			<h1
 				in:fadeScale={{ duration: 400 }}
@@ -69,7 +68,7 @@
 				</Button>
 			</span>
 		</div>
-		<div class="flex w-full p-6 md:p-12 gap-8 justify-center max-sm:flex-col">
+		<div class="flex w-full p-6 md:p-12 gap-8 justify-center max-sm:flex-col max-sm:items-center">
 			<div class="gap-y-8 items-end flex flex-col w-full h-fit max-w-sm">
 				<Card class="w-full p-3">
 					<Accordion let:Item>
@@ -126,7 +125,7 @@
 						<RadioGroup let:Radio bind:value={themeSwitcherValue} class="w-full">
 							<Radio
 								value="system"
-								class="bg-background w-full items-start flex-row-reverse focus-within:ring-1 data-[state=checked]:ring-accent focus-within:ring-accent rounded-2xl ring-1 ring-foreground/5 shadow p-4 gap-4"
+								class="bg-background w-full items-start flex-row-reverse focus-within:ring-1 data-[state=checked]:ring-accent focus-within:ring-accent rounded-2xl ring-1 ring-foreground/10 shadow p-4 gap-4"
 							>
 								<span class="flex flex-col gap-1.5 w-full">
 									<span class="font-medium">System</span>
@@ -138,7 +137,7 @@
 							</Radio>
 							<Radio
 								value="light"
-								class="items-start w-full flex-row-reverse focus-within:ring-1 data-[state=checked]:ring-accent focus-within:ring-accent rounded-2xl bg-background ring-1 ring-foreground/5 shadow p-4 gap-4"
+								class="items-start w-full flex-row-reverse focus-within:ring-1 data-[state=checked]:ring-accent focus-within:ring-accent rounded-2xl bg-background ring-1 ring-foreground/10 shadow p-4 gap-4"
 							>
 								<span class="flex flex-col gap-1.5 w-full">
 									<span class="font-medium">Light</span>
@@ -149,7 +148,7 @@
 							</Radio>
 							<Radio
 								value="dark"
-								class="items-start w-full flex-row-reverse focus-within:ring-1 data-[state=checked]:ring-accent focus-within:ring-accent rounded-2xl bg-background ring-1 ring-foreground/5 shadow p-4 gap-4"
+								class="items-start w-full flex-row-reverse focus-within:ring-1 data-[state=checked]:ring-accent focus-within:ring-accent rounded-2xl bg-background ring-1 ring-foreground/10 shadow p-4 gap-4"
 							>
 								<span class="flex flex-col gap-1.5 w-full">
 									<span class="font-medium">Dark</span>
@@ -176,10 +175,21 @@
 				</Header>
 				<form class="grid gap-4">
 					<AutoComplete label="Role" let:Option id="role" name="role">
-						<Option value="front">Front-end Developer</Option>
-						<Option value="back">Back-end Developer</Option>
-						<Option value="full">Full stack Developer</Option>
+						{#each [{ label: 'Front-end Developer', value: 'front' }, { label: 'Back-end Developer', value: 'back' }, { label: 'Full Stack Developer', value: 'full' }] as { value, label }}
+							<Option {value} {label} />
+						{/each}
 					</AutoComplete>
+
+					<!-- <AutoComplete
+						label="Role"
+						id="role"
+						name="role"
+						items={[
+							{ label: 'Front-end Developer', value: 'front' },
+							{ label: 'Back-end Developer', value: 'back' },
+							{ label: 'Full Stack Developer', value: 'full' }
+						]}
+					/> -->
 
 					<Input slot="input" label="Full Name" name="full-name" required value="Dave Kupyn" />
 					<Separator />
@@ -202,7 +212,7 @@
 								</Footer>
 							</Content>
 						</Modal>
-						<Button>Save</Button>
+						<Button on:click={() => toast('msg', {})}>Save</Button>
 					</div>
 				</form>
 			</Card>
@@ -210,7 +220,7 @@
 				<RadioGroup let:Radio value="Startup" class="w-full">
 					<Radio
 						value="Startup"
-						class="bg-background items-start flex-row-reverse focus-within:ring-1 data-[state=checked]:ring-accent focus-within:ring-accent rounded-2xl ring-1 ring-foreground/5 shadow p-4 max-w-sm gap-4"
+						class="bg-background items-start flex-row-reverse focus-within:ring-1 data-[state=checked]:ring-accent focus-within:ring-accent rounded-2xl ring-1 ring-foreground/10 shadow p-4 max-w-sm gap-4"
 					>
 						<span class="flex flex-col gap-1.5 w-full">
 							<span class="font-medium">Startup</span>
@@ -219,7 +229,7 @@
 					</Radio>
 					<Radio
 						value="Business"
-						class="items-start flex-row-reverse focus-within:ring-1 data-[state=checked]:ring-accent focus-within:ring-accent rounded-2xl bg-background ring-1 ring-foreground/5 shadow p-4 max-w-sm gap-4"
+						class="items-start flex-row-reverse focus-within:ring-1 data-[state=checked]:ring-accent focus-within:ring-accent rounded-2xl bg-background ring-1 ring-foreground/10 shadow p-4 max-w-sm gap-4"
 					>
 						<span class="flex flex-col gap-1.5 w-full">
 							<span class="font-medium">Business</span>
@@ -228,7 +238,7 @@
 					</Radio>
 					<Radio
 						value="Enterprise"
-						class="items-start flex-row-reverse focus-within:ring-1 data-[state=checked]:ring-accent focus-within:ring-accent rounded-2xl bg-background ring-1 ring-foreground/5 shadow p-4 max-w-sm gap-4"
+						class="items-start flex-row-reverse focus-within:ring-1 data-[state=checked]:ring-accent focus-within:ring-accent rounded-2xl bg-background ring-1 ring-foreground/10 shadow p-4 max-w-sm gap-4"
 					>
 						<span class="flex flex-col gap-1.5 w-full">
 							<span class="font-medium">Enterprise</span>

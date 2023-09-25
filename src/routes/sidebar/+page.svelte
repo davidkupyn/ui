@@ -41,7 +41,7 @@
 					aria-label="Go to home page"
 					class="text-center flex items-center gap-2 w-fit font-bold text-foreground whitespace-nowrap -ml-1 p-2 h-9 focus-visible:ring-2 focus-visible:outline-none rounded-xl transition ring-offset-background focus-visible:ring-muted-foreground"
 				>
-					<Logo class="text-accent" size="32" />
+					<Logo class="text-accent" size="24" />
 					Essence
 				</a>
 			{/if}
