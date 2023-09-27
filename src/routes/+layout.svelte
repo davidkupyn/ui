@@ -11,6 +11,7 @@
 	import Logo from './logo.svelte';
 	import Label from '$lib/ui/label.svelte';
 	import { Toaster } from 'svelte-sonner';
+	import Kbd from '$lib/ui/kbd.svelte';
 
 	let disabled = false;
 </script>
@@ -36,7 +37,7 @@
 		<a
 			href="/"
 			aria-label="Go to home page"
-			class="font-bold flex items-center gap-3 -ml-2 p-1 focus-visible:ring-2 focus-visible:outline-none rounded-xl transition ring-offset-base-50 dark:ring-offset-base-950 focus-visible:ring-primary-600"
+			class="font-bold flex items-center gap-3 -ml-2 p-1 focus-visible:ring-2 focus-visible:outline-none rounded-lg transition ring-offset-base-50 dark:ring-offset-base-950 focus-visible:ring-primary-600"
 		>
 			<Logo class="text-accent" size="24" />
 			Essence

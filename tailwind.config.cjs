@@ -75,6 +75,15 @@ const config = {
 					...colors.blue
 				}
 			},
+			borderRadius: {
+				sm: 'calc(var(--radius) - 0.375rem)',
+				DEFAULT: 'calc(var(--radius) - 0.25rem)',
+				md: 'calc(var(--radius) - 0.125rem)',
+				lg: 'var(--radius)',
+				xl: 'calc(var(--radius) + 0.25rem)',
+				'2xl': 'calc(var(--radius) + 0.75rem)',
+				'3xl': 'calc(var(--radius) + 1.0rem)'
+			},
 			fontFamily: {
 				sans: ['Manrope', ...defaultTheme.fontFamily.sans],
 				display: ['Manrope', ...defaultTheme.fontFamily.sans]

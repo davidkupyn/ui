@@ -5,7 +5,7 @@
 
 	export const badgeStyles = tv({
 		slots: {
-			base: 'inline-flex items-center rounded-lg px-2.5 py-0.5 text-xs font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-border focus:ring-offset-2',
+			base: 'inline-flex items-center rounded px-2.5 py-0.5 text-xs font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-border focus:ring-offset-2',
 			statusDot: 'w-1 h-1 rounded-full'
 		},
 		variants: {

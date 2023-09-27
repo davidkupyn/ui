@@ -7,7 +7,7 @@
 
 <kbd
 	class={cn(
-		'pointer-events-none bg-muted py-1 select-none flex items-center gap-1 rounded-md px-1.5 font-mono text-xs font-medium opacity-100',
+		'pointer-events-none bg-muted py-1 select-none flex items-center gap-1 rounded px-1.5 font-mono text-xs font-medium opacity-100',
 		className
 	)}
 >

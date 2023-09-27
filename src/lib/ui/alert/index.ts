@@ -3,7 +3,7 @@ import { tv } from 'tailwind-variants';
 export { default as Alert } from './alert-root.svelte';
 
 export const alertStyles = tv({
-	base: 'relative w-full rounded-2xl ring-1 ring-foreground/10 shadow px-4 py-3 text-sm [&>svg+div]:translate-y-[-3px] [&>svg]:absolute [&>svg]:left-4 [&>svg]:top-4 [&>svg]:text-foreground [&>svg~*]:pl-7',
+	base: 'relative w-full rounded-xl ring-1 ring-foreground/10 shadow px-4 py-3 text-sm [&>svg+div]:translate-y-[-3px] [&>svg]:absolute [&>svg]:left-4 [&>svg]:top-4 [&>svg]:text-foreground [&>svg~*]:pl-7',
 	variants: {
 		variant: {
 			default: 'bg-background text-foreground',

@@ -11,7 +11,7 @@ export { default as Modal } from './modal-root.svelte';
 
 export const modal = tv({
 	slots: {
-		base: 'relative z-50 flex flex-col shadow-lg focus:outline-none rounded-3xl border border-popover-border bg-popover p-5 gap-5 rounded-t-3xl [--modal-duration:300] sm:[--modal-duration:200] ',
+		base: 'relative z-50 flex flex-col shadow-lg focus:outline-none rounded-2xl border border-popover-border bg-popover p-5 gap-5 rounded-t-2xl [--modal-duration:300] sm:[--modal-duration:200] ',
 		container: 'z-50 flex justify-center sm:items-center items-end fixed inset-0 p-2',
 		title: 'font-semibold text-lg leading-none tracking-tight flex items-center',
 		description: 'text-sm text-muted-foreground'

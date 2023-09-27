@@ -15,7 +15,7 @@
 	<div
 		transition:fly={{ duration: 150, y: -10 }}
 		class={cn(
-			'rounded-2xl p-4 w-72 border border-popover-border bg-popover shadow-lg z-50 focus:outline-none',
+			'rounded-xl p-4 w-72 border border-popover-border bg-popover shadow-lg z-50 focus:outline-none',
 			className
 		)}
 		{...$content}

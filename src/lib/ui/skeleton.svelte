@@ -5,6 +5,6 @@
 </script>
 
 <div
-	class={cn('bg-base-200/50 dark:bg-base-800 rounded-xl animate-pulse', className)}
+	class={cn('bg-base-200/50 dark:bg-base-800 rounded-lg animate-pulse', className)}
 	{...$$restProps}
 />

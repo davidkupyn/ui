@@ -6,12 +6,14 @@
 	import { createEventDispatcher } from 'svelte';
 	import type { Action } from '@sveltejs/kit';
 	import type { _CheckboxItemProps } from '@melt-ui/svelte/dist/builders/menu';
+	import Wrapper from '../utils/wrapper.svelte';
 
 	const dispatch = createEventDispatcher();
 
 	export let checkbox = false;
 	export let disabled = false;
 	export let danger = false;
+	export let description = '';
 	export let checked: boolean | 'indeterminate' = false;
 	const options = {
 		disabled,
@@ -64,6 +66,7 @@
 			checkbox && 'relative pl-8',
 			danger &&
 				'focus:bg-error-400/20 text-error dark:focus:text-error-200 dark:focus:bg-error-600/20 focus:text-error',
+			description && 'h-fit',
 			className
 		)}
 		{...$item}
@@ -91,6 +94,8 @@
 			checkbox && 'relative pl-8',
 			danger &&
 				'focus:bg-error-400/20 text-error dark:focus:text-error-200 dark:focus:bg-error-600/20 focus:text-error',
+			($$slots.description || description) && 'h-fit',
+
 			className
 		)}
 		{...$item}
@@ -98,7 +103,14 @@
 		on:m-click={(e) => dispatch('select', e.detail)}
 		{...$$restProps}
 	>
-		<slot />
+		<Wrapper class="flex flex-col gap-1 mr-2" show={!!description || $$slots.description}>
+			<slot />
+			<slot name="description">
+				<p>
+					{description}
+				</p>
+			</slot>
+		</Wrapper>
 		{#if checked && checkbox}
 			<Check size="16" class="absolute left-2 top-1/2 -translate-y-1/2" />
 		{/if}

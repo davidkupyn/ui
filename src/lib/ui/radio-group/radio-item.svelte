@@ -25,7 +25,7 @@
 	<button
 		use:item
 		{...$item({ value, disabled })}
-		class="h-5 w-5 sm:h-4 sm:w-4 my-1 focus:outline-none data-[state=unchecked]:group-hover:bg-muted shrink-0 cursor-pointer data-[state=checked]:bg-accent ring-1 ring-foreground/20 data-[state=checked]:ring-accent shadow rounded-full grid place-content-center focus-visible:ring-2 bg-background text-accent outline-0 focus-visible:ring-offset-background transition-[background-color] focus-visible:ring-offset-2"
+		class="h-5 w-5 sm:h-4 sm:w-4 focus:outline-none data-[state=unchecked]:group-hover:bg-muted shrink-0 cursor-pointer data-[state=checked]:bg-accent ring-1 ring-foreground/20 data-[state=checked]:ring-accent shadow rounded-full grid place-content-center focus-visible:ring-2 bg-background text-accent outline-0 focus-visible:ring-offset-background transition-[background-color] focus-visible:ring-offset-2"
 		aria-labelledby="{id}-label"
 		{id}
 	>

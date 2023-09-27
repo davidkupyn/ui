@@ -12,7 +12,7 @@
 
 <div
 	use:calendar
-	class="flex w-80 flex-col overflow-clip rounded-3xl border border-popover-border bg-popover p-4 backdrop-blur-md shadow-lg ring-opacity-5 focus:outline-none"
+	class="flex w-80 flex-col overflow-clip rounded-xl border border-popover-border bg-popover p-4 backdrop-blur-md shadow-lg ring-opacity-5 focus:outline-none"
 >
 	<div class="mb-4 flex items-center justify-between">
 		<Button

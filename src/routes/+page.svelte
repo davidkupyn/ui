@@ -125,7 +125,7 @@
 						<RadioGroup let:Radio bind:value={themeSwitcherValue} class="w-full">
 							<Radio
 								value="system"
-								class="bg-background w-full items-start flex-row-reverse focus-within:ring-1 data-[state=checked]:ring-accent focus-within:ring-accent rounded-2xl ring-1 ring-foreground/10 shadow p-4 gap-4"
+								class="bg-background w-full items-start flex-row-reverse focus-within:ring-1 data-[state=checked]:ring-accent focus-within:ring-accent rounded-xl ring-1 ring-foreground/10 shadow p-4 gap-4"
 							>
 								<span class="flex flex-col gap-1.5 w-full">
 									<span class="font-medium">System</span>
@@ -137,7 +137,7 @@
 							</Radio>
 							<Radio
 								value="light"
-								class="items-start w-full flex-row-reverse focus-within:ring-1 data-[state=checked]:ring-accent focus-within:ring-accent rounded-2xl bg-background ring-1 ring-foreground/10 shadow p-4 gap-4"
+								class="items-start w-full flex-row-reverse focus-within:ring-1 data-[state=checked]:ring-accent focus-within:ring-accent rounded-xl bg-background ring-1 ring-foreground/10 shadow p-4 gap-4"
 							>
 								<span class="flex flex-col gap-1.5 w-full">
 									<span class="font-medium">Light</span>
@@ -148,7 +148,7 @@
 							</Radio>
 							<Radio
 								value="dark"
-								class="items-start w-full flex-row-reverse focus-within:ring-1 data-[state=checked]:ring-accent focus-within:ring-accent rounded-2xl bg-background ring-1 ring-foreground/10 shadow p-4 gap-4"
+								class="items-start w-full flex-row-reverse focus-within:ring-1 data-[state=checked]:ring-accent focus-within:ring-accent rounded-xl bg-background ring-1 ring-foreground/10 shadow p-4 gap-4"
 							>
 								<span class="flex flex-col gap-1.5 w-full">
 									<span class="font-medium">Dark</span>
@@ -220,7 +220,7 @@
 				<RadioGroup let:Radio value="Startup" class="w-full">
 					<Radio
 						value="Startup"
-						class="bg-background items-start flex-row-reverse focus-within:ring-1 data-[state=checked]:ring-accent focus-within:ring-accent rounded-2xl ring-1 ring-foreground/10 shadow p-4 max-w-sm gap-4"
+						class="bg-background items-start flex-row-reverse focus-within:ring-1 data-[state=checked]:ring-accent focus-within:ring-accent rounded-xl ring-1 ring-foreground/10 shadow p-4 max-w-sm gap-4"
 					>
 						<span class="flex flex-col gap-1.5 w-full">
 							<span class="font-medium">Startup</span>
@@ -229,7 +229,7 @@
 					</Radio>
 					<Radio
 						value="Business"
-						class="items-start flex-row-reverse focus-within:ring-1 data-[state=checked]:ring-accent focus-within:ring-accent rounded-2xl bg-background ring-1 ring-foreground/10 shadow p-4 max-w-sm gap-4"
+						class="items-start flex-row-reverse focus-within:ring-1 data-[state=checked]:ring-accent focus-within:ring-accent rounded-xl bg-background ring-1 ring-foreground/10 shadow p-4 max-w-sm gap-4"
 					>
 						<span class="flex flex-col gap-1.5 w-full">
 							<span class="font-medium">Business</span>
@@ -238,7 +238,7 @@
 					</Radio>
 					<Radio
 						value="Enterprise"
-						class="items-start flex-row-reverse focus-within:ring-1 data-[state=checked]:ring-accent focus-within:ring-accent rounded-2xl bg-background ring-1 ring-foreground/10 shadow p-4 max-w-sm gap-4"
+						class="items-start flex-row-reverse focus-within:ring-1 data-[state=checked]:ring-accent focus-within:ring-accent rounded-xl bg-background ring-1 ring-foreground/10 shadow p-4 max-w-sm gap-4"
 					>
 						<span class="flex flex-col gap-1.5 w-full">
 							<span class="font-medium">Enterprise</span>

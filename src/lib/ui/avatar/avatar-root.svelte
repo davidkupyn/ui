@@ -29,7 +29,7 @@
 <div
 	class={cn(
 		'grid h-9 aspect-square place-content-center rounded-full bg-muted',
-		squared ? 'rounded-xl' : 'rounded-full',
+		squared ? 'rounded' : 'rounded-full',
 		className
 	)}
 >

@@ -3,7 +3,7 @@
 
 	export const badgeStyles = tv({
 		slots: {
-			base: 'inline-flex items-center rounded-lg px-2.5 py-0.5 text-xs font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-border focus:ring-offset-2',
+			base: 'inline-flex items-center rounded-xl px-2.5 py-0.5 text-xs font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-border focus:ring-offset-2',
 			statusDot: 'w-1 h-1 rounded-full'
 		},
 		variants: {
@@ -92,14 +92,14 @@
 	use:root
 	{...$root}
 	class={cn(
-		'group relative flex touch-none [&:has(:focus-visible)]:ring-2 [&:has(:focus-visible)]:ring-offset-2 rounded-xl transition ring-offset-background [&:has(:focus-visible)]:ring-primary select-none items-center overflow-hidden data-[orientation=vertical]:flex-col',
+		'group relative flex touch-none [&:has(:focus-visible)]:ring-2 [&:has(:focus-visible)]:ring-offset-2 rounded-lg transition ring-offset-background [&:has(:focus-visible)]:ring-primary select-none items-center overflow-hidden data-[orientation=vertical]:flex-col',
 		orientation === 'vertical' ? 'h-full min-h-[4rem] w-fit' : 'w-full h-fit',
 		className
 	)}
 >
 	<span
 		class={cn(
-			'relative h-8 sm:h-5 w-full shadow-inner grow overflow-hidden rounded-xl backdrop-blur-sm bg-primary/20',
+			'relative h-8 sm:h-5 w-full shadow-inner grow overflow-hidden rounded-lg backdrop-blur-sm bg-primary/20',
 			orientation === 'vertical' && 'h-full w-8'
 		)}
 	>
@@ -108,7 +108,7 @@
 			{...$range}
 			class={cn(
 				'absolute h-full bg-primary dark:shadow-[inset_0_-1px_#0000004d] shadow-[inset_0_1px_0_#ffffff4d]',
-				orientation === 'vertical' ? 'w-full' : 'rounded-xl'
+				orientation === 'vertical' ? 'w-full' : 'rounded'
 			)}
 		/>
 	</span>

@@ -8,7 +8,7 @@
 
 @layer base {
 	:root {
-		--radius: 0.75rem;
+		--radius: 0.6rem;
 		--border: 240 6% 90%;
 
 		--color-primary: 240 10% 4%;
@@ -103,7 +103,7 @@
 }
 
 .tippy-box {
-	@apply inline-block rounded-lg border border-border bg-background px-2.5 py-1 text-sm font-medium shadow-sm;
+	@apply inline-block rounded-xl border border-border bg-background px-2.5 py-1 text-sm font-medium shadow-sm;
 }
 
 @layer utilities {
@@ -171,7 +171,7 @@
 	}
 
 	.btn {
-		@apply inline-flex h-9 items-center justify-center gap-2 rounded-xl bg-primary px-4 py-2 text-sm font-medium text-primary-foreground ring-offset-background transition hover:bg-primary-focus focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-focus focus-visible:ring-offset-2 active:scale-95 disabled:pointer-events-none disabled:opacity-50;
+		@apply inline-flex h-9 items-center justify-center gap-2 rounded-lg bg-primary px-4 py-2 text-sm font-medium text-primary-foreground ring-offset-background transition hover:bg-primary-focus focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-focus focus-visible:ring-offset-2 active:scale-95 disabled:pointer-events-none disabled:opacity-50;
 
 		&-outline {
 			@apply border border-transparent bg-transparent text-foreground shadow ring-1 ring-base-950/10 hover:bg-border focus-visible:border-border focus-visible:ring-border dark:border-border dark:shadow-black;
@@ -214,7 +214,7 @@
 		}
 
 		&-sm {
-			@apply h-8 rounded-lg px-3 text-xs;
+			@apply h-8 rounded-xl px-3 text-xs;
 		}
 
 		&-lg {

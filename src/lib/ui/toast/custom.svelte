@@ -6,7 +6,7 @@
 	const dispatch = createEventDispatcher();
 </script>
 
-<div class="px-4 py-3 w-[356px] bg-popover border border-popover-border rounded-2xl space-y-1">
+<div class="px-4 py-3 w-[356px] bg-popover border border-popover-border rounded-xl space-y-1">
 	<p class="font-medium text-sm">Account Saved</p>
 	<p class="text-muted-foreground text-sm">You can always revoke the changes.</p>
 	<Button

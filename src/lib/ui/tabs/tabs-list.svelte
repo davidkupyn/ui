@@ -24,7 +24,7 @@
 	use:list
 	{...$list}
 	class={cn(
-		'flex shrink-0 items-center w-full h-9 p-1 gap-2 data-[orientation=vertical]:flex-col data-[orientation=vertical]:w-fit data-[orientation=vertical]:min-w-[6rem] shadow-inner data-[orientation=vertical]:h-auto overflow-x-auto bg-muted dark:shadow-[inset_0_1px_#ffffff0f] data-[orientation=vertical]:rounded-2xl rounded-xl',
+		'flex shrink-0 items-center w-full h-9 p-1 gap-2 data-[orientation=vertical]:flex-col data-[orientation=vertical]:w-fit data-[orientation=vertical]:min-w-[6rem] shadow-inner data-[orientation=vertical]:h-auto overflow-x-auto bg-muted dark:shadow-[inset_0_1px_#ffffff0f] data-[orientation=vertical]:rounded rounded-lg',
 		className
 	)}
 >

@@ -39,7 +39,7 @@
 					href="/"
 					on:click|stopPropagation
 					aria-label="Go to home page"
-					class="text-center flex items-center gap-2 w-fit font-bold text-foreground whitespace-nowrap -ml-1 p-2 h-9 focus-visible:ring-2 focus-visible:outline-none rounded-xl transition ring-offset-background focus-visible:ring-muted-foreground"
+					class="text-center flex items-center gap-2 w-fit font-bold text-foreground whitespace-nowrap -ml-1 p-2 h-9 focus-visible:ring-2 focus-visible:outline-none rounded-lg transition ring-offset-background focus-visible:ring-muted-foreground"
 				>
 					<Logo class="text-accent" size="24" />
 					Essence
@@ -93,7 +93,7 @@
 										duration: 200
 									}}
 									out:send={{ key: 'background', easing: cubicOut, duration: 200 }}
-									class="w-full h-full rounded-xl bg-background dark:bg-muted shadow-[inset_0_1px_#ffffff0f]"
+									class="w-full h-full rounded-lg bg-background dark:bg-muted shadow-[inset_0_1px_#ffffff0f]"
 								/>
 							{/if}
 						</Button>
@@ -103,6 +103,6 @@
 		</nav>
 	</div>
 	<main
-		class="h-[calc(100vh-1rem)] w-full m-2 ml-0 p-4 bg-background dark:bg-muted rounded-3xl dark:shadow-[0_-1px_0_#ffffff2a]"
+		class="h-[calc(100vh-1rem)] w-full m-2 ml-0 p-4 bg-background dark:bg-muted rounded-xl dark:shadow-[0_-1px_0_#ffffff2a]"
 	/>
 </div>

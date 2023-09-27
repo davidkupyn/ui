@@ -85,7 +85,7 @@
 								duration: animationDuration
 							}}
 							out:send={{ key: 'background', easing: cubicOut, duration: animationDuration }}
-							class="w-full h-full rounded-xl bg-muted shadow-[inset_0_1px_#ffffff0f]"
+							class="w-full h-full rounded-lg bg-muted shadow-[inset_0_1px_#ffffff0f]"
 						/>
 					{/if}
 				</Button>

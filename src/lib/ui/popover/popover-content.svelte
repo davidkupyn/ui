@@ -16,7 +16,7 @@
 	<div
 		transition:css={{ duration: 150, y: '--popover-y', x: '--popover-x' }}
 		class={cn(
-			'rounded-2xl p-4 w-72 border border-popover-border bg-popover shadow-lg z-50 focus:outline-none [--popover-y:-10px]',
+			'rounded-xl p-4 w-72 border border-popover-border bg-popover shadow-lg z-50 focus:outline-none [--popover-y:-10px]',
 			className
 		)}
 		use:content

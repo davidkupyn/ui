@@ -30,7 +30,7 @@
 						slot="card"
 						let:card
 						class={cn(
-							'[box-shadow:_inset_0_1px_2px_0px_hsl(0_0%_100%/0.2)] grid bg-background place-content-center transition ease-out rounded-2xl w-72 h-96'
+							'[box-shadow:_inset_0_1px_2px_0px_hsl(0_0%_100%/0.2)] grid bg-background place-content-center transition ease-out rounded-xl w-72 h-96'
 						)}
 					>
 						{card.name}

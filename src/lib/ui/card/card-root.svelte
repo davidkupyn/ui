@@ -11,7 +11,7 @@
 </script>
 
 <div
-	class={cn('rounded-3xl bg-background ring-1 ring-foreground/10 shadow p-6 grid gap-6', className)}
+	class={cn('rounded-2xl bg-background ring-1 ring-foreground/10 shadow p-6 grid gap-6', className)}
 	{...$$restProps}
 >
 	<slot {Header} {Footer} />

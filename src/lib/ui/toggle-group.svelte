@@ -23,7 +23,7 @@
 	{#each tabs as tab (tab)}
 		<button
 			on:click={() => dispatch('change', tab)}
-			class="group relative btn btn-text w-full h-full p-0 rounded-lg"
+			class="group relative btn btn-text w-full h-full p-0 rounded-xl"
 			melt={$item(tab)}
 			use:item
 			disabled={disabled.includes(tab)}
@@ -33,7 +33,7 @@
 					in:receive={{ key: 'tab', easing: cubicOut, duration }}
 					out:send={{ key: 'tab', easing: cubicOut, duration }}
 					class={cn(
-						'w-full h-full rounded-lg overflow-hidden bg-muted',
+						'w-full h-full rounded-xl overflow-hidden bg-muted',
 						transparent && 'bg-background shadow'
 					)}
 				>
