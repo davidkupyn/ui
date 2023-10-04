@@ -96,21 +96,7 @@ const config = {
 		}
 	},
 
-	plugins: [
-		forms,
-		animate,
-		plugin(function ({ matchUtilities, theme }) {
-			matchUtilities(
-				{
-					custom: (value) => ({
-						width: value,
-						height: value
-					})
-				},
-				{ values: theme('colors') }
-			);
-		})
-	]
+	plugins: [forms, animate]
 };
 
 module.exports = config;
