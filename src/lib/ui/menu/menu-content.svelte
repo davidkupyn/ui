@@ -3,7 +3,7 @@
 	import Separator from './menu-separator.svelte';
 	import Label from './menu-item-label.svelte';
 	import Item from './menu-item.svelte';
-	import { cn } from '$lib/helpers/style';
+	import { cn } from '$lib/helpers';
 	import { ctx, menuStyles } from '.';
 	import { fade } from 'svelte/transition';
 	import Submenu from './menu-submenu.svelte';

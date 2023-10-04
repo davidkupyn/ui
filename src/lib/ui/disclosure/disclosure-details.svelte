@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { ctx } from '.';
-	import { cn } from '$lib/helpers/style';
+	import { cn } from '$lib/helpers';
 	import { slide } from 'svelte/transition';
 	import { cubicInOut } from 'svelte/easing';
 

@@ -39,6 +39,8 @@
 	let isWarningModalTrigger: any;
 	$: defaultTheme = $themeStore.theme;
 	$: themeSwitcherValue = defaultTheme;
+
+	[{ key: 'football', value: {} }];
 </script>
 
 {#key mounted}
@@ -50,7 +52,7 @@
 			>
 				Elegant. Functional.
 				<span
-					class="animate-text bg-clip-text text-transparent bg-gradient-to-r from-accent-focus to-accent selection:text-accent-500 dark:selection:text-accent-400"
+					class="bg-clip-text text-transparent bg-gradient-to-t from-accent-focus to-accent-300 selection:text-accent-500 dark:selection:text-accent-400"
 				>
 					Essence.
 				</span>
@@ -217,7 +219,7 @@
 				</form>
 			</Card>
 			<div class="w-full max-w-sm h-fit space-y-8">
-				<RadioGroup let:Radio value="Startup" class="w-full">
+				<RadioGroup let:Radio value="Startup" class="w-full dark">
 					<Radio
 						value="Startup"
 						class="bg-background items-start flex-row-reverse focus-within:ring-1 data-[state=checked]:ring-accent focus-within:ring-accent rounded-xl ring-1 ring-foreground/10 shadow p-4 max-w-sm gap-4"

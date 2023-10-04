@@ -1,11 +1,11 @@
 <script lang="ts" context="module">
-	import { cn } from '$lib/helpers/style';
+	import { cn } from '$lib/helpers';
 	import type { HTMLAnchorAttributes } from 'svelte/elements';
 	import { tv, type VariantProps } from 'tailwind-variants';
 
 	export const badgeStyles = tv({
 		slots: {
-			base: 'inline-flex items-center rounded px-2.5 py-0.5 text-xs font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-border focus:ring-offset-2',
+			base: 'inline-flex items-center rounded px-2.5 py-0.5 text-xs font-medium transition-colors focus:outline-none focus:ring-2 transition focus:ring-border focus:ring-offset-2',
 			statusDot: 'w-1 h-1 rounded-full'
 		},
 		variants: {
@@ -65,15 +65,19 @@
 	export let round: VariantProps<typeof badgeStyles>['round'] = false;
 	let className: string | undefined | null = undefined;
 	export { className as class };
-	const { base, statusDot } = badgeStyles({ variant, round, subtle });
 </script>
 
-<svelte:element this={href ? 'a' : 'span'} {href} class={cn(base(), className)} {...$$restProps}>
-	{#if subtle && variant !== 'outline'}
+<svelte:element
+	this={href ? 'a' : 'span'}
+	{href}
+	class={cn(badgeStyles({ variant, round, subtle }).base(), className)}
+	{...$$restProps}
+>
+	{#if subtle}
 		<span
 			class="rounded-full grid place-content-center h-2 w-2 mr-1.5 ring-1 ring-base-950/10 shadow dark:border-border border border-transparent p-1"
 		>
-			<span class={statusDot()}></span>
+			<span class={badgeStyles({ variant, round, subtle }).statusDot()} />
 		</span>
 	{/if}
 	<slot />

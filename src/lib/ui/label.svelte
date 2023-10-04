@@ -1,8 +1,8 @@
 <script lang="ts">
-	import { cn } from '$lib/helpers/style';
+	import { cn } from '$lib/helpers';
 	import { createLabel } from '@melt-ui/svelte';
 	import type { HTMLLabelAttributes } from 'svelte/elements';
-	import Wrapper from './utils/wrapper.svelte';
+	import Wrapper from '../wrapper.svelte';
 
 	type $$Props = HTMLLabelAttributes & {
 		required?: boolean | null;

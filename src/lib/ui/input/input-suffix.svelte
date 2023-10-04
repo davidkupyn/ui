@@ -9,10 +9,7 @@
 </script>
 
 <span
-	class={cn(
-		'absolute inset-y-0 right-0 flex items-center pr-3.5 pointer-events-none text-muted-foreground',
-		className
-	)}
+	class={cn('absolute inset-y-0 right-0 flex items-center pr-3.5 text-muted-foreground', className)}
 	{...$$restProps}
 >
 	<slot />

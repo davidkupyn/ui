@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { cn } from '$lib/helpers/style';
+	import { cn } from '$lib/helpers';
 	import { Check } from 'lucide-svelte';
 	import { ctx } from '.';
 	import { menuStyles } from '../menu';

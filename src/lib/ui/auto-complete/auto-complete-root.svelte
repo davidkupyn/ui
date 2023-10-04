@@ -13,7 +13,7 @@
 	export let required = false;
 	export let placeholder = '';
 	export let disabled = false;
-	export let value: ComboboxOption<string> | undefined = undefined;
+	export let value: ComboboxOption<string> | ComboboxOption<string>[] | undefined = undefined;
 	export let loop = false;
 	export let preventScroll = true;
 	export let multiple = false;
@@ -31,7 +31,7 @@
 	export { className as class };
 	const dispatch = createEventDispatcher();
 
-	const select = ctx.set<string>({
+	const autoComplete = ctx.set<string>({
 		onSelectedChange: ({ next }) => {
 			value = next;
 			dispatch('change', next);
@@ -50,7 +50,7 @@
 		states: { open: openStore, selected: valueStore },
 		elements: { input, menu },
 		options
-	} = select;
+	} = autoComplete;
 
 	$: valueStore.set(value);
 	$: options.loop.set(loop);
@@ -78,7 +78,7 @@
 		aria-pressed={$openStore}
 	/>
 </Input>
-<input {name} type="hidden" value={$valueStore?.value} />
+<input {name} type="hidden" value={JSON.stringify($valueStore.map((value) => value.value))} />
 {#if $openStore}
 	<ul transition:fly={{ duration: 150, y: -10 }} use:menu {...$menu} class={menuStyles().content()}>
 		<slot {Option} {Empty} />

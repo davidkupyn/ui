@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { cn } from '$lib/helpers/style';
+	import { cn } from '$lib/helpers';
 	import { fade } from 'svelte/transition';
 	import { css, ctx, modal } from '.';
 	import Footer from './modal-footer.svelte';

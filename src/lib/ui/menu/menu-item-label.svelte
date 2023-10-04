@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { cn } from '$lib/helpers/style';
+	import { cn } from '$lib/helpers';
 	import { menuStyles } from '.';
 
 	let className: string | undefined | null = undefined;

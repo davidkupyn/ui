@@ -2,11 +2,11 @@
 	import { Check } from 'lucide-svelte';
 	import type { Writable } from 'svelte/store';
 	import { ctx, menuStyles } from '.';
-	import { cn } from '$lib/helpers/style';
+	import { cn } from '$lib/helpers';
 	import { createEventDispatcher } from 'svelte';
 	import type { Action } from '@sveltejs/kit';
 	import type { _CheckboxItemProps } from '@melt-ui/svelte/dist/builders/menu';
-	import Wrapper from '../utils/wrapper.svelte';
+	import Wrapper from '$lib/components/wrapper.svelte';
 
 	const dispatch = createEventDispatcher();
 
@@ -19,7 +19,6 @@
 		disabled,
 		defaultChecked: checked,
 		onCheckedChange: ({ next }) => {
-			console.log(next);
 			checked = next;
 			dispatch('change', next);
 			return next;

@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { ctx } from '.';
-	import { cn } from '$lib/helpers/style';
+	import { cn } from '$lib/helpers';
 	import { uuid } from '$lib/helpers/uuid';
 	import Trigger from './accordion-item-trigger.svelte';
 	import Content from './accordion-item-content.svelte';

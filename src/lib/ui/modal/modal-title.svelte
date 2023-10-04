@@ -2,9 +2,17 @@
 	import { AlertCircle, AlertTriangle, CheckCircle2, Info, X } from 'lucide-svelte';
 	import { modal, ctx } from '.';
 	import Button from '../button.svelte';
-	import { cn } from '$lib/helpers/style';
+	import { cn } from '$lib/helpers';
+	import type { HTMLAttributes } from 'svelte/elements';
+
+	type $$Props = HTMLAttributes<HTMLHeadingElement> & {
+		icon?: boolean;
+	};
 
 	export let icon = false;
+	let className: $$Props['class'] = undefined;
+
+	export { className as class };
 
 	const {
 		elements: { title, close },
@@ -13,27 +21,27 @@
 	$: hasIcon = !!$type || $$slots.icon || icon;
 </script>
 
-<h2 class={modal({ hasIcon }).title()} use:title {...$title}>
+<h2 class={cn(modal({ hasIcon }).title(), className)} use:title {...$title} {...$$restProps}>
 	<span aria-hidden>
 		{#if $type === 'error'}
-			<div class="bg-error-500/10 rounded p-1.5 text-error text-shadow">
+			<div class="bg-error-500/10 rounded-md p-1.5 text-error text-shadow">
 				<AlertCircle size="20" />
 			</div>
 		{:else if $type === 'warning'}
-			<div class="bg-warning-500/10 rounded p-1.5 text-warning">
+			<div class="bg-warning-500/10 rounded-md p-1.5 text-warning">
 				<AlertTriangle size="20" />
 			</div>
 		{:else if $type === 'success'}
-			<div class="bg-success-500/10 rounded p-1.5 text-success">
+			<div class="bg-success-500/10 rounded-md p-1.5 text-success">
 				<CheckCircle2 size="20" />
 			</div>
 		{:else if $type === 'info'}
-			<div class="bg-info-500/10 rounded p-1.5 text-info">
+			<div class="bg-info-500/10 rounded-md p-1.5 text-info">
 				<Info size="20" />
 			</div>
 		{:else if $$slots.icon}
 			<div
-				class="rounded bg-popover ring-1 ring-accent-500/10 p-1.5 shadow text-accent [&>svg]:drop-shadow"
+				class="rounded-md bg-popover ring-1 ring-accent-500/10 p-1.5 shadow text-accent [&>svg]:drop-shadow"
 			>
 				<slot name="icon" />
 			</div>
@@ -42,7 +50,7 @@
 	<slot />
 </h2>
 
-{#if $crossButton && !$alert}
+{#if $crossButton}
 	<Button
 		variant="text"
 		size="icon"

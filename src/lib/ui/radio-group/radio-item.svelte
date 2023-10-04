@@ -18,7 +18,7 @@
 
 <svelte:element
 	this={$$slots.default ? 'label' : 'div'}
-	class={cn('flex items-center gap-3 group', className)}
+	class={cn('flex items-center text-foreground gap-3 group', className)}
 	data-state={$isChecked(value) ? 'checked' : 'unchecked'}
 	aria-checked={$isChecked(value)}
 >

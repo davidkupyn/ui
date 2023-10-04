@@ -40,6 +40,10 @@ const config = {
 				base: colors.zinc,
 				background: 'hsl(var(--color-background))',
 				foreground: 'hsl(var(--color-foreground))',
+				card: {
+					DEFAULT: 'hsl(var(--color-card))',
+					foreground: 'hsl(var(--color-card-foreground))'
+				},
 				border: 'hsl(var(--border))',
 				muted: {
 					DEFAULT: 'var(--color-muted)',

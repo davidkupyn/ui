@@ -3,8 +3,8 @@
 	import Content from './modal-content.svelte';
 	import { ctx } from '.';
 
-	export let crossButton = true;
 	export let alert = false;
+	export let crossButton = alert;
 	export let type: 'error' | 'warning' | 'success' | 'info' | undefined = undefined;
 	export let drawer = false;
 	export let side: 'left' | 'right' | 'top' | 'bottom' | undefined = drawer ? 'right' : undefined;

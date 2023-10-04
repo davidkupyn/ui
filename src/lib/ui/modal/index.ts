@@ -140,8 +140,8 @@ export function css(
 			isEnabled
 				? `
 			transform: ${transform} translate(${(1 - t) * xValue}${xUnit}, ${(1 - t) * yValue}${yUnit}) scale(${
-				1 - sd * u
-			});
+						1 - sd * u
+				  });
 			opacity: ${target_opacity - od * u}`
 				: ''
 	};

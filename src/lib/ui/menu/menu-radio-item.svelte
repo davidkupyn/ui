@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { cn } from '$lib/helpers/style';
+	import { cn } from '$lib/helpers';
 	import { ctx, menuStyles } from '.';
 
 	const {
@@ -15,7 +15,7 @@
 </script>
 
 <div
-	class={cn(item(), 'relative pl-8 ', className)}
+	class={cn(item(), 'relative pl-8', className)}
 	{...$radioItem({ value, disabled })}
 	use:radioItem
 >

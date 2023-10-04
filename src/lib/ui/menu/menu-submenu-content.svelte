@@ -2,7 +2,7 @@
 	import Label from './menu-item-label.svelte';
 	import RadioGroup from './menu-radio-group.svelte';
 	import Separator from './menu-separator.svelte';
-	import { cn } from '$lib/helpers/style';
+	import { cn } from '$lib/helpers';
 	import { ctx, menuStyles } from '.';
 
 	const {
