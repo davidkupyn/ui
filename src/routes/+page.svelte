@@ -1,23 +1,22 @@
 <script lang="ts">
-	import Slider from '$lib/ui/slider.svelte';
-	import { ArrowRight, Brush, DollarSign, Palette, Volume1, Volume2, VolumeX } from 'lucide-svelte';
-	import { cubicOut } from 'svelte/easing';
-	import { fade, slide } from 'svelte/transition';
-	import { onMount } from 'svelte';
-	import Button from '$lib/ui/button.svelte';
-	import Illustration from './illustration.svelte';
+	import { themeStore } from '$lib/theme-switcher';
 	import { Accordion } from '$lib/ui/accordion';
-	import { Card } from '$lib/ui/card';
 	import { AutoComplete } from '$lib/ui/auto-complete';
+	import Button from '$lib/ui/button.svelte';
+	import { Card } from '$lib/ui/card';
 	import { Input } from '$lib/ui/input';
 	import Label from '$lib/ui/label.svelte';
-	import Separator from '$lib/ui/separator.svelte';
-	import Switch from '$lib/ui/switch.svelte';
-	import { RadioGroup } from '$lib/ui/radio-group';
-	import Progress from '$lib/ui/progress.svelte';
 	import { Modal } from '$lib/ui/modal';
-	import { themeStore } from '$lib/theme-switcher';
+	import Progress from '$lib/ui/progress.svelte';
+	import { RadioGroup } from '$lib/ui/radio-group';
+	import Separator from '$lib/ui/separator.svelte';
+	import Slider from '$lib/ui/slider.svelte';
+	import Switch from '$lib/ui/switch.svelte';
 	import { toast } from '$lib/ui/toast';
+	import { ArrowRight, Brush, Palette, Volume1, Volume2, VolumeX } from 'lucide-svelte';
+	import { onMount } from 'svelte';
+	import { cubicOut } from 'svelte/easing';
+	import { fade } from 'svelte/transition';
 	let mounted = false;
 	onMount(() => (mounted = true));
 	function fadeScale(node: Element, { delay = 0, duration = 200, baseScale = 0.9 }) {
@@ -219,7 +218,7 @@
 				</form>
 			</Card>
 			<div class="w-full max-w-sm h-fit space-y-8">
-				<RadioGroup let:Radio value="Startup" class="w-full dark">
+				<RadioGroup let:Radio value="Startup" class="w-full">
 					<Radio
 						value="Startup"
 						class="bg-background items-start flex-row-reverse focus-within:ring-1 data-[state=checked]:ring-accent focus-within:ring-accent rounded-xl ring-1 ring-foreground/10 shadow p-4 max-w-sm gap-4"
@@ -253,20 +252,3 @@
 		</div>
 	</main>
 {/key}
-
-<style>
-	@keyframes text {
-		0%,
-		100% {
-			background-size: 200% 200%;
-			background-position: left center;
-		}
-		50% {
-			background-size: 200% 200%;
-			background-position: right center;
-		}
-	}
-	.animate-text {
-		animation: text 6s ease infinite;
-	}
-</style>

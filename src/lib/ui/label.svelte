@@ -2,7 +2,7 @@
 	import { cn } from '$lib/helpers';
 	import { createLabel } from '@melt-ui/svelte';
 	import type { HTMLLabelAttributes } from 'svelte/elements';
-	import Wrapper from '../wrapper.svelte';
+	import Wrapper from './utils/wrapper.svelte';
 
 	type $$Props = HTMLLabelAttributes & {
 		required?: boolean | null;

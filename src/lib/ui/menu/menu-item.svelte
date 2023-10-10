@@ -6,7 +6,7 @@
 	import { createEventDispatcher } from 'svelte';
 	import type { Action } from '@sveltejs/kit';
 	import type { _CheckboxItemProps } from '@melt-ui/svelte/dist/builders/menu';
-	import Wrapper from '$lib/components/wrapper.svelte';
+	import Wrapper from '../utils/wrapper.svelte';
 
 	const dispatch = createEventDispatcher();
 

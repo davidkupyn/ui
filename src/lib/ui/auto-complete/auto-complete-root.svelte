@@ -78,7 +78,13 @@
 		aria-pressed={$openStore}
 	/>
 </Input>
-<input {name} type="hidden" value={JSON.stringify($valueStore.map((value) => value.value))} />
+<input
+	{name}
+	type="hidden"
+	value={multiple && $valueStore
+		? JSON.stringify($valueStore.map((value) => value.value))
+		: $valueStore}
+/>
 {#if $openStore}
 	<ul transition:fly={{ duration: 150, y: -10 }} use:menu {...$menu} class={menuStyles().content()}>
 		<slot {Option} {Empty} />
