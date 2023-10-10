@@ -44,7 +44,7 @@
 </script>
 
 {#key mounted}
-	<main class="z-10 flex justify-start items-center flex-col pt-28 md:pt-48 gap-12 pb-9">
+	<main class="flex justify-start items-center flex-col pt-24 md:pt-32 gap-12 pb-9">
 		<div class="p-6 flex flex-col justify-center items-center gap-8">
 			<h1
 				in:fadeScale={{ duration: 400 }}
@@ -63,7 +63,7 @@
 			>
 				Craft modern, captivating interfaces effortlessly with easy-to-use UI components.
 			</p>
-			<span in:fadeScale={{ duration: 400 }} class="mt-4">
+			<span in:fadeScale={{ duration: 400 }}>
 				<Button size="lg" href="/preview">
 					Explore Components
 					<ArrowRight class="group-hover:translate-x-1 transition" size="16" />
