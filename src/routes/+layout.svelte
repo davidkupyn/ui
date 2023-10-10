@@ -87,17 +87,14 @@
 <slot />
 
 <footer
-	class={cn('border-muted w-full', $page.url.pathname === '/sidebar' ? 'hidden' : 'border-t')}
+	class={cn(
+		'border-muted z-[0] w-full mt-8 bg-background',
+		$page.url.pathname === '/' ? 'absolute bottom-0' : 'border-t',
+		$page.url.pathname === '/sidebar' && 'hidden'
+	)}
 >
-	<div class="container mx-auto flex justify-between items-center px-6 py-6">
-		<span class="mx-auto text-sm text-muted-foreground">
-			<span class="mr-1.5">&copy</span><a
-				href="https://github.com/davidkupyn"
-				target="_blank"
-				class="font-medium border-b border-opacity-0 dark:border-opacity-0 border-base-500 dark:border-base-400 hover:border-opacity-100 dark:hover:border-opacity-100 transition"
-				>David Kupyn, Essence UI</a
-			>
-		</span>
+	<div class="container mx-auto flex justify-between items-center px-6 h-14 relative bottom-0">
+		<span class="mx-auto text-sm text-muted-foreground font-medium">&copy David Kupyn</span>
 		{#if $page.url.pathname !== '/'}
 			<Menu let:trigger let:Content placement="bottom-end">
 				<Button melt={trigger} aria-label="Theme picker" variant="ghost" size="icon">
