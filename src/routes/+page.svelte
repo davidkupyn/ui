@@ -16,7 +16,7 @@
 	import { ArrowRight, Brush, Palette, Volume1, Volume2, VolumeX } from 'lucide-svelte';
 	import { onMount } from 'svelte';
 	import { cubicOut } from 'svelte/easing';
-	import { fade, fly } from 'svelte/transition';
+	import { fade } from 'svelte/transition';
 	let mounted = false;
 	onMount(() => (mounted = true));
 	function fadeScale(node: Element, { delay = 0, duration = 200, baseScale = 0.9 }) {

@@ -21,7 +21,7 @@
 					'hover:brightness-95 dark:hover:brightness-90 bg-gradient-to-b from-warning-focus to-warning text-warning-foreground focus-visible:ring-warning-focus shadow-[inset_0_1px_0_#ffffff5d,inset_0_-1px_0_#00000015,0_1px_3px_0_rgb(0_0_0_/_0.1),_0_1px_2px_-1px_rgb(0_0_0_/_0.1)]',
 				info: '[--text-shadow:_0_1px_0_rgb(0_0_0_/_20%)] data-[loading]:[--text-shadow:none] hover:brightness-95 dark:hover:brightness-90 bg-gradient-to-b from-info to-info-focus [--text-color:theme(colors.info.foreground)] focus-visible:ring-info-focus shadow-[inset_0_1px_0_#ffffff5d,inset_0_-1px_0_#00000015,0_1px_3px_0_rgb(0_0_0_/_0.1),_0_1px_2px_-1px_rgb(0_0_0_/_0.1)]',
 				ghost:
-					'hover:bg-muted dark:hover:bg-base-800/50 [--text-color:theme(colors.muted.foreground)] focus-visible:[--text-color:theme(colors.foreground)] dark:focus-visible:text-base-300 hover:[--text-color:theme(colors.foreground)] aria-pressed:[--text-color:theme(colors.foreground)] focus-visible:ring-border hover:shadow-[inset_0_1px_0_#ffffff0f] data-[state=open]:bg-muted data-[state=open]:[--text-color:theme(colors.foreground)] data-[state=open]:shadow-[inset_0_1px_0_#ffffff0f]',
+					'hover:bg-muted dark:hover:bg-base-800/50 [--text-color:theme(colors.muted.foreground)] focus-visible:[--text-color:theme(colors.foreground)] dark:focus-visible:text-base-300 hover:[--text-color:theme(colors.foreground)] aria-pressed:[--text-color:theme(colors.foreground)] focus-visible:ring-border hover:shadow-[inset_0_1px_0_#ffffff0f] data-[state=open]:bg-muted aria-pressed:bg-muted data-[state=open]:[--text-color:theme(colors.foreground)] data-[state=open]:shadow-[inset_0_1px_0_#ffffff0f] aria-pressed:shadow-[inset_0_1px_0_#ffffff0f]',
 				text: '[--text-color:theme(colors.muted.foreground)] focus-visible:[--text-color:theme(colors.foreground)] hover:[--text-color:theme(colors.foreground)] aria-pressed:[--text-color:theme(colors.foreground)] data-[selected]:[--text-color:theme(colors.foreground)] data-[state=active]:[--text-color:theme(colors.foreground)] aria-pressed:underline underline-offset-4 data-[state=active]:underline focus-visible:ring-offset-0 focus-visible:ring-border',
 				link: '[--text-shadow:_0_1px_0.5px_rgb(0_0_0_/_10%)] underline-offset-4 underline text-accent hover:text-accent-focus focus-visible:ring-accent'
 			},
@@ -44,6 +44,7 @@
 	import { ExternalLink, Loader2 } from 'lucide-svelte';
 	import type { Action } from 'svelte/action';
 	import type { HTMLAnchorAttributes, HTMLButtonAttributes } from 'svelte/elements';
+	import { page } from '$app/stores';
 
 	let className: string | undefined | null = undefined;
 	export { className as class };
@@ -87,6 +88,7 @@
 		target={external ? '_blank' : undefined}
 		rel={external ? 'noopener noreferrer' : undefined}
 		{href}
+		aria-pressed={$page.url.pathname === href || undefined}
 		class={cn(buttonStyles({ variant, size }), className)}
 		data-loading={loading || undefined}
 		{...$$restProps}
@@ -116,6 +118,7 @@
 		target={external ? '_blank' : undefined}
 		rel={external ? 'noopener noreferrer' : undefined}
 		{href}
+		aria-pressed={$page.url.pathname === href || undefined}
 		class={cn(buttonStyles({ variant, size }), className)}
 		data-loading={loading || undefined}
 		{...$$restProps}
