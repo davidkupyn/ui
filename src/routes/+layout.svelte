@@ -9,11 +9,7 @@
 	import Button from '$lib/ui/button.svelte';
 	import Separator from '$lib/ui/separator.svelte';
 	import Logo from './logo.svelte';
-	import Label from '$lib/ui/label.svelte';
 	import { Toaster } from 'svelte-sonner';
-	import Kbd from '$lib/ui/kbd.svelte';
-
-	let disabled = false;
 </script>
 
 <svelte:head>
@@ -26,9 +22,10 @@
 </svelte:head>
 <ThemeProvider attribute="class" disableTransitionOnChange storageKey="essense-theme" />
 <Toaster />
+
 <header
 	class={cn(
-		'w-full z-20',
+		'w-full z-20 bg-gradient-to-b from-background to-transparent',
 		$page.url.pathname === '/sidebar' && 'hidden',
 		$page.url.pathname === '/' && 'absolute'
 	)}
@@ -85,7 +82,7 @@
 </header>
 <svg
 	class="absolute pointer-events-none inset-0 top-1.5 h-[400px] w-full stroke-foreground dark:stroke-muted-foreground opacity-10 [mask-image:radial-gradient(100%_100%_at_top_center,white,transparent)]"
-	aria-hidden="true"
+	aria-hidden
 >
 	<defs>
 		<pattern
@@ -114,8 +111,8 @@
 
 <footer
 	class={cn(
-		'border-muted z-[0] w-full mt-8 bg-background',
-		$page.url.pathname === '/' ? 'absolute bottom-0' : 'border-t',
+		'border-muted w-full mt-8 bg-background',
+		$page.url.pathname === '/' ? '' : 'border-t',
 		$page.url.pathname === '/sidebar' && 'hidden'
 	)}
 >

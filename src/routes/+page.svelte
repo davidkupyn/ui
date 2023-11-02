@@ -42,7 +42,7 @@
 </script>
 
 {#key mounted}
-	<main class="flex justify-start items-center flex-col pt-24 md:pt-32 gap-12 pb-9">
+	<main class="flex justify-start flex-grow items-center flex-col pt-24 md:pt-32 gap-12 pb-9">
 		<div class="p-6 flex flex-col justify-center items-center gap-8">
 			<h1
 				in:fadeScale={{ duration: 500 }}
@@ -68,7 +68,7 @@
 				</Button>
 			</span>
 		</div>
-		<div class="flex w-full p-6 md:p-12 gap-8 justify-center max-sm:flex-col max-sm:items-center">
+		<div class="flex w-full p-6 md:p-12 gap-8 justify-center max-lg:flex-col max-lg:items-center">
 			<div class="gap-y-8 items-end flex flex-col w-full h-fit max-w-sm">
 				<Card class="w-full p-3">
 					<Accordion let:Item>
