@@ -16,7 +16,7 @@
 	import { ArrowRight, Brush, Palette, Volume1, Volume2, VolumeX } from 'lucide-svelte';
 	import { onMount } from 'svelte';
 	import { cubicOut } from 'svelte/easing';
-	import { fade } from 'svelte/transition';
+	import { fade, fly } from 'svelte/transition';
 	let mounted = false;
 	onMount(() => (mounted = true));
 	function fadeScale(node: Element, { delay = 0, duration = 200, baseScale = 0.9 }) {
@@ -69,7 +69,10 @@
 			</span>
 		</div>
 		<div class="flex w-full p-6 md:p-12 gap-8 justify-center max-lg:flex-col max-lg:items-center">
-			<div class="gap-y-8 items-end flex flex-col w-full h-fit max-w-sm">
+			<div
+				in:fade={{ delay: 100, duration: 600 }}
+				class="gap-y-8 items-end flex flex-col w-full h-fit max-w-sm"
+			>
 				<Card class="w-full p-3">
 					<Accordion let:Item>
 						<Item let:Content let:Trigger>
@@ -167,56 +170,57 @@
 					</Content>
 				</Modal>
 			</div>
+			<div in:fade={{ delay: 200, duration: 600 }} class="w-full max-w-md">
+				<Card let:Header class="w-full h-fit">
+					<Header let:Title let:Description>
+						<Title>Account</Title>
+						<Description>Change your personal information and account's settings</Description>
+					</Header>
+					<form class="grid gap-4">
+						<AutoComplete label="Role" let:Option id="role" name="role">
+							{#each [{ label: 'Front-end Developer', value: 'front' }, { label: 'Back-end Developer', value: 'back' }, { label: 'Full Stack Developer', value: 'full' }] as { value, label }}
+								<Option {value} {label} />
+							{/each}
+						</AutoComplete>
 
-			<Card let:Header class="w-full max-w-md h-fit">
-				<Header let:Title let:Description>
-					<Title>Account</Title>
-					<Description>Change your personal information and account's settings</Description>
-				</Header>
-				<form class="grid gap-4">
-					<AutoComplete label="Role" let:Option id="role" name="role">
-						{#each [{ label: 'Front-end Developer', value: 'front' }, { label: 'Back-end Developer', value: 'back' }, { label: 'Full Stack Developer', value: 'full' }] as { value, label }}
-							<Option {value} {label} />
-						{/each}
-					</AutoComplete>
+						<!-- <AutoComplete
+							label="Role"
+							id="role"
+							name="role"
+							items={[
+								{ label: 'Front-end Developer', value: 'front' },
+								{ label: 'Back-end Developer', value: 'back' },
+								{ label: 'Full Stack Developer', value: 'full' }
+							]}
+						/> -->
 
-					<!-- <AutoComplete
-						label="Role"
-						id="role"
-						name="role"
-						items={[
-							{ label: 'Front-end Developer', value: 'front' },
-							{ label: 'Back-end Developer', value: 'back' },
-							{ label: 'Full Stack Developer', value: 'full' }
-						]}
-					/> -->
-
-					<Input slot="input" label="Full Name" name="full-name" required value="Dave Kupyn" />
-					<Separator />
-					<Label class="justify-between" required>
-						Two-Factor authentication
-						<Switch id="2fa" checked />
-					</Label>
-					<Separator />
-					<div class="mt-4 text-right space-x-4">
-						<Modal alert type="error" let:trigger let:Content>
-							<Button variant="outline" melt={trigger}>Discard</Button>
-							<Content let:Header let:Footer let:close class="sm:w-96">
-								<Header let:Title let:Description>
-									<Title>Are you sure?</Title>
-									<Description>You cannot undo this action.</Description>
-								</Header>
-								<Footer>
-									<Button melt={close} variant="outline">Cancel</Button>
-									<Button melt={close} variant="error">Continue</Button>
-								</Footer>
-							</Content>
-						</Modal>
-						<Button on:click={() => toast('msg', {})}>Save</Button>
-					</div>
-				</form>
-			</Card>
-			<div class="w-full max-w-sm h-fit space-y-8">
+						<Input slot="input" label="Full Name" name="full-name" required value="Dave Kupyn" />
+						<Separator />
+						<Label class="justify-between" required>
+							Two-Factor authentication
+							<Switch id="2fa" checked />
+						</Label>
+						<Separator />
+						<div class="mt-4 text-right space-x-4">
+							<Modal alert type="error" let:trigger let:Content>
+								<Button variant="outline" melt={trigger}>Discard</Button>
+								<Content let:Header let:Footer let:close class="sm:w-96">
+									<Header let:Title let:Description>
+										<Title>Are you sure?</Title>
+										<Description>You cannot undo this action.</Description>
+									</Header>
+									<Footer>
+										<Button melt={close} variant="outline">Cancel</Button>
+										<Button melt={close} variant="error">Continue</Button>
+									</Footer>
+								</Content>
+							</Modal>
+							<Button on:click={() => toast('msg', {})}>Save</Button>
+						</div>
+					</form>
+				</Card>
+			</div>
+			<div in:fade={{ delay: 300, duration: 600 }} class="w-full max-w-sm h-fit space-y-8">
 				<RadioGroup let:Radio value="Startup" class="w-full">
 					<Radio
 						value="Startup"
