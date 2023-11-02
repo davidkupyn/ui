@@ -4,7 +4,7 @@
 	import { Card } from '$lib/ui/card';
 	import Checkbox from '$lib/ui/checkbox.svelte';
 	import { Disclosure } from '$lib/ui/disclosure';
-	import { Input } from '$lib/ui/input';
+	import { Input, inputStyles } from '$lib/ui/input';
 	import Kbd from '$lib/ui/kbd.svelte';
 	import Label from '$lib/ui/label.svelte';
 	import { Popover } from '$lib/ui/popover';
@@ -87,18 +87,9 @@
 			label="Normal Input"
 			description="Up to 16 characters, no special characters"
 			spellcheck="false"
-			type="text"
 			bind:value={normalInputValue}
 			error={normalInputError}
 		/>
-
-		<label class="input-label w-full">
-			Text Area
-			<fieldset class="input-group h-64 flex flex-col">
-				<input class="!text-xl font-semibold mt-1" placeholder="Title" />
-				<textarea class="h-full sm:text-sm" placeholder="Description" />
-			</fieldset>
-		</label>
 
 		<Card let:Header class="max-w-md">
 			<Header let:Title let:Description>
@@ -145,7 +136,7 @@
 				</Input>
 				<Label class="flex-col" for="select2" required>
 					Native Select
-					<select slot="input" class="input" id="select2" name="native" value="david">
+					<select slot="input" class={inputStyles()} id="select2" name="native" value="david">
 						<optgroup label="Class 3">
 							<option value="witalina">Witalina</option>
 							<option value="david">David</option>
@@ -188,7 +179,7 @@
 
 			<Button
 				disabled={buttonLoading}
-				loading={buttonLoading}
+				data-loading={buttonLoading || undefined}
 				on:click={() => {
 					buttonLoading = true;
 					setTimeout(() => {

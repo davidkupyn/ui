@@ -6,36 +6,19 @@
 	import Description from './input-description.svelte';
 	import Error from './input-error.svelte';
 	import Label from '../label.svelte';
-	import { AlertCircle } from 'lucide-svelte';
+	import { XCircle } from 'lucide-svelte';
 	import Prefix from './input-prefix.svelte';
 	import Suffix from './input-suffix.svelte';
-	import { inputStyles } from '.';
+	import { inputStyles, type InputEvents } from '.';
 	import type { ExplicitBuilderReturn } from '@melt-ui/svelte/internal/helpers';
-
-	type FormInputEvent<T extends Event = Event> = T & {
-		currentTarget: EventTarget & HTMLInputElement;
-	};
 
 	type $$Props = HTMLInputAttributes & {
 		use?: Action<HTMLElement, any> | ExplicitBuilderReturn<any, any, any, any>;
 		description?: string;
 		label?: string;
-		error?: string;
+		error?: boolean | string;
 	};
-	type $$Events = {
-		blur: FormInputEvent<FocusEvent>;
-		change: FormInputEvent<Event>;
-		click: FormInputEvent<MouseEvent>;
-		focus: FormInputEvent<FocusEvent>;
-		keydown: FormInputEvent<KeyboardEvent>;
-		keypress: FormInputEvent<KeyboardEvent>;
-		keyup: FormInputEvent<KeyboardEvent>;
-		mouseover: FormInputEvent<MouseEvent>;
-		mouseenter: FormInputEvent<MouseEvent>;
-		mouseleave: FormInputEvent<MouseEvent>;
-		paste: FormInputEvent<ClipboardEvent>;
-		input: FormInputEvent<InputEvent>;
-	};
+	type $$Events = InputEvents;
 
 	let className: $$Props['class'] = undefined;
 	export let value: $$Props['value'] = undefined;
@@ -94,12 +77,12 @@
 		{:else if error}
 			<Suffix>
 				<span transition:scale={{ start: 0.5, duration: 200 }}>
-					<AlertCircle class="text-error" size="16" />
+					<XCircle class="text-error" size="16" />
 				</span>
 			</Suffix>
 		{/if}
 	</div>
-	{#if error}
+	{#if error !== '' && typeof error === 'string'}
 		<Error>
 			{error}
 		</Error>

@@ -10,7 +10,7 @@
 </script>
 
 <div
-	transition:slide={{ duration: 200 }}
+	transition:slide={{ duration: 150 }}
 	class={cn('mt-1 space-y-4 text-sm/6 text-error', className)}
 	{...$$restProps}
 >

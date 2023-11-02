@@ -46,7 +46,7 @@
 	use:root
 	{...$root}
 	class={cn(
-		'my-1 h-5 w-5 shrink-0 cursor-pointer transition disabled:opacity-50 disabled:pointer-events-none  border-0 ring-1 ring-foreground/25 data-[state=unchecked]:hover:bg-muted bg-background data-[state=checked]:bg-accent shadow outline-0 data-[state=checked]:ring-accent focus-visible:ring-border focus-visible:ring-offset-2 focus:ring-1 focus:ring-offset-0 focus:data-[state=checked]:ring-accent focus-visible:ring-2 focus-visible:border data-[state=checked]:focus-visible:border-accent focus-visible:border-foreground/20 focus-visible:ring-offset-background data-[state=checked]:focus-visible:ring-accent sm:h-4 sm:w-4 rounded-sm',
+		'my-1 h-5 w-5 shrink-0 cursor-pointer transition disabled:opacity-50 disabled:pointer-events-none border-0 ring-1 ring-foreground/25 data-[state=unchecked]:hover:bg-muted bg-background data-[state=checked]:bg-accent shadow outline-0 data-[state=checked]:ring-accent focus-visible:ring-border focus-visible:ring-offset-2 focus:ring-1 focus:ring-offset-0 focus:data-[state=checked]:ring-accent focus-visible:ring-2 focus-visible:border data-[state=checked]:focus-visible:border-accent focus-visible:border-foreground/20 focus-visible:ring-offset-background data-[state=checked]:focus-visible:ring-accent sm:h-4 sm:w-4 rounded-sm',
 		className
 	)}
 	{...$$restProps}

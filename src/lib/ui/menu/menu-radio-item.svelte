@@ -3,8 +3,7 @@
 	import { ctx, menuStyles } from '.';
 
 	const {
-		elements: { radioItem },
-		helpers: { isChecked }
+		elements: { radioItem }
 	} = ctx.radioGroup.get();
 
 	export let value: string;
@@ -15,13 +14,13 @@
 </script>
 
 <div
-	class={cn(item(), 'relative pl-8', className)}
+	class={cn(item(), 'group relative pl-8', className)}
 	{...$radioItem({ value, disabled })}
 	use:radioItem
 >
-	{#if $isChecked(value)}
-		<span class="absolute left-3 rounded-full w-1.5 h-1.5 bg-foreground top-1/2 -translate-y-1/2" />
-	{/if}
+	<span
+		class="group-aria-checked:block hidden absolute left-3 rounded-full w-1.5 h-1.5 bg-foreground top-1/2 -translate-y-1/2"
+	/>
 	<slot />
 	{#if $$slots.after}
 		<span class="ml-auto">
