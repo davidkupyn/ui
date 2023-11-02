@@ -35,7 +35,6 @@
 		};
 	}
 	let sliderValue = 30;
-	let isWarningModalTrigger: any;
 	$: defaultTheme = $themeStore.theme;
 	$: themeSwitcherValue = defaultTheme;
 
@@ -46,7 +45,7 @@
 	<main class="flex justify-start items-center flex-col pt-24 md:pt-32 gap-12 pb-9">
 		<div class="p-6 flex flex-col justify-center items-center gap-8">
 			<h1
-				in:fadeScale={{ duration: 400 }}
+				in:fadeScale={{ duration: 500 }}
 				class="text-center font-display antialiased py-2.5 -my-2.5 [text-wrap:balance] text-4xl md:text-6xl bg-clip-text transition-all duration-1000 text-transparent bg-gradient-to-t selection:text-base-950 dark:selection:text-base-50 from-base-950 via-base-900 to-base-700 md:to-base-500 dark:from-base-400 dark:via-base-100 tracking-tighter dark:to-base-50"
 			>
 				Elegant. Functional.
@@ -57,12 +56,12 @@
 				</span>
 			</h1>
 			<p
-				in:fade={{ duration: 400 }}
+				in:fade={{ duration: 500 }}
 				class="text-center text-sm [text-wrap:balance] bg-clip-text max-w-md text-transparent transition-all delay-500 duration-1000 bg-gradient-to-t from-base-700 to-base-500 dark:from-base-400 dark:to-base-50 md:text-lg selection:text-foreground"
 			>
 				Craft modern, captivating interfaces effortlessly with easy-to-use UI components.
 			</p>
-			<span in:fadeScale={{ duration: 400 }}>
+			<span in:fadeScale={{ duration: 500 }}>
 				<Button size="lg" href="/preview">
 					Explore Components
 					<ArrowRight class="group-hover:translate-x-1 transition" size="16" />

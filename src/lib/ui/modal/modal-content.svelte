@@ -14,7 +14,7 @@
 	export { className as class };
 </script>
 
-<div use:portalled>
+<div use:portalled class="absolute">
 	{#if $open}
 		<div class={modal({ drawer: $drawer, side: $side }).container()}>
 			<div
