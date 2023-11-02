@@ -81,7 +81,7 @@
 	</div>
 </header>
 <svg
-	class="absolute pointer-events-none inset-0 top-1.5 h-[400px] w-full stroke-foreground dark:stroke-muted-foreground opacity-10 [mask-image:radial-gradient(100%_100%_at_top_center,white,transparent)]"
+	class="absolute pointer-events-none inset-0 top-3.5 h-[400px] w-full stroke-foreground dark:stroke-muted-foreground opacity-10 [mask-image:radial-gradient(100%_100%_at_top_center,white,transparent)]"
 	aria-hidden
 >
 	<defs>
