@@ -89,8 +89,8 @@ const config = {
 				'3xl': 'calc(var(--radius) + 1.0rem)'
 			},
 			fontFamily: {
-				sans: ['Manrope', ...defaultTheme.fontFamily.sans],
-				display: ['Manrope', ...defaultTheme.fontFamily.sans]
+				sans: ['Inter', ...defaultTheme.fontFamily.sans],
+				display: ['Inter', ...defaultTheme.fontFamily.sans]
 				// display: ['PP Editorial New', ...defaultTheme.fontFamily.serif]
 			}
 		}
