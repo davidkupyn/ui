@@ -17,6 +17,9 @@ dependencies:
   lucide-svelte:
     specifier: 0.279.0
     version: 0.279.0(svelte@4.2.0)
+  mode-watcher:
+    specifier: ^0.0.7
+    version: 0.0.7(svelte@4.2.0)
   svelte-headlessui:
     specifier: ^0.0.26
     version: 0.0.26(svelte@4.2.0)
@@ -1496,6 +1499,15 @@ packages:
       minimist: 1.2.8
     dev: true
 
+  /mode-watcher@0.0.7(svelte@4.2.0):
+    resolution: {integrity: sha512-3/RXHKzg9TjhkYo8YTx++Ai7a2Qd7BkYS3RFWaIhj0NPonXAF5JNegiZ3CTk1Q/k0wyhPQUlsWW0Y5ByCp6Y1g==}
+    peerDependencies:
+      svelte: ^4.0.0
+    dependencies:
+      svelte: 4.2.0
+      svelte-persisted-store: 0.7.0(svelte@4.2.0)
+    dev: false
+
   /mri@1.2.0:
     resolution: {integrity: sha512-tzzskb3bG8LvYGFF/mDTpq3jpI6Q9wc3LEmBaghu+DdCssd1FakN7Bc0hVNmEyGq1bq3RgfkCb3cmQLpNPOroA==}
     engines: {node: '>=4'}
@@ -1983,6 +1995,15 @@ packages:
       svelte: ^3.19.0 || ^4.0.0
     dependencies:
       svelte: 4.2.0
+
+  /svelte-persisted-store@0.7.0(svelte@4.2.0):
+    resolution: {integrity: sha512-PczYS60ysScQ0DmTCPXQm5rwt8FfQzSlx0lCbljbE6hTCKqXaw2bP8KH1+B7QTPmuiy/QbAk4pjYpNCmZhjyRw==}
+    engines: {node: '>=0.14'}
+    peerDependencies:
+      svelte: ^3.48.0 || >4.0.0
+    dependencies:
+      svelte: 4.2.0
+    dev: false
 
   /svelte-preprocess@5.0.4(postcss-load-config@4.0.1)(postcss@8.4.29)(svelte@4.2.0)(typescript@5.2.2):
     resolution: {integrity: sha512-ABia2QegosxOGsVlsSBJvoWeXy1wUKSfF7SWJdTjLAbx/Y3SrVevvvbFNQqrSJw89+lNSsM58SipmZJ5SRi5iw==}

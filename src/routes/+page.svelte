@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { themeStore } from '$lib/theme-switcher';
+	import { currentTheme } from '$lib/stores/theme';
 	import { Accordion } from '$lib/ui/accordion';
 	import { AutoComplete } from '$lib/ui/auto-complete';
 	import Button from '$lib/ui/button.svelte';
@@ -15,27 +15,12 @@
 	import { toast } from '$lib/ui/toast';
 	import { ArrowRight, Brush, Palette, Volume1, Volume2, VolumeX } from 'lucide-svelte';
 	import { onMount } from 'svelte';
-	import { cubicOut } from 'svelte/easing';
-	import { fade } from 'svelte/transition';
+	import { fade, scale } from 'svelte/transition';
 	let mounted = false;
 	onMount(() => (mounted = true));
-	function fadeScale(node: Element, { delay = 0, duration = 200, baseScale = 0.9 }) {
-		const o = +getComputedStyle(node).opacity;
-		const m = getComputedStyle(node).transform.match(/scale\(([0-9.]+)\)/);
-		const s = m ? Number(m[1]) : 1;
-		const is = 1 - baseScale;
 
-		return {
-			delay,
-			duration,
-			css: (t: number) => {
-				const eased = cubicOut(t);
-				return `opacity: ${eased * o}; transform: scale(${eased * s * is + baseScale})`;
-			}
-		};
-	}
 	let sliderValue = 30;
-	$: defaultTheme = $themeStore.theme;
+	$: defaultTheme = $currentTheme;
 	$: themeSwitcherValue = defaultTheme;
 
 	[{ key: 'football', value: {} }];
@@ -45,7 +30,7 @@
 	<main class="flex justify-start flex-grow items-center flex-col pt-24 md:pt-32 gap-12 pb-9">
 		<div class="p-6 flex flex-col justify-center items-center gap-8">
 			<h1
-				in:fadeScale={{ duration: 500 }}
+				in:scale={{ duration: 500, start: 0.9 }}
 				class="text-center font-display antialiased py-2.5 [text-wrap:balance] text-4xl md:text-6xl bg-clip-text transition-all duration-1000 text-transparent bg-gradient-to-t selection:text-base-950 dark:selection:text-base-50 from-base-950 via-base-900 to-base-700 md:to-base-500 dark:from-base-400 dark:via-base-100 tracking-tighter dark:to-base-50"
 			>
 				Elegant. Functional.
@@ -61,7 +46,7 @@
 			>
 				Craft modern, captivating interfaces effortlessly with easy-to-use UI components.
 			</p>
-			<span in:fadeScale={{ duration: 500 }}>
+			<span in:scale={{ duration: 500, start: 0.9 }}>
 				<Button size="lg" href="/preview">
 					Explore Components
 					<ArrowRight class="group-hover:translate-x-1 transition" size="16" />
@@ -163,7 +148,7 @@
 						</RadioGroup>
 						<Footer>
 							<Button melt={close} type="button" variant="outline">Cancel</Button>
-							<Button melt={close} on:click={() => ($themeStore.theme = themeSwitcherValue)}>
+							<Button melt={close} on:click={() => ($currentTheme = themeSwitcherValue)}>
 								Save changes
 							</Button>
 						</Footer>

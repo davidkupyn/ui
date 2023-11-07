@@ -4,12 +4,12 @@
 	import '../app.postcss';
 	import { cn } from '$lib/helpers/style';
 	import { Menu } from '$lib/ui/menu';
-	import ThemeProvider from '$lib/theme-switcher/theme-provider.svelte';
-	import { themeStore } from '$lib/theme-switcher';
 	import Button from '$lib/ui/button.svelte';
 	import Separator from '$lib/ui/separator.svelte';
 	import Logo from './logo.svelte';
 	import { Toaster } from 'svelte-sonner';
+	import { ModeWatcher } from 'mode-watcher';
+	import { currentTheme } from '$lib/stores/theme';
 </script>
 
 <svelte:head>
@@ -20,7 +20,8 @@
 	/>
 	<meta name="author" content="David Kupyn" />
 </svelte:head>
-<ThemeProvider attribute="class" disableTransitionOnChange storageKey="essense-theme" />
+
+<ModeWatcher />
 <Toaster />
 
 <header
@@ -55,16 +56,16 @@
 				<li>
 					<Menu let:trigger let:Content>
 						<Button melt={trigger} aria-label="Theme picker" variant="ghost" size="icon">
-							{#if $themeStore.theme === 'dark'}
+							{#if $currentTheme === 'dark'}
 								<Moon size="16" />
-							{:else if $themeStore.theme === 'light'}
+							{:else if $currentTheme === 'light'}
 								<Sun size="16" />
 							{:else}
 								<Monitor size="16" />
 							{/if}
 						</Button>
 						<Content let:RadioGroup>
-							<RadioGroup let:Radio bind:value={$themeStore.theme}>
+							<RadioGroup let:Radio bind:value={$currentTheme}>
 								<Radio value="dark">Dark</Radio>
 								<Radio value="light">Light</Radio>
 								<Radio value="system">System</Radio>
@@ -117,20 +118,20 @@
 	)}
 >
 	<div class="container mx-auto flex justify-between items-center px-6 h-14 relative bottom-0">
-		<span class="mx-auto text-sm text-muted-foreground font-medium">&copy David Kupyn</span>
+		<span class="mx-auto text-sm text-muted-foreground">&copy David Kupyn</span>
 		{#if $page.url.pathname !== '/'}
 			<Menu let:trigger let:Content placement="bottom-end">
 				<Button melt={trigger} aria-label="Theme picker" variant="ghost" size="icon">
-					{#if $themeStore.theme === 'dark'}
+					{#if $currentTheme === 'dark'}
 						<Moon size="16" />
-					{:else if $themeStore.theme === 'light'}
+					{:else if $currentTheme === 'light'}
 						<Sun size="16" />
 					{:else}
 						<Monitor size="16" />
 					{/if}
 				</Button>
 				<Content let:RadioGroup>
-					<RadioGroup let:Radio bind:value={$themeStore.theme}>
+					<RadioGroup let:Radio bind:value={$currentTheme}>
 						<Radio value="dark">Dark</Radio>
 						<Radio value="light">Light</Radio>
 						<Radio value="system">System</Radio>
