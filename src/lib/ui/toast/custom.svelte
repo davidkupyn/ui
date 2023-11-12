@@ -1,4 +1,4 @@
-<script lang="ts">
+<!-- <script lang="ts">
 	import { createEventDispatcher } from 'svelte';
 	import { X } from 'lucide-svelte';
 	import Button from '../button.svelte';
@@ -17,4 +17,4 @@
 	>
 		<X size="16" />
 	</Button>
-</div>
+</div> -->

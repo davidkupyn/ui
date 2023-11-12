@@ -7,7 +7,6 @@
 	import Button from '$lib/ui/button.svelte';
 	import Separator from '$lib/ui/separator.svelte';
 	import Logo from './logo.svelte';
-	import { Toaster } from 'svelte-sonner';
 	import { ModeWatcher } from 'mode-watcher';
 	import { currentTheme } from '$lib/stores/theme';
 </script>
@@ -21,8 +20,7 @@
 	<meta name="author" content="David Kupyn" />
 </svelte:head>
 
-<ModeWatcher />
-<Toaster />
+<!-- <ModeWatcher /> -->
 
 <header
 	class={cn(
