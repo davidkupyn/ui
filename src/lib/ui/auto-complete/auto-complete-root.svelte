@@ -22,10 +22,6 @@
 	export let description = '';
 	export let error = '';
 	export let emptyText = 'No results found';
-	export let items: {
-		label: string;
-		value: string;
-	}[] = [];
 
 	let className: string | undefined | null = undefined;
 	export { className as class };

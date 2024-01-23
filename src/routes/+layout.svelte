@@ -7,7 +7,7 @@
 	import Button from '$lib/ui/button.svelte';
 	import Separator from '$lib/ui/separator.svelte';
 	import Logo from './logo.svelte';
-	import { Toaster } from 'svelte-sonner';
+	import { Toaster, toast } from 'svelte-sonner';
 	import { ModeWatcher } from 'mode-watcher';
 	import { currentTheme } from '$lib/stores/theme';
 </script>
@@ -22,7 +22,15 @@
 </svelte:head>
 
 <ModeWatcher />
-<Toaster />
+<Toaster
+	theme={$currentTheme}
+	class="toaster group"
+	toastOptions={{
+		class:
+			'group toast group-[.toaster]:bg-popover group-[.toaster]:rounded-xl group-[.toaster]:text-foreground group-[.toaster]:border-popover-border group-[.toaster]:shadow-lg [&>*:has(data-button)]:bg-primary [&>*:has(data-button)]:text-primary-foreground [&>*:has(data-close-button)]:bg-muted [&>*:has(data-close-button)]:text-muted-foreground',
+		descriptionClass: 'group-[.toast]:text-muted-foreground'
+	}}
+/>
 
 <header
 	class={cn(

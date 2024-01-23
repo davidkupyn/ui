@@ -2,6 +2,7 @@
 	import Trigger from './tabs-trigger.svelte';
 	import { ctx } from '.';
 	import { cn } from '$lib/helpers/style';
+	import { crossfade } from 'svelte/transition';
 
 	const {
 		elements: { list }
@@ -18,6 +19,12 @@
 	export let tabs: Tab[] = [];
 	export let disabled: Tab[] = [];
 	export { className as class };
+
+	ctx.crossfade.set(
+		crossfade({
+			duration: 250
+		})
+	);
 </script>
 
 <div

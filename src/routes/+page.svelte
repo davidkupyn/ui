@@ -47,7 +47,7 @@
 				Craft modern, captivating interfaces effortlessly with easy-to-use UI components.
 			</p>
 			<span in:scale={{ duration: 500, start: 0.9 }}>
-				<Button size="lg" href="/preview">
+				<Button href="/preview">
 					Explore Components
 					<ArrowRight class="group-hover:translate-x-1 transition" size="16" />
 				</Button>

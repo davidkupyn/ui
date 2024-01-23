@@ -45,7 +45,7 @@
 
 	const {
 		states: { open: openStore, selected: valueStore, selectedLabel: valueLabel },
-		elements: { trigger, input, menu },
+		elements: { trigger, menu, hiddenInput },
 		options
 	} = select;
 
@@ -77,7 +77,7 @@
 		<ChevronsUpDown size="16" />
 	</Suffix>
 </button>
-<input use:input {...$input} {id} />
+<input use:hiddenInput {...$hiddenInput} {id} />
 {#if $openStore}
 	<ul transition:fly={{ duration: 150, y: -10 }} use:menu {...$menu} class={menuStyles().content()}>
 		<slot {Option} {Group} />

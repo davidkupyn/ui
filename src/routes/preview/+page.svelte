@@ -97,8 +97,8 @@
 				<Description>Using custom and native select components</Description>
 			</Header>
 			<form class="grid gap-4">
-				<label class="input-label w-full" for="select1">
-					Custom Select
+				<fieldset>
+					<Label class="mb-1.5" for="select1">Custom Select</Label>
 					<Select let:Group placeholder="Select an option" id="select1" name="custom">
 						<Group let:Option let:Label={SelectLabel}>
 							<SelectLabel>Class 3</SelectLabel>
@@ -113,7 +113,7 @@
 							<Option value="aleks">Aleks</Option>
 						</Group>
 					</Select>
-				</label>
+				</fieldset>
 
 				<AutoComplete
 					label="Auto Complete"
